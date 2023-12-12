@@ -313,7 +313,9 @@ if(row.tact === "Webinar")
             $('#tact').val(data.tact);
           
             $('#eb_comment').val(data.user_ebcomment);
+            $()
             $('#comment').val(data.tycomment);
+            $('#comment').val(data.comment);
         
             $('#blast_type').val(data.blast_type);
             $('#blast_type').val(data.blast_type);
