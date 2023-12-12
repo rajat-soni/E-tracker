@@ -622,7 +622,7 @@ if(row.tact === "Webinar")
    }else if(tactValue=="Webinar")
    {
 
-      
+       alert("hello")
       
     console.log("Tact is Webinar");
     var user_imagename=data.user_ebfiles;
@@ -650,7 +650,7 @@ if(row.tact === "Webinar")
       console.log("Within if condition...");
     
     
-      htmlContent += '<form enctype="multipart/form-data" id = "form_id"><p> <tr><td width="10%">Upload File Here</td><td><input type="text" value='+user_imagename[i]+ ' name="filenum" style="display:none;"><input type="file" name="user_ebfiles" class = " bg- form-control btn-dark imageInput custom-file-input" data-id = '+i+'  > <input type="submit"  class="bg-primary btn-sm btn-primary" onclick = "fileReplace1(this)" data-id=\''+ data.camp_id + ',' +user_imagename[i]+ ',' + i + ',' +tactValue+ '\' value = "Insert File"></tr></td>' ,'</p> </form>';
+      htmlContent += '<form enctype="multipart/form-data" id = "form_id"><p> <tr><td width="10%">Upload File Here</td><td><input type="text" value='+user_imagename[i]+ ' name="filenum" style="display:none;"><input type="file" name="user_ebfiles" class = " bg- form-control btn-dark imageInput custom-file-input" data-id = '+i+'  > <input type="submit"  class="bg-primary btn-sm btn-primary" onclick = "fileReplace1(this)" data-id=\''+ data.camp_id + ',' +user_imagename[i]+ ',' + i + ',' +tactValue+ '\' value = "Insert"></tr></td>' ,'</p> </form>';
       
    
     }else  if(user_imagename[i] != '')
@@ -660,7 +660,7 @@ if(row.tact === "Webinar")
       console.log("tact is:" +tact);
       console.log("Within else condition...");
       console.log(user_imagename[i]);
-      htmlContent += '<p> <tr><td width="25%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="user_ebfiles"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <input type="submit" class="btn btn-primary btn-md bg-primary" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "'+user_imagename[i]+'"></tr></td>' ,'</p>';
+      htmlContent += '<p> <tr><td width="25%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="user_ebfiles"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <input type="submit" class="btn btn-primary btn-md bg-primary" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert Image"></tr></td>' ,'</p>';
    
     }
     
