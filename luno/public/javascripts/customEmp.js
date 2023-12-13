@@ -68,6 +68,7 @@ $(document).ready(function () { // for fetch Data //
       
 var tact=row.tact;
 
+
 console.log("tact value is:" +tact);
 
                if(row.tact === "Email Blast")
@@ -101,7 +102,7 @@ if(row.tact === "Webinar")
 
 
           
-          if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_file==""))
+          if(row.id === null || (tact=="Email-Reminder-Blast" && row.user_rb_file==""))
           {
 
         
@@ -130,12 +131,12 @@ if(row.tact === "Webinar")
                       </div>
                       <div class="modal-body">
                       <div class="form-floating">
-                      <input type = "text" class ="tact" id = "tact" name = "tact" data-id = `+tact+`>
-                      <input type = "text" class ="user_id" id = "camp_id" name ="camp_id" value ="`+row.id+`" data-id = "`+row.id+`">
+                      <input type = "hidden" class ="tact" id = "tact" name = "tact" data-id = `+tact+`>
+                      <input type = "hidden" class ="user_id" id = "camp_id" name ="camp_id" value ="`+row.id+`" data-id = "`+row.id+`">
                       <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
                       <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
                       <input type = "hidden" id ="status"  data-id = " `+row.status+`" >
-                      <input type = "text" id ="status"  data-id = " `+row.blast_type+`" >
+                      <input type = "hidden" id ="status"  data-id = " `+row.blast_type+`" >
                 
                       <textarea class="form-control"  id = "emailBlastComment" name = "emailBlastComment" placeholder="" id="floatingTextarea"></textarea>
                       <label for="floatingTextarea"></label>
@@ -150,8 +151,9 @@ if(row.tact === "Webinar")
                   </div>
                 </div>`;
           }else{
+            alert(tact)
             return`
-
+           
             ${(row.allocated_to == row.user_id && row.status == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" style="font-size:26px;"></i>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
@@ -183,11 +185,11 @@ if(row.tact === "Webinar")
                       <div class="modal-body">
                       <div class="form-floating">
                       <input type = "text" class ="tact" id = "tact" name = "tact"  data-id = `+tact+` value = `+tact+`>
-                      <input type = "text" class ="user_id" name = "camp_id" id = "camp_id" value = "`+row.id+`" data-id = "`+row.id+`">
-                      <input type = "text" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
+                      <input type = "hidden" class ="user_id" name = "camp_id" id = "camp_id" value = "`+row.id+`" data-id = "`+row.id+`">
+                      <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
                       <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
                       <input type = "hidden" id ="status"  data-id = " `+row.status+`" >
-                      <input type = "text" id ="status"  data-id = " `+row.blast_type+`" >
+                      <input type = "hidden" id ="status"  data-id = " `+row.blast_type+`" >
                 
                       <textarea class="form-control"  id = "emailBlastComment" name = "emailBlastComment" placeholder="" id="floatingTextarea"></textarea>
                       <label for="floatingTextarea"></label>
@@ -300,6 +302,8 @@ if(row.tact === "Webinar")
          dataType: "JSON",
          success: function (data) {
 
+
+            alert
             $('#cnameview').val(data.client_name);
             $('#sender_nameview').val(data.sender_name);
             $('#sender_emailview').val(data.sender_email);
@@ -313,8 +317,8 @@ if(row.tact === "Webinar")
             $('#tact').val(data.tact);
           
             $('#eb_comment').val(data.user_ebcomment);
-            $()
-            $('#comment').val(data.tycomment);
+           
+               $('#comment').val(data.tycomment);
             $('#comment').val(data.comment);
         
             $('#blast_type').val(data.blast_type);
@@ -384,9 +388,12 @@ if(row.tact === "Webinar")
                      var d =   document.getElementById('wbinarVeiw11').innerHTML = htmlContent;
                   
                         $('#wbinarVeiw11').show();
+
                         $('#fileviewdownload').hide();
                         $('#rbFlex').hide();
-                
+                        $('#user_comment').val(data.user_ebcomment).show();
+                        $('#webinar_admin_comment').val(data.comment).show()
+            
 
                         var admin_image1=data.admin_files;
                         var admin_image1 = admin_image1.split(',');
@@ -473,6 +480,7 @@ if(row.tact === "Webinar")
 
       const myArray = idtype.split(" ");
       var camp_id = myArray[0];
+   
  
  
       var tactValue = myArray[1];
@@ -642,7 +650,7 @@ if(row.tact === "Webinar")
    var htmlContent1 ='';
    var htmlContent2 =htmlContent+ '' +htmlContent1;
    
-   for (var i = 0; i <= length; i++){ 
+   for (var i = 0; i <= 1; i++){ 
     
     
     if(user_imagename[i] == undefined) { 
@@ -662,7 +670,7 @@ if(row.tact === "Webinar")
       console.log("tact is:" +tact);
       console.log("Within else condition...");
       console.log(user_imagename[i]);
-      htmlContent += '<p> <tr><td width="25%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="user_ebfiles"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <input type="submit" class="btn btn-primary btn-md bg-primary" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert Image"></tr></td>' ,'</p>';
+      htmlContent += '<p> <tr><td width="25%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="user_ebfiles"  class = "  imageInput custom-file-input form-control" data-id = '+i+' id = "image_id"  onchange="handleImageUpload()" ></td><td> <input type="submit" class="btn btn-primary btn-md bg-primary" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert Image" id = "btn_id"></tr></td>' ,'</p>';
    
     }
     
@@ -864,7 +872,7 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
     
       $('#exampleModal').modal('hide');
     var imageleng =  document.getElementById('image').files.length;
-    console.log("hello image"+imageleng)
+   
     if(imageleng < 3  ){
   
       var formData1 = new FormData(document.getElementById("sample_form"));
@@ -1002,22 +1010,25 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
       const myArray = idtype.split(",");
 
       var camp_id = myArray[0];
-      alert(camp_id)
+     
       var oldfname = myArray[1];
       var filenum = myArray[2];
       var tact = myArray[3];
-      // alert(myArray[3])
 
+      // alert(myArray[3])
+       if(filenum.length !== 0){
       // alert("tact in filereplace function" +tact);
       var user_files  =  $('.custom-file-input')[0].files[0]
      
       // console.log("iamge",user_files)
 
+      
       var formData = new FormData();
       var user_files  =  $('.custom-file-input')[0].files[0]
       // var user_files = $('.imageInput')[id].files[0]; // Get the selected file
+
      
-     
+      
       
 
       formData.append('tact', tact); // Append the file to FormData
@@ -1036,8 +1047,7 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
           success: function(response) {
               // Handle the server's response here
               
-              $('#action_modal').modal('hide'); // for hide root modal
-              $('#form_id')[0].reset();
+             
              
             //  $('.wrap_new').html('<p class="alert alert-success">Image Upload successfully..</p>').fadeOut(3000)
               // $("#container11").hide();
@@ -1055,7 +1065,8 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
               setTimeout(function () {
                 $('#message').html('');
               }, 5000);
-
+              $('#action_modal').modal('hide'); // for hide root modal
+              $('#form_id')[0].reset();
 
           },
           error: function(xhr, status, error) {
@@ -1063,9 +1074,30 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
               console.error(xhr.responseText);
           }
       });
+       }else{
+         $('.comment').html('<p class="alert alert-primary">Please upload only two Images..</p>').fadeOut(4000);
+
+       }
   }
 
     
+
+  function handleImageUpload() {
+   var imageInput = document.getElementById('image_id');
+   var imageleng =  document.getElementById('image_id').files.length;
+   for(i=0; i>=imageleng; i++){
+
+      if(imageleng[i] == imageleng){
+
+    alert(imageleng[i])
+      
+         document.getElementById('btn_id').disabled = true;
+      }else{
+         document.getElementById('btn_id').disabled = false;
+      }
+   }
+
+  }
 
   function resetForm() {
    // Get the form element

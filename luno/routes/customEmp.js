@@ -687,6 +687,14 @@ console.log("hhhhh");
 
     router.post('/image_replace', upload.single('user_files'), (request, response) => {
 
+        var oldfname1 = request.body.oldfname;
+        console.log("oldRajat file"+oldfname1 )
+
+        const newfile1 = request.file.filename;
+        console.log("new Rajat  file"+newfile1 );
+
+
+
         console.log("hello Rajat ")
         console.trace();
        
@@ -730,6 +738,7 @@ console.log("hhhhh");
                     var camp_id=row.camp_id;
                     if(tact === "Webinar"){
                    var  admin_files = row.user_ebfiles;
+
                    console.trace();
                    console.log("trace project"+row.user_ebfiles)
 
@@ -751,8 +760,12 @@ console.log("hhhhh");
                     console.log("camp_id" +camp_id);
                     console.log("user_files",newfile);
     
-                   const admin_files1 = new Array(admin_files);
-                    var output= newfile.split(',');
+                   
+                    var output= admin_files.split(',');
+
+                   const indexOfOldFile= output.indexOf(oldfname1);
+                   output[indexOfOldFile]=newfile1
+
                     console.log("Array:" +output[filenum]);
                     var updatedfile=output[filenum];
     
