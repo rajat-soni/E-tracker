@@ -752,7 +752,7 @@ console.log("hhhhh");
                     }
     
                     else{
-                        var admin_files = row.image;
+                        var admin_files = row.user_ebfiles;
                     }
                    
     
@@ -812,7 +812,7 @@ console.log("hhhhh");
     
                        }
                        else{
-                        var updateSql = `UPDATE comment_tbl SET image='${output}' WHERE camp_id = '${camp_id}'`;
+                        var updateSql = `UPDATE comment_tbl SET user_ebfiles ='${output}' WHERE camp_id = '${camp_id}'`;
                        }
                        
                       
