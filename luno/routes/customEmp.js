@@ -447,7 +447,7 @@ var storage = multer.diskStorage({
 var camp_id =  request.body.camp_id;
 
 var tact = request.body.tact;
-console.log(` tactics value: ==> ${tact}`);
+console.log(` tactics value: ==> ${request.body.tact}`);
 console.log(` camp_id2: ==> ${request.body.camp_id}`);
 // console.log("check tact  tactics:" +tact);
 var fs = require('fs');
@@ -840,7 +840,7 @@ console.log("hhhhh");
                         console.log('inside 1 else');
                         
 
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles) VALUES (${camp_id}, '${output}')`; // insert query //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles,eb_comment) VALUES (${camp_id}, '${output}')`; // insert query //
                      //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
 
                      if(tact = "Webinar"){
