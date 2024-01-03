@@ -20,7 +20,7 @@ $(document).ready(function () { // for fetch Data //
       'columns': [
          { data: 'camp_name' },
          { data: 'asset_name' },
-         { data: 'blast_type' },
+         { data: 'tact' },
       //   { data: 'emailBlastComment' },
          //   { data : 'user_id' },
          { data: 'id' },
@@ -39,7 +39,7 @@ $(document).ready(function () { // for fetch Data //
             render: function (data, type, row, meta) {
               
                
-    
+              console.log("rbfilesfound"+row.user_rbfiles)
                 console.log("mytact"+ row.tact);
                console.log("muca"+ row.id);
    
@@ -72,10 +72,12 @@ var tact=row.tact;
 console.log("tact value is:" +tact);
 
                if(row.tact === "Email Blast")
+              
 {
-
+  
   console.log("Email Blast nrew"+row.tact);
-  var tact="Email-Blast";
+   tact="Email-Blast";
+  
 
 }
 else{
@@ -86,8 +88,10 @@ else{
 
 
                if(row.tact === "Email Blast / Reminder Blast")
+            
 {
-  var tact="Email-Reminder-Blast";
+   
+   tact="Email-Reminder-Blast";
 }
 
 
@@ -96,13 +100,14 @@ else{
 
 if(row.tact === "Webinar")
 {
+   
   console.log("Webinar Blast");
-  var tact="Webinar";
+   tact="Webinar";
 }
 
 
           
-          if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_file==""))
+          if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rbfile==""))
           {
 
         
@@ -112,47 +117,17 @@ if(row.tact === "Webinar")
                ${(row.rballocated_to == row.user_id && row.rbstatus == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"style="font-size:26px;"></i>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
                  <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" `+ row.id + ' ' + row.user_id + ' ' + row.blast_type + ` "><span class="bi bi-eye" style = "font-size:20px"></span></button>
+                 
                  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                  Comment
                 </button>
               
  
-                <i class="fa fa-file-excel-o"></i></button>
-                
-                
-                <!-- Modal -->
-                <form id = "sample_form"  enctype="multipart/form-data">
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                      <div class="form-floating">
-                      <input type = "hidden" class ="tact" id = "tact" name = "tact" data-id = `+tact+`>
-                      <input type = "hidden" class ="user_id" id = "camp_id" name ="camp_id" value ="`+row.id+`" data-id = "`+row.id+`">
-                      <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
-                      <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
-                      <input type = "hidden" id ="status"  data-id = " `+row.status+`" >
-                      <input type = "hidden" id ="status"  data-id = " `+row.blast_type+`" >
-                
-                      <textarea class="form-control"  id = "emailBlastComment" name = "emailBlastComment" placeholder="" id="floatingTextarea"></textarea>
-                      <label for="floatingTextarea"></label>
-                      <input type = "file" class="form-control" name = "image[]" id = "image" multiple >
-                    </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary sendimgbtn" onclick="<input type = "text" class ="tact" id = "tact" name = "tact" value = "`+row.tact+`" data-id = `+row.tact+`>()">Send Comment</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>`;
+                `;
           }else{
+           
             return`
-
+ 
             ${(row.allocated_to == row.user_id && row.status == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" style="font-size:26px;"></i>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
@@ -167,14 +142,16 @@ if(row.tact === "Webinar")
 
                  <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" `+ row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:20px"></span></button>
 
-                 <button type="button" class=" btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id =" `+row.id+ ' ' + row.user_id + ' ' + row.blast_type + ' ' + row.tact +` ">
-                 <i class="fa fa-upload"></i></button>
-        
-                </button></i>
                 
+                 <button type="button" class=" btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#${tact}" data-id =" `+row.id+ ' ' + row.user_id + ' ' + tact + `  " onmouseover = "">
+                 <i class="fa fa-upload"></i></button>
+               
                 <!-- Modal -->
+            
                 <form id = "sample_form"  enctype="multipart/form-data">
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               
+ 
+                <div class="modal fade" ID="${tact}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -183,7 +160,8 @@ if(row.tact === "Webinar")
                       </div>
                       <div class="modal-body">
                       <div class="form-floating">
-                      <input type = "text" class ="tact" id = "tact" name = "tact"  data-id = `+tact+` value = `+tact+`>
+                      
+                      <input type = "text" class ="tact" id = "tact" name = "tact"  data-id = ${tact} value = ${tact} >
                       <input type = "hidden" class ="user_id" name = "camp_id" id = "camp_id" value = "`+row.id+`" data-id = "`+row.id+`">
                       <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
                       <input type = "hidden" id ="rbstatus"  data-id = " `+row.rbstatus+`" >
@@ -197,7 +175,7 @@ if(row.tact === "Webinar")
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="myFunction(this)">Send Comment</button>
+                        <button type="button" class="btn btn-primary" onclick="myFunction(${row.id},'${tact}',${row.status})">Send Comment</button>
 
 
                       </div>
@@ -254,7 +232,7 @@ if(row.tact === "Webinar")
         var user_id = myArray[2];
         var tact = myArray[3];
 
-        alert(tact);
+      
       console.log("View Data"); 
       console.log("ID" +id);
       console.log("User ID" +user_id);
@@ -263,6 +241,8 @@ if(row.tact === "Webinar")
        
 
        if(tact == "Email-Blast"){
+        
+        
          $('#ebasset').show();
          $('#rbasset').hide();
          console.log("Only E-Blast")
@@ -341,31 +321,13 @@ if(row.tact === "Webinar")
             var user_rbfiles = user_rbfiles.split(',');
            
             var user_rbfiles_length = user_rbfiles.length;
-   
-           
-
-          
-
             var admin_rb_image=data.admin_rb_file;
             var admin_rb_image = admin_rb_image.split(',');
             var admin_rb_length = admin_rb_image.length;
-
-
-
-
-
-
-           
-           
-
             var admin_image=data.admin_files;
-        
             var admin_image = admin_image.split(',');
             var admin_length = admin_image.length;
-        
-    
             var htmlContent = '';
-
             if(tact === "Webinar" ){
 
                   alert("its me you lookin me ")
@@ -409,6 +371,8 @@ if(row.tact === "Webinar")
             }else if(tact  ===  'Email-Blast'){
             
 
+              
+
                var user_image=data.user_ebfiles;
             
                var user_image = user_image.split(',');
@@ -421,9 +385,8 @@ if(row.tact === "Webinar")
                      var emailUser = document.getElementById('viewfiles11').innerHTML = htmlContent;
                      $('#viewfiles11').show();
                      $('#rbFlex').hide();
-                     $('#rbFlex').hide();
-                     $('#viewReminderBlastView11').hide()
-                     $('#webinarflex').hide();
+                    
+                    
                   
                   
                   
@@ -435,13 +398,12 @@ if(row.tact === "Webinar")
                   }
                      var data =   document.getElementById('viewfiles12').innerHTML = adminHtml;
                      $('#viewfiles12').show();
-                     $('#rbFlex').hide();
-                     $('#viewReminderBlastView12').hide()
-                     $('#webinarFlex').hide();
+                    
              
 
             }else if(tact === 'Email-Reminder-Blast'){
             
+               alert("all"+tact)
         
                   for (var i = 0; i < user_rbfiles_length; i++)
                   { 
@@ -484,6 +446,7 @@ if(row.tact === "Webinar")
 
    $(document).on('click', '#editimage', function () {
        
+
 
       // var id = $(this).data('id');
       var idtype = $(this).data('id');
@@ -878,11 +841,10 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
    // }
    
 
-   function myFunction(e) { //=> funtion for uploading images into data base //
-
+   function myFunction(id,tac,sta) { //=> funtion for uploading images into data base //
+console.log(id,tac,sta);
      
-    
-      $('#exampleModal').modal('hide');
+      $(`#${tac}`).modal('hide');
     var imageleng =  document.getElementById('image').files.length;
    
     if(imageleng < 3  ){
@@ -890,26 +852,27 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
       var formData1 = new FormData(document.getElementById("sample_form"));
       //   var image =  document.getElementById('image');
       // var camp_id = $('.user_id').val();
-        var tact = $('#tact').val();  
+        var tact = tac;  
+        alert(tact)
                
       var sendComment = $('#emailBlastComment').val();
-         var camp_id = $("#camp_id").attr("data-id");
-         alert(camp_id)
+         var campe_id = id;
+        alert(campe_id)
  
-         var status = $("#status").attr("data-id");
+         var status = sta;
 
                                     formData1.append('sendComment', sendComment);
                                     formData1.append('status', status);
-                                 //   formData1.append('tact', tact);
+                                // formData1.append('tact', tact);
                                     formData1.getAll("image[]", image);
      
-      console.log({formData1});
+ 
       //   var camp_id = $('id')
       // if (confirm("Are you sure you want to update the data?")) {
           $.ajax({
               url: "http://localhost:3000/customEmp/comment",
               method: "POST",
-              data: formData1,camp_id:camp_id,
+              data: formData1,camp_id:campe_id,tact:tact,
             //   dataType: "JSON",
             contentType: false,
             processData: false,

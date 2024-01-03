@@ -140,16 +140,19 @@ router.get('/get_data', function (request, response, next) {
             var total_records_with_filter = data[0].Total;
 
             console.log("Rajashri");
-            var query = `SELECT * ,CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask left join comment_tbl on addtask.id=comment_tbl.camp_id WHERE 1 ${search_query} 
-            ORDER BY ${column_name} ${column_sort_order} 
-            LIMIT ${start}, ${length}`;
+            var query = `
+            SELECT * ,CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask left join comment_tbl on addtask.id=comment_tbl.camp_id
+            WHERE  (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query} 
+          ORDER BY ${column_name} ${column_sort_order} 
+          LIMIT ${start}, ${length}
+          `;
             console.log("Query:" + query);
 
             var data_arr = [];
-
+           
             database.query(query, function (error, data) {
 
-
+              console.log("mydata"+data)
                 data.forEach(function (row) {
                     // console.log(row.role);
                     var user_id = request.session.user_id;
@@ -180,11 +183,11 @@ if(tact==="e_blast"){
    
     if(row.rb_assetname!="" && row.rb_assetlink!="")
 {
-    var tact="Email Blast / Reminder Blast"; 
+     tact="Email Blast / Reminder Blast"; 
     console.log("Email Blast / Reminder Blast");
 }
 else{
-    var tact="Email Blast";
+     tact="Email Blast";
     console.log("Email Blast");
 
 }
@@ -192,7 +195,7 @@ else{
 }
 else if(tact==="webinar")
 {
-    var tact="Webinar";
+     tact="Webinar";
     console.log("Webinar");
 }
 
@@ -203,51 +206,51 @@ else if(tact==="webinar")
 
                     //  console.log("user_id"+user_id);
                     //   console.log("pdid"+data.row['id']);
-                    // if (role == 'user' && user_id == row.user_id) {
+                    if (role == 'user' && user_id == row.user_id) {
 
-                    //     var allocated_to = row.allocated_to;
-                    //     var rballocated_to = row.rballocated_to;
-                    //     var id = row.id;
-                    //     var user_id = request.session.user_id;
+                        var allocated_to = row.allocated_to;
+                        var rballocated_to = row.rballocated_to;
+                        var id = row.id;
+                        var user_id = request.session.user_id;
 
-                    //     console.log("EB Allocated To: " + allocated_to);
-                    //     console.log("RB Allocated To: " + rballocated_to);
-                    //     console.log("User ID: " + user_id);
-                    //     console.log("ID: " + id);
+                        console.log("EB Allocated To: " + allocated_to);
+                        console.log("RB Allocated To: " + rballocated_to);
+                        console.log("User ID: " + user_id);
+                        console.log("ID: " + id);
 
-                    //     var blast_type;
-                    //     if (row.allocated_to == row.rballocated_to) {
-                    //         console.log("Email and Re Blast");
-                    //         blast_type = "E-Blast/Reminder Blast";
-                    //     } else if (row.allocated_to == request.session.user_id && row.allocated_to != row.rballocated_to) {
-                    //         console.log("Email Blast");
+                        var blast_type;
+                        if (row.allocated_to == row.rballocated_to) {
+                            console.log("Email and Re Blast");
+                            blast_type = "E-Blast/Reminder Blast";
+                        } else if (row.allocated_to == request.session.user_id && row.allocated_to != row.rballocated_to) {
+                            console.log("Email Blast");
 
-                    //         blast_type = "Email Blast";
-                    //     } else if (row.allocated_to != row.rballocated_to && row.rballocated_to == request.session.user_id) {
-                    //         console.log("Reminder Blast");
-                    //         blast_type = "Reminder Blast";
-                    //     } else {
+                            blast_type = "Email Blast";
+                        } else if (row.allocated_to != row.rballocated_to && row.rballocated_to == request.session.user_id) {
+                            console.log("Reminder Blast");
+                            blast_type = "Reminder Blast";
+                        } else {
 
-                    //     }
-                    // }
+                        }
+                    }
 
-                 
-                        data_arr.push({
-                            'balst_dt' : row.balst_dt,
-                            'camp_name' : camp_name,
-                            'status' : row.status,
-                            'allocated_to' : row.allocated_to,
-                            'blast_date' : row.blast_date,
-                            'blast_type' : row.blast_type,
-                            'rb_type' : row.rb_type,
-                            'rb_date' : row.rb_date,
-                            'blast_time' : row.blast_time,
-                            'camp_id' : row.camp_id,
-                            'id': row.id,
-                            'tact': tact,
-                            'eblast_datetime': row.eblast_datetime,
-                            'user_rbfiles': row.user_rbfiles,
-                            'reblast_datetime': row.reblast_datetime
+                    data_arr.push({
+                        'user_id': user_id,
+                        'camp_name': row.camp_name,
+                        'asset_name': row.asset_name,
+                        'blast_type': blast_type || row.blast_type,
+                        'status': row.status,
+                        'allocated_to': row.allocated_to,
+                        'rballocated_to': row.rballocated_to,
+                        'rbstatus': row.rbstatus,
+                        'todaydt': row.todaydt,
+                        'blast_date': row.blast_date,
+                        'camp_id': row.camp_id,
+                        'id': row.id,
+                        'tact': tact,
+                        'eblast_datetime': row.eblast_datetime,
+                        'user_rbfiles': row.user_rbfiles,
+                        'reblast_datetime': row.reblast_datetime
                     });
 
 
@@ -320,7 +323,7 @@ console.log("Fetch Single Query For View");
          right join user_tbl u on a.allocated_to=u.user_id join
           comment_tbl cm on cm.camp_id=a.id WHERE a.id = "${id}" `;
        
-
+         console.log("my nrw query"+swlquery)
         database.query(swlquery, function (error, data) {
             response.json(data[0]);
         });
@@ -533,6 +536,8 @@ var upload = multer({
 });
 
 router.post("/comment",  upload.any('image'),(request, response) => {
+   var camp_id = request.body.camp_id;
+    console.log("hello"+camp_id)
 
     var uploadFiles = request.files;
 
@@ -541,8 +546,8 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
     var filenames = uploadFiles.map(item => item.filename);
     var combinedFilenames = filenames.join(',');
-    console.log("kdfksdfsjdk"+combinedFilenames);
-    var comment = request.body.comment;
+    
+    // var comment = request.body.comment;
     // var image = request.body.image;
     // const imagePath = request.files.filename;
     // console.log(imagePath);
@@ -552,8 +557,9 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
 
         var sendComment = request.body.sendComment;
+        console.log("comment"+sendComment)
         var camp_id = request.body.camp_id;
-        tact = request.body.tact;
+       var tact = request.body.tact;
         // var tact = request.body.tact;
         // console.log("tactice value new"+tact);
         var status = request.body.status;
