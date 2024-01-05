@@ -529,10 +529,7 @@ console.log("Dir 3 is out of if else:" +dir3);
 })
 
 var upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-      },
+    storage: storage
 });
 
 router.post("/comment",  upload.any('image'),(request, response) => {
@@ -690,7 +687,9 @@ console.log("hhhhh");
     // }else{
 
 
-    router.post('/image_replace', upload.single('user_files'), (request, response) => {
+    router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {
+
+        
 
         var oldfname1 = request.body.oldfname;
         console.log("oldRajat file"+oldfname1 )
@@ -700,8 +699,8 @@ console.log("hhhhh");
 
 
 
-        console.log("hello Rajat ")
-        console.trace();
+   
+      
        
         const newfile = request.file.filename;
         console.log("updatedfile:" +newfile);

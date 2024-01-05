@@ -2400,6 +2400,7 @@ document.getElementById('container11').innerHTML = htmlContent2;
      if(admin_filesname[i] === undefined)
    
      {
+    
        console.log("Within if condition...");
 
        console.log("tact is:" +tact);
@@ -2425,7 +2426,7 @@ document.getElementById('container11').innerHTML = htmlContent2;
    
    
    htmlContent2 +=htmlContent+ '' +htmlContent1 ;
-   console.log(htmlContent2);
+
    
    
    document.getElementById('container11').innerHTML = htmlContent2;
