@@ -436,6 +436,27 @@ console.log("Fetch Single Query For View");
 
 
 
+// router.post('/image_remove', (request, response) => { //  delete code //
+// 	{
+// 		var camp_id = request.body.camp_id;
+//         var file = request.body.file;
+//         var tact = request.body.tact;
+//         console.log("mynewData"+camp_id,file,tact)
+
+// 		// var query = `DELETE FROM comment_tbl WHERE  client_id = '${client_id}' `;
+
+// 		// database.query(query, function(error, data){
+
+// 		// 	response.json({
+
+// 		// 		message : 'Client Request Deleted Successfully..'
+// 		// 	});
+
+// 		// });
+// 	}
+
+// })
+
 
 
 router.post("/test", (request, res) => {   // =>  image upload code start

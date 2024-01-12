@@ -408,8 +408,7 @@ if(row.tact === "Webinar")
              
 
             }else if(tact === 'Email-Reminder-Blast'){
-            
-               alert("all"+tact)
+        alert("hello")
         
                   for (var i = 0; i < user_rbfiles_length; i++)
                   { 
@@ -581,21 +580,11 @@ if(row.tact === "Webinar")
 
           for (var i = 0; i < 2; i++)
           { 
-            if(user_rb_files[i] === undefined)
-    
-            {
-                
-                  console.log("Within if condition...");
-  
-                  console.log("tact is:" +tactValue);
-                 alert(user_rb_files[1])
-                  htmlContent += '<form enctype="multipart/form-data" id = "form_id"><input type="text" value=' +user_rb_files[i]+ ' name="filenum" style="display:none;">Upload File...</td><td><input type="file" name="user_rbfiles" id = "user_rbfiles"  class = "imageInput custom-file-input" data-id = '+i+'  ><input type="submit" class="btn btn-primary"  onclick = "fileReplace1(this)" data-id=\''+data.camp_id+ ',' + user_rb_files[i] + ',' + i + ',' +tactValue+ '\'></tr></td>' ,'</p> ' ;
-
-            }else  if(user_rb_files[i] != ''){
+             if(user_rb_files[i] != ''){
                   console.log("tact is:" +tact);
                   console.log("Within else condition...");
                   console.log(user_rb_files[i]);
-                  htmlContent += '<p> <tr><td width="20%"><img src="../../file_img.png" style="width:15%"></td><td ><p>'+user_rb_files[i]+'</p><button type="button" class="btn btn-primary"  name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + user_rb_files[i] + ',' + i +  ','  + tactValue+'\'>Download File</button></td><td width="30%"><input type="text" value='+user_rb_files[i]+ ' name="filenum" style="display:none;"><p><input type="file" name="user_rbfiles" id = "user_rbfiles" class = "imageInput custom-file-input" data-id = '+i+'  ></p> <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)" data-id=\''+data.camp_id+ ',' + user_rb_files[i] + ',' + i + ',' +tactValue+'\'></tr></td>' ,'</p>' ;
+                  htmlContent += '<form enctype="multipart/form-data" id = "form_id"><tr><td>'+user_rb_files[i]+'<button type="button" class="btn btn-primary"  name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + user_rb_files[i] + ',' + i +  ','  + tactValue+'\'>Download File</button></td><td width="30%"> <button type="submit" class="btn btn-primary" onclick = "fileReplace1(this)" data-id=\''+data.camp_id+ ',' + user_rb_files[i] + ',' + i + ',' +tactValue+'\'> Remove file <i class="fas fa-cut" style="font-size:18px"></i></button></tr></td>' ,'</p></form>' ;
     
             }
          }
@@ -1004,6 +993,10 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
 
       var camp_id = myArray[0];
       var oldfname = myArray[1];
+
+       alert("myfile"+ oldfname)
+     
+      
      
       var filenum = myArray[2];
       var tact = myArray[3];
@@ -1100,4 +1093,85 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
  alert("hello - am form")
    // Reset the form
    form.reset();
+}
+
+function removeFile(e){
+   var idtype = $(e).data('id');
+      console.log("idtype:" +idtype);
+      const myArray = idtype.split(",");
+
+      var camp_id = myArray[0];
+      var oldfname = myArray[1];
+
+       alert("myfile"+ oldfname)
+     
+      
+     
+      var filenum = myArray[2];
+      var tact = myArray[3];
+  
+      // alert(myArray[3])
+       if(filenum.length !== 0){
+      // alert("tact in filereplace function" +tact);
+   //   var rb_files =  document.getElementsByClassName('.custom-file-input')
+      // var user_files  =  $('.imageInput')[0].files[0];
+      // alert(user_files)
+    
+   
+     
+      // console.log("iamge",user_files)
+
+      
+      var formData = new FormData();
+      // var user_rbfiles  =  $('.imageInput')[0].files[0]
+  
+      // var user_files = $('.imageInput')[id].files[0]; // Get the selected file
+
+      formData.append('tact', tact); // Append the file to FormData
+      formData.append('camp_id', camp_id); // Append the file to FormData
+      formData.append('filenum', filenum); // Append the file to FormData
+      formData.append('oldfname', oldfname); // Append the file to FormData
+      // formData.append('user_rbfiles', user_rbfiles); // Append the file to FormData
+
+   $.ajax({
+       type: 'POST',
+       url: 'http://localhost:3000/customEmp/image_remove', // Replace with your server-side script URL
+       data: formData,camp_id :camp_id,tact:tact,
+       processData: false, // Prevent jQuery from processing the data
+       contentType: false, // Set content type to false, as we are using FormData
+       success: function(response) {
+           // Handle the server's response here
+           
+           
+          
+         //  $('.wrap_new').html('<p class="alert alert-success">Image Upload successfully..</p>').fadeOut(3000)
+           // $("#container11").hide();
+           //   $("#fileviewbox").hide();
+           alert(response)
+
+          
+
+
+           $('#message').html('<div class="alert alert-success">'  + response.message +  '</div>');
+           $('#leftnav').DataTable().ajax.reload();
+           $('#apptask').DataTable().ajax.reload();
+           $('#task_priorities').DataTable().ajax.reload();
+           $('#todaysstask').DataTable().ajax.reload();
+           $('#weeklytasks').DataTable().ajax.reload();
+           setTimeout(function () {
+             $('#message').html('');
+           }, 5000);
+           $('#action_modal').modal('hide'); // for hide root modal
+           $('#form_id')[0].reset();
+
+       },
+       error: function(xhr, status, error) {
+           // Handle errors here
+           console.error(xhr.responseText);
+       }
+   });
+    }else{
+      $('.comment').html('<p class="alert alert-primary">Please upload only two Images..</p>').fadeOut(4000);
+
+    }
 }
