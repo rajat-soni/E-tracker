@@ -455,7 +455,7 @@ console.log("Fetch Single Query For View");
 // 		// });
 // 	}
 
-// })
+//})
 
 
 
@@ -467,6 +467,9 @@ router.post("/test", (request, res) => {   // =>  image upload code start
 
 var storage = multer.diskStorage({
     destination: (request, files, callBack) => {
+
+      
+
 var camp_id =  request.body.camp_id;
 
 var tact = request.body.tact;
@@ -520,6 +523,8 @@ if (!fs.existsSync(dir1)){
     {
         var dir3=`./files/${request.body.camp_id}/user/Webinar`;
 
+        
+
         if (!fs.existsSync(dir3)){
             fs.mkdirSync(dir3);
             console.log("Webinar Blast folder created....");
@@ -555,7 +560,9 @@ var upload = multer({
 
 router.post("/comment",  upload.any('image'),(request, response) => {
    var camp_id = request.body.camp_id;
-    console.log("hello"+camp_id)
+   var tact = request.body.tact;
+
+    console.log("hello"+tact)
 
     var uploadFiles = request.files;
 
@@ -565,13 +572,9 @@ router.post("/comment",  upload.any('image'),(request, response) => {
     var filenames = uploadFiles.map(item => item.filename);
     var combinedFilenames = filenames.join(',');
     
-    // var comment = request.body.comment;
-    // var image = request.body.image;
-    // const imagePath = request.files.filename;
-    // console.log(imagePath);
-    // console.log("image+image" + image);
-    // console.log("hello hello")
-    // if (comment == 'sendComment') {
+
+    
+    
 
 
         var sendComment = request.body.sendComment;
@@ -579,14 +582,16 @@ router.post("/comment",  upload.any('image'),(request, response) => {
         var camp_id = request.body.camp_id;
        var tact = request.body.tact;
         // var tact = request.body.tact;
-        // console.log("tactice value new"+tact);
+    console.log("tactice value new"+tact);
         var status = request.body.status;
         var rb_status = request.body.rb_status;
         console.log("status" + "" + status)
         console.log("rb_status" + "" + rb_status)
+        
+        console.log("filenames" ,filenames,request.files)
         console.log("image image " + combinedFilenames)
         console.log("mytact"+ tact);
-        // console.log("mycamp_id",camp_id);
+        console.log("mycamp_id",camp_id);
         console.log("sendComment"+sendComment);
       
 console.log("Rajashri comments");
@@ -614,46 +619,27 @@ console.log("hhhhh");
 
                         if(tact=="Email-Reminder-Blast")
                         {
-                            console.log("in if condition");
+                            console.log("in if condition reminder Balst condition");
                             var updateSql = `UPDATE comment_tbl SET  user_rbcomment='${sendComment}', user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
                             console.log("tact is eb/rb:" +updateSql);
       
                         }
-                        else
+                        else if(tact == "Webinar")
                         {
-                            console.log("in else condition");
-                        var updateSql = `UPDATE comment_tbl SET user_ebcomment = '${sendComment}', user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            console.log("in else  webinar condition");
+                            var updateSql = `UPDATE comment_tbl SET webinar_comment = "${sendComment}", webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
     
-                        }
+                        }else
+                            var updateSql = `UPDATE comment_tbl SET user_ebcomment = '${sendComment}', user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            console.log(" Email Blast Contion Update query" +updateSql);
+                         
+                            database.query(updateSql, function (err, data) {
     
-                        console.log("Update query" +updateSql);
-                        database.query(updateSql, function (err, data) {
-    
-                            // if (err) {
-                            //     response.json({
-                            //         success: false,
-                            //         message: 'errro'
-                            //     })
-                            //     console.log(err)
-                            // } else {
-                            //      response.json({
-                            //         success: true,
-                            //         message: 'Eamil Balst updated  id exist'
-                            //     })
-                            // }
-    
-    
-    
-                           
                                 response.json({
                                     success: true,
                                     message : 'id already exits...'
                                 });
                           
-    
-    
-    
-    
                         })
                        
             
@@ -713,6 +699,9 @@ console.log("hhhhh");
         
 
         var oldfname1 = request.body.oldfname;
+        console.log("myfiles"+ oldfname1)
+
+    
         console.log("oldRajat file"+oldfname1 )
 
         const newfile1 = request.file.filename;
@@ -762,7 +751,7 @@ console.log("hhhhh");
     
                     var camp_id=row.camp_id;
                     if(tact === "Webinar"){
-                   var  admin_files = row.user_ebfiles;
+                   var  admin_files = row.webinar_files;
 
                    console.trace();
                    console.log("trace project"+row.user_ebfiles)
@@ -829,7 +818,9 @@ console.log("hhhhh");
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles='${output}' WHERE camp_id = '${camp_id}'`;
 
                         if( tact === "Webinar"){
-                            var updateSql = `UPDATE comment_tbl SET user_ebfiles='${output}' WHERE camp_id = '${camp_id}'`;
+
+
+                            var updateSql = `UPDATE comment_tbl SET webinar_files='${output}' WHERE camp_id = '${camp_id}'`;
                         }
                        else if(tact==="Email-Reminder-Blast")
                        {
@@ -837,6 +828,7 @@ console.log("hhhhh");
     
                        }
                        else{
+                        
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles ='${output}' WHERE camp_id = '${camp_id}'`;
                        }
                        
@@ -865,7 +857,7 @@ console.log("hhhhh");
                         console.log('inside 1 else');
                         
 
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles,eb_comment) VALUES (${camp_id}, '${output}')`; // insert query //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${output}')`; // insert query //
                      //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
 
                      if(tact = "Webinar"){
