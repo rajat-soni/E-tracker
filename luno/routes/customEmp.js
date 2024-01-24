@@ -129,7 +129,7 @@ router.get('/get_data', function (request, response, next) {
     database.query(`
     SELECT COUNT(*) As Total,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}
     `, function (error, data) {
-        var qq = ` SELECT COUNT(*) As Total,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`;
+        var qq = `SELECT COUNT(*) As Total,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`;
         console.log("QQ:" + qq);
 
         var total_records = data[0].Total;
@@ -141,10 +141,9 @@ router.get('/get_data', function (request, response, next) {
 
             console.log("Rajashri");
             var query = `
-            SELECT * ,CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask left join comment_tbl on addtask.id=comment_tbl.camp_id
-            WHERE  (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query} 
-          ORDER BY ${column_name} ${column_sort_order} 
-          LIMIT ${start}, ${length}
+            SELECT *,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query} 
+            ORDER BY ${column_name} ${column_sort_order} 
+            LIMIT ${start}, ${length}
           `;
             console.log("Query:" + query);
 
@@ -157,7 +156,7 @@ router.get('/get_data', function (request, response, next) {
                     // console.log(row.role);
                     var user_id = request.session.user_id;
                     var role = request.session.role;
-
+                        console.log("session"+user_id);
                     const getDate = () => {
                         const newDate = new Date();
                         const year = newDate.getFullYear();
@@ -177,35 +176,34 @@ router.get('/get_data', function (request, response, next) {
 
                     var tact=row.tact;
 
-console.log("tact in routes:" +tact);
-
-if(tact==="e_blast"){
-   
-    if(row.rb_assetname!="" && row.rb_assetlink!="")
-{
-     tact="Email Blast / Reminder Blast"; 
-    console.log("Email Blast / Reminder Blast");
-}
-else{
-     tact="Email Blast";
-    console.log("Email Blast");
-
-}
-
-}
-else if(tact==="webinar")
-{
-     tact="Webinar";
-    console.log("Webinar");
-}
-
-
-
+                    console.log("tact in routes:" +tact);
+                    
+                    if(tact==="e_blast"){
+                       
+                        if(row.rb_assetname!="" && row.rb_assetlink!="")
+                    {
+                        var tact="Email Blast / Reminder Blast"; 
+                        console.log("Email Blast / Reminder Blast");
+                    }
+                    else{
+                        var tact="Email Blast";
+                        console.log("Email Blast");
+                    
+                    }
+                    
+                    }
+                    else if(tact==="webinar")
+                    {
+                        var tact="Webinar";
+                        console.log("Webinar");
+                    }
+                    
 
 
 
-                    //  console.log("user_id"+user_id);
-                    //   console.log("pdid"+data.row['id']);
+console.log("ebBlastDateCjeck"+row.balst_dt);
+                     console.log("user_id"+user_id);
+                      console.log("pdid"+row['id']);
                     if (role == 'user' && user_id == row.user_id) {
 
                         var allocated_to = row.allocated_to;
@@ -233,7 +231,7 @@ else if(tact==="webinar")
 
                         }
                     }
-
+                    console.log("user_id1"+row.user_id);
                     data_arr.push({
                         'user_id': user_id,
                         'camp_name': row.camp_name,
@@ -249,9 +247,9 @@ else if(tact==="webinar")
                         'id': row.id,
                         'tact': tact,
                         'eblast_datetime': row.eblast_datetime,
-                        'user_rbfiles': row.user_rbfiles,
                         'reblast_datetime': row.reblast_datetime
                     });
+
 
 
                 });
@@ -561,6 +559,8 @@ var upload = multer({
 router.post("/comment",  upload.any('image'),(request, response) => {
    var camp_id = request.body.camp_id;
    var tact = request.body.tact;
+   var sendComment = request.body.sendComment;
+   console.log("myckeck comment"+sendComment)
 
     console.log("hello"+tact)
 

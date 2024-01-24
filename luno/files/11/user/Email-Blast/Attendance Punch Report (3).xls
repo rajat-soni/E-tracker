@@ -1,0 +1,462 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=UTF8">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 9">
+<link rel=File-List href="./Book1_files/filelist.xml">
+<link rel=Edit-Time-Data href="./Book1_files/editdata.mso">
+<link rel=OLE-Object-Data href="./Book1_files/oledata.mso">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Jaison</o:Author>
+  <o:LastAuthor>Jaison</o:LastAuthor>
+  <o:Created>2011-10-26T11:13:25Z</o:Created>
+  <o:LastSaved>2011-10-26T11:20:50Z</o:LastSaved>
+  <o:Company>Lenvica</o:Company>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DownloadComponents/>
+  <o:LocationOfComponents HRef="msowc.cab"/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{mso-footer-data:"&CPage &P of &N";
+	margin:1.0in .75in 1.0in .75in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-page-orientation:landscape;}
+tr
+	{mso-height-source:auto;}
+col
+	{mso-width-source:auto;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:Normal;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.x201
+ {mso-style-parent:style0;
+ mso-number-format:"\@"; 
+ mso-pattern:auto none;
+ }
+.x202
+ {mso-style-parent:style0;
+ mso-pattern:auto none;
+ }
+.x203
+ {mso-style-parent:style0;
+ mso-number-format:"\@"; 
+ }
+.x204
+ {mso-style-parent:style0;
+ }
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet1</x:Name>
+    <x:WorksheetOptions>
+     <x:FitToPage/>
+     <x:Print>
+      <x:ValidPrinterInfo/>
+      <x:PaperSizeIndex>9</x:PaperSizeIndex>
+      <x:Scale>37</x:Scale>
+      <x:HorizontalResolution>600</x:HorizontalResolution>
+      <x:VerticalResolution>600</x:VerticalResolution>
+     </x:Print>
+     <x:Selected/>
+     <x:DoNotDisplayGridlines/>
+     <x:Panes>
+      <x:Pane>
+       <x:Number>3</x:Number>
+      </x:Pane>
+     </x:Panes>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+ </x:ExcelWorkbook>
+ <x:ExcelName>
+  <x:Name>Print_Area</x:Name>
+  <x:SheetIndex>1</x:SheetIndex>
+  <x:Formula>=Sheet1!$A$1:$BA$33</x:Formula>
+ </x:ExcelName>
+</xml><![endif]-->
+</head>
+
+<body link=blue vlink=purple>
+<table><col/>
+<col/>
+<col/>
+<col/>
+<col width=75 style='mso-width-source:userset;width=56pt'/>
+<col width=75 style='mso-width-source:userset;width=56pt'/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col width=2 style='mso-width-source:userset;width=2pt'/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<col/>
+<tr>
+<td colspan=51 class=x204 style="font-size:14pt;font-weight:700;text-align:right;vertical-align:middle;">XDBS Private Limited</td>
+</tr>
+<tr>
+<td colspan=51 class=x204 style="font-size:8pt;text-align:right;vertical-align:middle;">Unite No. 611, Tower - 1, World Trade Center,</td>
+</tr>
+<tr>
+<td colspan=51 class=x204 style="font-size:10pt;text-align:right;vertical-align:middle;"></td>
+</tr>
+<tr height=36 style='mso-height-source:userset;height:27.00pt'>
+<td colspan=51 class=x204 style="font-size:14pt;font-weight:700;vertical-align:middle;">Report on Attendance Punch Details (Nov 24, 2023 - Dec 23, 2023)</td>
+</tr>
+<tr height=60 style='mso-height-source:userset;height:45.00pt'>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Employee Id</td>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Name</td>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Designation</td>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Department</td>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Date of Joining</td>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Period With Company</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">24</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">25</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">26</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">27</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">28</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">29</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">30</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">1</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">2</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">3</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">4</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">5</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">6</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">7</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">8</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">9</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">10</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">11</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">12</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">13</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">14</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">15</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">16</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">17</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">18</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">19</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">20</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">21</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">22</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">23</td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;text-align:center;vertical-align:middle;"></td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">No of hrs Worked</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;white-space:normal;">Weekly Off Worked(Hrs)</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">Week 1</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">Week 2</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">Week 3</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">Week 4</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">Week 5</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">Total</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">P</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">A</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">AR</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">PL</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">MS</td>
+<td class=x202 style="font-size:8pt;font-weight:700;background-color:#FA9C00;text-align:center;vertical-align:middle;">LOP</td>
+</tr>
+<tr>
+<td rowspan=3 class=x201 style="font-size:10pt;background-color:#A6CAF0;text-align:center;vertical-align:middle;">103855</td>
+<td rowspan=3 class=x202 style="font-size:10pt;background-color:#A6CAF0;text-align:center;vertical-align:middle;">Rajat Soni</td>
+<td rowspan=3 class=x201 style="font-size:10pt;background-color:#A6CAF0;text-align:center;vertical-align:middle;">PHP Developer</td>
+<td rowspan=3 class=x201 style="font-size:10pt;background-color:#A6CAF0;text-align:center;vertical-align:middle;">Digital Marketing</td>
+<td rowspan=3 class=x201 style="font-size:10pt;background-color:#A6CAF0;text-align:center;vertical-align:middle;">Aug 5, 2022</td>
+<td rowspan=3 class=x202 style="font-size:10pt;background-color:#A6CAF0;text-align:center;vertical-align:middle;">1</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:29</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:32</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:28</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:41</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:30</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:25</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:20</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:23</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:26</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:27</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:21</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:27</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:00</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:23</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">19:24</td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;">CL</td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;">CL</td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;">CL</td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;">CL</td>
+<td class=x201 style="font-size:8pt;background-color:#20CE00;text-align:center;vertical-align:middle;">PL</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;">DO</td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;">148:01</td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;">10:27</td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;">52:41</td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;">53:17</td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;">31:36</td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x203 style="font-size:8pt;text-align:center;vertical-align:middle;">148:01</td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;">14</td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+</tr>
+<tr>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">5:56</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:08</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:03</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">5:55</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:07</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:04</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">5:29</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:07</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:22</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:09</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:07</td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">5:40</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:04</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:04</td>
+<td class=x201 style="font-size:8pt;background-color:#A8A8FF;text-align:center;vertical-align:middle;">6:02</td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#0298A4;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#20CE00;text-align:center;vertical-align:middle;"></td>
+<td class=x201 style="font-size:8pt;background-color:#DCC98D;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+<td class=x204 style="font-size:8pt;text-align:center;vertical-align:middle;"></td>
+</tr>
+<tr>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:27</td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:36</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:35</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:14</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:37</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:39</td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:09</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:44</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:56</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:42</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:46</td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:13</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">00:04</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:41</td>
+<td class=x201 style="font-size:8pt;background-color:#00FF00;">10:38</td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#00FF00;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+<td class=x204 style="font-size:8pt;"></td>
+</tr>
+<tr>
+<td class=x202 style="font-size:10pt;font-weight:700;background-color:#FA9C00;text-align:left;vertical-align:middle;">1 Employees</td>
+<td class=x202 style="font-size:10pt;background-color:#FA9C00;text-align:left;vertical-align:middle;"></td>
+<td class=x202 style="font-size:10pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:10pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:10pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:10pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+<td class=x202 style="font-size:8pt;background-color:#FA9C00;"></td>
+</tr>
+</table></body></html>
