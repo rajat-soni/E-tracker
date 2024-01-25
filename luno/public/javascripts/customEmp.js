@@ -135,7 +135,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
            
             return`
  
-         console.log("helllo me")
+     
          ${(row.allocated_to == row.user_id && row.status == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" style="font-size:26px;"></i>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
@@ -144,7 +144,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                <button type="button"  id = "editimage"   class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' +tact+`">
                
                
-               <i class="fa fa-file-excel-o" style = "font-size:20px;"></i>
+               <i class="fa fa-file-excel-o" style = "font-size:18px;"></i>
 
 
 
@@ -265,7 +265,15 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
        
 
        if(tact == "Email-Blast"){
+    
+
         
+         $("#eBc").show()
+         $("#cf").show()
+         $("#sendmail").show()
+         $("#sendname").show()
+         $("#campname").show()
+         $("#fileviewbox").hide()
          $("#webinarFlex").hide()
          $("#ebBlastview").show()
          $('#webinar_files').hide();
@@ -351,7 +359,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
             var admin_image = data.admin_files;
             var tactValue = data.tact;
-            alert(tactValue)
+         
             var user_rbfiles =data.user_rbfiles;
     
             var user_rbfiles = user_rbfiles.split(',');
@@ -363,19 +371,20 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
             var admin_image = admin_image.split(',');
             var admin_length = admin_image.length;
             var htmlContent = ''; 
-
-
+            alert("within success" +tactValue)
+       
             if(tactValue == "webinar" ){
               
+               alert(data.webinar_files)
                $("#webinarFlex").show()
                   $("#ebBlastview").hide();      
                   var user_image1=data.webinar_files;
-              
+               
               
                   var user_image1 = user_image1.split(',');
                   var length = user_image1.length;
 
-
+                  alert("webinar"+data.webinar_files)
 
                      for (var i = 0; i < length; i++)
                      { 
@@ -422,10 +431,9 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                   for (var i = 0; i < length ; i++)
                   { 
                     
-               
                      htmlebContent += '<p> <tr><td><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_image[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="user_ebfiles" id="user_ebfiles" onclick="fileviewFunction(this)" data-id=\''+ data.cate_id +','+user_image[i]+',' + i +  ','  + tact +'\'> Download File</button><br>'+now+' </td></tr>' ,'</p>' ;
                     
-                     
+     
                   }
                    document.getElementById('viewfiles112').innerHTML = htmlebContent;
                      $("#viewfiles112").show();
@@ -455,11 +463,13 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                     
              
 
-            }else if(tact == 'Email-Reminder-Blast'){
-   
+            }
+            
+            
+            
+               
                var user_rbfiles =data.user_rbfiles;
-               alert("user_rbfiles")
-    
+              
                var user_rbfiles = user_rbfiles.split(',');
                var user_rbfiles_length = user_rbfiles.length;
                   for (var i = 0; i < user_rbfiles_length; i++)
@@ -491,9 +501,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                     $('#fileviewdownload').hide();
                     $('#viewfiles11').hide();
            
-            }else{
-               alert("Please Check anyone option");
-            }
+           
          }
       });
 

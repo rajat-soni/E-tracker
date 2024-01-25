@@ -2,25 +2,85 @@
 
 
 var tactebweb = document.getElementById('tactebweb');
+
 error_Tact.disabled = true;
+
+
+
+
+var tact_new= document.getElementById('tactebweb');
+
+ function tactValidation () {
+
+    var tactebweb = document.getElementById('tactebweb');
+    if(tactebweb.value  == "Please select one"){
+        error_Tact.disabled = false;
+        error_Tact.innerHTML = 'Please select one value'
+        tact_new.style.borderColor = "black";
+
+        return false;
+    }else{
+        error_Tact.disabled= true;
+        error_Tact.innerHTML = '';
+        tact_new.style.borderColor = "green";
+
+        
+    }
+
+
+   
+
+
+}
+
+    
+
+
+var btnClick = document.getElementById('action_button');
+//var camp_name_error = document.getElementById('camp_error');
+
+btnClick.onclick = () => {
+
+    // webinar errors //
+    error_Tact.disabled = true;
+  
+
+
+    tactValidation();
+    
+
+
+if(  (error_Tact.disabled == true)   ) {
+   
+    return true;
+}else{
+ 
+    return false;
+}
+}
+
+
+
 
 tactebweb.onchange = () => {
     tactValidation();
   //  tactEmail();
     var e = document.getElementById("tactebweb");
 var value = e.value;
-alert("Tact value first" +value);
+
    
 
 
-    
+
+
+
 
 
 
 console.log("Tact value on tact validation:" +value);
 if(value  === "e_blast"){
    
-    alert("first if condition");
+ 
    // for e-blast //
 var cname = document.getElementById('cname');
 var camp_name = document.getElementById('camp_name');
@@ -32,8 +92,9 @@ var blast_type = document.getElementById('blast_type11');
 var asset_name = document.getElementById('asset_name');
 var asset_link = document.getElementById('asset_link');
 var tactebweb = document.getElementById('tactebweb');
+var blast_date = document.getElementById('blast_date');
+var blast_time = document.getElementById('blast_time');
 
- 
 
 
 
@@ -54,7 +115,8 @@ var error_Tact = document.getElementById('error_Tact');
 var error_blast_type = document.getElementById('error_blast_type');
 var error_ebasset_name = document.getElementById('error_ebasset_name');
 var error_asset_link = document.getElementById('error_asset_link');
-
+var error_blast_date = document.getElementById('error_blast_date');
+var error_blast_time = document.getElementById('error_blast_time');
 
 
 
@@ -64,7 +126,7 @@ var error_asset_link = document.getElementById('error_asset_link');
 //var eblast_error = document.getElementById('eblast_error');
 
 
-
+error_blast_time.disabled = true;
 cname_error.disabled = true;
 camp_name_error.disabled = true;
 camp_from_error.disabled = true;
@@ -74,7 +136,7 @@ error_allocated.disabled = true;
 error_blast_type.disabled = true;
 error_ebasset_name.disabled = true;
 error_Tact.disabled = true;
-
+error_blast_date.disabled = true;
 
 
 
@@ -143,7 +205,7 @@ error_Tact.disabled = true;
 //     var ebasset_nameview = document.getElementById('ebasset_nameview').value;
 //        alert(ebasset_nameview);
 //     if(ebasset_nameview.length <=2){
-//         eblast_error.innerHTML = 'comment Must be in 2 letters'
+//         eblast_error.innerHTML = 'comment Must be in 3 letters'
 //         eblast_error.disabled = false;
 //         return false;
 //     }
@@ -301,6 +363,79 @@ asset_link_new.style.borderColor = "green";
 } 
 
 //end validation of E-Blast Asset Link//
+
+
+
+
+
+//start validation  E-Blast Date
+
+blast_date.onchange = () => {
+    balst_dateValidation();
+    }
+    var blast_date_new = document.getElementById('blast_date');
+    
+    function balst_dateValidation () {  // defination of function //
+    var blast_date = document.getElementById('blast_date').value;
+    
+   
+    if(blast_date.length == 0){
+        error_blast_date.innerHTML = ' Blast Date not be empty'
+        error_blast_date.disabled = false; 
+        blast_date_new.style.borderColor = "black";
+    
+        return false;
+    }
+    
+    
+    error_blast_date.innerHTML ='';
+    error_blast_date.disabled = true;  
+    blast_date_new.style.borderColor = "green";
+    
+    } 
+    
+    //end validation of Blast E-Blast Date
+
+
+
+
+
+
+
+    
+
+//start validation E-Blast Time
+
+blast_time.onchange = () => {
+    blast_timeValidation();
+    }
+    var blast_time_new = document.getElementById('blast_time');
+    
+    function blast_timeValidation () {  // defination of function //
+    var blast_time = document.getElementById('blast_time').value;
+    
+
+    if(blast_time.length == 0){
+        error_blast_time.innerHTML = ' Blast Time not be empty'
+        error_blast_time.disabled = false; 
+        blast_time_new.style.borderColor = "black";
+    
+        return false;
+    }
+    
+    
+    error_blast_time.innerHTML ='';
+    error_blast_time.disabled = true;  
+    blast_time_new.style.borderColor = "green";
+    
+    } 
+    
+    //end validation of E-Blast Time
+
+
+
+
+
 blast_count.onkeyup = () => {
 blastCountValidation();
 }
@@ -337,7 +472,7 @@ function campFromValidation () {  // defination of function //
 var camp_from = document.getElementById('camp_from').value;
 
 if(camp_from.length <= 2){
-    camp_from_error.innerHTML = 'Campaign from Must be in 2 letters'
+    camp_from_error.innerHTML = 'Campaign from Must be in 3 letters'
     camp_from_error.disabled = false;
     camp_from_new.style.borderColor = "black";
     return false;
@@ -371,7 +506,7 @@ function campNameValidation () {  // defination of function //
 var camp_name_value = document.getElementById('camp_name').value;
 
 if(camp_name_value.length <= 2){
-    camp_name_error.innerHTML = 'Campaign Name Must be in 2 letters'
+    camp_name_error.innerHTML = 'Campaign Name Must be in 3 letters'
     camp_name_error.disabled = false;
     camp_name_new.style.borderColor = "black";
     return false;
@@ -424,6 +559,7 @@ var btnClick = document.getElementById('action_button');
 var camp_name_error = document.getElementById('camp_error');
 
 btnClick.onclick = () => {
+    
 cname_error.disabled = true;
 camp_name_error.disabled = true;
 camp_from_error.disabled = true;
@@ -431,10 +567,12 @@ blast_error.disabled = true;
 error_priority.disabled = true;
 error_allocated.disabled = true;
 error_blast_type.disabled= true;
+error_blast_date.disabled= true;
+error_blast_time.disabled= true;
 // error_Tact.disabled = true;
 
-
-
+blast_timeValidation();
+balst_dateValidation();
 nameValidation();
 campNameValidation();
 campFromValidation()
@@ -452,7 +590,7 @@ asset_nameValidation();
 
 
 
-if( ( cname_error.disabled == true) && ( camp_name_error.disabled == true ) && (camp_from_error.disabled == true)  && (blast_error.disabled == true) && (error_priority.disabled == true) && (error_allocated.disabled == true) && (error_blast_type.disabled == true) && (error_ebasset_name.disabled == true) && (webcamp_error.disabled == true) && (webcamp_from_error.disabled == true) && (webinar_count_error.disabled == true ) && (weberror_priority_error.disabled == true) && ( weberrblsttype_error.disabled == true) && (weberror_allocated_error.disabled == true) && (error_registration_link.disabled == true) ) {
+if( ( cname_error.disabled == true) && ( camp_name_error.disabled == true ) && (camp_from_error.disabled == true)  && (blast_error.disabled == true) && (error_priority.disabled == true) && (error_allocated.disabled == true) && (error_blast_type.disabled == true) && (error_ebasset_name.disabled == true) && (webcamp_error.disabled == true) && (webcamp_from_error.disabled == true) && (webinar_count_error.disabled == true ) && (weberror_priority_error.disabled == true) && ( weberrblsttype_error.disabled == true) && (weberror_allocated_error.disabled == true) && (error_registration_link.disabled == true) && (error_blast_date.disabled == true)&& (error_blast_time.disabled == true) ) {
     return true;
 }else{
     return false;
@@ -472,18 +610,29 @@ if( ( cname_error.disabled == true) && ( camp_name_error.disabled == true ) && (
 
 
 }
+
+
+
+
+
+//validation start for webinar tactics
 else if(value  === "webinar"){
 
-    alert("within else if webinar");
+  
 
 // for webinar //
 var webcamp_name = document.getElementById('webcamp_name');
+var cnamewebinar = document.getElementById('cnamewebinar');
+
 var webcamp_from = document.getElementById('webcamp_from');
 var webinar_count = document.getElementById('webinar_count');
 var webpriority = document.getElementById('webpriority');
 var webBlsttype = document.getElementById('webblsttype');
 var weballocated_to = document.getElementById('weballocated_to');
 var registration_link = document.getElementById('registration_link');
+var webinar_count= document.getElementById('webinar_count');
+var registration_date= document.getElementById('registration_date');
+var registration_time= document.getElementById('registration_time');
 
 
 // for webinar error //
@@ -492,15 +641,16 @@ var webcamp_from_error = document.getElementById('webcamp_from_error');
 var webinar_count_error = document.getElementById('webinar_count_error');
 var weberror_priority_error = document.getElementById('weberror_priority');
 var weberrblsttype_error = document.getElementById('weberrblsttype');
-var weberrblsttype_error = document.getElementById('weberrblsttype');
+
 var weberror_allocated_error = document.getElementById('weberror_allocated');
 var error_registration_link = document.getElementById('error_registration_link');
+var cnamewebinar_error = document.getElementById('cnamewebinar_error');
+var webinar_count_error = document.getElementById('webinar_count_error');
+var error_registration_time = document.getElementById('error_registration_time');
 
 
-
-
-
-    
+webinar_count_error.disabled = true;
+cnamewebinar_error.disabled = true;
 webcamp_error.disabled = true;
 webcamp_from_error.disabled = true;
 
@@ -509,6 +659,8 @@ weberror_priority_error.disabled = true;
 weberrblsttype_error.disabled = true;
 weberror_allocated_error.disabled = true;
 error_registration_link.disabled = true;
+error_registration_date.disabled = true;
+error_registration_time.disabled = true;
 
 
 
@@ -524,7 +676,7 @@ registration_link.onkeyup = () => {
         var registration_link = document.getElementById('registration_link').value;
        
         if(registration_link.length <=2){
-            error_registration_link.innerHTML = 'comment Must be in 2 letters'
+            error_registration_link.innerHTML = 'comment Must be in 3 letters'
             error_registration_link.disabled = false;
             return false;
         }
@@ -551,12 +703,147 @@ registration_link.onkeyup = () => {
 
 
 
+//start validation for cnamewebinar
+cnamewebinar.onchange = () => {
+ 
+    cnamewebinarval();
+}
+    
+    var cnamewebinar_new = document.getElementById('cnamewebinar');
+  
+    function cnamewebinarval()  {
+    
+  var cnamewebinar = document.getElementById('cnamewebinar');
+
+    if(cnamewebinar.value == "Please select one"){
+   // if(cnamewebinar.value  == "Please select one"){
+        cnamewebinar_error.disabled = false;
+        cnamewebinar_error.innerHTML = 'Please select one value'
+        cnamewebinar_new.style.borderColor = "black";
+    
+        return false;
+    }else{
+  
+        cnamewebinar_error.disabled= true;
+        cnamewebinar_error.innerHTML = '';
+        cnamewebinar_new.style.borderColor = "green";
+    
+        
+    }
+    }
+
+//end validation for cnamewebinar
 
 
 
 
 
 
+
+
+
+
+//start validation  registration_date for webinar
+
+registration_date.onchange = () => {
+    registration_dateValidation();
+    }
+    var registration_date_new = document.getElementById('registration_date');
+    
+    function registration_dateValidation () {  // defination of function //
+    var registration_date = document.getElementById('registration_date').value;
+    
+
+    if(registration_date.length == 0){
+        error_registration_date.innerHTML = ' Registration Date not be empty'
+        error_registration_date.disabled = false; 
+        registration_date_new.style.borderColor = "black";
+    
+        return false;
+    }
+    
+    
+    error_registration_date.innerHTML ='';
+    error_registration_date.disabled = true;  
+    registration_date_new.style.borderColor = "green";
+    
+    } 
+    
+    //end validation of registration_date for webinar
+
+
+
+
+
+
+
+    
+
+//start validation E-Blast Time
+
+registration_time.onchange = () => {
+    registration_timeValidation();
+    }
+    var registration_time_new = document.getElementById('registration_time');
+    
+    function registration_timeValidation () {  // defination of function //
+    var registration_time = document.getElementById('registration_time').value;
+    
+
+    if(registration_time.length == 0){
+        error_registration_time.innerHTML = ' Registration Time not be empty'
+        error_registration_time.disabled = false; 
+        registration_time_new.style.borderColor = "black";
+    
+        return false;
+    }
+    
+    
+    error_registration_time.innerHTML ='';
+    error_registration_time.disabled = true;  
+    registration_time_new.style.borderColor = "green";
+    
+    } 
+    
+    //end validation of E-Blast Time
+
+
+
+
+
+
+
+webinar_count.onkeyup = () => {
+
+    webinar_countFun();
+    }
+    
+    var webinar_count_new = document.getElementById('webinar_count');
+
+
+    function webinar_countFun() {
+    
+        var webinar_count = document.getElementById('webinar_count').value;
+       
+       
+    
+        if(webinar_count.length == 0){
+            webinar_count_error.innerHTML = 'Please Enter Count'
+            webinar_count_error.disabled = false; 
+            webinar_count_new.style.borderColor = "black";
+            return false;
+        }
+        if(!webinar_count.match(/^\d+/)){
+            webinar_count_error.innerHTML = 'Please Enter Valid Counts';
+            webinar_count_error.disabled = false;
+            webinar_count_new.style.borderColor = "black";
+            return false;
+        }
+    
+        webinar_count_error.innerHTML ='';
+        webinar_count.disabled = true;    
+        webinar_count_new.style.borderColor = "green";
+    } //end of camp_name //
 
 
 
@@ -566,13 +853,17 @@ weballocated_to.onchange = () => {
 }
     
     var weballocated_to_new = document.getElementById('weballocated_to');
+
+    
+
     function webAllocatedTo()  {
     
     var webBlsttype = document.getElementById('weballocated_to');
     if(webBlsttype.value  == "Please select one"){
+  
         weberror_allocated_error.disabled = false;
         weberror_allocated_error.innerHTML = 'Please select one value'
-        weberror_allocated_error.style.borderColor = "black";
+        weballocated_to_new.style.borderColor = "black";
     
         return false;
     }else{
@@ -588,20 +879,20 @@ webBlsttype.onchange = () => {
     webBlstTypFun();
 }
     
-    var blast_type_new = document.getElementById('webblsttype');
+    var webblsttype_new = document.getElementById('webblsttype');
     function webBlstTypFun()  {
     
     var webBlsttype = document.getElementById('webblsttype');
     if(webBlsttype.value  == "Please select one"){
         weberrblsttype_error.disabled = false;
         weberrblsttype_error.innerHTML = 'Please select one value'
-        weberrblsttype_error.style.borderColor = "black";
+        webblsttype_new.style.borderColor = "black";
     
         return false;
     }else{
         weberrblsttype_error.disabled= true;
         weberrblsttype_error.innerHTML = '';
-        blast_type_new.style.borderColor = "green";
+        webblsttype_new.style.borderColor = "green";
     
         
     }
@@ -616,20 +907,20 @@ webpriority.onchange = () => {
     webPriorityFun();
     }
     
-    var blast_type_new = document.getElementById('webpriority');
+    var webpriority_new = document.getElementById('webpriority');
     function   webPriorityFun()  {
     
     var webpriority = document.getElementById('webpriority');
     if(webpriority.value  == "Please select one"){
         weberror_priority_error.disabled = false;
         weberror_priority_error.innerHTML = 'Please select one value'
-        weberror_priority_error.style.borderColor = "black";
+        webpriority_new.style.borderColor = "black";
     
         return false;
     }else{
         weberror_priority_error.disabled= true;
         weberror_priority_error.innerHTML = '';
-        blast_type_new.style.borderColor = "green";
+        webpriority_new.style.borderColor = "green";
     
         
     }
@@ -656,88 +947,111 @@ webinar_count.onkeyup = () => {
 
     wapCountFromFun();
     }
-    
+    var webinar_count_new = document.getElementById('webinar_count');
+
     function wapCountFromFun() {
     
-        var webinar_countnew = document.getElementById('webinar_count').value;
+        var webinar_count = document.getElementById('webinar_count').value;
        
         if(webinar_count.length == 0){
             webinar_count_error.innerHTML = ' webinar count not be empty'
             webinar_count_error.disabled = false; 
-         //   webinar_count.style.borderColor = "black";
+            webinar_count_new.style.borderColor = "black";
         
             return false;
         }
     
         webinar_count_error.innerHTML ='';
         webinar_count_error.disabled = true;  
-       // webinar_count.style.borderColor = 'green';
+        webinar_count_new.style.borderColor = 'green';
     } //end of camp_name //
 
+
+
+
+
+    //start validation for webinar campaign form
     webcamp_from.onkeyup = () => {
 
     wapCampFromFun();
     }
-    
+    var webcamp_from_new = document.getElementById('webcamp_from');
+
     function wapCampFromFun() {
     
         var webcamp_from = document.getElementById('webcamp_from').value;
        
         if(webcamp_from.length <=2){
-            webcamp_from_error.innerHTML = 'comment Must be in 2 letters'
+            webcamp_from_error.innerHTML = 'comment Must be in 3 letters'
             webcamp_from_error.disabled = false;
+            webcamp_from_new.style.borderColor = "black";
+
             return false;
         }
     
         if(webcamp_from.length == 0){
             webcamp_from_error.innerHTML = 'Please Enter Name'
             webcamp_from_error.disabled = false; 
+            webcamp_from_new.style.borderColor = "black";
+
             return false;
         }
         if(!webcamp_from.match(/^[a-zA-Z]/)){
             webcamp_from_error.innerHTML = 'Please Enter Valid Name';
             webcamp_from_error.disabled = false;
+            webcamp_from_new.style.borderColor = "black";
+
             return false;
         }
     
         webcamp_from_error.innerHTML ='';
-        webcamp_from_error.disabled = true;    
-    } //end of camp_name //
+        webcamp_from_error.disabled = true;  
+        webcamp_from_new.style.borderColor = "green";
+  
+    } //end of webinar campaign form //
     
     
 
 
 
 
-
+//start validation for webinar camapign name
 webcamp_name.onkeyup = () => {
 
 wapCampFun();
 }
+var webcamp_name_new = document.getElementById('webcamp_name');
 
 function wapCampFun() {
 
     var webcamp_name = document.getElementById('webcamp_name').value;
    
     if(webcamp_name.length <=2){
-        webcamp_error.innerHTML = 'comment Must be in 2 letters'
+        webcamp_error.innerHTML = 'comment Must be in 3 letters'
         webcamp_error.disabled = false;
+        webcamp_name_new.style.borderColor = "black";
         return false;
     }
 
     if(webcamp_name.length == 0){
         webcamp_error.innerHTML = 'Please Enter Name'
         webcamp_error.disabled = false; 
+        webcamp_name_new.style.borderColor = "black";
+
         return false;
     }
     if(!webcamp_name.match(/^[a-zA-Z]/)){
         webcamp_error.innerHTML = 'Please Enter Valid Name';
         webcamp_error.disabled = false;
+        webcamp_name_new.style.borderColor = "black";
+
         return false;
     }
 
     webcamp_error.innerHTML ='';
-    webcamp_error.disabled = true;    
+    webcamp_error.disabled = true; 
+    webcamp_name_new.style.borderColor = "green";
+   
 } //end of camp_name //
 
 
@@ -751,13 +1065,17 @@ var btnClick = document.getElementById('action_button');
 var camp_name_error = document.getElementById('camp_error');
 
 btnClick.onclick = () => {
-alert("within action button");
+
     // webinar errors //
+    webinar_count_error.disabled = true;
+    cnamewebinar_error.disabled = true;
     webcamp_error.disabled = true;
     webcamp_from_error.disabled = true
     webinar_count_error.disabled = true;  
     weberror_priority_error.disabled = true;
     weberror_allocated_error.disabled = true;
+    error_registration_date.disabled = true;
+    error_registration_time.disabled = true;
     wapCampFun();
     wapCampFromFun();
     wapCountFromFun();
@@ -765,16 +1083,20 @@ alert("within action button");
     webBlstTypFun()
     webAllocatedTo();
     registrLinkFun();
+     cnamewebinarval();
+     webinar_countFun();
+     registration_dateValidation();
+     registration_timeValidation();
 
 
 
 
 
-if(  (webcamp_error.disabled == true) && (webcamp_from_error.disabled == true) && (webinar_count_error.disabled == true ) && (weberror_priority_error.disabled == true)  && (weberror_allocated_error.disabled == true)  ) {
-    alert("if condition within action btn");
+if(  (webcamp_error.disabled == true) && (webcamp_from_error.disabled == true) && (webinar_count_error.disabled == true ) && (weberror_priority_error.disabled == true)  && (weberror_allocated_error.disabled == true) && (cnamewebinar_error.disabled == true) && (webinar_count_error.disabled == true)  && (error_registration_date.disabled == true)  && (error_registration_time.disabled == true)  ) {
+   
     return true;
 }else{
-    alert("else condtion within action btn");
+ 
     return false;
 }
 }
@@ -793,30 +1115,7 @@ if(  (webcamp_error.disabled == true) && (webcamp_from_error.disabled == true) &
 }
 
 }
-var tact_new= document.getElementById('tactebweb');
 
- function tactValidation () {
-
-    var tactebweb = document.getElementById('tactebweb');
-    if(tactebweb.value  == "Please select one"){
-        error_Tact.disabled = false;
-        error_Tact.innerHTML = 'Please select one value'
-        tact_new.style.borderColor = "black";
-
-        return false;
-    }else{
-        error_Tact.disabled= true;
-        error_Tact.innerHTML = '';
-        tact_new.style.borderColor = "green";
-
-        
-    }
-
-
-   
-
-
-}
 
 
 
