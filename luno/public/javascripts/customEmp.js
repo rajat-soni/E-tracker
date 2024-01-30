@@ -41,7 +41,7 @@ $(document).ready(function () { // for fetch Data //
                
                console.log("mytact"+ row.tact);
                console.log("muca"+ row.id);
-   
+          var rowId = row.id;
                console.log("user_id"+ row.user_id);
                console.log("Status"+ row.status);
               
@@ -125,7 +125,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
                  <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" `+ row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:20px"></span></button>
                  
-                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                  Comment
                 </button>
               
@@ -155,9 +155,9 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
 
                 
-                 <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#${tact}" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date +' ' + row.blast_time +' ' + tact +`">
+                 <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" "  data-bs-target="#${tact}" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date +' ' + row.blast_time +' ' + tact +`" >
                 
-            <i class="fa fa-upload"></i></button>
+            <i class="fa fa-upload" onclick = "this.bgColor='black'" style = "font-size:10px;"></i></button>
            </button>
                 
                
@@ -243,6 +243,8 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
    });
 
+
+
    $(document).on('click', '.view', function () {
       //alert("Edit data");
       //var idtype = $(this).data('id');
@@ -250,7 +252,17 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
      
       $("#hide_modal").show();
       var idtype = $(this).data('id');
+     
+     
+      var btn =   document.getElementsByClassName('btnColor').innertext = 'Close';
+     if(btn == 'Close'){
+      this.style.color = "black";
+     }else{
+      this.style.color = "blue";
+     }
 
+    
+      
         const myArray = idtype.split(" ");
         var id = myArray[1];
         var user_id = myArray[2];
@@ -267,7 +279,8 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
        if(tact == "Email-Blast"){
     
 
-        
+    
+         $("#rbFlex").hide()
          $("#eBc").show()
          $("#cf").show()
          $("#sendmail").show()
@@ -280,17 +293,36 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
          $('#ebasset').show();
          $('#rbasset').hide();
          $('#comment').show();
+         $('#comment').show();
          console.log("Only E-Blast")
        }
        else if(tact == "Email-Reminder-Blast")
        {
+         $("#eBc").show()
+         $("#cf").show()
+         $("#sendmail").show()
+         $("#sendname").show()
+         $("#campname").show()
+         $("#webinarFlex").hide()
+         $("#fileviewbox").hide()
          $('#ebasset').show();
          $('#rbasset').show();
          console.log("E-Blast/Reminder");
        }
-       else if(tact=="Webinar")
+       else if(tact == "Webinar")
       {
-         $("#webinarFlex").show()
+
+  
+  
+         $("#webinarFlex").show();
+         $("#ebComment").show();
+         $("#rbFlex").hide();
+         $("#eBc").show()
+         $("#cf").show()
+         $("#sendmail").show()
+         $("#sendname").show()
+         $("#campname").show()
+       
          $("#ebBlastview").hide();   
          $('#ebasset').hide();
          $('#rbasset').hide();
@@ -322,8 +354,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
          dataType: "JSON",
          success: function (data) {
 
-
-          
+    
             $('#cnameview').val(data.client_name);
             $('#sender_nameview').val(data.sender_name);
             $('#sender_emailview').val(data.sender_email);
@@ -334,14 +365,16 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
             $('#asset_link').val(data.asset_link);
             $('#blast_date').val(data.blast_date);
             $('#blast_time').val(data.blast_time);
-            $('#tact').val(data.tact);
+            
+            $('#rb_comment').val(data.rb_comment);
 
-          
+           $('#user_rbcomment').val(data.user_rbcomment);
             $('#eb_comment').val(data.user_ebcomment);
            
-            $('#comment').val(data.tycomment);
             $('#comment').val(data.comment);
+            $('#webinar_admin_comment').val(data.comment)
             $('#webinar_comment').val(data.webinar_comment)
+           
             $('#blast_type').val(data.blast_type);
          
             $('#rb_assetnameview').val(data.rb_assetname);
@@ -371,30 +404,47 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
             var admin_image = admin_image.split(',');
             var admin_length = admin_image.length;
             var htmlContent = ''; 
-            alert("within success" +tactValue)
+           
        
             if(tactValue == "webinar" ){
               
-               alert(data.webinar_files)
-               $("#webinarFlex").show()
-                  $("#ebBlastview").hide();      
+             
+
+               
+       
+               $("#webinarFlex").show();
+               
+                     
+               //  alert(webinar.html())
+               $("#ebComment").hide();
+               var rb =  $("#rbFlex").hide();
+               // alert(rb.html())
+               $("#ebasset").hide(); 
+               $("#ebComment").hide(); 
+             
+                  $("#ebBlastview").hide(); 
+                  $('#webinar_comment').show();   
+                  $('#webinar_admin_comment').show();
                   var user_image1=data.webinar_files;
                
               
                   var user_image1 = user_image1.split(',');
                   var length = user_image1.length;
 
-                  alert("webinar"+data.webinar_files)
+                
 
-                     for (var i = 0; i < length; i++)
+                     for (var i = 0; i <=1; i++)
                      { 
                    
-                        htmlContent += '<p> <tr><td><img src="../../file_img.png" style="width:15%"></td><td ><p>'+user_image1[i]+'</p><button type="button" class="btn btn-primary"  name="images" id="images" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + user_image1[i] + ',' + i +  ','  + tact+'\'>Download EB File</button><br>'+now+' </td></tr>' ,'</p>' ;
+                        htmlContent += '<p> <tr><td ><span>&nbsp; &nbsp;'+user_image1[i]+'<span>&nbsp; &nbsp;<button type="button" class="btn btn-primary"  name="webinar_files" id="images" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + user_image1[i] + ',' + i +  ','  + tact+'\'>Download</button><br>'+now+' </td></tr>' ,'</p>' ;
                      }
-                   document.getElementById('wbinarVeiw11').innerHTML = htmlContent;
+                   document.getElementById('wbinar11').innerHTML = htmlContent;
+                   $('#webinar_comment').show();
+              
+                   $('#webinarcomment').show()
                   
-                        $('#wbinarVeiw11').show();
-
+                   $("#webinarFlex").show();
+                     
                         $('#ebBlastview').hide();
                         $('#rbFlex').hide();
                         $('#ebComment').hide()
@@ -404,12 +454,15 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                         var admin_image = admin_image.split(',');
                         var admin_length = admin_image.length;
                         var adminHtml = '';
-                        for(var i = 0; i<admin_length; i++ ){
-                           adminHtml += '<p> <tr><td><img src="../../file_img.png" style="width:15%"></td><td ><p>'+admin_image[i]+'</p><button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + admin_image[i] + ',' + i +  ','  + tact+'\'>Download EB File</button></td></tr>' ,'</p>' ;
+                        for(var i = 0; i<=1; i++ ){
+                           adminHtml += '<p> <tr><td><span>&nbsp; &nbsp;'+admin_image[i]+'<span>&nbsp; &nbsp;<button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + admin_image[i] + ',' + i +  ','  + tact+'\'>Download</button></td></tr>' ,'</p>' ;
                         }
-                        document.getElementById('wbinarVeiw12').innerHTML = adminHtml;
+                        document.getElementById('wbinar12').innerHTML = adminHtml;
          
-                        $('#wbinarVeiw12').show();
+                       
+                        $('#webinarFlex').show();
+                       
+                     
                         $('#ebBlastview').hide();
                         $('#rbFlex').hide();
                         $('#ebComment').hide();
@@ -418,6 +471,8 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
             }else if(tactValue  ==  'e_blast'){
 
+
+               $("#rbFlex").show();
                $("#webinarFlex").hide()
                $("#ebBlastview").show()
     
@@ -431,14 +486,14 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                   for (var i = 0; i < length ; i++)
                   { 
                     
-                     htmlebContent += '<p> <tr><td><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_image[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="user_ebfiles" id="user_ebfiles" onclick="fileviewFunction(this)" data-id=\''+ data.cate_id +','+user_image[i]+',' + i +  ','  + tact +'\'> Download File</button><br>'+now+' </td></tr>' ,'</p>' ;
+                     htmlebContent += '<p> <tr><td><span>&nbsp; &nbsp;'+user_image[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary btn-sm"  name="user_ebfiles" style = "font-size: 12px;" id="user_ebfiles" onclick="fileviewFunction(this)" data-id=\''+ data.cate_id +','+user_image[i]+',' + i +  ','  + tact +'\'> Download</button><br>'+now+' </td></tr>' ,'</p>' ;
                     
      
                   }
                    document.getElementById('viewfiles112').innerHTML = htmlebContent;
                      $("#viewfiles112").show();
-                     $("#rbFlex").hide();
-                     $("#webinarFlex").hide();
+                     $("#rbFlex").show();
+                     $("#webinarFlex").show();
 
                      var admin_image=data.admin_files;
                      
@@ -451,12 +506,12 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                      
                     
                    
-                     amdinebContent += '<p> <tr><td><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+ admin_image[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\''+ data.cate_id +','+admin_image[i]+',' + i +  ','  + data.tact +'\'> Download File</button></td></tr>' ,'</p>' ;
+                     amdinebContent += '<p> <tr><td><span>&nbsp; &nbsp;'+ admin_image[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary" style = "font-size: 12px;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\''+ data.cate_id +','+admin_image[i]+',' + i +  ','  + data.tact +'\'> Download</button></td></tr>' ,'</p>' ;
                  
                   }
                   document.getElementById('viewfiles113').innerHTML = amdinebContent;
                   $("#viewfiles113").show();
-                  $("#rbFlex").hide();
+                  $("#rbFlex").show();
                   $("#webinarFlex").hide();
                 
                  
@@ -477,7 +532,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
                      
             
-                     htmlContent += '<p> <tr><td><img src="../../file_img.png" style="width:15%"></td><td ><p>'+user_rbfiles[i]+'</p><button type="button" class="btn btn-primary"  name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + user_rbfiles[i] + ',' + i +  ','  + tact+'\'>Download EB File</button><br>'+now+' </td></tr>' ,'</p>';
+                     htmlContent += '<tr><td ><p> <span>&nbsp; &nbsp;'+user_rbfiles[i]+'&nbsp;&nbsp;</span><button type="button" class="btn btn-primary btn-sm"  name="user_rbfiles" style = "font-size: 12px;" id="user_file" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + user_rbfiles[i] + ',' + i +  ','  + tact+'\'>Download</button><br>'+now+' </td></tr>' ,'</p>';
                   }
                      document.getElementById('viewReminderBlastView11').innerHTML = htmlContent;
                      
@@ -491,7 +546,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                      var adminRbHtml = '';
                   for(var i = 0; i < admin_rb_length; i++ ){
                
-                     adminRbHtml += '<p> <tr><td><img src="../../file_img.png" style="width:15%"></td><td ><p>'+admin_rb_image[i]+'</p><button type="button" class="btn btn-primary"  name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + admin_rb_image[i] + ',' + i +  ','  + tact+'\'>Download File</button><br></td></tr>' ,'</p>' ;
+                     adminRbHtml += '<tr><td ><p> <span>&nbsp; &nbsp;'+admin_rb_image[i]+' <span>&nbsp; &nbsp;<button type="button" class="btn btn-primary btn-sm" style = "font-size: 12px;" name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\''+data.camp_id+ ',' + admin_rb_image[i] + ',' + i +  ','  + tact+'\'>Download</button><br></td></tr>' ,'</p>' ;
                   }
                     document.getElementById('viewReminderBlastView12').innerHTML = adminRbHtml;
                     $('#viewReminderBlastView12').show();
@@ -514,7 +569,8 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
    $(document).on('click', '#editimage', function () {
        
 
-
+     
+ 
       // var id = $(this).data('id');
       var idtype = $(this).data('id');
 
@@ -588,7 +644,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
 
 
-                if(tactValue=="Email-Blast")  
+                if(tactValue==="Email-Blast")  
                 {
                      var user_imagename=data.user_ebfiles;
                      var user_imagename = user_imagename.split(',');
@@ -599,7 +655,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
                      var htmlContent1 ='';
                      var htmlContent2 =htmlContent+ '' +htmlContent1;
    
-                  for (var i = 0; i <= 1; i++){ 
+                  for (var i = 0; i <= length; i++){ 
     
                         if(user_imagename[i] == undefined) { 
 
@@ -609,14 +665,14 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
                          
                            console.log(user_imagename[i]);
-                           htmlContent += '<p> <tr><td width="20%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ cate_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td></tr> &nbsp;<tr><td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="user_ebfiles"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-primary btn-md " onclick = "fileReplace1(this)"  data-id=\'' + cate_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert File"> &nbsp; &nbsp;</span></tr></td>' ,'</p>';
+                           htmlContent += '<p> <tr><td width="20%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ cate_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td></tr> &nbsp;<tr><td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="user_ebfiles"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-primary btn-md " onclick = "fileReplace1(this)"  data-id=\'' + cate_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert File"> &nbsp; &nbsp;</span></tr></td>' ,'</p>';
                         }else{
                                alert("tact is not:" +tact);
                         }
                   }
             
        
-
+               
    
                   document.getElementById('container11').innerHTML = htmlContent;
                   
@@ -644,14 +700,25 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
           for (var i = 0; i <= 1; i++)
           { 
 
-           if(user_rb_files[i] != ''){
+            if(user_rb_files[i] == undefined) { 
+         
+   
+      
+      
+               htmlContent += '<form enctype="multipart/form-data" id = "form_id"><p> <tr><td width="10%">Upload File Here</td><td><input type="text" value='+user_rb_files[i]+ ' name="filenum" style="display:none;"> <input type="submit"  class="bg-primary btn-sm btn-primary" onclick = "fileReplace1(this)" data-id=\''+ data.camp_id + ',' +user_rb_files[i]+ ',' + i + ',' +tactValue+ '\' value = "Insert" ></tr></td>' ,'</p> </form>';
+               
+            
+            }else  if
+(user_rb_files[i] != ''){
                   console.log("tact is:" +tact);
                   console.log("Within else condition...");
                   console.log(user_rb_files[i]);
-                  htmlContent += '<p class="main"> <tr><td width="25%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_rb_files[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_rb_files[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_rb_files[i]+' name="filenum" style="display:none;"><input type="file" name="user_rbfiles"  class = "  imageInput custom-file-input form-control" data-id = '+i+' id = "image_id"  onchange="handleImageUpload()" ></td><td> <input type="submit" class="btn btn-primary btn-md bg-primary" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ','+user_rb_files[i]+',' + i + ',' +tactValue+'\' value = "Insert Image" id = "btn_id"></tr></td>' ,'</p>' ;
+                  htmlContent += '<p class="main"> <tr><td width="25%"><span>&nbsp; &nbsp;'+user_rb_files[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_rb_files[i]+',' + i +  ','  + tactValue +'\'> Download</button></td> &nbsp;<td></td><td> <input type="submit" class="btn btn-primary btn-md bg-primary" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ','+user_rb_files[i]+',' + i + ',' +tactValue+'\' value = "Delete file" id = "btn_id"></tr></td>' ,'</p>' ;
     
             }
          }
+
+         htmlContent += '<form enctype="multipart/form-data" id = "form_id"><p> <tr><input type = "file" class="form-control" name = "image[]" = "image" multiple ><button type="button" class="imageform btn btn-primary" onclick="fileUpload(this)"  data-id\'' +data.camp_id+' data-tact='+tactValue+'>Send Comment</button></tr>' ,'</p>  </form>';
                htmlContent2 +=htmlContent+ '' +htmlContent1 ;
                console.log(htmlContent2);
            
@@ -663,7 +730,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
            
             $('#sample_form').trigger('reset');
          
-      
+           
       
    }else if(tactValue === "Webinar")
    {
@@ -674,7 +741,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
 
     var user_imagename=data.webinar_files;
  
-    alert(data.webinar_files)
+    alert("webinarFiles"+data.webinar_files)
    
     var user_imagename = user_imagename.split(',');
    
@@ -706,7 +773,7 @@ if(row.id === null || (row.tact=="Email Blast / Reminder Blast" && row.user_rb_f
          console.log("tact is:" +tact);
          console.log("Within else condition...");
          console.log(user_imagename[i]);
-         htmlContent += '<p> <tr ><td width="25%"><img src="../../file_img.png" style="width:10%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="webinar_files"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-primary btn-md " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert File"> &nbsp; &nbsp;</span></tr></td>' ,'</p>';
+         htmlContent += '<p> <tr ><td width="25%"><span>&nbsp; &nbsp;'+user_imagename[i]+'&nbsp;&nbsp;</span><button type="button" class=" btn btn-primary btn-sm bg-primary"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+user_imagename[i]+',' + i +  ','  + tactValue +'\'> Download File</button></td> &nbsp;<td><input type="text" value='+user_imagename[i]+' name="filenum" style="display:none;"><input type="file" name="webinar_files"  class = " btn-dark imageInput custom-file-input form-control" data-id = '+i+'  ></td><td> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-primary btn-md " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ','+user_imagename[i]+',' + i + ',' +tactValue+'\' value = "Insert File"> &nbsp; &nbsp;</span></tr></td>' ,'</p>';
    
       }else{
          alert("please check the data webinardata!")
@@ -909,12 +976,14 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
 
 
    function fileUpload(e){
+
+
       const formData1=new FormData(document.getElementById("sample_form"));
       const camp_id=$(e).data("id");
    
       const tact=$(e).data("tact") 
     
-
+ 
       //alert(tact)
       
       
@@ -1135,7 +1204,7 @@ $(document).on('click', '.remider_blstcheckbox', function (e) {
       console.log("idtype:" +idtype);
       const myArray = idtype.split(",");
       var camp_id = myArray[0];
-      alert(camp_id)
+
       var oldfname = myArray[1];
       var loop_index=myArray[2]
        alert("myfile"+ oldfname)
@@ -1298,3 +1367,7 @@ function removeFile(e){
 
     }
 }
+
+
+v
+

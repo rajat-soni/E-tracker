@@ -695,8 +695,7 @@ console.log("hhhhh");
 
 
     router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {
-
-        
+     
 
         var oldfname1 = request.body.oldfname;
         console.log("myfiles"+ oldfname1)
@@ -796,7 +795,7 @@ console.log("hhhhh");
    // output[filenum] = newfile;
     console.log("Updated Files:" +user_files11);
     
-    
+    console.log("BEFORE🙀🙀🙀😽😼😻😻🐱‍💻🐱‍💻",updateSql);
     //console.log("admin_files11:" +admin_files11);
     
                
@@ -819,16 +818,33 @@ console.log("hhhhh");
 
                         if( tact === "Webinar"){
 
+                         
+                             //
+                            if(output.length==1){
+                                output.push(newfile1)
+                            }
 
+                           
+                            
+                            
                             var updateSql = `UPDATE comment_tbl SET webinar_files='${output}' WHERE camp_id = '${camp_id}'`;
+
+                            console.log("🙀🙀🙀😽😼😻😻🐱‍💻🐱‍💻",updateSql);
                         }
                        else if(tact==="Email-Reminder-Blast")
                        {
+                        if(output.length==1){
+                            output.push(newfile1)
+                        }
+                        
                         var updateSql = `UPDATE comment_tbl SET user_rbfiles='${output}' WHERE camp_id = '${camp_id}'`;
     
                        }
                        else{
-                        
+                        if(output.length==1){
+                            output.push(newfile1)
+                        }
+
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles ='${output}' WHERE camp_id = '${camp_id}'`;
                        }
                        
