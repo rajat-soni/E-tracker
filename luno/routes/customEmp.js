@@ -466,7 +466,7 @@ router.post("/test", (request, res) => {   // =>  image upload code start
 var storage = multer.diskStorage({
     destination: (request, files, callBack) => {
 
-      
+        console.log( request.body,"😀😀😀");
 
 var camp_id =  request.body.camp_id;
 
@@ -505,6 +505,8 @@ if (!fs.existsSync(dir1)){
 
     else if(tact==="Email-Reminder-Blast")
     {
+
+        
         var dir3=`./files/${request.body.camp_id}/user/Email-Reminder-Blast`;
 
         if (!fs.existsSync(dir3)){
@@ -557,6 +559,10 @@ var upload = multer({
 });
 
 router.post("/comment",  upload.any('image'),(request, response) => {
+
+
+  
+
    var camp_id = request.body.camp_id;
    var tact = request.body.tact;
    var sendComment = request.body.sendComment;
@@ -565,6 +571,8 @@ router.post("/comment",  upload.any('image'),(request, response) => {
     console.log("hello"+tact)
 
     var uploadFiles = request.files;
+
+
 
     var image = request.files.image;
     const imagePath = request.files.filename;
@@ -698,21 +706,22 @@ console.log("hhhhh");
      
 
         var oldfname1 = request.body.oldfname;
+        var camp_id = request.body.camp_id;
         console.log("myfiles"+ oldfname1)
 
     
         console.log("oldRajat file"+oldfname1 )
 
-        const newfile1 = request.file.filename;
-        console.log("new Rajat  file"+newfile1 );
+        // const newfile1 = request.file.filename;
+        // console.log("new Rajat  file"+newfile1 );
 
 
 
    
       
        
-        const newfile = request.file.filename;
-        console.log("updatedfile:" +newfile);
+        // const newfile = request.file.filename;
+        // console.log("updatedfile:" +newfile);
     
     
      
@@ -723,8 +732,39 @@ console.log("hhhhh");
         var filenum = request.body.filenum;
         var oldfname = request.body.oldfname;
         console.log("oldfname" + oldfname);
-        console.log("filenum" + filenum);
-    
+        console.log("filenum mean index of file" + filenum);
+
+
+var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
+    console.log("URL:😍😎😋" + url);
+   // var url = window.URL || window.webkitURL;
+
+      console.log("url" + url);
+
+      
+  
+  console.log("oldfname:" +oldfname);
+
+  const fs = require("fs");
+  const path = require("path");
+  
+
+
+
+  fs.unlink(url, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('File deleted successfully');
+  });   
+  
+  
+
+  
+
+
+
          var camp_id = request.body.camp_id;
         console.log("camp_id" + camp_id);
     
@@ -768,21 +808,36 @@ console.log("hhhhh");
                         var admin_files = row.user_ebfiles;
                     }
                    
+                    const myArray =  new Array(admin_files);
+
+                    var output = admin_files.split(',');
+                    console.log("Array:" + output[filenum]);
+                    var deletefile=output[filenum]
+    
+                    console.log("deletefile Array:" + filenum);
+    
+                    const x = output.splice(filenum,1);
+                    
+                    console.log(`output values: ${output}`);
+                    console.log(`variable x value: ${x}`);
+    
     
     
                     console.log("camp_id" +camp_id);
-                    console.log("user_files",newfile);
+                    // console.log("user_files",newfile);
     
                    
-                    var output= admin_files.split(',');
+                   
 
-                   const indexOfOldFile= output.indexOf(oldfname1);
-                   output[indexOfOldFile]=newfile1
+                    // array = array.filter(v => v !== 'B');
 
-                    console.log("Array:" +output[filenum]);
-                    var updatedfile=output[filenum];
+                //    const indexOfOldFile= output.indexOf(oldfname1);
+                //    output[indexOfOldFile]=newfile1
+
+                    // console.log("Array:" +output[filenum]);
+                    // var updatedfile=output[filenum];
     
-                    console.log("updatedfile:" +newfile);
+                    // console.log("updatedfile:" +newfile);
     
     
                     var user_files11=row.user_rbfiles;
@@ -812,8 +867,8 @@ console.log("hhhhh");
     
                         console.log("check image taactics:" +tact);
     
-                        console.log("check image taactics1:" +newfile);
-
+                    
+                        
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles='${output}' WHERE camp_id = '${camp_id}'`;
 
                         if( tact === "Webinar"){
@@ -821,7 +876,7 @@ console.log("hhhhh");
                          
                              //
                             if(output.length==1){
-                                output.push(newfile1)
+                                output.push(output)
                             }
 
                            
@@ -834,7 +889,7 @@ console.log("hhhhh");
                        else if(tact==="Email-Reminder-Blast")
                        {
                         if(output.length==1){
-                            output.push(newfile1)
+                            output.push(output)
                         }
                         
                         var updateSql = `UPDATE comment_tbl SET user_rbfiles='${output}' WHERE camp_id = '${camp_id}'`;
@@ -842,7 +897,7 @@ console.log("hhhhh");
                        }
                        else{
                         if(output.length==1){
-                            output.push(newfile1)
+                            output.push(output)
                         }
 
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles ='${output}' WHERE camp_id = '${camp_id}'`;
