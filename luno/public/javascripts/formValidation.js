@@ -10,7 +10,7 @@ clientName.onkeyup = () => {
 
 function clickFormValidationCheck(){ 
     var client_name = document.getElementById('client_name').value;
-       var client_name = trim(client_name); 
+       
     if(client_name.length < 2){
         clientErr.innerHTML = '*first name must be in 2 letters'
         clientName.style.borderColor = "#B2BABB"; 

@@ -143,6 +143,7 @@
         <div class="modal" tabindex="-1" id="action_modal">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
+                  
                      <form method="post" id="sample_form" name = "sample_form"  >
                         <div class="modal-header text-danger" id="dynamic_modal_title" style="font-size:20px; font-weight: bold;">
                             <h3 class="modal-title text-danger" style="font-size:20px; font-weight: bold;"></h3>
@@ -246,7 +247,7 @@
 
   <div class="row">
     <div class="col-12">
- <h6  class="alert alert-danger"><strong>E-Mail Blast Module </strong></h6>
+ <h6  class="alert alert-secondary" ><center><strong>E-Mail Blast Module </strong></center></h6>
     </div>
 
   </div>
@@ -310,19 +311,19 @@
                                 <div class="col-6">
                                   <label class="form-label" style="color:red; ">User Comment</label>
   
-                                  <textarea class="form-control"  id = "eb_comment" name = "eb_comment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
+                                  <textarea class="form-control"  id = "user_ebcomment" name = "user_ebcomment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
                                     
   
   
                                 </div>
-
-                                <!-- <div class="row"  id = "webinarcomment" style="">
+<!-- 
+                                 <div class="row"  id = "webinarcomment" style="">
                                   <div class="col-6">
                                     <label class="form-label" style="color:red; ">webinar Comment</label>
     
                                     <textarea class="form-control"  id = "webinar_comment" name = "webinar_comment" placeholder="webinar Comment" readonly="readonly"></textarea>
 
-                                  </div> -->
+                                  </div> --> 
   
                               
                                 <div class="col-6"  id = "adminComment" >
@@ -361,11 +362,11 @@
   </div>
   
                             <div id="rbasset"  style="display:none">
-  <hr>
+
                               <div class="row">
                                 <div class="col-12">
                                  
-                                  <h6  class="alert alert-danger"><strong>Reminder Blast Module</strong></h6>
+                                  <h6  class="alert alert-secondary"><strong>Reminder Blast Module</strong></h6>
                                 </div>
   
                               </div>
@@ -429,10 +430,22 @@
                                 </div>
                               </div>
                               <hr>
-
                               <div class="row" id = "ebComment">
+
+                              <div class="col-6"  id = "adminComment" >
+                                <label class="form-label" style="color:red; ">User RB Comment</label>
+
+                                <textarea class="form-control"  id = "user_rbcomment" name = "user_rbcomment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
+                                  
+
+
+                              </div>
+
+                              
+
+                              
                                 <div class="col-6">
-                                  <label class="form-label" style="color:red; ">User RB Comment</label>
+                                  <label class="form-label" style="color:red; ">Admin RB Comment</label>
   
                                   <textarea class="form-control"  id = "rb_comment" name = "rb_comment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
                                     
@@ -442,14 +455,7 @@
 
                               
                               
-                                <div class="col-6"  id = "adminComment" >
-                                  <label class="form-label" style="color:red; ">Admin RB Comment</label>
-  
-                                  <textarea class="form-control"  id = "user_rbcomment" name = "user_rbcomment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
-                                    
-  
-  
-                                </div>
+                                
                               </div>
 
                             </div>
@@ -529,7 +535,7 @@
                             <table class="table table-striped table-hover table-bordered">
                             <thead>
                               <tr>
-                                <b>Webinar Blast Module</b>
+                                <b style = "color:red"><h2>Webinar Blast Module</h2></b>
                                 </tr>
                              <tr>
                            <th scope="col">webinar user  fils</th>
@@ -569,7 +575,7 @@
                               <div class="row">
                                 <div class="col-12" >
                                 
-                                  
+                                 
                                   <!-- <input type="hidden" name="admin_files" id="admin_files" />      -->
 
 
@@ -579,14 +585,13 @@
                                 <table class="table table-hover table-bordered">
                                 <thead>
                                  <tr class="bg-light text-dark" >
-                               <th scope="col">View  Files/Download Now file</th>
-                                <th scope="col">Action</th> 
+                                  <p class="msgedit"></p>
+                               <th>View  Files/Download Now file</th>
+                                <th>Action</th> 
                                </tr>
                                </thead>
                                <tbody id = "container11">
-                          <tr >
-                                <td  ></td>
-                              </tr>
+                         <tr></tr>
                                </tbody>
 
                                </table>

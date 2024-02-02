@@ -52,7 +52,7 @@ $(document).ready(function() { //  code for fetch Data //
         'serverSide': true,
         'serverMethod': 'get',
         'ajax': {
-            'url': 'http://localhost:3000/newUser/get_data',
+            'url': 'http://staging.webtechstar.com:7777/newUser/get_data',
 
         },
 
@@ -204,7 +204,7 @@ $(document).ready(function() { //  code for fetch Data //
 
 
         $.ajax({
-            url: "http://localhost:3000/newUser/action",
+            url: "http://staging.webtechstar.com:7777/newUser/action",
             method: "POST",
             data: $('#sample_form').serialize(),
             dataType: "JSON",
@@ -323,7 +323,7 @@ $(document).ready(function() { //  code for fetch Data //
         }
 
         $.ajax({
-            url: "http://localhost:3000/newUser/action",
+            url: "http://staging.webtechstar.com:7777/newUser/action",
             method: "POST",
             data: {
                 user_id: user_id,
@@ -436,7 +436,7 @@ $(document).ready(function() { //  code for fetch Data //
             $(".readAll").prop("readonly", true);
         }
         $.ajax({
-            url: "http://localhost:3000/newUser/action",
+            url: "http://staging.webtechstar.com:7777/newUser/action",
             method: "POST",
             data: {
                 user_id: user_id,
@@ -475,7 +475,7 @@ $(document).ready(function() { //  code for fetch Data //
 
         if (confirm("Are you sure you want to delete this data?")) {
             $.ajax({
-                url: "http://localhost:3000/newUser/action",
+                url: "http://staging.webtechstar.com:7777/newUser/action",
                 method: "POST",
                 data: {
                     action: 'delete',

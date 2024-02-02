@@ -38,7 +38,7 @@ first_name.onkeyup = () => {
 
 function userFormValidationCheck(){  // defination of function //
     var first_name_new = document.getElementById('first_name').value;
-   
+
     if(first_name_new.length < 3){
         first_name_error.innerHTML = '*first name must be  3 letters'
         first_name_error.disabled = false;
@@ -51,7 +51,7 @@ function userFormValidationCheck(){  // defination of function //
         first_name.style.borderColor = "#B2BABB"
         return false;
     }
-    if(!first_name_new.match(/^[a-zA-Z ]{2,30}$/)){
+    if(!first_name_new.match(/^[a-zA-Z]+[a-zA-Z\s]*?[^0-9]$/)){
         first_name_error.innerHTML = '*please enter valid name';
         first_name_error.disabled = false;
         first_name.style.borderColor = "#B2BABB"
@@ -89,7 +89,7 @@ function userLastNameValidationCheck(){  // defination of function //
         last_name.style.borderColor = "#B2BABB"
         return false;
     }
-    if(!last_name_new.match(/^[a-zA-Z ]{2,30}$/)){
+    if(!last_name_new.match(/^[a-zA-Z]+[a-zA-Z\s]*?[^0-9]$/)){
         last_name_error.innerHTML = '*please enter valid name';
         last_name_error.disabled = false;
         last_name.style.borderColor = "#B2BABB"
@@ -205,7 +205,7 @@ function userNameValidationCheck(){  // defination of function //
         user_name_error.disabled = false; 
         return false;
     }
-    if(!user_name_new.match(/^[a-zA-Z ]{2,30}$/)){
+    if(!user_name_new.match(/^[a-zA-Z]+[a-zA-Z\s]*?[^0-9]$/)){
         user_name_error.innerHTML = '*please Enter valid Name';
         user_name.style.borderColor = "#B2BABB"; 
         user_name_error.disabled = false;
@@ -281,6 +281,43 @@ function passwordValidation(){  // defination of function //
 } //end of user_Name validation  //
 
 
+// function passwordValidation(){  // defination of function //
+//     var password_new = document.getElementById('password').value;
+
+//     '^(?=.*[a-z,A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z].*[a-z]).{8}$'
+      
+//     var exp = /^(\S)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])[a-zA-Z0-9~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{10,16}$/;
+   
+
+ 
+//     // if(){
+//     //     password_error1.innerHTML = '**password must less than 15 digits'
+//     //     password_error1.style.borderColor = "#B2BABB"; 
+//     //     password_error1.disabled = false;
+//     //     return false;
+//     // }
+    
+    
+//     if(!password_new.match(exp)){
+//         password_error1.innerHTML = '*1 upper 1 lower,  1 special  Length must be between 10 to 16 characters.';
+//         password_error1.style.borderColor = "#B2BABB"; 
+//         password_error1.disabled = false;
+//         return false;
+//     }
+
+//     if(( password_new == 10)){
+//         password_error1.innerHTML = '*password must be  8 digits'
+//         password_error1.style.borderColor = "#B2BABB"; 
+//         password_error1.disabled = false;
+//         return false;
+//     }
+
+//     password_error1.innerHTML ='';
+//     password.style.borderColor = "#34eb40"
+//     password_error1.disabled = true;    
+// } //end of user_Name validation  //
+
+
 
 
 // var client_id_new = document.getElementById('client_id')
@@ -326,6 +363,7 @@ btnClick.onclick = () => {       // all function condition start //
     user_name_error.disabled = true;
     role_error.disabled = true;
     password_error1.disabled = true;  
+    
     userFormValidationCheck();
     userLastNameValidationCheck();
     userEmailValidationCheck();

@@ -9,7 +9,7 @@
          'serverSide' : true,
          'serverMethod' : 'get',
          'ajax' : {
-             'url' : 'http://localhost:3000/sender/get_data',
+             'url' : 'http://staging.webtechstar.com:7777/sender/get_data',
              
          },
  
@@ -96,7 +96,7 @@
         senderFormValidationCheck();
         clientIdValidationCheck();
         $.ajax({
-            url: "http://localhost:3000/sender/action",
+            url: "http://staging.webtechstar.com:7777/sender/action",
             method: "POST",
             data: $('#sample_form').serialize(),
             dataType: "JSON",
@@ -182,7 +182,7 @@
     
     
     $.ajax({
-        url: "http://localhost:3000/sender/action",
+        url: "http://staging.webtechstar.com:7777/sender/action",
         method: "POST",
         data: {
             sender_id: sender_id,
@@ -252,7 +252,7 @@
          }
         
         $.ajax({
-            url: "http://localhost:3000/sender/action",
+            url: "http://staging.webtechstar.com:7777/sender/action",
             method: "POST",
             data: {
                 sender_id: sender_id,
@@ -283,7 +283,7 @@ var sender_id = $(this).data('id');
     if(confirm("Are you sure you want to delete this data?"))
     {
         $.ajax({
-            url:"http://localhost:3000/sender/action",
+            url:"http://staging.webtechstar.com:7777/sender/action",
             method:"POST",
             data:{action:'delete', sender_id:sender_id},
             dataType:"JSON",

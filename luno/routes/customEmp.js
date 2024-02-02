@@ -127,16 +127,16 @@ router.get('/get_data', function (request, response, next) {
     var user_id = request.session.user_id;
     console.log("User ID:" + user_id);
     database.query(`
-    SELECT COUNT(*) As Total,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}
+    SELECT COUNT(*) As Total,now() as todaydt,MAX((DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour))) as eblast_datetime,MAX((DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour))) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}
     `, function (error, data) {
-        var qq = `SELECT COUNT(*) As Total,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`;
+        var qq = `SELECT COUNT(*) As Total,now() as todaydt,MAX((DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour))) as eblast_datetime,MAX((DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour))) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`;
         console.log("QQ:" + qq);
 
         var total_records = data[0].Total;
         console.log(total_records);
         database.query(`
         
-        SELECT COUNT(*) As Total,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`, function (error, data) {
+        SELECT COUNT(*) As Total,now() as todaydt,MAX((DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour))) as eblast_datetime,MAX((DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour))) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`, function (error, data) {
             var total_records_with_filter = data[0].Total;
 
             console.log("Rajashri");
@@ -146,6 +146,7 @@ router.get('/get_data', function (request, response, next) {
             LIMIT ${start}, ${length}
           `;
             console.log("Query:" + query);
+          
 
             var data_arr = [];
            
@@ -621,48 +622,116 @@ console.log("hhhhh");
                 } else {
                     console.log('inside 2');
                     if (data.length > 0) {
+                        data.forEach(function (row) {
                         console.log('inside 2 update');
                         // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
                         console.log("type of " +typeof uploadFiles);
 
                         if(tact=="Email-Reminder-Blast")
                         {
+
+
+                            let arr=row.user_rbfiles.split(",")
+                            if(row.user_rbfiles.trim().length>0 && arr.length==1 && filenames.length==1){
+                                arr.push(filenames[0])
+                                combinedFilenames=arr.join(",")
+                            }
+
                             console.log("in if condition reminder Balst condition");
-                            var updateSql = `UPDATE comment_tbl SET  user_rbcomment='${sendComment}', user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+
+
+                        let  comment_section=`user_rbcomment='${sendComment}',`
+                         if(sendComment==undefined){
+                            comment_section=""
+                         }
+
+                            var updateSql = `UPDATE comment_tbl SET  ${comment_section} user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
                             console.log("tact is eb/rb:" +updateSql);
+                    
       
                         }
                         else if(tact == "Webinar")
                         {
+                            
+                            let arr=row.webinar_files.split(",")
+                            if(row.webinar_files.trim().length>0 && arr.length==1 && filenames.length==1){
+                                arr.push(filenames[0])
+                                combinedFilenames=arr.join(",")
+
+                                
+                            }
+
+                            let  comment_section=`webinar_comment='${sendComment}',`
+                            if(sendComment==undefined){
+                               comment_section=""
+                            }
+
+
                             console.log("in else  webinar condition");
-                            var updateSql = `UPDATE comment_tbl SET webinar_comment = "${sendComment}", webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
+                            var updateSql = `UPDATE comment_tbl SET ${comment_section} webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
     
-                        }else
-                            var updateSql = `UPDATE comment_tbl SET user_ebcomment = '${sendComment}', user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                            console.log(" Email Blast Contion Update query" +updateSql);
+                        }else{
+                          
+                            console.log("😂😂🤣😂😂😁😀😀",row);
+
+                            let arr=row.user_ebfiles.split(",")
+
+                            if(row.user_ebfiles.trim().length>0 && arr.length==1 && filenames.length==1){
+                                arr.push(filenames[0])
+                                combinedFilenames=arr.join(",")
+                            }
+
+                            let  comment_section=`user_ebcomment='${sendComment}',`
+                            if(sendComment==undefined){
+                               comment_section=""
+                            }
+
+
+
+                            var updateSql = `UPDATE comment_tbl SET ${comment_section} user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            console.log("camp_id 11111",camp_id);
+                            console.log("updateSql 111",updateSql);
+                        }    console.log(" Email Blast Contion Update query" +updateSql);
                          
                             database.query(updateSql, function (err, data) {
     
                                 response.json({
                                     success: true,
-                                    message : 'id already exits...'
+                                    message : 'file uploaded successfully...'
                                 });
                           
-                        })
+                            })
                        
-            
+                        })
                     } else {
-                        console.log('inside 1 else');
-                        
+                        // console.log('inside 1 else');
+                    
+                      
+                        // var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
                      //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id, user_ebcomment , user_ebfiles) VALUES (${request.body.camp_id}, '${sendComment}' , '${combinedFilenames}')`; // insert query //
+          console.log("mycheck tact"+tact)
+          
+                     if(tact === "Webinar"){
+                        var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_comment,webinar_files) VALUES (${camp_id}, '${sendComment}', '${combinedFilenames}')`;
+                     }
+    
+                     else if(tact==="Email-Reminder-Blast")
+                     {
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbcomment, user_rbfiles) VALUES (${camp_id}, '${sendComment}','${combinedFilenames}')`; // insert query //
+                     }
+                     else{
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebcomment,user_ebfiles) VALUES (${camp_id},'${sendComment}','${combinedFilenames}')`; //
+                        // insert query //
+                        console.log("inser qeruy"+sqlQry)
+                     }
+                       
                         console.log("insert query"+sqlQry);
     
                         database.query(sqlQry, function (err, data) {
     
                             response.json({
                                 success: true,
-                                message: 'Image  Inseted.. '
+                                message: 'Files Uploaded Successfully...'
                             })
                         })
                     }
@@ -875,9 +944,9 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
 
                          
                              //
-                            if(output.length==1){
-                                output.push(output)
-                            }
+                            // if(output.length==1){
+                            //     output.push(output)
+                            // }
 
                            
                             
@@ -888,17 +957,17 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                         }
                        else if(tact==="Email-Reminder-Blast")
                        {
-                        if(output.length==1){
-                            output.push(output)
-                        }
+                        // if(output.length==1){
+                        //     output.push(output)
+                        // }
                         
                         var updateSql = `UPDATE comment_tbl SET user_rbfiles='${output}' WHERE camp_id = '${camp_id}'`;
     
                        }
                        else{
-                        if(output.length==1){
-                            output.push(output)
-                        }
+                        // if(output.length==1){
+                        //     output.push(output)
+                        // }
 
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles ='${output}' WHERE camp_id = '${camp_id}'`;
                        }
@@ -918,21 +987,21 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                                 //    if(inserted_id == data_id){
                                     response.json({
                                         success: true,
-                                        message: 'Files Updated Successfully.. '
+                                        message: 'Files deleted Successfully.. '
                                     })
                             }
     
     
                         })
                     } else {
-                        console.log('inside 1 else');
+                    //     console.log('inside 1 else');
                         
 
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${output}')`; // insert query //
-                     //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+                    //     var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${output}')`; // insert query //
+                    //  //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
 
                      if(tact = "Webinar"){
-                        var sqlQry =  `INSERT INTO comment_tbl (camp_id,user_ebfiles) VALUES (${camp_id}, '${output}')`;
+                        var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_files) VALUES (${camp_id}, '${output}')`;
                      }
     
                      else if(tact="Email-Reminder-Blast")

@@ -9,7 +9,7 @@ $(document).ready(function() { // satart code  for fetch Data //
         'serverSide' : true,
         'serverMethod' : 'get',
         'ajax' : {
-            'url' : 'http://localhost:3000/client/get_data',
+            'url' : 'http://staging.webtechstar.com:7777/client/get_data',
             
         },
 
@@ -51,7 +51,7 @@ $(document).ready(function() { // satart code  for fetch Data //
 
 
     //     $.ajax({
-    //         url: "http://localhost:3000/client/action",
+    //         url: "http://staging.webtechstar.com:7777/client/action",
     //         method: "POST",
     //         data: {
     //             action : 'fetch'
@@ -146,7 +146,7 @@ $(document).ready(function() { // satart code  for fetch Data //
         
      
             $.ajax({
-                url: "http://localhost:3000/client/action",
+                url: "http://staging.webtechstar.com:7777/client/action",
                 method: "POST",
                 data: $('#sample_form').serialize(),
                 dataType: "JSON",
@@ -231,7 +231,7 @@ $(document).ready(function() { // satart code  for fetch Data //
         
         
         $.ajax({
-            url: "http://localhost:3000/client/action",
+            url: "http://staging.webtechstar.com:7777/client/action",
             method: "POST",
             data: {
                 client_id: client_id,
@@ -297,7 +297,7 @@ $(document).ready(function() { // satart code  for fetch Data //
         
         
         $.ajax({
-            url: "http://localhost:3000/client/action",
+            url: "http://staging.webtechstar.com:7777/client/action",
             method: "POST",
             data: {
                 client_id: client_id,
@@ -331,7 +331,7 @@ $(document).ready(function() { // satart code  for fetch Data //
       
             if (confirm("Are you sure you want to delete this data?")) {
                $.ajax({
-                  url: "http://localhost:3000/client/action",
+                  url: "http://staging.webtechstar.com:7777/client/action",
                   method: "POST",
                   data: {
                      action: 'delete',
