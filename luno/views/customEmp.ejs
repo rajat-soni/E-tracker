@@ -145,12 +145,17 @@
                 <div class="modal-content">
                   
                      <form method="post" id="sample_form" name = "sample_form"  >
-                        <div class="modal-header text-danger" id="dynamic_modal_title" style="font-size:20px; font-weight: bold;">
-                            <h3 class="modal-title text-danger" style="font-size:20px; font-weight: bold;"></h3>
+                        <div class="modal-header text-dark bg-light" id="dynamic_modal_title" style="font-size:24px; font-weight: bold; ">
+                            <h3 class="modal-title text-danger" style="font-size:20px; font-weight: bold;"> </h3>
+                           
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           
                         </div>
+                       
                         <div class="modal-body">
+                         
                             <div id = "hide_modal">
+                            
                               <div class="row" id="cname1">
                                 <div class="col-md-6">
                                   <label class="form-label" style="color:red">Client Name:</label>
@@ -293,7 +298,7 @@
                                 </div>
                               </div>
   
-  
+  muted
                               <div class="row">
                                 <div class="col-12">
                                   <label class="form-label" style="color:red; ">Blast Time:</label>
@@ -308,10 +313,16 @@
 
 <hr>
                               <div class="row" id = "ebComment">
-                                <div class="col-6">
-                                  <label class="form-label" style="color:red; ">User Comment</label>
+                                <div class="container">
+                                <div class="card">
+                                  <div class="card-header bg-light"><h4><b>User And  Admin Comments</b></h4></div>
+                                  <div class="card-body">
+                                    
+                               <div class="row">
+                                <div class="col">
+                                  <label class="form-label text-dark"><b>User Comment</b></label>
   
-                                  <textarea class="form-control"  id = "user_ebcomment" name = "user_ebcomment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
+                                  <textarea class="form-control"  id = "user_ebcomment" name = "user_ebcomment" placeholder="" id="floatingTextarea" readonly="readonly" style = "border-radius:0px;"></textarea>
                                     
   
   
@@ -326,27 +337,31 @@
                                   </div> --> 
   
                               
-                                <div class="col-6"  id = "adminComment" >
-                                  <label class="form-label" style="color:red; ">AdminComment</label>
+                                <div class="col"  id = "adminComment" >
+                                  <label  class="form-label text-dark"><b>AdminComment</b></label>
   
-                                  <textarea class="form-control"  id = "comment" name = "comment" placeholder="" id="floatingTextarea" readonly="readonly"></textarea>
+                                  <textarea class="form-control"  id = "comment" name = "comment" placeholder="" id="floatingTextarea" readonly="readonly" style = "border-radius: 0px;"></textarea>
                                     
   
   
                                 </div>
+                                </div>
                               </div>
   
+                            </div>
+                                  </div>
   
-  
+                            </div>
                             </div>
   
   
 <br>
 <div class="row" id = "webinar_comment_show">
+  
   <div class="col-6">
     <label class="form-label" style="color:; display:none; ">User Webinar Comment</label>
 
-    <textarea class="form-control"  id = "webinar_comment" name = "webinar_comment" placeholder=" User, Webinar Comment" id="floatingTextarea" readonly="readonly" style="color:red; display:none; "></textarea>
+    <textarea style = "border-radius: 0px;" class="form-control"  id = "webinar_comment" name = "webinar_comment" placeholder=" User, Webinar Comment" id="floatingTextarea" readonly="readonly" style="color:red; display:none; "></textarea>
       
 
 
@@ -462,14 +477,17 @@
                     
                                  
                             <hr>
+                           
                             <div class="row" id = "ebBlastview"   style = "display:none;" >
-                              <b class="alert alert-danger pt-3 pb-3">E-Blast Files</b>
-                            <div >
-                              <table class="table table-striped table-hover table-bordered">
+                             
+                           
+                              <div class="card">
+                                <div class="card-header bg-light"><h4><b>Email-Blast Files</b></h4></div>
+                         
+                                <div class="card-body">
+                              <table class="table table-striped table-hover table-bordered bg-light">
                               <thead>
-                                <tr>
-                                 
-                                  </tr>
+                              
                                <tr>
                              <th scope="col">user Email Blast</th>
                              <th scope="col">Admin Email Blast</th>
@@ -483,12 +501,7 @@
 
                               <td id = "viewfiles112" style="border-right: 1px solid; display:none;"></td>
                               <td id = "viewfiles113" style="border-right: 1px solid; display: none;"></td>
-                              <!-- <td id = "viewReminderBlastView11" style="border-right: 1px solid; display: none;"></td>
-                              <td id = "viewReminderBlastView12" style="border-right: 1px solid; display : none;"></td> -->
-                            
-                              <!-- <td id = "wbinarVeiw11" style="border-right: 1px solid; display: none;"></td>
-                              <td id = "wbinarVeiw12" style="border-right: 1px solid; display : none;"></td> -->
-                              
+                             
 
                               
                              </tr>
@@ -497,13 +510,19 @@
                              </table>
                              </div>
                             </div>
+                            </div>
+                            
+                            
                              <div class="row"  id = "rbFlex"   style = "display: none;" >
                           
-                      
+                              <div class="card">
+                                <div class="card-header bg-light"><h4><b>Reminder Blast Files</b></h4></div>
+                         
+                                <div class="card-body">
                                    <table class="table table-striped table-hover table-bordered">
                                       <thead>
                                           <tr>
-                                              <b class="alert alert-danger pt-3 pb-3">Reminder Blast Files</b>
+                                             
                                           </tr>
                                           <tr>
                                               <th scope="col">user rb Blast</th>
@@ -523,19 +542,28 @@
                                   </table>
                            
                               </div>
+                              </div>
+                              </div>
 
         
 
-                 
+                
 
 
                           <div  id = "webinarFlex"  style = "display:block;"     >
                           
                       
-                            <table class="table table-striped table-hover table-bordered">
+                            <div class="card">
+                              <div class="card-header bg-light"><h4><b>Webinar Blast Files</b></h4></div>
+                       
+                              <div class="card-body">
+            
+                                
+                              
+                            <table class="table table-striped table-hover table-bordered bg-">
                             <thead>
                               <tr>
-                                <b style = "color:red"><h2>Webinar Blast Module</h2></b>
+                                <b style = "color:red"><h2></h2></b>
                                 </tr>
                              <tr>
                            <th scope="col">webinar user  fils</th>
@@ -545,10 +573,10 @@
                            <!-- <th scope="col">Replace</th> -->
                            </tr>
                            </thead>
-                           <tbody class="table"   >
+                           <tbody class="table">
                           </tr>
-
-                          <td id = "wbinar11" style="border-right: 1px solid;  display:none;"  ></td>
+                          <tr class="bg-muted">
+                          <td  id = "wbinar11" style="border-right: 1px solid;  display:none;"  ></td>
                           <td id = "wbinar12" style="border-right: 1px solid; display:none;"  ></td>
                         </tr>
                         </tbody>
@@ -559,6 +587,8 @@
 
 
                       </div>
+                    </div>
+                  </div>
 
                           
 
@@ -571,32 +601,42 @@
 </div>
 
                       <br>
-                            <div  id="fileviewbox" style = "display: none;"  >
+                            <div   class="container-fluid" id="fileviewbox" style = "display: none;"  >
                               <div class="row">
-                                <div class="col-12" >
-                                
+                               
+                                <div class="col-md-12">
                                  
                                   <!-- <input type="hidden" name="admin_files" id="admin_files" />      -->
 
 
+                                  <div class="card">
+                                    <div class="card-header"> <h3 class="text-dark">  Files Replace & Upload </h3></div>
+                                    <div class="card-body bg-light">
+                                      <table class="table table-hover table-bordered w-100">
+                               
+                                 
+                                        <p class="msgedit" style ="width:50%;"></p>
+                                        <thead class="bg-light">
+                                          <tr>
+                                       <th>View  Files/Download Now file</th>
+                                      <th>Action</th> 
+                                    </tr>
+                                 </thead>
+                                 <tbody id = "container11"  >
+                        
+                                 </tbody>
+  
+                                 </table>
+                                    </div>
+                                  </div>
+
                                
 
                               
-                                <table class="table table-hover table-bordered">
-                                <thead>
-                                 <tr class="bg-light text-dark" >
-                                  <p class="msgedit"></p>
-                               <th>View  Files/Download Now file</th>
-                                <th>Action</th> 
-                               </tr>
-                               </thead>
-                               <tbody id = "container11">
-                         <tr></tr>
-                               </tbody>
-
-                               </table>
+                                
                                </div>
 
+                               </div>
                                
 
                                <br>
@@ -612,7 +652,7 @@
 
 
                                     <button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction()" >Download File</button> -->
-                                </div>
+                          
 
 
                               </div>
@@ -623,12 +663,14 @@
                                     </div>  -->
                               
 
-                                  
                                     
-                        <div class="modal-footer">
+                        <div class="modal-footer bg-light">
                             <input type="hidden" name="id" id="id" />
                             <input type="hidden" name="action" id="action" value="Add" />
+                         
+                                    
                             <button type="button" class="btn btn-secondary btnColor" data-bs-dismiss="modal" >Close</button>
+                            
                             <button type="submit" class="btn btn-primary" id="action_button">Add New User</button></div>
                     </form>
                 </div>

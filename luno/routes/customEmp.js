@@ -697,7 +697,7 @@ console.log("hhhhh");
     
                                 response.json({
                                     success: true,
-                                    message : 'file uploaded successfully...'
+                                    message : 'File Uploaded Successfully...'
                                 });
                           
                             })
@@ -987,7 +987,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                                 //    if(inserted_id == data_id){
                                     response.json({
                                         success: true,
-                                        message: 'Files deleted Successfully.. '
+                                        message: 'Files Updated Successfully.. '
                                     })
                             }
     

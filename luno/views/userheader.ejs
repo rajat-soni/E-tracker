@@ -58,7 +58,7 @@ $(document).ready(function () {
       <div class="title-text d-flex align-items-center mb-4 mt-1">
         <!-- <h4 class="sidebar-title mb-0 flex-grow-1"><span>XDBS</span></h4> -->
         <!-- <a href="https://xdbsworldwide.com/" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary"> -->
-          <img src="https://92.204.129.232/lp-db/XDBS-new-logo.png" width="60" style="    margin-left: -3px;" class="logoimg">
+          <img src="http://staging.webtechstar.com:7777/assets/img/ondirect-connect-logo.png" width="180" style="    margin-left: -3px;" class="logoimg">
           
         <!-- </a> -->
       </div>
@@ -123,14 +123,14 @@ $(document).ready(function () {
 
             <div class="row">
               <div class="col-md-5">
-            <button type="button" class="btn btn-link d-none d-xl-block sidebar-mini-btn p-0 text-primary">
+            <button type="button" class="btn btn-link d-none d-xl-block sidebar-mini-btn p-0 text-primary" id="btnlogo">
               <span class="hamburger-icon">
                 <span class="line"></span>
                 <span class="line"></span>
                 <span class="line"></span>
               </span>
             </button>
-            <button type="button" class="btn btn-link d-block d-xl-none menu-toggle p-0 text-primary">
+            <button type="button" class="btn btn-link d-block d-xl-none menu-toggle p-0 text-primary" id="btnlogo">
               <span class="hamburger-icon">
                 <span class="line"></span>
                 <span class="line"></span>
@@ -233,14 +233,14 @@ $(document).ready(function () {
     <script>
 
       
-$('.hamburger-icon').click(function(e){
+$('#btnlogo').click(function(e){
        
-       if(e.target.className == 'hamburger-icon'){
-         
+       if(e.target.className == 'hamburger-icon active'){
+        $('.logoimg').attr('width',"60")
     
-      $('.logoimg').attr('width',"50")
+     
        }else{
-         $('.logoimg').attr('width',"100")
+        $('.logoimg').attr('width',"180")
        }
      })
 
