@@ -7,21 +7,13 @@ var database = require('../database');
 var path = require('path');
 const e = require('connect-flash');
 
-//const MulterSharpResizer = require("multer-sharp-resizer");
-// const { type } = require('os');
-// const { off } = require('process');
-
-
-
-
-
 
 router.get("/", function (request, response, next) {
 
 
     var alltask = "SELECT * FROM addtask";
 
-    // var query = "SELECT * FROM addtask a right join sender_tbl s on a.cname=s.client_id order by date(a.blast_date)desc,a.blast_time desc;";
+   
 
     var query = "select *,a.id as eid,a.id as rbid,u.first_name as ebfname,a.camp_name as campname,CONCAT( a.blast_date ,' | ', a.blast_time) as eblast_date,a.status as ebstatus,CONCAT( a.rb_date ,' | ', a.rb_time) as rblast_date,t3.first_name as rbfname,a.camp_name as rbcampname,a.rbstatus as rb_status,a.rb_type as rbtype from user_tbl u join addtask a on u.user_id=a.allocated_to left join user_tbl t3 on a.rballocated_to=t3.user_id ";
 
@@ -38,17 +30,7 @@ router.get("/", function (request, response, next) {
     var pending = "select (select count(*) from addtask where (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now() ) and status=0) + (select count(*) from addtask where (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now()) and rbstatus=0 ) as pending";
 
 
-    // var missed = "select * FROM `addtask` WHERE DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) < now() && status=0";
-
-
-    // var client_id = request.query.client_id;
-    // var mysql = require('mysql');
-    // var draw = request.query.draw;
-    //    console.log("client_id:");
-    //     console.log(client_id);
-    //  var senderlist = 'SELECT * FROM  sender_tbl WHERE client_id ='+ mysql.escape(client_id);
-
-    //   console.log(request.body.client_name);
+   
     database.query(alltask, function (error, alltask) {
         database.query(query, function (error, data) {
             database.query(query1, function (error, data1) {
@@ -61,8 +43,7 @@ router.get("/", function (request, response, next) {
                                         database.query(pending, function (error, pending) {
                                             database.query(missed, function (error, missed) {
 
-                                                //  database.query(senderlist, function(error, senderlist){
-                                                //console.log(senderlist);
+                                               
 
                                                 response.render('alltask', { title: 'TASK Details', missed: missed, alltask: alltask, data: data, data1: data1, data2: data2, currentblast: currentblast, data4: data4, clientlist: clientlist, completed: completed, pending: pending, userlist: userlist, session: request.session });
                                             });
@@ -81,12 +62,7 @@ router.get("/", function (request, response, next) {
 
 
 
-
 // Code start for Fetch Dropdown value
-
-
-
-
 
 
 
@@ -102,20 +78,7 @@ router.get('/get_sender_data11', function (request, response, next) {
         var query = `
              SELECT DISTINCT CONCAT( " Sender Name:","  ", sender_name  ," Sender Email:",  "  ", sender_email) AS Data FROM sender_tbl 
              WHERE client_id = '${search_query}'  
-             ORDER BY sender_email ASC
-
-
-             
-             `;
-
-
-
-        //  var query = `  SELECT DISTINCT CONCAT( " Sender Name:","  ", s.sender_name  ," Sender Email:",  "  ", s.sender_email) AS Data FROM sender_tbl s right join addtask a on a.cname=s.client_id
-        //  WHERE s.client_id = '${search_query}'  && a.id = '${id}'
-        //  ORDER BY s.sender_email ASC `;
-
-        console.log(query);
-
+             ORDER BY sender_email ASC `;
 
 
     }
@@ -137,12 +100,6 @@ router.get('/get_sender_data11', function (request, response, next) {
             var query = `SELECT asset_name AS Data FROM addtask WHERE id = "${id}"`;
 
 
-            // var query = `
-            // SELECT asset_name AS Data FROM addtask 
-            // WHERE id = '${search_query}'  `;
-
-            console.log(query);
-
         }
 
     }
@@ -162,23 +119,6 @@ router.get('/get_sender_data11', function (request, response, next) {
     });
 
 });
-
-
-
-// router.get('/fetchdropdown', function(request, response, next){
-//     var client_id = request.query.client_id;
-//     var mysql = require('mysql');
-//     console.log(client_id);
-//     console.log("Rajashri");
-//     var senderlist = 'SELECT * FROM  sender_tbl WHERE client_id ='+ mysql.escape(client_id);
-//     console.log(senderlist1);
-//     database.query(senderlist1, function(error, senderlist){
-//         response.render('alltask', {senderlist: senderlist});
-
-//     });
-
-// });
-
 
 
 // Code End for Fetch Dropdown value
@@ -225,13 +165,13 @@ router.get('/get_data', function (request, response, next) {
 
     //Total number of records without filtering
 
-    database.query("SELECT COUNT(*) AS Total ,CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask", function (error, data) {
+    database.query("SELECT COUNT(*) AS Total ,MAX(CONCAT(  blast_date ,' | ', blast_time)) AS balst_dt FROM addtask", function (error, data) {
 
         var total_records = data[0].Total;
 
         //Total number of records with filtering
 
-        database.query(`SELECT COUNT(*) AS Total ,CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask WHERE 1 ${search_query}`, function (error, data) {
+        database.query(`SELECT COUNT(*) AS Total ,MAX(CONCAT(  blast_date ,' | ', blast_time)) AS balst_dt FROM addtask WHERE 1 ${search_query}`, function (error, data) {
 
             var total_records_with_filter = data[0].Total;
 
@@ -310,6 +250,7 @@ router.get('/get_data', function (request, response, next) {
                         'blast_time': row.blast_time,
                         'camp_id': row.camp_id,
                         'admin_rb_file': row.admin_rb_file,
+                        'admin_files': row.admin_files,
                         'id': row.id
                     });
                 });
@@ -331,11 +272,11 @@ router.get('/get_data', function (request, response, next) {
 
 });
 
+//end code for display all data
 
 
 
-
-
+//start code for display priority data
 router.get('/get_prioritydata', function (request, response, next) {
 
 
@@ -375,13 +316,13 @@ router.get('/get_prioritydata', function (request, response, next) {
 
     //Total number of records without filtering
 
-    database.query("SELECT COUNT(*) AS Total, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt ,CONCAT( rb_date ,' | ', rb_time) AS rb_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,'  ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,'  ', rb_time) >= CURRENT_TIMESTAMP) ", function (error, data) {
+    database.query("SELECT COUNT(*) AS Total, MAX(CONCAT(  blast_date ,' | ', blast_time)) AS balst_dt ,MAX(CONCAT( rb_date ,' | ', rb_time)) AS rb_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,'  ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,'  ', rb_time) >= CURRENT_TIMESTAMP) ", function (error, data) {
 
         var total_records = data[0].Total;
 
         //Total number of records with filtering
 
-        database.query(`SELECT COUNT(*) AS Total, CONCAT(  blast_date," | ", blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS rb_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,'  ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,'  ', rb_time) >= CURRENT_TIMESTAMP) AND 1 ${search_query}`, function (error, data) {
+        database.query(`SELECT COUNT(*) AS Total, MAX(CONCAT(  blast_date," | ", blast_time)) AS balst_dt, MAX(CONCAT( rb_date ,' | ', rb_time)) AS rb_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,'  ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,'  ', rb_time) >= CURRENT_TIMESTAMP) AND 1 ${search_query}`, function (error, data) {
 
             var total_records_with_filter = data[0].Total;
 
@@ -391,6 +332,7 @@ router.get('/get_prioritydata', function (request, response, next) {
             LIMIT ${start}, ${length}
             `;
 
+           
             var data_arr = [];
 
             database.query(query, function (error, data) {
@@ -429,7 +371,7 @@ router.get('/get_prioritydata', function (request, response, next) {
 
 });
 
-
+//End code for display priority data
 
 
 
@@ -474,13 +416,13 @@ router.get('/get_todaytaskdata', function (request, response, next) {
 
     //Total number of records without filtering
 
-    database.query("SELECT COUNT(*) AS Total, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask where blast_date=CURDATE() && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now()) || (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now() ) order by date(blast_date)asc,blast_time asc", function (error, data) {
+    database.query("SELECT COUNT(*) AS Total, MAX(CONCAT(  blast_date ,' | ', blast_time)) AS balst_dt FROM addtask where blast_date=CURDATE() && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now()) || (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now() ) order by date(blast_date)asc,blast_time asc", function (error, data) {
 
         var total_records = data[0].Total;
 
         //Total number of records with filtering
 
-        database.query(`SELECT COUNT(*) AS Total, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask WHERE blast_date=CURDATE() && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now()) || (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now() ) AND 1 ${search_query}`, function (error, data) {
+        database.query(`SELECT COUNT(*) AS Total, MAX(CONCAT(  blast_date ,' | ', blast_time)) AS balst_dt FROM addtask WHERE blast_date=CURDATE() && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now()) || (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now() ) AND 1 ${search_query}`, function (error, data) {
 
             var total_records_with_filter = data[0].Total;
 
@@ -570,13 +512,17 @@ router.get('/get_weeklytaskdata', function (request, response, next) {
 
     //Total number of records without filtering
 
-    database.query("SELECT COUNT(*) AS Total, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS reminder_dt FROM addtask WHERE (blast_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (rb_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) ", function (error, data) {
+    database.query("SELECT COUNT(*) AS Total,  MAX(CONCAT(blast_date, ' | ', blast_time)) AS blast_dt,  MAX(CONCAT(rb_date, ' | ', rb_time)) AS reminder_dt FROM addtask WHERE (blast_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) OR (rb_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY); ", function (error, data) {
+
+
+     
+
 
         var total_records = data[0].Total;
 
         //Total number of records with filtering
 
-        database.query(`SELECT COUNT(*) AS Total, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS reminder_dt FROM addtask WHERE (blast_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (rb_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) AND 1 ${search_query}`, function (error, data) {
+        database.query(`SELECT COUNT(*) AS Total, MAX(CONCAT(  blast_date ,' | ', blast_time)) AS balst_dt, MAX(CONCAT( rb_date ,' | ', rb_time)) AS reminder_dt FROM addtask WHERE (blast_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (rb_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) AND 1 ${search_query}`, function (error, data) {
 
             var total_records_with_filter = data[0].Total;
 
@@ -741,6 +687,7 @@ router.post("/action", function (request, response, next) {
             var rb_assetlink = "";
             var rb_date = "";
             var rb_time = "";
+            var rballocated_to = "";
             //var comment = request.body.comment;
             var priority = request.body.priority;
             var allocated_to = request.body.allocated_to;
@@ -771,14 +718,15 @@ router.post("/action", function (request, response, next) {
             console.log(cname);
             var query = `
 		INSERT INTO addtask 
-		(cname,camp_name, camp_from,blast_count,asset_name,asset_link,tact,blast_type,blast_date,blast_time,rb_type,rb_assetname,rb_assetlink,rb_date,rb_time,priority,allocated_to,status) 
-		VALUES ("${cname}", "${camp_name}","${camp_from}","${blast_count}", "${asset_name}", "${asset_link}", "${tact}", "${blast_type}", "${blast_date}","${blast_time}", "${rb_type}", "${rb_assetname}","${rb_assetlink}","${rb_date}","${rb_time}","${priority}", "${allocated_to}", "${status}")
+		(cname,camp_name, camp_from,blast_count,asset_name,asset_link,tact,blast_type,blast_date,blast_time,rb_type,rb_assetname,rb_assetlink,rb_date,rb_time,rballocated_to,priority,allocated_to,status) 
+		VALUES ("${cname}", "${camp_name}","${camp_from}","${blast_count}", "${asset_name}", "${asset_link}", "${tact}", "${blast_type}", "${blast_date}","${blast_time}", "${rb_type}", "${rb_assetname}","${rb_assetlink}","${rb_date}","${rb_time}","${rballocated_to}","${priority}", "${allocated_to}", "${status}")
 		`;
+       
             console.log(query);
             database.query(query, function (error, data) {
 
                 response.json({
-                    message: 'Data Added'
+                    message: "Data Inserted Successfully..."
                 });
 
             });
@@ -786,6 +734,7 @@ router.post("/action", function (request, response, next) {
 
         else if (tact == "webinar") {
             var cnamewebinar = request.body.cnamewebinar;
+            
             var webcamp_name = request.body.webcamp_name;
             var webcamp_from = request.body.webcamp_from;
             var webinar_count = request.body.webinar_count;
@@ -795,7 +744,7 @@ router.post("/action", function (request, response, next) {
             var registration_link = request.body.registration_link;
             var registration_date = request.body.registration_date;
             var registration_time = request.body.registration_time;
-            var webcomment = request.body.webcomment;
+           // var webcomment = request.body.webcomment;
 
 
             console.log("webblsttype:" + webblsttype);
@@ -806,6 +755,7 @@ router.post("/action", function (request, response, next) {
             var rb_date = "";
             var rb_time = "";
             var rb_assetname = "";
+            var rb_assetlink = "";
             var webstatus = "0";
 
 
@@ -836,7 +786,7 @@ router.post("/action", function (request, response, next) {
             database.query(querywebinar, function (error, data) {
 
                 response.json({
-                    message: 'Data Added'
+                    message: "Data Inserted Successfully..."
                 });
 
             });
@@ -1010,7 +960,7 @@ router.post("/action", function (request, response, next) {
         var blast_type = request.body.blast_typerr;
         var blast_date = request.body.blast_date;
         var blast_time = request.body.blast_time;
-        var comment = request.body.comment;
+      //  var comment = request.body.comment;
         var priority = request.body.priority;
         var allocated_to = request.body.allocated_to;
         var cname = cname[0];
@@ -1101,7 +1051,7 @@ router.post("/action", function (request, response, next) {
             var registration_link = request.body.registration_link;
             var registration_date = request.body.registration_date;
             var registration_time = request.body.registration_time;
-            var webcomment = request.body.webcomment;
+        //    var webcomment = request.body.webcomment;
             console.log("Web Priority:" + webpriority);
             var query = `
     UPDATE addtask 
@@ -1115,11 +1065,7 @@ router.post("/action", function (request, response, next) {
     asset_link = "${registration_link}",
     blast_date = "${registration_date}",
     blast_time = "${registration_time}",
-    tact = "${tact}",
-    
-   
-    comment = "${webcomment}"
-   
+    tact = "${tact}"
     
     WHERE id = "${id}"
     `;
@@ -1161,7 +1107,7 @@ router.post("/action", function (request, response, next) {
        
         
         
-        comment = "${comment}",
+       
         priority = "${priority}",
         allocated_to = "${allocated_to}"
         WHERE id = "${id}"
@@ -1193,7 +1139,7 @@ router.post("/action", function (request, response, next) {
         blast_time = "${blast_time}",
         asset_name = "${asset_name}" ,
         asset_link = "${asset_link}",
-        comment = "${comment}",
+       
         priority = "${priority}",
         allocated_to = "${allocated_to}"
         WHERE id = "${id}"
@@ -1271,7 +1217,7 @@ router.post("/action", function (request, response, next) {
 
 router.post("/test", (req, res) => { // =>  image upload code start
     console.log('test port');
-    res.send("this is custom rout to post");
+    res.send("this is custom route to post");
 })
 
 
@@ -1414,10 +1360,15 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
             if (err) {
                 response.json({
                     success: false,
-                    message: 'errro'
+                    message: 'errror'
                 })
                 console.log(err)
             } else {
+                
+                
+                
+                
+                
                 console.log('inside 2');
                 if (data.length > 0) {
                     console.log('inside 2 update');
@@ -1457,7 +1408,7 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
 
                         response.json({
                             success: true,
-                            message: 'File Updated Successfully...'
+                            message: 'Record Updated Successfully...'
                         });
 
 
@@ -1495,7 +1446,7 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
 
                         response.json({
                             success: true,
-                            message: 'Files Uploaded Successfully.. '
+                            message: 'File inserted successfully....'
                         })
                     })
                  
@@ -1527,12 +1478,17 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
 
 router.post('/admin_comment2', upload.single('admin_files'), (request, response) => {
 
-    const newfile = request.file.filename;
-    console.log("updatedfile:" + newfile);
+    // const newfile = request.file.filename;
+    // console.log("updatedfile:" + newfile);
 
 
 
     console.log("within admn comment js");
+
+   
+
+
+
     var tact = request.body.tact;
 
     console.log("tact in route file:" + tact);
@@ -1543,6 +1499,56 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
 
     var camp_id = request.body.camp_id;
     console.log("camp_id" + camp_id);
+
+
+
+
+    
+
+  
+  //start code for delete file from folder
+  
+  var admin_files = oldfname;
+  if (tact === "Email-Blast") {
+    var tactfolder = "Email-Blast";
+  }
+
+  else if (tact === "Email-Reminder-Blast") {
+    var tactfolder = "Email-Reminder-Blast";
+  }
+
+  else if (tact === "Webinar") {
+    var tactfolder = "Webinar";
+  }
+
+  
+    var url = "./files/" + camp_id + "/Admin/" + tactfolder + "/" + admin_files;
+    console.log("URL:" + url);
+   // var url = window.URL || window.webkitURL;
+
+      console.log("url" + url);
+
+      
+  
+  console.log("oldfname:" +oldfname);
+
+  const fs = require("fs");
+  const path = require("path");
+  
+
+
+
+  fs.unlink(url, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('File deleted successfully');
+  });
+  
+ // return;
+  //End code for delete file from folder
+
 
 
 
@@ -1559,6 +1565,210 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
 
 
         database.query(selectQuery, function (err, data) {
+            console.log("within first condition");
+
+            data.forEach(function (row) {
+
+                console.log("within second condition");
+
+                var camp_id = row.camp_id;
+
+                if (tact === "Email-Reminder-Blast") {
+                    var admin_files = row.admin_rb_file;
+
+                }
+
+                else {
+                    var admin_files = row.admin_files;
+                }
+
+
+
+                const myArray =  new Array(admin_files);
+
+                var output = admin_files.split(',');
+                console.log("Array:" + output[filenum]);
+                var deletefile=output[filenum]
+
+                console.log("deletefile Array:" + filenum);
+
+                const x = output.splice(filenum,1);
+                
+                console.log(`output values: ${output}`);
+                console.log(`variable x value: ${x}`);
+                
+
+
+
+
+                console.log("camp_id" + camp_id);
+                console.log("admin_files" + admin_files);
+
+              const admin_files1 = new Array(admin_files);
+              console.log("admin_files1" +admin_files1);
+             
+            
+
+
+            
+
+
+               
+
+
+                //admin_files.remove(output[filenum]);
+
+           //  delete admin_files[0];
+           
+
+
+
+
+               
+
+
+             
+                // Replace the item at the found index
+
+                // if(filenum > 4)
+                // {
+
+                //     var newfile="";
+                // }
+                // else{
+
+                //      var newfile="";
+                // }
+
+              
+
+
+                //console.log("admin_files11:" +admin_files11);
+
+
+                if (err) {
+                    response.json({
+                        success: false,
+                        message: 'errro'
+                    })
+                    console.log(err)
+                } else {
+                    console.log('inside 2');
+                    if (data.length > 0) {
+                        console.log('inside 2 update');
+
+                        console.log("check tact:" + tact);
+
+                        console.log("Output check:" + output);
+                        // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+
+                        if (tact === "Email-Reminder-Blast") {
+                            var updateSql = `UPDATE comment_tbl SET admin_rb_file='${output}' WHERE camp_id = '${camp_id}'`;
+
+                        }
+                        else {
+                            var updateSql = `UPDATE comment_tbl SET admin_files='${output}' WHERE camp_id = '${camp_id}'`;
+                        }
+
+
+                        console.log("Update query" + updateSql);
+                        database.query(updateSql, function (err, data) {
+
+                            if (err) {
+                                response.json({
+                                    success: false,
+                                    message: 'errro'
+                                })
+                                console.log(err)
+                            } else {
+                                // let inserted_id = data.insertId;
+                                //    if(inserted_id == data_id){
+                                response.json({
+                                    success: true,
+                                    message: 'Files Deleted Successfully.. '
+                                })
+                            }
+
+
+                        })
+                    } else {
+                        console.log('inside 1 else');
+
+                        //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+
+                        if (tact = "Email-Reminder-Blast") {
+                            var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rb_file) VALUES (${camp_id}, '${output}')`; // insert query //
+                        }
+                        else {
+                            var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_files) VALUES (${camp_id}, '${output}')`; // insert query //
+                        }
+
+                        console.log("insert query" + sqlQry);
+
+                        database.query(sqlQry, function (err, data) {
+
+                            response.json({
+                                success: true,
+                                message: 'Files Deleted Successfully.. '
+                            })
+                        })
+                    }
+
+                }
+
+            })
+        })
+
+    }
+    // }else{
+
+
+
+
+
+})
+
+
+
+//End code for update image
+
+
+
+
+//start code for insert new image
+
+router.post("/fileinsert", upload.any('admin_files'), (request, response) => {
+
+ 
+    var camp_id = request.body.camp_id;
+    var tact = request.body.tact;
+    console.log("tact" + tact);
+
+
+    var uploadFiles = request.files;
+
+
+    var admin_files = request.files.admin_files;
+    const imagePath = request.files.filename;
+
+    //console.log(imagePath);
+    console.log("image+image" + imagePath);
+    console.log("hello hello")
+
+    console.log("admin_files:" + admin_files);
+    // if (comment == 'sendComment') {  
+
+
+    var filenames = uploadFiles.map(item => item.filename);
+    var combinedFilenames = filenames.join(',');
+    console.log(combinedFilenames);
+
+
+    if (camp_id != "") {
+        console.log('inside 1');
+        var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
+        console.log(selectQuery);
+      database.query(selectQuery, function (err, data) {
             console.log("within first condition");
             data.forEach(function (row) {
 
@@ -1581,22 +1791,20 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
                 console.log("admin_files" + admin_files);
 
                 //  const admin_files1 = new Array(admin_files);
-                var output = admin_files.split(',');
-                console.log("Array:" + output[filenum]);
-                var updatedfile = output[filenum];
+                if(admin_files=="")
+                {
+                    var output = combinedFilenames;
+                    console.log("If Admin file is empty output:" + output);
+                }
 
-                console.log("updatedfile:" + updatedfile);
+                else{
+                    var output = admin_files+','+combinedFilenames;
+                    console.log("Else Admin files not empty output:" + output);
+                }
+               
+               
 
-
-                var admin_files11 = row.admin_files;
-                console.log("admin_files11:" + admin_files11);
-
-                // Find the index of the item to replace
-                let index = admin_files11.indexOf(updatedfile);
-                console.log("Index:" + index);
-                // Replace the item at the found index
-                output[filenum] = newfile;
-                console.log("Updated Files:" + output);
+                
 
 
                 //console.log("admin_files11:" +admin_files11);
@@ -1665,7 +1873,7 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
 
                             response.json({
                                 success: true,
-                                message: 'Files Uploaded Successfully.. '
+                                message: 'File inserted successfully....'
                             })
                         })
                     }
@@ -1677,16 +1885,11 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
 
     }
     // }else{
-
-
-
-
-
 })
 
 
 
-//End code for update image
+//end code for inser new image
 
 // router.post("/admin_comment", upload.single('admin_files'),(request, response) => {
 

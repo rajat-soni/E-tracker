@@ -10,7 +10,7 @@ const { log } = require('console');
 router.get("/", function (request, response, next) {
 
     var user_id = request.session.user_id;
- 
+    console.log("me", user_id);
 
     var queryuser = `SELECT * FROM user_tbl where user_id = ${user_id}`;
 
@@ -32,7 +32,7 @@ router.get("/", function (request, response, next) {
     console.log("Missed:" + missed);
     var pending = `select (select count(*) from addtask where (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now() ) and status=0 and allocated_to=${user_id}) + (select count(*) from addtask where (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now()) and rbstatus=0 and rballocated_to=${user_id}) as pending`;
 
-   
+    console.log("Pending blast" + pending);
     // var client_id = request.query.client_id;
     // var mysql = require('mysql');
     // var draw = request.query.draw;
@@ -120,43 +120,44 @@ router.get('/get_data', function (request, response, next) {
    
  )
   `;
-    
+    console.log(search_value);
+    console.log(search_query);
 
     //Total number of records without filtering
     var user_id = request.session.user_id;
-  
+    console.log("User ID:" + user_id);
     database.query(`
     SELECT COUNT(*) As Total,now() as todaydt,MAX((DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour))) as eblast_datetime,MAX((DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour))) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}
     `, function (error, data) {
         var qq = `SELECT COUNT(*) As Total,now() as todaydt,MAX((DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour))) as eblast_datetime,MAX((DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour))) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`;
-      
+        console.log("QQ:" + qq);
 
         var total_records = data[0].Total;
-       
+        console.log(total_records);
         database.query(`
         
         SELECT COUNT(*) As Total,now() as todaydt,MAX((DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour))) as eblast_datetime,MAX((DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour))) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query}`, function (error, data) {
             var total_records_with_filter = data[0].Total;
 
-           
+            console.log("Rajashri");
             var query = `
             SELECT *,now() as todaydt,(DATE_ADD(concat(addtask.blast_date, ' ', addtask.blast_time),interval 2 hour)) as eblast_datetime,(DATE_ADD(concat(addtask.rb_date, ' ', addtask.rb_time),interval 2 hour)) as reblast_datetime FROM user_tbl JOIN addtask ON  user_tbl.user_id =addtask.allocated_to left join user_tbl t3 on addtask.rballocated_to=t3.user_id left join comment_tbl on addtask.id=comment_tbl.camp_id WHERE (rballocated_to = ${user_id} || allocated_to = ${user_id}) AND ${search_query} 
             ORDER BY ${column_name} ${column_sort_order} 
             LIMIT ${start}, ${length}
           `;
-           
+            console.log("Query:" + query);
           
 
             var data_arr = [];
            
             database.query(query, function (error, data) {
 
-           
+              console.log("mydata"+data)
                 data.forEach(function (row) {
                     // console.log(row.role);
                     var user_id = request.session.user_id;
                     var role = request.session.role;
-                        
+                        console.log("session"+user_id);
                     const getDate = () => {
                         const newDate = new Date();
                         const year = newDate.getFullYear();
@@ -165,9 +166,9 @@ router.get('/get_data', function (request, response, next) {
 
                         return `${year}-${month.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`;
                     }
-                    
+                    console.log("Current date11");
                     var curdate = getDate();
-                   
+                    console.log(curdate);
 
 
 
@@ -176,18 +177,18 @@ router.get('/get_data', function (request, response, next) {
 
                     var tact=row.tact;
 
-                   
+                    console.log("tact in routes:" +tact);
                     
                     if(tact==="e_blast"){
                        
                         if(row.rb_assetname!="" && row.rb_assetlink!="")
                     {
                         var tact="Email Blast / Reminder Blast"; 
-                      
+                        console.log("Email Blast / Reminder Blast");
                     }
                     else{
                         var tact="Email Blast";
-                     
+                        console.log("Email Blast");
                     
                     }
                     
@@ -195,17 +196,15 @@ router.get('/get_data', function (request, response, next) {
                     else if(tact==="webinar")
                     {
                         var tact="Webinar";
-                        
-                    }else if(tact==="make-good")
-                    {
-                        var tact="Make Good";
-                        
+                        console.log("Webinar");
                     }
                     
-                    
 
 
-                  
+
+console.log("ebBlastDateCjeck"+row.balst_dt);
+                     console.log("user_id"+user_id);
+                      console.log("pdid"+row['id']);
                     if (role == 'user' && user_id == row.user_id) {
 
                         var allocated_to = row.allocated_to;
@@ -213,24 +212,27 @@ router.get('/get_data', function (request, response, next) {
                         var id = row.id;
                         var user_id = request.session.user_id;
 
-                    
+                        console.log("EB Allocated To: " + allocated_to);
+                        console.log("RB Allocated To: " + rballocated_to);
+                        console.log("User ID: " + user_id);
+                        console.log("ID: " + id);
 
                         var blast_type;
                         if (row.allocated_to == row.rballocated_to) {
-                           
+                            console.log("Email and Re Blast");
                             blast_type = "E-Blast/Reminder Blast";
                         } else if (row.allocated_to == request.session.user_id && row.allocated_to != row.rballocated_to) {
-                           
+                            console.log("Email Blast");
 
                             blast_type = "Email Blast";
                         } else if (row.allocated_to != row.rballocated_to && row.rballocated_to == request.session.user_id) {
-                           
+                            console.log("Reminder Blast");
                             blast_type = "Reminder Blast";
                         } else {
 
                         }
                     }
-                   
+                    console.log("user_id1"+row.user_id);
                     data_arr.push({
                         'user_id': user_id,
                         'camp_name': row.camp_name,
@@ -300,59 +302,20 @@ router.post("/action", function (request, response, next) {
     console.log("id" +id);
 
     var query = `SELECT * FROM comment_tbl WHERE camp_id = "${id}"`;
-
-
+console.log("Fetch Single Query For View");
+    console.log(query);
     database.query(query, function(error, data){
 
         response.json(data[0]);
 
     });
 }
-
-
-
     //
 
     if (action == "fetch_single") {
         // fetech single record query //
         var user_id = request.session.user_id;
-       
-
-        var id = request.body.id;
-      
-
-        var swlquery = `SELECT * FROM sender_tbl s right join addtask a on s.client_id=a.cname 
-         right join client_tbl c on s.client_id=c.client_id 
-         right join user_tbl u on a.allocated_to=u.user_id join
-          comment_tbl cm on cm.camp_id=a.id WHERE a.id = "${id}" `;
-       
-       
-        database.query(swlquery, function (error, data) {
-            response.json(data[0]);
-        });
-    }
-
-
-    if (action == "fetch_single_Profile") { // for profile view //
-       
-        var id = request.body.user_id;
-      
-        console.log("user_id"+id)
-        var swlquery = `SELECT * FROM  user_tbl where user_id  = "${id}" `;
-       
-       
-        database.query(swlquery, function (error, data) {
-            response.json(data[0]);
-            console.log("myqueryCheck"+swlquery)
-        });
-    }
-
-
-
-    if (action == "admin_fetch_files") {
-        // fetech single record query //
-        var user_id = request.session.user_id;
-       
+        console.log("User ID on fetch single:" + user_id);
 
         var id = request.body.id;
         console.log("ID in fetch single" + id);
@@ -362,6 +325,26 @@ router.post("/action", function (request, response, next) {
          right join user_tbl u on a.allocated_to=u.user_id join
           comment_tbl cm on cm.camp_id=a.id WHERE a.id = "${id}" `;
        
+         console.log("my nrw query"+swlquery)
+        database.query(swlquery, function (error, data) {
+            response.json(data[0]);
+        });
+    }
+
+
+    if (action == "admin_fetch_files") {
+        // fetech single record query //
+        var user_id = request.session.user_id;
+        console.log("User ID on fetch single:" + user_id);
+
+        var id = request.body.id;
+        console.log("ID in fetch single" + id);
+
+        var swlquery = `SELECT * FROM sender_tbl s right join addtask a on s.client_id=a.cname 
+         right join client_tbl c on s.client_id=c.client_id 
+         right join user_tbl u on a.allocated_to=u.user_id join
+          comment_tbl cm on cm.camp_id=a.id WHERE a.id = "${id}" `;
+        console.log(swlquery);
 
         database.query(swlquery, function (error, data) {
             response.json(data[0]);
@@ -422,7 +405,7 @@ router.post("/action", function (request, response, next) {
 
         // var updateREmTask = `UPDATE addtask SET status = 2  , blast_type = 'ReminderBlast'  WHERE id = ${p_id}`;
         var updateREmTask = `UPDATE addtask SET rbstatus = 1 WHERE id = ${id}`;
-    
+        console.log("Update Query:" + updateREmTask);
 
         database.query(updateREmTask, function (error, data) {
             if (!error) {
@@ -479,7 +462,7 @@ router.post("/action", function (request, response, next) {
 
 
 router.post("/test", (request, res) => {   // =>  image upload code start
-   
+    console.log('test port');
     res.send("this is custom rout to post");
 })
 
@@ -487,14 +470,13 @@ router.post("/test", (request, res) => {   // =>  image upload code start
 var storage = multer.diskStorage({
     destination: (request, files, callBack) => {
 
-       
-      
-     
-
+        console.log( request.body,"😀😀😀");
 
 var camp_id =  request.body.camp_id;
-var tact = request.body.tact;
 
+var tact = request.body.tact;
+console.log(` tactics value: ==> ${request.body.tact}`);
+console.log(` camp_id2: ==> ${request.body.camp_id}`);
 // console.log("check tact  tactics:" +tact);
 var fs = require('fs');
 //var dir = './tmp';
@@ -502,7 +484,7 @@ var fs = require('fs');
 var dir1=`./files/${request.body.camp_id}`;
 if (!fs.existsSync(dir1)){
     fs.mkdirSync(dir1);
-   
+    console.log("First Camp ID directory created successfully......");
 
 }
 
@@ -510,7 +492,7 @@ if (!fs.existsSync(dir1)){
 
     if (!fs.existsSync(dir2)){
         fs.mkdirSync(dir2);
-      
+        console.log("Admin folder created");
 
     }
 
@@ -520,7 +502,7 @@ if (!fs.existsSync(dir1)){
 
         if (!fs.existsSync(dir3)){
             fs.mkdirSync(dir3);
-           
+            console.log("Email Blast folder created....");
     
         }
     }
@@ -533,7 +515,7 @@ if (!fs.existsSync(dir1)){
 
         if (!fs.existsSync(dir3)){
             fs.mkdirSync(dir3);
-           
+            console.log("Reminder Blast folder created....");
     
         }
     }
@@ -543,19 +525,18 @@ if (!fs.existsSync(dir1)){
     
     else if(tact==="Webinar")
     {
-       
-        var dir3=`./files/${camp_id}/user/Webinar`;
- 
+        var dir3=`./files/${request.body.camp_id}/user/Webinar`;
+
         
 
         if (!fs.existsSync(dir3)){
             fs.mkdirSync(dir3);
-           
+            console.log("Webinar Blast folder created....");
     
         }
     }
   
-
+console.log("Dir3 is:" +dir3);
     
 
 
@@ -563,7 +544,7 @@ if (!fs.existsSync(dir1)){
 
 
 
-
+console.log("Dir 3 is out of if else:" +dir3);
 
         callBack(null, `./${dir3}`) // './public/images/' directory name where save the file
     },
@@ -588,8 +569,11 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
    var camp_id = request.body.camp_id;
    var tact = request.body.tact;
+   
    var sendComment = request.body.sendComment;
-  
+   console.log("myckeck comment"+sendComment)
+
+    console.log("hello"+tact)
 
     var uploadFiles = request.files;
 
@@ -607,37 +591,45 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
 
         var sendComment = request.body.sendComment;
-      
+        console.log("comment"+sendComment)
         var camp_id = request.body.camp_id;
        var tact = request.body.tact;
         // var tact = request.body.tact;
-    
+    console.log("tactice value new"+tact);
         var status = request.body.status;
         var rb_status = request.body.rb_status;
+        console.log("status" + "" + status)
+        console.log("rb_status" + "" + rb_status)
         
+        console.log("filenames" ,filenames,request.files)
+        console.log("image image " + combinedFilenames)
+        console.log("mytact"+ tact);
+        console.log("mycamp_id",camp_id);
+        console.log("sendComment"+sendComment);
       
-
+console.log("Rajashri comments");
+console.log("hhhhh");
 
 
 
         if (camp_id != "") {
-           
+            console.log('inside 1');
             var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
-            
+             console.log(selectQuery);
             database.query(selectQuery, function (err, data) {
                 if (err) {
                     response.json({
                         success: false,
                         message: 'errro'
                     })
-                   
+                    console.log(err)
                 } else {
-                   
+                    console.log('inside 2');
                     if (data.length > 0) {
                         data.forEach(function (row) {
-                      
+                        console.log('inside 2 update');
                         // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-                      
+                        console.log("type of " +typeof uploadFiles);
 
                         if(tact=="Email-Reminder-Blast")
                         {
@@ -649,7 +641,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                                 combinedFilenames=arr.join(",")
                             }
 
-                           
+                            console.log("in if condition reminder Balst condition");
 
 
                         let  comment_section=`user_rbcomment='${sendComment}',`
@@ -658,7 +650,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                          }
 
                             var updateSql = `UPDATE comment_tbl SET  ${comment_section} user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                           
+                            console.log("tact is eb/rb:" +updateSql);
                     
       
                         }
@@ -679,12 +671,12 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                             }
 
 
-                          
+                            console.log("in else  webinar condition");
                             var updateSql = `UPDATE comment_tbl SET ${comment_section} webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
     
                         }else{
                           
-                          
+                            console.log("😂😂🤣😂😂😁😀😀",row);
 
                             let arr=row.user_ebfiles.split(",")
 
@@ -701,8 +693,9 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
 
                             var updateSql = `UPDATE comment_tbl SET ${comment_section} user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                           
-                        }   
+                            console.log("camp_id 11111",camp_id);
+                            console.log("updateSql 111",updateSql);
+                        }    console.log(" Email Blast Contion Update query" +updateSql);
                          
                             database.query(updateSql, function (err, data) {
     
@@ -715,7 +708,12 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                        
                         })
                     } else {
-                       
+                        // console.log('inside 1 else');
+                    
+                      
+                        // var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
+                     //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+          console.log("mycheck tact"+tact)
           
                      if(tact === "Webinar"){
                         var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_comment,webinar_files) VALUES (${camp_id}, '${sendComment}', '${combinedFilenames}')`;
@@ -777,175 +775,15 @@ router.post("/comment",  upload.any('image'),(request, response) => {
     // }else{
 
 
-    router.post("/singleComment",  upload.any('image'),(request, response) => {
-
-
-
-       
-  
-
-        var camp_id = request.body.camp_id;
-        var tact = request.body.tact;
-         //var sendComment = request.body.sendComment;
-      
-     
-         var uploadFiles = request.files;
-     
-     
-     
-         var image = request.files.image;
-         const imagePath = request.files.filename;
-     
-         var filenames = uploadFiles.map(item => item.filename);
-         var combinedFilenames = filenames.join(',');
-         
-     
-         
-         
-     
-     
-             var sendComment = request.body.sendComment;
-          
-             var camp_id = request.body.camp_id;
-            var tact = request.body.tact;
-             // var tact = request.body.tact;
-         
-             var status = request.body.status;
-             var rb_status = request.body.rb_status;
-            
-     
-     
-     
-             if (camp_id != "") {
-                 console.log('inside 1');
-                 var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
-                  console.log(selectQuery);
-                 database.query(selectQuery, function (err, data) {
-                     if (err) {
-                         response.json({
-                             success: false,
-                             message: 'errro'
-                         })
-                         console.log(err)
-                     } else {
-                         console.log('inside 2');
-                         if (data.length > 0) {
-                             data.forEach(function (row) {
-                           
-                             // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-                          
-     
-                             if(tact=="Email-Reminder-Blast")
-                             {
-     
-     
-                                 let arr=row.user_rbfiles.split(",")
-                                 if(row.user_rbfiles.trim().length>0 && arr.length==1 && filenames.length==1){
-                                     arr.push(filenames[0])
-                                     combinedFilenames=arr.join(",")
-                                 }
-     
-                              
-     
-     
-                             
-                                 var updateSql = `UPDATE comment_tbl SET   user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                               
-                         
-           
-                             }
-                             else if(tact == "Webinar")
-                             {
-                                 
-                                 let arr=row.webinar_files.split(",")
-                                 if(row.webinar_files.trim().length>0 && arr.length==1 && filenames.length==1){
-                                     arr.push(filenames[0])
-                                     combinedFilenames=arr.join(",")
-     
-                                     
-                                 }
-     
-                               
-     
-     
-                                 console.log("in else  webinar condition");
-                                 var updateSql = `UPDATE comment_tbl SET  webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
-         
-                             }else{
-                               
-                                 
-     
-                                 let arr=row.user_ebfiles.split(",")
-     
-                                 if(row.user_ebfiles.trim().length>0 && arr.length==1 && filenames.length==1){
-                                     arr.push(filenames[0])
-                                     combinedFilenames=arr.join(",")
-                                 }
-     
-                                
-     
-     
-                                 var updateSql = `UPDATE comment_tbl SET  user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                                
-                             }    
-                              
-                                 database.query(updateSql, function (err, data) {
-         
-                                     response.json({
-                                         success: true,
-                                         message : 'File Uploaded Successfully...'
-                                     });
-                               
-                                 })
-                            
-                             })
-                         } else {
-                             // console.log('inside 1 else');
-                         
-                           
-                             // var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
-                          //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-               console.log("mycheck tact"+tact)
-               
-                          if(tact === "Webinar"){
-                             var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_files) VALUES (${camp_id}, '${combinedFilenames}')`;
-                          }
-         
-                          else if(tact==="Email-Reminder-Blast")
-                          {
-                             var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbfiles) VALUES (${camp_id},'${combinedFilenames}')`; // insert query //
-                          }
-                          else{
-                             var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles) VALUES (${camp_id},'${combinedFilenames}')`; //
-                             // insert query //
-                             console.log("inser qeruy"+sqlQry)
-                          }
-                            
-                             console.log("insert query"+sqlQry);
-         
-                             database.query(sqlQry, function (err, data) {
-         
-                                 response.json({
-                                     success: true,
-                                     message: 'Files Uploaded Successfully...'
-                                 })
-                             })
-                         }
-         
-                     }
-                 })
-         
-             }
-             // }else{
-         })
-
-
-    router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {  // for delete images //
+    router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {
      
 
         var oldfname1 = request.body.oldfname;
         var camp_id = request.body.camp_id;
-     
+        console.log("myfiles"+ oldfname1)
+
+    
+        console.log("oldRajat file"+oldfname1 )
 
         // const newfile1 = request.file.filename;
         // console.log("new Rajat  file"+newfile1 );
@@ -960,23 +798,25 @@ router.post("/comment",  upload.any('image'),(request, response) => {
     
     
      
-      
+        console.log("within admn comment js");
         var tact = request.body.tact;
     
+        console.log("tact in route file:" +tact);
         var filenum = request.body.filenum;
         var oldfname = request.body.oldfname;
-       
+        console.log("oldfname" + oldfname);
+        console.log("filenum mean index of file" + filenum);
 
 
 var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
-  
+    console.log("URL:😍😎😋" + url);
    // var url = window.URL || window.webkitURL;
 
-    
+      console.log("url" + url);
 
       
   
-  
+  console.log("oldfname:" +oldfname);
 
   const fs = require("fs");
   const path = require("path");
@@ -989,7 +829,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
       console.error(err);
       return;
     }
-  
+    console.log('File deleted successfully');
   });   
   
   
@@ -999,7 +839,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
 
 
          var camp_id = request.body.camp_id;
-      
+        console.log("camp_id" + camp_id);
     
     
     
@@ -1011,21 +851,22 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
         if (camp_id != "") {
             console.log('inside 1');
             var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
-           
+            console.log(selectQuery);
     
     
     
             database.query(selectQuery, function (err, data) {
-    
+    console.log("within first condition");
                 data.forEach(function(row){
     
-                
+                    console.log("within second condition");
     
                     var camp_id=row.camp_id;
                     if(tact === "Webinar"){
                    var  admin_files = row.webinar_files;
 
-                  
+                   console.trace();
+                   console.log("trace project"+row.user_ebfiles)
 
                     }
     
@@ -1073,13 +914,16 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
     
     
                     var user_files11=row.user_rbfiles;
-                  
+                    console.log("user_files11:" +user_files11);
     
                   // Find the index of the item to replace
     let index = user_files11.indexOf(user_files11);
+    console.log("Index:" +index);
+    // Replace the item at the found index
+   // output[filenum] = newfile;
+    console.log("Updated Files:" +user_files11);
     
-    
-    
+    console.log("BEFORE🙀🙀🙀😽😼😻😻🐱‍💻🐱‍💻",updateSql);
     //console.log("admin_files11:" +admin_files11);
     
                
@@ -1092,7 +936,9 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                 } else {
                     console.log('inside 2');
                     if (data.length > 0) {
-                        
+                        console.log('inside 2 update');
+    
+                        console.log("check image taactics:" +tact);
     
                     
                         
@@ -1111,7 +957,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                             
                             var updateSql = `UPDATE comment_tbl SET webinar_files='${output}' WHERE camp_id = '${camp_id}'`;
 
-                           
+                            console.log("🙀🙀🙀😽😼😻😻🐱‍💻🐱‍💻",updateSql);
                         }
                        else if(tact==="Email-Reminder-Blast")
                        {
@@ -1139,7 +985,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                                     success: false,
                                     message: 'errro'
                                 })
-                              
+                                console.log(err)
                             } else {
                                 // let inserted_id = data.insertId;
                                 //    if(inserted_id == data_id){
@@ -1170,7 +1016,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                         var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles) VALUES (${camp_id}, '${output}')`; // insert query //
                      }
                        
-                 
+                        console.log("insert query"+sqlQry);
     
                         database.query(sqlQry, function (err, data) {
     

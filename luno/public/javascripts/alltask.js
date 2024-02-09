@@ -1,4 +1,6 @@
 
+
+
 $(document).ready(function () {
 
   // code end for fetch sender details after selecting client name
@@ -52,11 +54,10 @@ $(document).ready(function () {
           }
 
 
-
-          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "")) {
+          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined") )) || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined") ))  ) {
 
             return `
-     
+  
             <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
            
            
@@ -81,7 +82,7 @@ $(document).ready(function () {
                  </div>
                  <div class="modal-body">
                  <div class="form-floating">
-
+                 <p id="insertfilemsg"></p>
                  <input type="hidden" name="camp_id" id="camp_id"/ >
                  <input type = "hidden" id ="blast_type" id="blast_type"/  >
                  <input type = "hidden" id ="tact" name="tact"/  >
@@ -1735,6 +1736,7 @@ $(document).ready(function () {
 
 
   $(document).on('click', '.view1', function () {
+    $('#task_form')[0].reset();
 
     //var id = $(this).data('id');
 
@@ -1837,14 +1839,16 @@ $(document).ready(function () {
         var tact = data.tact;
         var user_ebfiles = data.user_ebfiles;
         var user_rbfiles = data.user_rbfiles;
-
+        var webinar_files = data.webinar_files;
+        var webinar_comment = data.webinar_comment;
 
         var adminebcomment = data.comment;
         var adminrbcomment = data.rb_comment;
 
 
-
-        console.log("Check tact in view condition");
+        console.log("user webinar files");
+        console.log("tact is" +tact)
+       
 
         if (tact === "e_blast") {
           $("#webinarfileviewdownload").hide();
@@ -1852,7 +1856,7 @@ $(document).ready(function () {
 
 
 
-          //code for admin files
+         //////////  Code start for Admin EBlast Files   ////////////////
           if (!admin_filesname) {
             var htmlContent = '';
             console.log(htmlContent);
@@ -1862,72 +1866,51 @@ $(document).ready(function () {
 
           }
           else {
-            console.log("else condition admin_filesname not empty:" + admin_filesname);
-
+           
             var admin_filesname = admin_filesname.split(',');
-
             var length = admin_filesname.length;
-
-
-            console.log("length of admin file:" + length);
-
             var htmladminebcmt = '';
-            
-            htmladminebcmt += '<p> <tr><td width="5%"><b>Admin EB Comment:   </b> ' + adminebcomment + ' </td> </tr>', '</p>';
-
-
-       
-
-
-          
-
-
-            var htmlContent = '';
+           
+            htmladminebcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b  style="color:red">Admin EB Comment:   </b> ' + adminebcomment + ' </td> </tr>', '</p></div>';
+              var htmlContent = '';
             //var htmlData =admin_filesname;
             for (var i = 0; i < length; i++) {
 
 
 
 
-              htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:20%">' + admin_filesname[i] + '<br><br><button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td> </tr>', '</p>';
+          //    htmlContent += '<p style="background: white; text-align: center;"> <tr><td width="5%"><button type="button" style="border: none; background-color: #fff; display: flex;  justify-content: center; gap: 10px; align-items: center; padding: 10px; border-radius: 25px;"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" style="width:8%;" ><p style="margin:0;">' + admin_filesname[i] + '</p></button></td> </tr>', '</p>';
+
+              htmlContent += '<p class="filenamep" > <tr><td width="5%"><button type="button" class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg"  ><p style="margin:0;">' + admin_filesname[i] + '</p><i class="fa fa-download"></i></button></td> </tr>', '</p>';
 
             }
-            console.log("htmladminebcmt" + htmladminebcmt);
+           
 
             document.getElementById('adminebcomment').innerHTML = htmladminebcmt;
-
-   
-            document.getElementById('viewfiles11').innerHTML = htmlContent;
+           document.getElementById('viewfiles11').innerHTML = htmlContent;
           }
           
+      //////////  Code end for Admin EBlast Files   ////////////////
 
+
+
+          //////code start for display Admin Reminder files/////////////////
           var admin_reminderfiles = data.admin_rb_file;
-          console.log("admin RB file:" + admin_reminderfiles);
-
-
-
-          if (!admin_reminderfiles) {
+         
+       if (!admin_reminderfiles) {
 
 
 
           }
           else {
             var htmlContentrb = '';
-            console.log("Empty Admin Reminder Files:" + admin_reminderfiles);
+           
             if (admin_reminderfiles == "") {
 
             }
             else {
 
               document.getElementById('viewreminderfiles11').innerHTML = htmlContentrb;
-
-
-
-              console.log("within if condition:" + admin_reminderfiles);
-
-
-
-              console.log("Reminder file else condition");
 
               var admin_reminderfiles = admin_reminderfiles.split(',');
               console.log("admin_reminderfiles:" + admin_reminderfiles);
@@ -1941,51 +1924,40 @@ $(document).ready(function () {
               //var htmlData =admin_filesname;
               for (var i = 0; i < lengthrbfile; i++) {
 
-                htmlContentrb += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:20%">' + admin_reminderfiles[i] + '<br><br><button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_reminderfiles[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td></tr>', '</p>';
+                htmlContentrb += '<p  class="filenamep"> <tr><td width="5%"><button type="button" class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_reminderfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg" ><p  style="margin:0;">' + admin_reminderfiles[i] + '</p><i class="fa fa-download"></i></button></td></tr>', '</p>';
 
               }
 
-
-              console.log("htmlContentrb:" +htmlContentrb);
-
-
-              document.getElementById('viewreminderfiles11').innerHTML = htmlContentrb;
+         document.getElementById('viewreminderfiles11').innerHTML = htmlContentrb;
 
               
             }
             var adminrbcomment = data.rb_comment;
-          console.log("adminrbcomment:" +adminrbcomment);
+         
           var htmladminrbcmt = '';
-          htmladminrbcmt += '<p> <tr><td width="5%"><b>Admin RB Comment:   </b> ' + adminrbcomment + ' </td> </tr>', '</p>';
+          htmladminrbcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b style="color:red">Admin RB Comment:   </b> ' + adminrbcomment + ' </td> </tr>', '</p></div>';
           document.getElementById('adminrbcomment').innerHTML = htmladminrbcmt;
           }
 
 
-          //code for admin files
+         /////////   code end for admin Reminder files   //////////////////////
 
 
 
-          //code start for user files
+          ////////////////////   code start for user Eblast files     ////////////////////
 
 
           if (!user_ebfiles) {
             var htmlContentusereb = '';
-            console.log("User files are empty");
-            console.log(htmlContentusereb);
-
-
+            
             document.getElementById('userviewfiles11').innerHTML = htmlContentusereb;
 
           }
           else {
-            console.log("else condition user files are not empty:" + user_ebfiles);
-
+           
             var user_ebfiles = user_ebfiles.split(',');
 
             var length = user_ebfiles.length;
-
-
-            console.log("length of admin file:" + length);
 
             var htmlContentusereb = '';
             //var htmlData =admin_filesname;
@@ -1993,21 +1965,26 @@ $(document).ready(function () {
 
 
 
-              htmlContentusereb += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:20%">' + user_ebfiles[i] + '<br><br><button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + user_ebfiles[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td> </tr>', '</p>';
+              htmlContentusereb += '<p class="filenamep"> <tr><td width="5%"><button type="button" class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + user_ebfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg"><p  style="margin:0;">' + user_ebfiles[i] + '</p><i class="fa fa-download"></i></button></td> </tr>', '</p>';
 
             }
-            console.log(htmlContentusereb);
+             document.getElementById('userviewfiles11').innerHTML = htmlContentusereb;
+             var userebcomment = data.user_ebcomment;
+           
+            var htmluserebcmt = '';
+            htmluserebcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b style="color:red">User EB Comment:   </b> ' + userebcomment + ' </td> </tr>', '</p></div>';
+            document.getElementById('userebcomment').innerHTML = htmluserebcmt;
 
 
-            document.getElementById('userviewfiles11').innerHTML = htmlContentusereb;
+
           }
+/////////// Code End for user EB Files   //////////////
 
 
+
+
+///////////code start for user RB files ///////////////
           var user_rbfiles = data.user_rbfiles;
-          console.log("user RB file:" + user_rbfiles);
-
-
-
           if (!user_rbfiles) {
 
 
@@ -2023,98 +2000,138 @@ $(document).ready(function () {
 
               document.getElementById('userviewreminderfiles11').innerHTML = userhtmlContentrb;
 
-
-
-              console.log("within if condition:" + user_rbfiles);
-
-
-
-              console.log("Reminder file else condition");
-
               var user_rbfiles = user_rbfiles.split(',');
-              console.log("user_rbfiles:" + user_rbfiles);
               var lengthrbfile = user_rbfiles.length;
-              console.log("length of User RB file:" + lengthrbfile);
-              console.log("within else condition:" + user_rbfiles);
-
+              
               var userhtmlContentrb = '';
 
               var tact = "Email-Reminder-Blast";
               //var htmlData =admin_filesname;
               for (var i = 0; i < lengthrbfile; i++) {
 
-                userhtmlContentrb += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:20%">' + user_rbfiles[i] + '<br><br><button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + user_rbfiles[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td></tr>', '</p>';
+                userhtmlContentrb += '<p class="filenamep"> <tr><td width="5%"><button type="button" class="filebtn"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + user_rbfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png"  class="fileimg"><p style="margin:0;">' + user_rbfiles[i] + '</p><i class="fa fa-download"></i></button></td></tr>', '</p>';
 
               }
+             document.getElementById('userviewreminderfiles11').innerHTML = userhtmlContentrb;
+             var userrbcomment = data.user_rbcomment;
+             
+              var htmluserrbcmt = '';
+              htmluserrbcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b style="color:red">User RB Comment:   </b> ' + userrbcomment + ' </td> </tr>', '</p></div>';
+              document.getElementById('userrbcomment').innerHTML = htmluserrbcmt;
 
 
-              console.log(userhtmlContentrb);
 
-
-              document.getElementById('userviewreminderfiles11').innerHTML = userhtmlContentrb;
             }
           }
 
 
-          //code end for user files
+          ///////////code end for user RB files///////////////
 
         }
 
 
 
 
-
+///display files for webinar
         else if (tact == "webinar") {
-
 
 
           $("#fileviewdownload").hide();
           $("#userfileviewdownload").hide();
 
 
-          var adminwebinarcomment = data.comment;
+          var adminwebinarcomment1 = '';
 
-          var adminwebinarcomment ="<p style='font-size:12px;'><b>Admin Comment:   </b>" +data.comment+"</p>";
+        //  var adminwebinarcomment1 ="<p style='font-size:12px;'><b style='color:red'>Admin Comment:   </b>" +data.comment+"</p>";
+
+
+          adminwebinarcomment1 += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b  style="color:red">Admin Comment:   </b> ' + data.comment + ' </td> </tr>', '</p></div>';
+
+
 
           var tact = "Webinar";
 
-
+        
 
           if (!admin_filesname) {
-            var htmlContent = '';
-            console.log(htmlContent);
-
-
-            document.getElementById('webinarviewfiles11').innerHTML = htmlContent;
+           
+           
+            var htmlContentweb11 = '';
+             document.getElementById('webinarviewfiles12').innerHTML = htmlContentweb11;
 
           }
           else {
-            console.log("else condition admin_filesname not empty:" + admin_filesname);
-
+           
             var admin_filesname = admin_filesname.split(',');
 
             var length = admin_filesname.length;
 
+          var htmlContentweb11 = '';
+            //var htmlData =admin_filesname;
+            for (var i = 0; i < length; i++) {
 
-            console.log("length of admin file:" + length);
+             
+              htmlContentweb11 +='<p  class="filenamep"><tr><td width="5%"><button type="button"  class="filebtn"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg"><p style="margin:0;">' + admin_filesname[i] + '</p><i class="fa fa-download"></i></button></td> </tr></p>';
 
-            var htmlContent = '';
+
+            }
+
+            document.getElementById('webinarviewfiles12').innerHTML = htmlContentweb11;
+            document.getElementById('adminwebinarcomment').innerHTML = adminwebinarcomment1;
+          }
+
+         
+         
+///////code end for admin webinar files////////////////
+
+        ///////////code start for user webinar files    //////////////////
+
+
+        
+var user_webfiles=data.webinar_files;
+var user_webcomment=data.webinar_comment;
+
+var user_webcomment ="";
+
+
+user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b  style="color:red">User Comment:   </b> ' + data.webinar_comment + ' </td> </tr>', '</p></div>';
+
+
+
+    if (!user_webfiles) {
+            var htmlContentuserweb = '';
+            console.log(htmlContentuserweb);
+
+
+            document.getElementById('webinarviewfiles11').innerHTML = htmlContentuserweb;
+
+          }
+          else {
+            console.log("else condition User Webinar Files not empty:" + user_webfiles);
+
+            var user_webfiles = user_webfiles.split(',');
+
+            var length = user_webfiles.length;
+
+
+            console.log("length of user_ebfiles :" + length);
+
+            var htmlContentuserweb = '';
             //var htmlData =admin_filesname;
             for (var i = 0; i < length; i++) {
 
 
 
-              htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:20%">' + admin_filesname[i] + '<br><br><button type="button" class="btn btn-primary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td> </tr>', '</p>';
+              htmlContentuserweb += '<p  class="filenamep"> <tr><td width="5%"><button type="button"  class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + user_webfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg"><p style="margin:0;">' + user_webfiles[i] + '</p><i class="fa fa-download"></i></button></td> </tr>', '</p>';
 
             }
-            console.log(htmlContent);
+            console.log(htmlContentuserweb);
 
 
-            document.getElementById('webinarviewfiles11').innerHTML = htmlContent;
-            document.getElementById('adminwebinarcomment').innerHTML = adminwebinarcomment;
+            document.getElementById('webinarviewuserfiles11').innerHTML = htmlContentuserweb;
+            document.getElementById('uerwebinarcomment').innerHTML = user_webcomment;
           }
-
-
+          //End code for show webinar files for user
 
 
 
@@ -2340,17 +2357,46 @@ $(document).ready(function () {
           console.log("tact is:" + tact);
           console.log("Within else condition...");
           console.log(admin_filesname[i]);
-          htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '  id = "image_id"  onchange="handleImageUpload(' + i + ')"  > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr></td>', '</p>';
+        //  htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr></td>', '</p>';
+
+
+
+
+          if (admin_filesname[i] === undefined) {
+            console.log("Within if condition...");
+
+            console.log("tact is:" + tact);
+            console.log(admin_filesname[i]);
+          //  htmlContent += '<p> <tr><td></td><td>Upload File...</td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p>';
+
+          htmlContent += ' <tr id='+ admin_filesname[i]+'><td width="5%"><img src="../../assets/img/files-folder1.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="submit"  value="Delete" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr></td>', '';
+
+
+          }
+
+          else if (admin_filesname[i] != '') {
+            console.log("tact is:" + tact);
+            console.log("Within else condition...");
+            console.log(admin_filesname[i]);
+         //   htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p>';
+
+
+            htmlContent += '<tr id="'+ admin_filesname[i] +'" style="background-color: #f3f3f3;"><td colspan="3"><button type="button"  style="border:none;background-color: #e8e8e8;"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" style="width:10%;float: inline-start;"><p style="display:inline-block;float: inline-start;">' + admin_filesname[i] + '</p></button></td><td ><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;float: inline-start;"><input type="submit" value="Delete" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr>', '';
+
+          }
+
+
 
 
         }
+        console.log("check length:" +length);
 
         if (5 - length > 0) {
 
           console.log("tact is:" + tact);
           console.log("Within if condition...");
           console.log(admin_filesname[i]);
-          htmlContent += ' <form enctype="multipart/form-data" id = "form_id"><p> <tr><td></td><td>Upload File...</td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = "' + i + '" id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)" id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p> </form>';
+          htmlContent += ' <form enctype="multipart/form-data" id = "form_id"><p> <tr><td colspan="3">Upload File...<input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files[]"  class = "imageInput custom-file-input" data-id = "' + i + '" id = "image_id"  onchange="handleImageUpload(' + i + ')"  multiple></td><td> <input type="submit" class="btn btn-primary" onclick = "fileinsert1(this)" id = "btn' + i + '" data-id=\'' + camp_id + ','  + i + ',' + tact + '\'></tr></td>', '</p> </form>';
 
         }
 
@@ -2450,7 +2496,7 @@ $(document).ready(function () {
             console.log("tact is:" + tact);
             console.log("Within else condition...");
             console.log(admin_filesname[i]);
-            htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p>';
+            htmlContent += ' <tr id='+ admin_filesname[i]+'><td width="5%"><img src="../../assets/img/files-folder1.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit"  value="Delete" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>';
 
           }
 
@@ -2559,7 +2605,7 @@ $(document).on("click", ".open-homeEvents", function () {
 function myFunction() {
 
 
-  $("#exampleModal").modal("hide");
+ // $("#exampleModal").modal("hide");
 
   var imageleng = document.getElementById('admin_files').files.length;
 
@@ -2572,6 +2618,9 @@ function myFunction() {
     $("#fileviewdownload").hide();
 
     var formData1 = new FormData(document.getElementById("sample_form"));
+
+
+    
 
     var comment = $("#commentebrb").val();
 
@@ -2587,6 +2636,7 @@ function myFunction() {
     formData1.append("comment", comment);
     //console.log(formData1.append("comment", comment));
     formData1.append("comment_id ", comment_id);
+
     formData1.getAll("admin_files[]", admin_files)
     console.log("check which files are selected");
     console.log(formData1.getAll("admin_files[]", admin_files));
@@ -2619,10 +2669,11 @@ function myFunction() {
           setTimeout(function () {
             $('#message').html('');
           }, 5000);
-
+          $("#exampleModal").modal("hide");
           // $('#exampleModal').hide();
           $("#sample_form")[0].reset();
         } else {
+          $("#exampleModal").modal("hide");
           console.log("data in else:" + data);
           $(".comment")
             .html('<div class="alert alert-success">' + data.message + "</div>")
@@ -2634,7 +2685,12 @@ function myFunction() {
 
 
   else {
-    $('#message').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
+  //  $('#message').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
+
+  console.log("exampleModal show");
+  $('#exampleModal').modal('show');
+    $('#insertfilemsg').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
+
   }
 
 }
@@ -2734,7 +2790,14 @@ function fileviewFunction(name) { //=> funtion for uploading images into data ba
 function fileReplace1(e) {
   // e.preventDefault()
 
+
+  if (confirm("Are you sure you want to Delete this file?")) {
   console.log("filereplace function called");
+
+  $(e).closest("tr").remove();
+ // return false;
+
+
   var id = $(e).parent().children('.imageInput').first().data("id");
 
   var idtype = $(e).data('id');
@@ -2749,11 +2812,13 @@ function fileReplace1(e) {
 
 
 
+
+
   var formData = new FormData();
 
-  var admin_files = $('.imageInput')[id].files[0]; // Get the selected file
+ //var admin_files = $('.imageInput')[id].files[0]; // Get the selected file
 
-  console.log("admin_files:" + admin_files);
+ // console.log("admin_files:" + admin_files);
 
 
 
@@ -2761,8 +2826,8 @@ function fileReplace1(e) {
   formData.append('camp_id', camp_id); // Append the file to FormData
   formData.append('filenum', filenum); // Append the file to FormData
   formData.append('oldfname', oldfname); // Append the file to FormData
-  formData.append('admin_files', admin_files); // Append the file to FormData
-
+ // formData.append('admin_files', admin_files); // Append the file to FormData
+console.log(formData);
   // Make an Ajax POST request
   $.ajax({
     type: 'POST',
@@ -2773,7 +2838,7 @@ function fileReplace1(e) {
     success: function (response) {
       // Handle the server's response here
 
-      $('#action_modal').modal('hide'); // for hide root modal
+     
       //$('#task_form')[0].reset();
 
       //  $('.wrap_new').html('<p class="alert alert-success">Image Upload successfully..</p>').fadeOut(3000)
@@ -2781,10 +2846,12 @@ function fileReplace1(e) {
       // $("#container11").hide();
       //   $("#fileviewbox").hide();
 
-      console.log(response);
+      console.log("check Response: ",response);
+$('#action_modal').modal('show'); // for hide root modal
+// $("#action_modal").reload();
 
-
-      $('#message').html('<div class="alert alert-success">' + response.message + '</div>');
+//location.reload();
+      $('#deletemessage').html('<div class="alert alert-success">' + response.message + '</div>');
       $('#leftnav').DataTable().ajax.reload();
       $('#apptask').DataTable().ajax.reload();
       $('#task_priorities').DataTable().ajax.reload();
@@ -2792,7 +2859,7 @@ function fileReplace1(e) {
       $('#weeklytasks').DataTable().ajax.reload();
       //  $('#task_form')[0].reset();
       setTimeout(function () {
-        $('#message').html('');
+        $('#deletemessage').html('');
       }, 5000);
 
 
@@ -2802,6 +2869,8 @@ function fileReplace1(e) {
       console.error(xhr.responseText);
     }
   });
+
+}
 }
 
 
@@ -2810,6 +2879,138 @@ function fileReplace1(e) {
 
 
 
+
+//insert new file
+
+
+
+
+function fileinsert1(e) {
+  // e.preventDefault()
+
+
+  var imageleng = document.getElementById('image_id').files.length;
+
+  console.log("Check image length:" +imageleng);
+
+  var id = $(e).parent().children('.imageInput').first().data("id");
+  console.log("new file insert function" +id);
+
+  var idtype = $(e).data('id');
+  console.log("idtype:" + idtype);
+  const myArray = idtype.split(",");
+  var camp_id = myArray[0];
+  var filenum = myArray[1];
+  var tact = myArray[2];
+console.log("Total Files:" +filenum);
+  var filecountneeded=5-filenum;
+
+
+  if (filecountneeded >= imageleng) {
+
+
+  var imageleng = document.getElementById('admin_files');
+  console.log("new file insert function");
+//   var admin_files = $('.imageInput')[id].files[0]; // Get the selected file
+
+//  console.log("admin_files:" + admin_files);
+
+ 
+  
+ 
+  
+
+  var admin_files = document.getElementById("image_id").files;
+  console.log("admin_files" ,admin_files);
+
+  console.log("First selected image:",admin_files[0].name);
+  console.log("Tact is:" +tact);
+  var formData2 = new FormData();
+
+ 
+  
+ 
+  //formData2.append('admin_files', admin_files); // Append the file to FormData
+  formData2.append('tact', tact); // Append the file to FormData
+  formData2.append('camp_id', camp_id); // Append the file to FormData
+  formData2.append('filenum', filenum); // Append the file to FormData
+
+  for (let index = 0; index < admin_files.length; index++) {
+    formData2.append('admin_files1', admin_files[index]);
+    
+  }
+
+  //formData2.append('admin_files', admin_files);
+
+
+
+  //var imageleng = document.getElementById('admin_files').files.length;
+
+  //if (imageleng <= 5) {
+
+
+
+
+    $("#fileviewbox").show();
+    $("#fileviewdownload").hide();
+
+    
+    //   var camp_id = $('id')
+    // if (confirm("Are you sure you want to update the data?")) {
+    $.ajax({
+
+      url: "http://localhost:3000/alltask/fileinsert",
+      method: "POST",
+      data: formData2,
+    processData: false, // Prevent jQuery from processing the data
+    contentType: false, // Set content type to false, as we are using FormData
+    success: function (response) {
+
+     
+        if (response) {
+console.log("action button disabled");
+          $('#action_button').attr('disabled', false);
+          $('#action_modal').modal('hide');
+          // .html('<div class="alert alert-success">' + data.message + "</div>")
+          // .fadeOut(4000);
+
+       //   $('#message').html('<div class="alert alert-success">' + data.message + '</div>');
+       $('#message').html('<div class="alert alert-success">' + response.message + '</div>');
+          $('#leftnav').DataTable().ajax.reload();
+          $('#apptask').DataTable().ajax.reload();
+          $('#task_priorities').DataTable().ajax.reload();
+          $('#todaysstask').DataTable().ajax.reload();
+          $('#weeklytasks').DataTable().ajax.reload();
+          setTimeout(function () {
+            $('#message').html('');
+          }, 5000);
+
+          // $('#exampleModal').hide();
+          $("#sample_form")[0].reset();
+        
+
+       //   $("#task_form")[0].reset();
+        } else {
+          console.log("data in else:" + data);
+          $(".comment")
+            .html('<div class="alert alert-success">' + data.message + "</div>")
+            .fadeOut(4000);
+        }
+      },
+    });
+ 
+
+}
+  else {
+    $('#action_modal').modal('show');
+    $('#deletemessage').html('<p class="alert alert-primary">Please upload only ' +filecountneeded+ ' files...</p>').fadeOut(6000);
+  }
+}
+
+
+
+//code end for insert new file
+
 function handleImageUpload(i) {
   console.log("Handle function" + i);
 
@@ -2817,8 +3018,8 @@ function handleImageUpload(i) {
   $("#container11 .btn-primary").attr("disabled", true)
   $("#btn" + i).attr("disabled", false)
 
-  //     var imageInput = document.getElementById("image_id").value;
-  //     console.log("imageInput" +imageInput);
+      // var imageInput = document.getElementById("image_id").value;
+      // console.log("imageInput" +imageInput);
   //     var imageleng =  document.getElementById('image_id').files.length;
   //     console.log("image length:" +imageleng);
   //     for(var num=0;num<5;num++)

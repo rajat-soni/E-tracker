@@ -246,8 +246,8 @@ password.onkeyup = () => {
 }
 
 
-function passwordValidation(){  // defination of function //
-    var password_new = document.getElementById('password').value;
+// function passwordValidation(){  // defination of function //
+//     var password_new = document.getElementById('password').value;
       
      
    
@@ -259,16 +259,53 @@ function passwordValidation(){  // defination of function //
     //     password_error1.disabled = false;
     //     return false;
     // }
+    //  var reg = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{2,26}$/';
+    
+    // if(!password_new.match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{2,26}$/')){
+    //     password_error1.innerHTML = '*1 upper letter, 8 lower letters, 1 special char, 2 digits.';
+    //     password_error1.style.borderColor = "#B2BABB"; 
+    //     password_error1.disabled = false;
+    //     return false;
+    // }
+
+    // if(( password_new <= 8)){
+    //     password_error1.innerHTML = '*password must be  4 digits'
+    //     password_error1.style.borderColor = "#B2BABB"; 
+    //     password_error1.disabled = false;
+    //     return false;
+    // }
+
+    // password_error1.innerHTML ='';
+    // password.style.borderColor = "#34eb40"
+    // password_error1.disabled = true;    
+//} //end of user_Name validation  //
+
+
+function passwordValidation(){  // defination of function //
+    var password_new = document.getElementById('password').value;
+
+    // '^(?=.*[a-z,A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z].*[a-z]).{8}$'
+      
+    var exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{2,26}$/;
+   
+
+ 
+    // if(){
+    //     password_error1.innerHTML = '**password must less than 15 digits'
+    //     password_error1.style.borderColor = "#B2BABB"; 
+    //     password_error1.disabled = false;
+    //     return false;
+    // }
     
     
-    if(!password_new.match('^(?=.*[a-z,A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z].*[a-z]).{8}$')){
-        password_error1.innerHTML = '*1 upper letter, 4 lower letters, 1 special char, 2 digits.';
+    if(!password_new.match(exp)){
+        password_error1.innerHTML = '* Password must be 1 Upper 1 Lower,  1 Special  1 Number.';
         password_error1.style.borderColor = "#B2BABB"; 
         password_error1.disabled = false;
         return false;
     }
 
-    if(( password_new == 10)){
+    if(( password_new == 26)){
         password_error1.innerHTML = '*password must be  8 digits'
         password_error1.style.borderColor = "#B2BABB"; 
         password_error1.disabled = false;
@@ -278,44 +315,7 @@ function passwordValidation(){  // defination of function //
     password_error1.innerHTML ='';
     password.style.borderColor = "#34eb40"
     password_error1.disabled = true;    
-} //end of user_Name validation  //
-
-
-// function passwordValidation(){  // defination of function //
-//     var password_new = document.getElementById('password').value;
-
-//     '^(?=.*[a-z,A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z].*[a-z]).{8}$'
-      
-//     var exp = /^(\S)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])[a-zA-Z0-9~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{10,16}$/;
-   
-
- 
-//     // if(){
-//     //     password_error1.innerHTML = '**password must less than 15 digits'
-//     //     password_error1.style.borderColor = "#B2BABB"; 
-//     //     password_error1.disabled = false;
-//     //     return false;
-//     // }
-    
-    
-//     if(!password_new.match(exp)){
-//         password_error1.innerHTML = '*1 upper 1 lower,  1 special  Length must be between 10 to 16 characters.';
-//         password_error1.style.borderColor = "#B2BABB"; 
-//         password_error1.disabled = false;
-//         return false;
-//     }
-
-//     if(( password_new == 10)){
-//         password_error1.innerHTML = '*password must be  8 digits'
-//         password_error1.style.borderColor = "#B2BABB"; 
-//         password_error1.disabled = false;
-//         return false;
-//     }
-
-//     password_error1.innerHTML ='';
-//     password.style.borderColor = "#34eb40"
-//     password_error1.disabled = true;    
-// } //end of user_Name validation  //
+    } //end of user_Name validation  //
 
 
 
@@ -363,7 +363,6 @@ btnClick.onclick = () => {       // all function condition start //
     user_name_error.disabled = true;
     role_error.disabled = true;
     password_error1.disabled = true;  
-    
     userFormValidationCheck();
     userLastNameValidationCheck();
     userEmailValidationCheck();

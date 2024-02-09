@@ -58,7 +58,7 @@ $(document).ready(function () {
       <div class="title-text d-flex align-items-center mb-4 mt-1">
         <!-- <h4 class="sidebar-title mb-0 flex-grow-1"><span>XDBS</span></h4> -->
         <!-- <a href="https://xdbsworldwide.com/" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary"> -->
-          <img src="http://staging.webtechstar.com:7777/assets/img/ondirect-connect-logo.png" width="180" style="    margin-left: -3px;" class="logoimg">
+          <img src="https://staging.webtechstar.com:7777/assets/img/ondirect-connect-logo.png" width="180" style="    margin-left: -3px;" class="logoimg">
           
         <!-- </a> -->
       </div>
@@ -174,7 +174,7 @@ $(document).ready(function () {
                       </div>
                     </div>
                     <div class="list-group m-2 mb-3">
-                      <a class="list-group-item list-group-item-action border-0" href=""><i class="w30 fa fa-user"></i>My Profile</a>
+                      <a href = "#"><i class="w30 fa fa-user" class="btn btn-sm btn-primary profileView" data-bs-toggle="modal" data-bs-target="#add_contact"  onclick = profileView(this) data-id = '<%= session.user_id%>'></i> My Profile  </a>
                      
                     </div>
                     <a href="/logout" class="btn bg-secondary text-light text-uppercase rounded-0">Sign out</a>
@@ -229,6 +229,59 @@ $(document).ready(function () {
       </div>
     </div>
 
+
+    
+    <div class="modal fade" id="add_contact" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">View Profile Page</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-6">
+                <label class="form-label">First Name</label>
+                <input type="text"   id="first_namep" class="form-control readAll"  placeholder = "First Name" />
+              </div>
+              <div class="col-6">
+                <label class="form-label">Last Name</label>
+                <input type="text"  id="last_namep" class="form-control readAll" placeholder = "Last Name" />
+              </div>
+              <div class="col-12">
+                <label class="form-label">Email Address</label>
+                <input type="email"   id="emailp" class="form-control readAll"  placeholder = "Email" />
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Phone No</label>
+                <input type="text"   id="phonep" class="form-control readAll"  placeholder = "Mobile/Phone No" />
+              </div>
+              <div class="col-12">
+                <label class="form-label">User Name</label>
+                <input type="text"   id="user_namep" class="form-control readAll" placeholder = "User Name"  />
+              </div>
+             <!-- <div class="col-12">
+                <label class="form-label">User Name</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="Mobile">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Home</a></li>
+                    <li><a class="dropdown-item" href="#">Work</a></li>
+                    <li><a class="dropdown-item" href="#">Mobile</a></li>
+                  </ul>
+                </div>-
+              </div> -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
 

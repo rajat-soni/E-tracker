@@ -4,7 +4,7 @@
 
 //     function load_data() {
 //        $.ajax({
-//           url: "http://localhost:3000/newUser/action",
+//           url: "https://staging.webtechstar.com:7777/newUser/action",
 //           method: "POST",
 //           data: {
 //              action: 'fetch'
@@ -52,7 +52,7 @@ $(document).ready(function() { //  code for fetch Data //
         'serverSide': true,
         'serverMethod': 'get',
         'ajax': {
-            'url': 'http://staging.webtechstar.com:7777/newUser/get_data',
+            'url': 'https://staging.webtechstar.com:7777/newUser/get_data',
 
         },
 
@@ -95,15 +95,24 @@ $(document).ready(function() { //  code for fetch Data //
         columnDefs: [{
                 targets: 6,
                 orderable: false,
-                render: function(data) {
-                    return `
-                  
-                <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  data-id=" ` + data + ` "><i class="fa fa-trash" style = "font-size:17px; color:black;"></i></button>
-                <button type="button" class="btn btn-link btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"  data-id =" ` + data + ` "><i class="bi bi-pencil-square" style = "font-size:17px; color:black;"></i></button>
-                <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" ` + data + ` "><i class='fas fa-eye' style='font-size:17px; color: black;'></i></button>
+                render: function (data) {
+                
+                   return `
                     
-                    `;
-                }
+                
+                    
+                   <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id=" ` + data + ` "><i class="fa fa-trash" style = "font-size:17px; color:black;"></i></button>
+                    
+                   <button type="button" class="btn btn-link btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-id =" ` + data + ` "><i class="bi bi-pencil-square" style = "font-size:17px; color:black;"></i></button>
+                      
+                     <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view" data-id =" ` + data + ` "><i class='fas fa-eye' style='font-size:17px; color: black;'></i></button>`;
+             
+                    
+                 
+                }    
+                    
+                    
+                    
             }
 
 
@@ -204,7 +213,7 @@ $(document).ready(function() { //  code for fetch Data //
 
 
         $.ajax({
-            url: "http://staging.webtechstar.com:7777/newUser/action",
+            url: "https://staging.webtechstar.com:7777/newUser/action",
             method: "POST",
             data: $('#sample_form').serialize(),
             dataType: "JSON",
@@ -257,7 +266,7 @@ $(document).ready(function() { //  code for fetch Data //
             $('#user_name_error').hide();
             $('#mobile_error').hide();
             $('#role_error_value').hide();
-            $('#password_error1').hide();
+            $('#password_error1').show();
           
           
             $('#action_button').text('Edit').show();
@@ -323,7 +332,7 @@ $(document).ready(function() { //  code for fetch Data //
         }
 
         $.ajax({
-            url: "http://staging.webtechstar.com:7777/newUser/action",
+            url: "https://staging.webtechstar.com:7777/newUser/action",
             method: "POST",
             data: {
                 user_id: user_id,
@@ -436,7 +445,7 @@ $(document).ready(function() { //  code for fetch Data //
             $(".readAll").prop("readonly", true);
         }
         $.ajax({
-            url: "http://staging.webtechstar.com:7777/newUser/action",
+            url: "https://staging.webtechstar.com:7777/newUser/action",
             method: "POST",
             data: {
                 user_id: user_id,
@@ -475,7 +484,7 @@ $(document).ready(function() { //  code for fetch Data //
 
         if (confirm("Are you sure you want to delete this data?")) {
             $.ajax({
-                url: "http://staging.webtechstar.com:7777/newUser/action",
+                url: "https://staging.webtechstar.com:7777/newUser/action",
                 method: "POST",
                 data: {
                     action: 'delete',
