@@ -5,6 +5,7 @@ var router = express.Router();
 var database = require('../database');
 var path = require('path');
 const { log } = require('console');
+const e = require('connect-flash');
 
 
 router.get("/", function (request, response, next) {
@@ -156,6 +157,8 @@ router.get('/get_data', function (request, response, next) {
                     // console.log(row.role);
                     var user_id = request.session.user_id;
                     var role = request.session.role;
+                    var image_link = row.mg_link;
+                    console.log("linkUrl"+image_link)
                         
                     const getDate = () => {
                         const newDate = new Date();
@@ -178,30 +181,28 @@ router.get('/get_data', function (request, response, next) {
 
                    
                     
-                    if(tact==="e_blast"){
-                       
+                    if(tact==="e_blast")
+                    {  
                         if(row.rb_assetname!="" && row.rb_assetlink!="")
-                    {
-                        var tact="Email Blast / Reminder Blast"; 
+                        {
+                           var tact="Email Blast / Reminder Blast"; 
                       
+                        }else if(row.mg_link!="" && row.mg_image!=""){
+                            var tact = "Make-Good"
+                            console.log("mk find"+tact)
+                        }
+                        else if((row.rb_mg_link!="" && row.rb_mg_image!="")){
+                             var tact="RB-Make-Good";
+                             console.log("mkRB find"+tact)
+                        }else{
+                            var tact="Email Blast";
+                            console.log("Email Blast");
+                        }
                     }
-                    else{
-                        var tact="Email Blast";
-                     
-                    
-                    }
-                    
-                    }
-                    else if(tact==="webinar")
-                    {
+                    else if(tact==="webinar"){
                         var tact="Webinar";
                         
-                    }else if(tact==="make-good")
-                    {
-                        var tact="Make Good";
-                        
                     }
-                    
                     
 
 
@@ -249,10 +250,14 @@ router.get('/get_data', function (request, response, next) {
                         'id': row.id,
                         'tact': tact,
                         'eblast_datetime': row.eblast_datetime,
-                        'reblast_datetime': row.reblast_datetime
+                        'reblast_datetime': row.reblast_datetime,
+                        'mg_link': row.mg_link,
+                        'mg_image': row.mg_image,
+                        'mg_status' : row.mg_status,
+                        'rb_mg_status' : row.rb_mg_status
                     });
 
-
+                    
 
                 });
 
@@ -484,6 +489,13 @@ router.post("/test", (request, res) => {   // =>  image upload code start
 })
 
 
+
+
+
+
+
+
+
 var storage = multer.diskStorage({
     destination: (request, files, callBack) => {
 
@@ -495,7 +507,8 @@ var storage = multer.diskStorage({
 var camp_id =  request.body.camp_id;
 var tact = request.body.tact;
 
-// console.log("check tact  tactics:" +tact);
+
+
 var fs = require('fs');
 //var dir = './tmp';
 
@@ -510,6 +523,14 @@ if (!fs.existsSync(dir1)){
 
     if (!fs.existsSync(dir2)){
         fs.mkdirSync(dir2);
+      
+
+    }
+
+    var dir3=`./files/${request.body.camp_id}/user`;
+
+    if (!fs.existsSync(dir3)){
+        fs.mkdirSync(dir3);
       
 
     }
@@ -538,13 +559,29 @@ if (!fs.existsSync(dir1)){
         }
     }
 
+    else if(tact==="Make_Good")
+    {
+       
+        console.log("check tact  make good tactics:" +tact);
+        var dir3=`./files/${request.body.camp_id}/user/Make_Good`;
+ 
+        
+
+        if (!fs.existsSync(dir3)){
+            fs.mkdirSync(dir3);
+           
+    
+        }
+    }
+    
+
 
 
     
     else if(tact==="Webinar")
     {
        
-        var dir3=`./files/${camp_id}/user/Webinar`;
+        var dir3=`./files/${request.body.camp_id}/user/Webinar`;
  
         
 
@@ -557,7 +594,7 @@ if (!fs.existsSync(dir1)){
   
 
     
-
+  
 
 
 
@@ -660,9 +697,39 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                             var updateSql = `UPDATE comment_tbl SET  ${comment_section} user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
                            
                     
+
+                            
       
                         }
-                        else if(tact == "Webinar")
+
+                         // Make good code start  here//
+
+                         if(tact=="Make_Good")
+                         {
+ 
+                           console.log("i am in eb_mg_files🤣😃😄😅"+ tact)
+                             let arr=row.eb_mg_files.split(",")
+                             if(row.eb_mg_files.trim().length>0 && arr.length==1 && filenames.length==1){
+                                 arr.push(filenames[0])
+                                 combinedFilenames=arr.join(",")
+                             }
+ 
+                            
+ 
+ 
+                        //  let  comment_section=`user_rbcomment='${sendComment}',`
+                        //   if(sendComment==undefined){
+                        //      comment_section=""
+                        //   }
+ 
+                             var updateSql = `UPDATE comment_tbl SET   eb_mg_files = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            
+                     
+       
+                         //make good code end there //
+
+
+                         } else if(tact == "Webinar")
                         {
                             
                             let arr=row.webinar_files.split(",")
@@ -725,13 +792,19 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                      {
                         var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbcomment, user_rbfiles) VALUES (${camp_id}, '${sendComment}','${combinedFilenames}')`; // insert query //
                      }
+                     // make good  code start here //
+                     else if(tact==="Make_Good")
+                     {
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user) VALUES (${camp_id}, '${sendComment}','${combinedFilenames}')`; // insert query //
+                     }
+                     //make good code end here //
                      else{
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebcomment,user_ebfiles) VALUES (${camp_id},'${sendComment}','${combinedFilenames}')`; //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,mg_eb_files) VALUES (${camp_id},'${combinedFilenames}')`; //
                         // insert query //
-                        console.log("inser qeruy"+sqlQry)
+                        console.log("inser mg qeruy"+sqlQry)
                      }
                        
-                        console.log("insert query"+sqlQry);
+                        console.log("insert query "+sqlQry);
     
                         database.query(sqlQry, function (err, data) {
     
@@ -777,167 +850,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
     // }else{
 
 
-    router.post("/singleComment",  upload.any('image'),(request, response) => {
-
-
-
-       
-  
-
-        var camp_id = request.body.camp_id;
-        var tact = request.body.tact;
-         //var sendComment = request.body.sendComment;
-      
-     
-         var uploadFiles = request.files;
-     
-     
-     
-         var image = request.files.image;
-         const imagePath = request.files.filename;
-     
-         var filenames = uploadFiles.map(item => item.filename);
-         var combinedFilenames = filenames.join(',');
-         
-     
-         
-         
-     
-     
-             var sendComment = request.body.sendComment;
-          
-             var camp_id = request.body.camp_id;
-            var tact = request.body.tact;
-             // var tact = request.body.tact;
-         
-             var status = request.body.status;
-             var rb_status = request.body.rb_status;
-            
-     
-     
-     
-             if (camp_id != "") {
-                 console.log('inside 1');
-                 var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
-                  console.log(selectQuery);
-                 database.query(selectQuery, function (err, data) {
-                     if (err) {
-                         response.json({
-                             success: false,
-                             message: 'errro'
-                         })
-                         console.log(err)
-                     } else {
-                         console.log('inside 2');
-                         if (data.length > 0) {
-                             data.forEach(function (row) {
-                           
-                             // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-                          
-     
-                             if(tact=="Email-Reminder-Blast")
-                             {
-     
-     
-                                 let arr=row.user_rbfiles.split(",")
-                                 if(row.user_rbfiles.trim().length>0 && arr.length==1 && filenames.length==1){
-                                     arr.push(filenames[0])
-                                     combinedFilenames=arr.join(",")
-                                 }
-     
-                              
-     
-     
-                             
-                                 var updateSql = `UPDATE comment_tbl SET   user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                               
-                         
-           
-                             }
-                             else if(tact == "Webinar")
-                             {
-                                 
-                                 let arr=row.webinar_files.split(",")
-                                 if(row.webinar_files.trim().length>0 && arr.length==1 && filenames.length==1){
-                                     arr.push(filenames[0])
-                                     combinedFilenames=arr.join(",")
-     
-                                     
-                                 }
-     
-                               
-     
-     
-                                 console.log("in else  webinar condition");
-                                 var updateSql = `UPDATE comment_tbl SET  webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
-         
-                             }else{
-                               
-                                 
-     
-                                 let arr=row.user_ebfiles.split(",")
-     
-                                 if(row.user_ebfiles.trim().length>0 && arr.length==1 && filenames.length==1){
-                                     arr.push(filenames[0])
-                                     combinedFilenames=arr.join(",")
-                                 }
-     
-                                
-     
-     
-                                 var updateSql = `UPDATE comment_tbl SET  user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
-                                
-                             }    
-                              
-                                 database.query(updateSql, function (err, data) {
-         
-                                     response.json({
-                                         success: true,
-                                         message : 'File Uploaded Successfully...'
-                                     });
-                               
-                                 })
-                            
-                             })
-                         } else {
-                             // console.log('inside 1 else');
-                         
-                           
-                             // var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
-                          //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-               console.log("mycheck tact"+tact)
-               
-                          if(tact === "Webinar"){
-                             var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_files) VALUES (${camp_id}, '${combinedFilenames}')`;
-                          }
-         
-                          else if(tact==="Email-Reminder-Blast")
-                          {
-                             var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbfiles) VALUES (${camp_id},'${combinedFilenames}')`; // insert query //
-                          }
-                          else{
-                             var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles) VALUES (${camp_id},'${combinedFilenames}')`; //
-                             // insert query //
-                             console.log("inser qeruy"+sqlQry)
-                          }
-                            
-                             console.log("insert query"+sqlQry);
-         
-                             database.query(sqlQry, function (err, data) {
-         
-                                 response.json({
-                                     success: true,
-                                     message: 'Files Uploaded Successfully...'
-                                 })
-                             })
-                         }
-         
-                     }
-                 })
-         
-             }
-             // }else{
-         })
+   
 
 
     router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {  // for delete images //
@@ -1190,6 +1103,117 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
      
                 
    })
+
+
+   router.post("/singleComment",(request, response) => {
+
+
+
+          
+    
+   
+    var camp_id = request.body.id;
+    var sendcmt = request.body.sendComment;
+    var tact = request.body.tact;
+     //var sendComment = request.body.sendComment;
+   console.log("send_id"+camp_id)
+   console.log("tact"+tact)
+   console.log("cmt"+sendcmt)
+  
+         if (camp_id != "") {
+             console.log('inside 1');
+             var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
+             console.log(selectQuery);
+             database.query(selectQuery, function (err, data) {
+                if (err) {
+                     response.json({
+                         success: false,
+                         message: 'errro'
+                     })
+                     console.log(err)
+                }else {
+                    
+                     if (data.length > 0) {
+                       
+                       
+                       
+                     
+                         console.log( tact,'my console.log check 2');
+ 
+                         if(tact=="Email-Reminder-Blast")
+                         {
+                             
+ 
+                             var updateSql = `UPDATE comment_tbl SET   user_rbcomment = '${sendcmt}' WHERE camp_id = '${camp_id}'`;
+  
+                        }else if(tact == "Webinar")
+                         {
+                             
+                           
+                             var updateSql = `UPDATE comment_tbl SET webinar_comment ='${sendcmt}' WHERE camp_id = ${camp_id}`;
+     
+                        }else{
+                       
+                             var updateSql = `UPDATE comment_tbl SET  user_ebcomment = '${sendcmt}' WHERE camp_id = '${camp_id}'`;
+                            
+                         }    
+                          
+                             database.query(updateSql, function (err, data) {
+                            // console.log("updateSql😍🤔☺😊😊😊😉",updateSql)
+     
+                                 response.json({
+                                     success: true,
+                                     message : 'Message Inserted  Successfully...'
+                                 });
+                           
+                             })
+                        
+                        
+                    } else {
+                         console.log('in else part');
+                     
+                       
+                         // var sqlQry = `INSERT INTO comment_tbl (camp_id,webinar_files,eb_comment) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
+                      //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+                   
+           
+                      if(tact == "Webinar"){
+                         var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_comment) VALUES (${camp_id}, '${sendcmt}')`;
+                      }
+     
+                      else if(tact=="Email-Reminder-Blast")
+                      {
+                         var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbcomment) VALUES (${camp_id},'${sendcmt}')`; // insert query //
+                      }
+                      else{
+                         var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebcomment) VALUES (${camp_id},'${sendcmt}')`; //
+                         // insert query //
+                         console.log("inser qeruy"+sqlQry)
+                      }
+                        
+                         console.log("insert query"+sqlQry);
+     
+                         database.query(sqlQry, function (err, data) {
+     
+                             response.json({
+                                 success: true,
+                                 message: 'Message Inserted  Successfully...'
+                             })
+                         })
+                     }
+     
+                }
+             })
+     
+         }
+         // }else{
+     })
+
+
+
+
+
+
 
 
 

@@ -42,15 +42,10 @@ $(document).ready(function () { // for fetch Data //
                
                  var rowId = row.id;
               
-           var mg_link = row.mg_link;
-           var mg_image = row.image;
-           console.log(row.mg_link);
-           console.log(row.image)
+              var mg_status = row.mg_status
+              alert(mg_status);
                dt1 = new Date(row.todaydt);
-               console.log("dt1=>"+dt1)
-             
                dt2 = new Date(row.eblast_datetime);
-               console.log("dt2=>"+dt2)
                dt3 = new Date(row.reblast_datetime);
                allocated_to = row.allocated_to;
                rballocated_to = row.rballocated_to;
@@ -58,8 +53,6 @@ $(document).ready(function () { // for fetch Data //
               
       
 var tact=row.tact;
-
-
 
 
 console.log("tact value is:" +tact);
@@ -76,13 +69,6 @@ else{
 }
 
 
-// code for make good //
-
-if(row.tact == "Make-Good"){
-   var tact = "Make_Good"
-}
-
-//end code for make good //
 
 
                if(row.tact === "Email Blast / Reminder Blast")
@@ -114,13 +100,13 @@ if(row.tact === "Webinar")
 
            
           
-if ((row.camp_id === null) && (row.mg_status === null) || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" ||  (row.user_rbfiles === "undefined"))|| (row.tact == "Email Blast" && (row.user_ebfiles == "" ||  (row.user_ebfiles === "undefined") )) || (row.tact == "Webinar" && (row.webinar_files == "" ||  (row.webinar_files === "")  ))  )
+if (row.camp_id === null  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" ||  (row.user_rbfiles === "undefined"))|| (row.tact == "Email Blast" && (row.user_ebfiles == "" ||  (row.user_ebfiles === "undefined") )) || (row.tact == "Webinar" && (row.webinar_files == "" ||  (row.webinar_files === "undefined") || (row.mg_status == null)  )))
 {
 
                   return `
                      
-   
-                  ${(row.allocated_to == row.user_id && row.status == 1) ? `<span class="bg-success text-light px-1 rounded small">EB done</span>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
+       
+                  ${(row.allocated_to == row.user_id && row.status == 1 && mg_status == 0) ? `<b> <span class="bg-primary text-light px-1 rounded small">EB Done</span><i class="bi bi-check msgshow" style="font-size:21px;"></i> <span class="bg-primary text-light px-1 rounded small">make good pendding</span> <input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}">` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 1 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 && row.mg_status == 0) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}">`:` `} 
    
                   ${(row.rballocated_to == row.user_id && row.rbstatus == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"style="font-size:22px;"></i>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
@@ -213,26 +199,24 @@ if ((row.camp_id === null) && (row.mg_status === null) || (row.tact == "Email Bl
            
             return`
  
-   
-         ${(row.allocated_to == row.user_id && row.status == 1) ? `<b><span class="bg-success text-light px-1 rounded small">EB Done</span></i>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
+     
+         ${(row.allocated_to == row.user_id && row.status == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" style="font-size:22px;"></i>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
          ${(row.rballocated_to == row.user_id && row.rbstatus == 1) ? `<b><i class="bi bi-check msgshow" style="font-size:21px;"></i>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
-   
-         ${(row.allocated_to == row.user_id && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  ""  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`: $(row.allocated_to == row.user_id && dt2 < dt1 && row.mg_status == 0 && row.status == 1 && row.mg_link ===  null && row.mg_image ===  null ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`:` `}
-                 
-                 
-         ${(row.allocated_to == row.user_id && dt3 > dt1 && row.rb_mg_status == 0) ? `<input type="checkbox" class="btn btn-link btn-sm rbcheck" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.rb_mg_status == 0) ? `<input type="checkbox" class="btn btn-link btn-sm rbcheck" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `}
+               
+              
 
 
-        
+
 
 
                  <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" `+ row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
 
                  <button type="button" style = "display:none;" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" "  data-bs-target="#${tact+""+row.id}" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date +' ' + row.blast_time +' ' + tact +`" >
 
-                 <button type="button"  id = "editimage"     class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' +tact+`"><i class="fa fa-upload"></i></button>`; 
+                 <button type="button"  id = "editimage"     class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' +tact+`"><i class="fa fa-upload"></i></button>
+                 `;
           }
 
                 
@@ -323,11 +307,7 @@ if ((row.camp_id === null) && (row.mg_status === null) || (row.tact == "Email Bl
          $('#comment').show();
       
        }
-       else if(tact == "Make-Good")
-       {
-
-
-       }else if(tact == "Email-Reminder-Blast")
+       else if(tact == "Email-Reminder-Blast")
        {
          $("#eBc").show()
          $("#cf").show()
@@ -755,45 +735,7 @@ if ((row.camp_id === null) && (row.mg_status === null) || (row.tact == "Email Bl
                   
                   $('#image').val(data.user_ebfiles);
                   
-               // Make good edit code startt //
-
-                }else if(tactValue==="Make_Good")  
-                {
-                     var eb_mgfiles=data.eb_mg_files;
-                     var eb_mgfiles = eb_mgfiles.split(',');
-                     var length = eb_mgfiles.length;
-                     cate_id = data.camp_id;
-                  
-                        var htmlContent = '';
-                     var htmlContent1 ='';
-                     var htmlContent2 =htmlContent+ '' +htmlContent1;
-   
-                  for (var i = 0; i <= length; i++){ 
-    
-                        if(eb_mgfiles[i] == undefined) { 
-
-                           // htmlContent += '<form enctype="multipart/form-data" id = "form_id"><p> <tr><td width="10%">Upload File Here</td><td><input type="text" value='+user_imagename[i]+ ' name="filenum" style="display:none;"><input type="submit"  class="bg-primary btn-sm btn-primary" onclick = "fileReplace1(this)" data-id=\''+ cate_id + ',' + user_imagename[i] + ',' + i + ',' +tactValue+ '\' value = "Insert File"></tr></td>' ,'</p> </form>';
-   
-                        }else if(eb_mgfiles[i] != '') {
-
-                         
-                         
-                           htmlContent += '<tr><td width="60%"> <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;"> &nbsp; &nbsp;'+eb_mgfiles[i]+'&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\''+ data.camp_id +','+eb_mgfiles[i]+',' + i +  ','  + tactValue +'\'></i></td> &nbsp;<td  width="40%"><input type="text" value='+eb_mgfiles[i]+' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ','+eb_mgfiles[i]+',' + i + ',' +tactValue+'\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>' ,'';
-                        }else{
-                              //  alert("tact is not:" +tact);
-                        }
-                  }
-            
-                  if (2 - length > 0) {
-                     
-                           htmlContent += '<tr><td><form enctype="multipart/form-data" id = "form_id"><p> <tr id = "tr_id"><td style = "background-color: aliceblue;"><input type = "file" class="form-control" name = "image" id = "hello"    data-id="'+data.camp_id+'" data-for="single" ></td><td><button type="button" class="imageform btn btn-primary" onclick="myFunction(this)" data-id='+ data.camp_id + ','+tactValue+'>Upload</button></td></tr>' ,'</p>  </form></td></tr>';
-                        
-                  }
-                  document.getElementById('container11').innerHTML = htmlContent;
-                  
-                  $('#image').val(data.eb_mgfiles);
-                  
-               //Make good edit code end //
+               
        
         
 
@@ -1579,7 +1521,7 @@ function profileView(e) {//  start code for view profile data //
       
       var id = $(e).data('id');
       var tact = $(e).data('tact');
-     
+      console.log($(e).parent());
      var sendComment  = $(".modal-body").find(`[name = "sendComment"][data-id='${id}']`).val();
    
      
