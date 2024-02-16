@@ -298,6 +298,8 @@ router.post("/action", function (request, response, next) {
 
 
 
+
+
     if(action == 'fetch_files')
 {
     //alert("Fetch Single Record");
@@ -412,6 +414,46 @@ router.post("/action", function (request, response, next) {
             }
         });
     }
+
+
+    // make good  code check box code start //
+
+    if (action == "eb_mg_check") {
+        // edit query //
+
+        var eb_mg_id = request.body.eb_mg_id;
+        // console.log("p_id" + p_id);
+        var user_id = request.session.user_id; // session variable //
+        // console.log('session user '+user_id);
+
+        var updateCamp = `INSERT INTO camp_info_tbl (camp_id,user_id) VALUES (${eb_mg_id},${user_id})`;
+          console.log('the query '+updateCamp);
+
+        database.query(updateCamp, function (error, data) {
+            if (!error) {
+                var updateTask = `UPDATE addtask SET mg_status = 1   WHERE id = ${eb_mg_id}`;
+                database.query(updateTask, function (error, data) {
+                    if (!error) {
+                        response.json({
+                            success: true,
+                            message: "EB Make Good  Done.. ",
+                        });
+                    } else {
+                        response.json({
+                            success: false,
+                            message: "Error in Error in Make Good!",
+                        });
+                    }
+                });
+            } else {
+                response.json({
+                    success: false,
+                    message: "1st Updatee failed " + error,
+                });
+            }
+        });
+    }
+     // make good  code check box code End //
 
     if (action == "remider_blstcheckbox") {
         // edit query //
@@ -593,15 +635,6 @@ if (!fs.existsSync(dir1)){
     }
   
 
-    
-  
-
-
-
-
-
-
-
         callBack(null, `./${dir3}`) // './public/images/' directory name where save the file
     },
 
@@ -630,18 +663,12 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
     var uploadFiles = request.files;
 
-
-
     var image = request.files.image;
     const imagePath = request.files.filename;
 
     var filenames = uploadFiles.map(item => item.filename);
     var combinedFilenames = filenames.join(',');
     
-
-    
-    
-
 
         var sendComment = request.body.sendComment;
       
@@ -652,10 +679,6 @@ router.post("/comment",  upload.any('image'),(request, response) => {
         var status = request.body.status;
         var rb_status = request.body.rb_status;
         
-      
-
-
-
 
         if (camp_id != "") {
            
@@ -858,28 +881,11 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
         var oldfname1 = request.body.oldfname;
         var camp_id = request.body.camp_id;
-     
-
-        // const newfile1 = request.file.filename;
-        // console.log("new Rajat  file"+newfile1 );
-
-
-
-   
-      
-       
-        // const newfile = request.file.filename;
-        // console.log("updatedfile:" +newfile);
-    
-    
-     
-      
         var tact = request.body.tact;
+        console.log("old file Name😍😎😋😊😉"+oldfname1+"camp_id => "+camp_id+"tact=>"+ tact )
     
         var filenum = request.body.filenum;
         var oldfname = request.body.oldfname;
-       
-
 
 var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
   
@@ -935,6 +941,8 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                 
     
                     var camp_id=row.camp_id;
+
+                   
                     if(tact === "Webinar"){
                    var  admin_files = row.webinar_files;
 
@@ -948,6 +956,14 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                         var admin_files=row.user_rbfiles;
     
                     }
+
+                    else if(tact==="Make_Good")
+    
+                    {
+                        var admin_files=row.eb_mg_files;
+    
+                    }
+
     
                     else{
                         var admin_files = row.user_ebfiles;
@@ -1035,6 +1051,19 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                         var updateSql = `UPDATE comment_tbl SET user_rbfiles='${output}' WHERE camp_id = '${camp_id}'`;
     
                        }
+
+                       else if(tact==="Make_Good")
+                       {
+                        // if(output.length==1){
+                        //     output.push(output)
+                        // }
+                        
+                        var updateSql = `UPDATE comment_tbl SET eb_mg_files='${output}' WHERE camp_id = '${camp_id}'`;
+    
+                       }
+
+
+
                        else{
                         // if(output.length==1){
                         //     output.push(output)
