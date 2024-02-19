@@ -254,6 +254,8 @@ router.get('/get_data', function (request, response, next) {
                         'mg_link': row.mg_link,
                         'mg_image': row.mg_image,
                         'mg_status' : row.mg_status,
+                        'rb_mg_image': row.rb_mg_image,
+                        'rb_mg_link' : row.rb_mg_link,
                         'rb_mg_status' : row.rb_mg_status
                     });
 
@@ -454,6 +456,36 @@ router.post("/action", function (request, response, next) {
         });
     }
      // make good  code check box code End //
+// make good rb check box   code check box code start //
+if (action == "rb_mg_check") {
+    // edit query //
+
+    var rb_mg_check_id = request.body.rb_mg_check_id;
+    console.log("rb_mg_check_id" + rb_mg_check_id);
+    var user_id = request.session.user_id; // session variable //
+    // console.log('session user '+user_id);
+
+    var updateCamp = `UPDATE addtask SET rb_mg_status = 1   WHERE id = ${rb_mg_check_id}`;
+      console.log('the query '+updateCamp);
+            database.query(updateCamp, function (error, data) {
+                if (!error) {
+                    response.json({
+                        success: true,
+                        message: "RB Make Good  Done.. ",
+                    });
+                } else {
+                    response.json({
+                        success: false,
+                        message: "Error in Error in Make Good!",
+                    });
+                }
+            });
+      
+}
+// make good rb check box   code check box code end //
+
+
+     
 
     if (action == "remider_blstcheckbox") {
         // edit query //

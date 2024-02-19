@@ -48,6 +48,10 @@ $(document).ready(function() { // for fetch Data //
                   var mg_status = row.mg_status;
                   
                     var rowId = row.id;
+                    var rb_mg = row.rb_mg_link;
+
+                   
+                    
                     var mg_link = row.mg_link;
                     var mg_image = row.image;
                     console.log(row.mg_link);
@@ -57,6 +61,7 @@ $(document).ready(function() { // for fetch Data //
                     dt2 = new Date(row.eblast_datetime);
                     console.log("dt2=>" + dt2)
                     dt3 = new Date(row.reblast_datetime);
+                   
                     allocated_to = row.allocated_to;
                     rballocated_to = row.rballocated_to;
                     user_id = row.user_id;
@@ -108,11 +113,11 @@ $(document).ready(function() { // for fetch Data //
 
 
 
-                    if ((row.camp_id === null) && (row.mg_status === null) || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" || (row.user_rbfiles === "undefined")) || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === "") || (mg_link == "") || (mg_image == "")))) 
+                    if ((row.camp_id === null)  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" || (row.user_rbfiles === "undefined")) || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === "") || (mg_link == "") || (mg_image == "") || (row.rb_mg_image == "") || (row.rb_mg_link == "")))) 
                     {
 
                         return `
-                     
+                      console.log("if")
                         ${(row.allocated_to == row.user_id && row.status == 1) ? `<span class="bg-success text-light px-1 rounded small">EB done</span>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
          
                         ${(row.rballocated_to == row.user_id && row.rbstatus == 1) ? `<b><i class="bi bi-check msgshow"  data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"style="font-size:22px;"></i>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
@@ -120,60 +125,14 @@ $(document).ready(function() { // for fetch Data //
 
                         ${(row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  "" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  "" && mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">MG Done</span></i>`: $(row.allocated_to == row.user_id  && row.mg_status == 0 && row.status == 1 && row.mg_link ==  "undefine" && row.mg_image == "undefine" ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`:``}
 
+                         
+                        ${(row.allocated_to == row.user_id &&  dt3 > dt1 && row.rb_mg_status == 0 && row.rbstatus == 1 && row.rb_mg_link !==  "" && row.rb_mg_image !==  "" ) ? `<input type="checkbox" class="btn btn-link btn-sm rb_checkbox" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && row.rbstatus == 1 && dt3 > dt1 && row.rb_mg_link !==  "" && row.rb_mg_image !==  "" && row.rb_mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">RMG Done</span></i>` : (row.allocated_to == row.user_id && dt3 < dt1 && row.rbstatus  == 1  && row.rb_mg_status == 0 && row.rb_mg_link ==  "undefine" && row.rb_mg_image == "undefine"  ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`: `  `}
+                       
                         <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" ` + row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
                         
-                        <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" "  data-bs-target="#${tact+""+row.id}" data-id="` + row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"  style = "font-size:10px;">
-                        
-                        <i class="fa fa-upload" onclick = "this.bgColor='black'" style = "font-size:5px;"></i></button>
-                        </button>
-                              
-                           
-                              <!-- Modal -->
-                        
-                              <form id = "sample_form"  enctype="multipart/form-data">
-                           
-               
-                           
-                        <div class="modal fade" id="${tact+""+row.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Insert File</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <div class="form-floating">
-                                    <p class="msgee"></p>
-                                    <input type = "hidden" class ="tact" id = "tact" name = "tact"  >
-                                    <input type = "hidden" name = "camp_id" id = "camp_id"   >
-                                    <input type = "hidden" id ="rbstatus">
-                                    <input type = "hidden" id ="rbstatus">
-                                    <input type = "hidden" id ="status" name = "status">
-                                    <input type = "hidden" id ="blast-type">
-                                    <input type = "hidden" id ="comment_id" name = "comment_id" data-id = " ` + row.comment_id + `" >
-                                    <input type = "hidden" id ="status"  data-id = " ` + row.status + `" >
-                                    <textarea class="form-control"  id = "emailBlastComment" name = "emailBlastComment" placeholder = 'Write text here...' ></textarea>
-                                    <br>
-                                    <label for="floatingTextarea"></label>
-                                    <input type = "file" class="form-control main-list-image-input" name = "image[]" data-id="${row.id}"   id = "image" multiple >
-                                 </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                    
-                                    <button 
-                                    type="button" 
-                                    class="imageform btn btn-primary" onclick="fileUpload(this)" 
-                                    data-id="${row.id}" 
-                                    data-tact="${tact}"
-                                    
-                                    >Submit Files</button>
-            
-            
-                                    </div>
-                                 </div>
-                              </div>
-                              </div>
-                              </form>
+                        <button type="button" style = "display:none;" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" "  data-bs-target="#${tact+""+row.id}" data-id="` + row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `" >
+
+                        <button type="button"  id = "editimage"     class="btn btn-link btn-sm editimage" data-id="` + row.id + ' ' + tact + `"><i class="fa fa-upload"></i></button>
 
                               <!-- Button trigger modal -->
                               <i class="fa fa-commenting" style="font-size:16px" aria-hidden="true" class="bg-primary" data-bs-toggle="modal" data-bs-target="#${tact}"></i>
@@ -204,7 +163,7 @@ $(document).ready(function() { // for fetch Data //
                      } else {
 
                         return `
- 
+                        console.log("else")
                      
                         ${(row.allocated_to == row.user_id && row.status == 1) ? `<b><span class="bg-success text-light px-1 rounded small">EB Done</span></i>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
@@ -215,14 +174,16 @@ $(document).ready(function() { // for fetch Data //
                        
                         ${(row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  "" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  "" && mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">MG Done</span></i>`: $(row.allocated_to == row.user_id  && row.mg_status == 0 && row.status == 1 && row.mg_link ==  "undefine" && row.mg_image == "undefine" ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`:``}
                               
-                              
-                        ${(row.allocated_to == row.user_id && dt3 > dt1 && row.rb_mg_status == 0) ? `<input type="checkbox" class="btn btn-link btn-sm rbcheck" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.rb_mg_status == 0) ? `<input type="checkbox" class="btn btn-link btn-sm rbcheck" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`: `  `}
+    
+                      
 
                         <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view"  data-id =" ` + row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
 
                         <button type="button" style = "display:none;" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" "  data-bs-target="#${tact+""+row.id}" data-id="` + row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `" >
 
                         <button type="button"  id = "editimage"     class="btn btn-link btn-sm editimage" data-id="` + row.id + ' ' + tact + `"><i class="fa fa-upload"></i></button>
+
+                       
                         
                         <!-- Button trigger modal -->
                         <i class="fa fa-commenting" style="font-size:16px" aria-hidden="true" class="bg-primary" data-bs-toggle="modal" data-bs-target="#${tact}"></i>
@@ -248,6 +209,8 @@ $(document).ready(function() { // for fetch Data //
                            </div>
                         </div>
                         </div>
+
+
                         
                         `;
 
@@ -339,10 +302,24 @@ $(document).ready(function() { // for fetch Data //
             $('#comment').show();
             $('#comment').show();
 
-        } else if (tact == "Make-Good") {
+        } else if (tact == "Make_Good") {
+         $("#makeGood11").show();
+         $("#makeGood12").show();
+      
+         $("#MakeGoodView").show();
+         $("#ebBlastview").hide()
+         $("#sendmail").show()
+         $("#sendname").show()
+         $("#campname").show()
+         $("#webinarFlex").hide()
+         $("#fileviewbox").hide()
+         $('#ebasset').hide();
+         $('#rbasset').hide();
+         $("#rbFlex").hide();
 
 
         } else if (tact == "Email-Reminder-Blast") {
+         
             $("#eBc").show()
             $("#cf").show()
             $("#sendmail").show()
@@ -519,6 +496,36 @@ $(document).ready(function() { // for fetch Data //
                     $('#ebBlastview').hide()
                     $('#webinar_comment_show').show();
 
+                           // MAKE GOOD   START //
+                  }else if (tact == "Make_Good" ) {
+
+                   
+                     var eb_mg_files = data.eb_mg_files;
+
+                     var eb_mg_files = eb_mg_files.split(',');
+                     var eb_mg_files_length = eb_mg_files.length;
+                     for (var i = 0; i < eb_mg_files_length; i++) {
+                        if (eb_mg_files[i] != undefined && eb_mg_files[i].trim().length != 0) {
+
+                           htmlContent+= '<p ><tr><td style = "background-color: aliceblue;"  >  <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black" name="user_rbfiles" style = "font-size: 12px;" id="user_file" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
+
+                        }
+               
+                     }
+
+                     document.getElementById('MakeGoodView').innerHTML = htmlContent;
+
+                     $("#MakeGoodView").show();
+                     $('#viewfiles11').hide();
+                     $('#viewReminderBlastView11').hide()
+                     $('#webinarflex').hide();
+                     $('#fileviewdownload').hide();
+                     $('#rbFlex').hide();
+                     $("#user_ebcomment").hide();
+                     $("#makeGood11").show();
+                     $("#makeGood12").show();
+                     
+
 
                 } else if (tactValue == 'e_blast') {
 
@@ -563,12 +570,16 @@ $(document).ready(function() { // for fetch Data //
                             amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
 
                         }
-                    }
+                     }
+                    
                     document.getElementById('viewfiles113').innerHTML = amdinebContent;
                     $("#viewfiles113").show();
                     $("#rbFlex").hide();
                     $("#webinarFlex").hide();
                     $("#user_ebcomment").show();
+
+                     
+
 
 
 

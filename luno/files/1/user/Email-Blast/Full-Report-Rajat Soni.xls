@@ -1,9 +1,0 @@
-
-        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
-        <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"/>
-        <head><!--[if gte mso 9]><xml>
-        <x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>FullReport</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>
-        <![endif]--></head>
-        <body><table><tr><td>Date</td><td>Client_Code</td><td>CID</td><td>Campaign_Name</td><td>Category</td><td>Country</td><td>Asset_Name</td><td>EDM_link</td><td>Links_Updated_by</td><td>EDM_Completed_By</td><td>userid</td><td>Comments</td></tr><tr>
-                <td>2024-02-16</td><td>Survey</td><td>W-8</td><td>New-HTML-Build:-FY24-Q1-Q4-AWS-Education-WW-TS</td><td>W8-Techscore</td><td>Both</td><td>Mission-Critical Infrastructure | Take the Quiz! </td><td>https://engage.biz-tech-insights.com/LP-FY24-Q1-Q4-AWS-Education-WW-TS/email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
-            </tr></table></body></html>
