@@ -125,6 +125,12 @@ router.get('/get_sender_data11', function (request, response, next) {
 
 
 
+///code for display profile
+
+
+
+
+//end code for display profile
 
 router.get('/get_data', function (request, response, next) {
     // alert("get data");
@@ -215,6 +221,7 @@ router.get('/get_data', function (request, response, next) {
                         if (row.rb_assetname != "" && row.rb_assetlink != "") {
                             var tact = "Email Blast / Reminder Blast";
                         }
+                        
                         else {
                             var tact = "Email Blast";
 
@@ -619,6 +626,22 @@ router.post("/action", function (request, response, next) {
 
     /* End Code For Priority Task */
 
+    if (action == "fetch_single_Profile") { // for profile view //
+       
+console.log("within fetch_single_Profile");
+    
+        var id = request.body.user_id;
+      
+        console.log("user_id"+id)
+        var swlquery = `SELECT * FROM  user_tbl where user_id  = "${id}" `;
+       
+       
+        database.query(swlquery, function (error, data) {
+            response.json(data[0]);
+            console.log("myqueryCheck"+swlquery)
+        });
+    }
+
     /* Start Code For Today's Task */
 
 
@@ -963,6 +986,25 @@ router.post("/action", function (request, response, next) {
       //  var comment = request.body.comment;
         var priority = request.body.priority;
         var allocated_to = request.body.allocated_to;
+
+        var mgallocated_to = request.body.mgallocated_to;
+        var mgasset_name = request.body.mgasset_name;
+        var mgasset_link = request.body.mgasset_link;
+        var mg_date = request.body.mg_date;
+
+        console.log("MG Date in routes file is:" +mg_date);
+        var mg_time = request.body.mg_time;
+
+
+
+        var rb_mgallocated_to = request.body.rb_mgallocated_to;
+        var rb_mgasset_name = request.body.rb_mgasset_name;
+        var rb_mgasset_link = request.body.rb_mgasset_link;
+        var rb_mg_date = request.body.rb_mg_date;
+        var rb_mg_time = request.body.rb_mg_time;
+
+
+
         var cname = cname[0];
 
 
@@ -972,7 +1014,7 @@ router.post("/action", function (request, response, next) {
         var rb_time = request.body.rb_time;
 
         console.log("Blast Time:" + blast_time);
-
+//convert blast time to 24 hours format
         var validTime = blast_time.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
         if (!validTime) {
 
@@ -995,11 +1037,11 @@ router.post("/action", function (request, response, next) {
         }
 
 
+//end code for convert blast time to 24 hours format
 
 
 
-
-
+//code start to convert RB time AM/PM to 24 hurs format
 
         if (rb_date != "") {
             // var rb_date = request.body.rb_date;
@@ -1028,14 +1070,90 @@ router.post("/action", function (request, response, next) {
                 console.log("check Reminder Blast Time during Update]:" + rb_time); //h:i:s
             }
 
-            //    else{
-            //     var rb_time = request.body.rb_time;
-            //     console.log("Else RB Time:" +rb_time);
-            //    }
+           
 
 
         }
         // End code to Convert AM/PM to 24 Hours  
+
+
+
+
+        //start code for convert MG Time AM/PM to 24 hours format
+        if (mg_date != "") {
+            // var rb_date = request.body.rb_date;
+            console.log("Make Good Date displayed");
+            console.log(mg_date);
+            console.log("mg_date time" + mg_date);
+
+            var validTime = mg_time.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
+            if (!validTime) {
+
+                console.log("In 24 hours Format");
+                var mg_time = request.body.mg_time;
+                console.log("Else MG Time:" + mg_time);
+            }
+            else {
+                var hrs = Number(mg_time.match(/^(\d+)/)[1]);
+                var mnts = Number(mg_time.match(/:(\d+)/)[1]);
+                var format = mg_time.match(/\s(.*)$/)[1];
+                if (format == "PM" && hrs < 12) hrs = hrs + 12;
+                if (format == "AM" && hrs == 12) hrs = hrs - 12;
+                var hours = hrs.toString();
+                var minutes = mnts.toString();
+                if (hrs < 10) hours = "0" + hours;
+                if (mnts < 10) minutes = "0" + minutes;
+                var mg_time = hours + ":" + minutes + ":00";
+                console.log("check Make Good Time during Update]:" + mg_time); //h:i:s
+            }
+
+           
+
+
+        }
+        // End code to Convert AM/PM to 24 Hours  
+
+
+
+
+             //start code for convert RB MG Time AM/PM to 24 hours format
+             if (rb_mg_date != "") {
+                // var rb_date = request.body.rb_date;
+                console.log("RB Make Good Date displayed");
+                console.log(rb_mg_date);
+                console.log("rb_mg_date time" + rb_mg_date);
+    
+                var validTime = rb_mg_time.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
+                if (!validTime) {
+    
+                    console.log("In 24 hours Format");
+                    var rb_mg_time = request.body.rb_mg_time;
+                    console.log("Else RB MG Time:" + rb_mg_time);
+                }
+                else {
+                    var hrs = Number(rb_mg_time.match(/^(\d+)/)[1]);
+                    var mnts = Number(rb_mg_time.match(/:(\d+)/)[1]);
+                    var format = rb_mg_time.match(/\s(.*)$/)[1];
+                    if (format == "PM" && hrs < 12) hrs = hrs + 12;
+                    if (format == "AM" && hrs == 12) hrs = hrs - 12;
+                    var hours = hrs.toString();
+                    var minutes = mnts.toString();
+                    if (hrs < 10) hours = "0" + hours;
+                    if (mnts < 10) minutes = "0" + minutes;
+                    var rb_mg_time = hours + ":" + minutes + ":00";
+                    console.log("check RB Make Good Time during Update]:" + rb_mg_time); //h:i:s
+                }
+    
+               
+    
+    
+            }
+            // End code to Convert RB MG AM/PM to 24 Hours  
+
+            
+
+
+
 
         console.log("check tact above if:" + tact);
         if (tact === "webinar") {
@@ -1099,13 +1217,24 @@ router.post("/action", function (request, response, next) {
         rb_date = "${rb_date}" ,
         rb_time = "${rb_time}",
         rballocated_to="${rballocated_to}",
-       
+        blast_type = "${blast_type}",
         blast_date = "${blast_date}",
         blast_time = "${blast_time}",
         asset_name = "${asset_name}" ,
         asset_link = "${asset_link}",
+
+        mgallocated_to = "${mgallocated_to}",
+        mgasset_name = "${mgasset_name}",
+        mgasset_link = "${mgasset_link}",
+        mg_date = "${mg_date}",
+        mg_time = "${mg_time}",
        
-        
+        rb_mgallocated_to = "${rb_mgallocated_to}",
+        rb_mgasset_name = "${rb_mgasset_name}",
+        rb_mgasset_link = "${rb_mgasset_link}",
+        rb_mg_date = "${rb_mg_date}",
+        rb_mg_time = "${rb_mg_time}",
+
         
        
         priority = "${priority}",
@@ -1114,7 +1243,7 @@ router.post("/action", function (request, response, next) {
         `;
 
                 console.log("Update Query");
-                console.log(query);
+                console.log("query for update:",query);
                 database.query(query, function (error, data) {
                     response.json({
                         message: 'Data Edited'
@@ -1139,13 +1268,28 @@ router.post("/action", function (request, response, next) {
         blast_time = "${blast_time}",
         asset_name = "${asset_name}" ,
         asset_link = "${asset_link}",
+
+        mgallocated_to = "${mgallocated_to}",
+        mgasset_name = "${mgasset_name}",
+        mgasset_link = "${mgasset_link}",
+        mg_date = "${mg_date}",
+        mg_time = "${mg_time}",
+
+
+        rb_mgallocated_to = "${rb_mgallocated_to}",
+        rb_mgasset_name = "${rb_mgasset_name}",
+        rb_mgasset_link = "${rb_mgasset_link}",
+        rb_mg_date = "${rb_mg_date}",
+        rb_mg_time = "${rb_mg_time}",
+
+
        
         priority = "${priority}",
         allocated_to = "${allocated_to}"
         WHERE id = "${id}"
         `;
 
-                console.log("Update Query");
+                console.log("Update Query in else condition",query);
 
 
                 console.log(query);
@@ -1227,7 +1371,7 @@ router.post("/test", (req, res) => { // =>  image upload code start
 
 var storage = multer.diskStorage({
     destination: (req, files, callBack) => {
-
+        console.log("✔😃 IN MULTER DISK STORAGE");
         var campid = req.body.camp_id;
         var tact = req.body.tact;
         console.log("within storage:" + campid);
@@ -1328,28 +1472,13 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
 
     var comment = request.body.comment;
     console.log("within admn comment js" + comment);
+
     var camp_id = request.body.camp_id;
     var tact = request.body.tact;
     console.log("tact" + tact);
 
 
-    var uploadFiles = request.files;
-
-
-    var admin_files = request.files.admin_files;
-    const imagePath = request.files.filename;
-
-    //console.log(imagePath);
-    console.log("image+image" + imagePath);
-    console.log("hello hello")
-
-    console.log("admin_files:" + admin_files);
-    // if (comment == 'sendComment') {  
-
-
-    var filenames = uploadFiles.map(item => item.filename);
-    var combinedFilenames = filenames.join(',');
-    console.log(combinedFilenames);
+   
 
 
     if (camp_id != "") {
@@ -1377,13 +1506,13 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
                     console.log("check tact in route js:" + tact);
                     if (tact == "Email-Reminder-Blast") {
                         console.log("in if condition");
-                        var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+                        var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}' WHERE camp_id = '${camp_id.trim()}'`;
                         console.log("tact is eb/rb:" + updateSql);
 
                     }
                     else {
                         console.log("in else condition");
-                        var updateSql = `UPDATE comment_tbl SET  comment='${comment}', admin_files = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+                        var updateSql = `UPDATE comment_tbl SET  comment='${comment}' WHERE camp_id = '${camp_id.trim()}'`;
 
                     }
 
@@ -1424,7 +1553,7 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
                         console.log("in if condition tact is Email-Reminder-Blast");
                         //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
 
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rb_file,rb_comment) VALUES (${camp_id}, '${combinedFilenames}', '${comment}')`; // insert query //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,rb_comment) VALUES (${camp_id},  '${comment}')`; // insert query //
 
 
                         console.log("tact is eb/rb:" + sqlQry);
@@ -1436,7 +1565,7 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
                     else{
 
    //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-                    var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_files,comment) VALUES (${camp_id}, '${combinedFilenames}', '${comment}')`; // insert query //
+                    var sqlQry = `INSERT INTO comment_tbl (camp_id,comment) VALUES (${camp_id},  '${comment}')`; // insert query //
                     console.log("insert query" + sqlQry);
 
                   
@@ -1446,7 +1575,7 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
 
                         response.json({
                             success: true,
-                            message: 'File inserted successfully....'
+                            message: 'Comment inserted successfully....'
                         })
                     })
                  
@@ -1469,7 +1598,142 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
 
 
 
+//start code for insert image if no data available
 
+
+
+router.post("/admin_imginsert", upload.any('admin_files'), (request, response) => {
+    console.log("✔😃 IN /admin_imginsert");
+   
+    var camp_id = request.body.camp_id;
+    var tact = request.body.tact;
+    console.log("tact in admin img insert" + tact);
+
+
+    var uploadFiles = request.files;
+
+
+   // var admin_files = request.files.admin_files;
+    const imagePath = request.files.filename;
+
+    //console.log(imagePath);
+    console.log("image+image" + imagePath);
+    console.log("hello hello")
+
+   
+
+
+    var filenames = uploadFiles.map(item => item.filename);
+    var combinedFilenames = filenames.join(',');
+    console.log(combinedFilenames);
+
+
+    if (camp_id != "") {
+        console.log('inside 1');
+        var selectQuery = `select * from comment_tbl where camp_id = '${camp_id}'`; // verifying code id either exist or not //
+        console.log(selectQuery);
+        database.query(selectQuery, function (err, data) {
+            if (err) {
+                response.json({
+                    success: false,
+                    message: 'errro'
+                })
+                console.log(err)
+            } else {
+                console.log('inside 2');
+                if (data.length > 0) {
+                    console.log('inside 2 update');
+                    // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+                    console.log("type of " + typeof uploadFiles);
+                    console.log("check tact in route js:" + tact);
+                    if (tact == "Email-Reminder-Blast") {
+                        console.log("in if condition");
+                        var updateSql = `UPDATE comment_tbl SET  admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+                        console.log("tact is eb/rb:" + updateSql);
+
+                    }
+                    else {
+                        console.log("in else condition");
+                        var updateSql = `UPDATE comment_tbl SET   admin_files = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+
+                    }
+
+                    console.log("Update query" + updateSql);
+                    database.query(updateSql, function (err, data) {
+
+                        // if (err) {
+                        //     response.json({
+                        //         success: false,
+                        //         message: 'errro'
+                        //     })
+                        //     console.log(err)
+                        // } else {
+                        //      response.json({
+                        //         success: true,
+                        //         message: 'Eamil Balst updated  id exist'
+                        //     })
+                        // }
+
+
+
+
+                        response.json({
+                            success: true,
+                            message: 'File Updated Successfully...'
+                        });
+
+
+
+
+
+                    })
+                }
+
+                else {
+                    console.log('inside 1 else');
+                    if (tact == "Email-Reminder-Blast") {
+                        console.log("in if condition tact is Email-Reminder-Blast");
+                        //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rb_file) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
+
+
+                        console.log("tact is eb/rb:" + sqlQry);
+
+                        
+
+                    }
+
+                    else{
+
+   //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
+                    var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_files) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
+                    console.log("insert query" + sqlQry);
+
+                  
+                    }
+
+                    database.query(sqlQry, function (err, data) {
+
+                        response.json({
+                            success: true,
+                            message: 'Files Uploaded Successfully.. '
+                        })
+                    })
+                 
+                }
+
+            }
+        })
+
+    }
+    // }else{
+})
+
+//End code for insert image
+
+
+//end code for insert image if no data available
 
 
 

@@ -13,7 +13,7 @@ $(document).ready(function () {
     'serverMethod': 'get',
     'order': [[0, 'desc']],
     'ajax': {
-      'url': 'http://localhost:3000/alltask/get_data',
+      'url': 'http://localhost:7777/alltask/get_data',
 
     },
 
@@ -32,43 +32,56 @@ $(document).ready(function () {
         targets: 3,
         orderable: false,
         render: function (data, type, row, meta) {
-          console.log("row camp id:" + row.camp_id);
-          console.log("row Tact:" + row.tact);
+         
 
           if (row.tact == "Email Blast / Reminder Blast") {
             var tact = "Email-Reminder-Blast";
 
-            console.log("set tact is Email-Reminder-Blast");
+          
           }
 
           if (row.tact == "Email Blast") {
-            console.log("Email Blast");
+          
             var tact = "Email-Blast";
           }
 
 
 
           if (row.tact == "Webinar") {
-            console.log("Webinar Blast");
+           
             var tact = "Webinar";
           }
 
 
-          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined") )) || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined") ))  ) {
+          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined") )) || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined") ))  ) 
+
+          {
+
+
 
             return `
   
-            <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
+
+          
+            <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
            
            
             <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-pencil"></i></button>
 
             <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + `"><i class="fa fa-eye"></i></button>
 
+           
 
-               
-            <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `">
-            <i class="fa fa-upload"></i></button>
+            <button type="button"    class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
+
+
+            <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#fileinsertModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-pencil"></i></button>
+
+
+
+
+            <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `">
+            <i class="fa fa-comment"></i></button>
            </button>
            
            <!-- Modal -->
@@ -96,12 +109,12 @@ $(document).ready(function () {
                
                  
                  <br>
-                 <textarea class="form-control"  id = "commentebrb" name = "commentebrb" placeholder="Add Comment..." id="floatingTextarea"></textarea>
+                 <textarea class="form-control"  id = "comment" name = "comment" placeholder="Add Comment..." id="floatingTextarea"></textarea>
                  <span>Add Comment...</span>
                  <br><br>
                  
-                 <input type = "file" class="form-control" name = "admin_files[]" id = "admin_files"  multiple>
-                 <span >(upload max 5 files)</span>
+              <!--   <input type = "file" class="form-control" name = "admin_files[]" id = "admin_files"  multiple>
+                 <span >(upload max 5 files)</span>-->
                 
                </div>
                  </div>
@@ -114,42 +127,66 @@ $(document).ready(function () {
            </div>
 
            </form>
-                                  
-              `;
-          }
-
-          else {
-            return `
-
-                  
-           
-
-
-                   
-            <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
-           
-           
-            <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
-
-            <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + `"><i class="fa fa-eye"></i></button>
 
 
 
 
-            <button type="button"    class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
 
+           <form id = "imginsert_form"  enctype="multipart/form-data">
+           <div class="modal fade" id="fileinsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                 <div class="form-floating">
+                 <p id="insertfilemsg"></p>
+                 <input type="hidden" name="camp_id" id="camp_id"/ >
+                 <input type = "hidden" id ="blast_type" id="blast_type"/  >
+                 <input type = "hidden" id ="tact" name="tact"/  >
+                 <input type = "hidden" id ="status"   >
 
-
+                 <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
+                 <input type = "hidden" id ="rbstatus"  data-id = " ` + row.rbstatus + `" >
+                 
+                 
+            
                
-            <button type="button" style="display:none" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `">
-            Comment
-           </button>
-           
-         
+                 
+                 <br>
+               
+                 
+               <input type = "file" class="form-control" name = "admin_files[]" id = "admin_files"  multiple>
+                 <span >(upload max 5 files)</span>
+                
+               </div>
+                 </div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn btn-primary" onclick="imginsert1()" data-id="`+ row.id + '' + tact + ` ">Send Comment</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           </form>
+
+
                                   
               `;
+        
+          }
+
+          else{
+
 
           }
+
+          
+
+         
 
         }
       }
@@ -174,7 +211,7 @@ $(document).ready(function () {
     'serverSide': true,
     'serverMethod': 'get',
     'ajax': {
-      'url': 'http://localhost:3000/alltask/get_prioritydata',
+      'url': 'http://localhost:7777/alltask/get_prioritydata',
 
     },
 
@@ -202,7 +239,7 @@ $(document).ready(function () {
         render: function (data, type, row, meta) {
           return `
                     
-          <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
+          <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
                    
                    
           <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
@@ -233,7 +270,7 @@ $(document).ready(function () {
     'serverSide': true,
     'serverMethod': 'get',
     'ajax': {
-      'url': 'http://localhost:3000/alltask/get_todaytaskdata',
+      'url': 'http://localhost:7777/alltask/get_todaytaskdata',
 
     },
 
@@ -255,7 +292,7 @@ $(document).ready(function () {
         render: function (data, type, row, meta) {
           return `
                     
-          <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
+          <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
                    
                    
           <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
@@ -285,7 +322,7 @@ $(document).ready(function () {
     'serverSide': true,
     'serverMethod': 'get',
     'ajax': {
-      'url': 'http://localhost:3000/alltask/get_weeklytaskdata',
+      'url': 'http://localhost:7777/alltask/get_weeklytaskdata',
 
     },
 
@@ -307,7 +344,7 @@ $(document).ready(function () {
         render: function (data, type, row, meta) {
           return `
                     
-          <button type="button" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
+          <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
                    
                    
           <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
@@ -332,11 +369,17 @@ $(document).ready(function () {
 
   $('#add_data').click(function () {
 
+    
+
     $('#dynamic_modal_title').text('Add Data');
 
     $('#task_form')[0].reset();
     
+    var btn = $('#action_button').text('Add');
 
+    console.log("add_data clicked btn:"+btn.text());
+
+    
     $('#action').val('Add');
 
     $('#action_button').text('Add');
@@ -349,15 +392,27 @@ $(document).ready(function () {
     $('#action_button').text('Add').show();
 
 
-    var btn = $('#action_button').text('Add');
-
-  
+    
 
     $("#fileviewbox").hide();
     $("#webinarblast").hide();
     $("#editdataa").hide();
     // code start for select tact
     if (btn.text() == 'Add') {
+
+      console.log("within id add btn")
+      $('#error_Tact').show();
+      $('#cname_error').show();
+      $('#camp_error').show();
+      $('#camp_from_error').show();
+      $('#blast_error').show();
+      $('#error_priority').show();
+      $('#error_allocated').show();
+
+      $('#error_blast_type').show();
+      $('#error_blast_type').show();
+      $('#error_blast_type').show();
+
 
       $("#tactics").show();
       $("#viewdata11").hide();
@@ -391,7 +446,7 @@ $(document).ready(function () {
               $("#senerdtl").show();
             
               $.ajax({
-                url: "http://localhost:3000/alltask/action",
+                url: "http://localhost:7777/alltask/action",
                 method: "POST",
                 data: { cname: cname, action: 'fetch_senderdtladd' },
 
@@ -429,7 +484,9 @@ $(document).ready(function () {
           if (action === "Add") {
 
 
-         
+           
+
+
             $("#tactebweb option").prop('disabled', false);
 
 
@@ -452,6 +509,7 @@ $(document).ready(function () {
                 $("#assets").show();
                 $("#reblastassets").hide();
                 $("#ebassets").hide();
+                $("#mkgoodassets").hide();
                 $('#asset_name')[0].disabled = false;
                 $('#asset_link')[0].disabled = false;
                 $('#blast_date')[0].disabled = false;
@@ -550,14 +608,14 @@ $(document).ready(function () {
             });
 
             $("#blast_date").change(function () {
-              console.log(this.value);
+             
               var today = updatedcurrentdate;
-              console.log(today);
+           
 
               $("#blast_time").val('');
               if (this.value === today) {
                 var thisHour = getCurrentTime(new Date());
-                console.log("check updated time" + thisHour);
+              
                 var updatedtime = hours + ":" + minutes;
                 $('#blast_time').timepicker('option', 'minTime', updatedtime);
                 $('#blast_time').timepicker('option', 'maxTime', '11:59 PM');
@@ -593,8 +651,7 @@ $(document).ready(function () {
 
             }
 
-            console.log("updateddate" + updateddate);
-            console.log("Updated currentDate" + updatedcurrentdate);
+           
 
             if (updateddate == updatedcurrentdate) {
               // {
@@ -619,12 +676,12 @@ $(document).ready(function () {
 
           $("#webinarblast").show();
           $("#editdataa").hide();
-          console.log(this.value);
+      
 
 
 
           var today1 = new Date();
-          console.log("Today date" + today1);
+       
 
 
           function addMinutes(date, minutes) {
@@ -638,12 +695,7 @@ $(document).ready(function () {
           //      const date = new Date('Wed Aug 16 2023 23:43:55 GMT+0530 (India Standard Time)');
 
           const result11 = addMinutes(currentDate1, 30);
-          console.log("Updated Date:  " + result11); // 👉️ 2023-07-27T17:24:52.897Z
-          //  var dd = String(today.getDate()).padStart(2, '0');
-          //   var mm = String(today.getMonth() + 1).padStart(2, '0');
-          //   var yyyy = today.getFullYear();
-
-          //   today = yyyy + '-' + mm + '-' + dd;
+       
 
 
           var ddcurrent1 = String(result11.getDate()).padStart(2, '0');
@@ -652,10 +704,7 @@ $(document).ready(function () {
 
           var updatedcurrentdate1 = yyyycurrent1 + '-' + mmcurrent1 + '-' + ddcurrent1;
 
-          console.log("updatedcurrentdate1:" + updatedcurrentdate1);
-
-
-
+       
 
           var dd11 = String(result11.getDate()).padStart(2, '0');
           var mm11 = String(result11.getMonth() + 1).padStart(2, '0');
@@ -663,14 +712,14 @@ $(document).ready(function () {
 
           var updateddate11 = yyyy11 + '-' + mm11 + '-' + dd11;
 
-          console.log("updateddate11:" + updateddate11);
+       
 
           var hours1 = result11.getHours();
           var minutes1 = result11.getMinutes();
           var seconds1 = result11.getSeconds();
 
           var updatedtime111 = hours1 + ":" + minutes1 + ":" + seconds1;
-          console.log("updatedtime" + updatedtime111);
+       
 
           $('#registration_date').attr('min', updateddate11);
 
@@ -682,17 +731,16 @@ $(document).ready(function () {
           });
 
           $("#registration_date").change(function () {
-            console.log("Print this value");
-            console.log(this.value);
+          
             var today11 = updateddate11;
-            console.log("Today Date:" + today11);
+           
 
             $("#registration_time").val('');
             if (this.value === today11) {
               var thisHour = getCurrentTime(new Date());
-              console.log(thisHour);
+             
               var updatedtime = hours1 + ":" + minutes1;
-              console.log("updated time for webinar:" + updatedtime);
+            
               $('#registration_time').timepicker('option', 'minTime', updatedtime);
               $('#registration_time').timepicker('option', 'maxTime', '11:59 PM');
 
@@ -727,22 +775,18 @@ $(document).ready(function () {
 
           }
 
-          console.log("updateddate" + updateddate11);
-          console.log("Updated currentDate in webinar" + updatedcurrentdate1);
-
-
-
+        
         }
 
         else {
           $("#webinarblast").hide();
           $("#editdataa").hide();
-          console.log(this.value);
+      
         }
 
       });
 
-      console.log("Button text is add");
+     
     }
 
     //code end for select tact
@@ -772,12 +816,12 @@ $(document).ready(function () {
 
     $.ajax({
 
-      url: "http://localhost:3000/alltask/action",
+      url: "http://localhost:7777/alltask/action",
       method: "POST",
       data: $('#task_form').serialize(),
       dataType: "json",
       beforeSend: function () {
-        $('#action_button').attr('disabled', 'disabled');
+        //$('#action_button').attr('disabled', 'disabled');
       },
 
       success: function (data) {
@@ -829,15 +873,16 @@ $(document).ready(function () {
     $('#action_button').text('Edit');
 
     $('#action_modal').modal('show');
+    console.log("edit modal opened")
 
   });
 
 
   $(document).on('click', '.edit', function () {
 
+console.log("clicked on edit btn");
 
 
-    console.log("Edit data js file");
 
 
     //  var id = $(this).data('id');
@@ -854,10 +899,10 @@ $(document).ready(function () {
     var btn = $('#action_button').text('Edit');
 
     var checktect = btn.text();
-    console.log("Button text:" + checktect);
+  
 
     if (btn.text() === "Edit") {
-
+      $("#mkgoodassets").hide();
       $('#cname_error').hide();
       $('#camp_error').hide();
       $('#camp_from_error').hide();
@@ -867,10 +912,22 @@ $(document).ready(function () {
       $('#error_Tact').hide();
       $('#error_blast_type').hide();
       $('#action_button').text('Edit').show();
-      console.log("Within if button text is edit");
+  
     }
 
     else {
+
+      $('#cname_error').show();
+      $('#camp_error').show();
+      $('#camp_from_error').show();
+      $('#blast_error').show();
+      $('#error_priority').show();
+      $('#error_allocated').show();
+      $('#error_Tact').show();
+      $('#error_blast_type').show();
+      
+
+
       //  $('#action_button').text('view').hide();
     }
 
@@ -888,7 +945,7 @@ $(document).ready(function () {
 
     var action = $("#action").val();
     if (action === "Edit") {
-      console.log("within if condition");
+    
       $("#tactebweb option").prop('disabled', true);
 
       $("#rballocated_to option").prop('disabled', false);
@@ -905,6 +962,7 @@ $(document).ready(function () {
       $('#blast_date')[0].disabled = false;
       $('#blast_time')[0].disabled = false;
 
+      //Code start for Reminder Blast Date and Time for Edit
 
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
@@ -933,7 +991,7 @@ $(document).ready(function () {
 
 
       const resultrbdt = addMinutesrb(currentDate, 30);
-      console.log("Updated Date:  " + resultrbdt); // 👉️ 2023-07-27T17:24:52.897Z
+     
       var dd2 = String(resultrbdt.getDate()).padStart(2, '0');
       var mm2 = String(resultrbdt.getMonth() + 1).padStart(2, '0');
       var yyyy2 = resultrbdt.getFullYear();
@@ -941,12 +999,13 @@ $(document).ready(function () {
       var updatedrbdate = yyyy2 + '-' + mm2 + '-' + dd2;
       $('#rb_date').attr('min', updatedrbdate);
 
+      //Code End for Blast Date and Time for Edit
 
 
       //Code start for Blast Date and Time for Edit
 
       var today = new Date();
-      console.log("Today date" + today);
+    
 
 
       function addMinutes(date, minutes) {
@@ -960,13 +1019,7 @@ $(document).ready(function () {
       //      const date = new Date('Wed Aug 16 2023 23:43:55 GMT+0530 (India Standard Time)');
 
       const resulteb = addMinutes(currentDaterb, 30);
-      console.log("Updated Date:  " + resulteb); // 👉️ 2023-07-27T17:24:52.897Z
-      //  var dd = String(today.getDate()).padStart(2, '0');
-      //   var mm = String(today.getMonth() + 1).padStart(2, '0');
-      //   var yyyy = today.getFullYear();
-
-      //   today = yyyy + '-' + mm + '-' + dd;
-
+    
 
       var ddcurrenteb = String(resulteb.getDate()).padStart(2, '0');
       var mmcurrenteb = String(resulteb.getMonth() + 1).padStart(2, '0');
@@ -991,7 +1044,7 @@ $(document).ready(function () {
       var secondseb = resulteb.getSeconds();
 
       var updatedtimeeb = hourseb + ":" + minuteseb + ":" + secondseb;
-      console.log("updatedtimeeb" + updatedtimeeb);
+     
 
       $('#blast_date').attr('min', updateddateeb);
 
@@ -1003,16 +1056,16 @@ $(document).ready(function () {
       });
 
       $("#blast_date").change(function () {
-        console.log(this.value);
+       
         var today = updateddateeb;
-        console.log(today);
+    
 
         $("#blast_time").val('');
         if (this.value === today) {
           var thisHour = getCurrentTime(new Date());
-          console.log(thisHour);
+        
           var updatedtimeeb = hourseb + ":" + minuteseb;
-          console.log("Updated Time edit" + updatedtimeeb);
+        
           $('#blast_time').timepicker('option', 'minTime', updatedtimeeb);
           $('#blast_time').timepicker('option', 'maxTime', '11:59 PM');
 
@@ -1061,7 +1114,7 @@ $(document).ready(function () {
       //      const date = new Date('Wed Aug 16 2023 23:43:55 GMT+0530 (India Standard Time)');
 
       const result1 = addMinutes(currentDate1, 30);
-      console.log("Updated Date:  " + result1); // 👉️ 2023-07-27T17:24:52.897Z
+   
 
 
       var ddcurrent = String(result1.getDate()).padStart(2, '0');
@@ -1076,7 +1129,7 @@ $(document).ready(function () {
       var seconds = result1.getSeconds();
 
       var updatedtime = hours + ":" + minutes + ":" + seconds;
-      console.log("updatedtime 1" + updatedtime);
+    
 
       $(function () {
         $('#rb_time').timepicker({
@@ -1086,15 +1139,17 @@ $(document).ready(function () {
       });
 
       $("#rb_date").change(function () {
-        //console.log(this.value);
+       
         var today1 = updatedcurrentdaterb;
-        console.log("today date:" + today1);
+      
 
         $("#rb_time").val('');
         if (this.value === today1) {
           var thisHour = getCurrentTime(new Date());
-          console.log(thisHour);
+      
           var updatedtime = hours + ":" + minutes;
+
+          console.log("RB Updated time:" +updatedtime)
           $('#rb_time').timepicker('option', 'minTime', updatedtime);
           $('#rb_time').timepicker('option', 'maxTime', '11:59 PM');
 
@@ -1134,6 +1189,239 @@ $(document).ready(function () {
 
 
 
+
+
+   //  code start for add 30 min on make good time
+
+   var today = new Date();
+   var dd = String(today.getDate()).padStart(2, '0');
+   var mm = String(today.getMonth() + 1).padStart(2, '0');
+   var yyyy = today.getFullYear();
+
+   today = yyyy + '-' + mm + '-' + dd;
+
+   var todaycheck = new Date();
+   var datecheck = todaycheck.getFullYear() + '-' + (todaycheck.getMonth() + 1) + '-' + todaycheck.getDate();
+   var timecheck = todaycheck.getHours() + ":" + todaycheck.getMinutes() + ":" + todaycheck.getSeconds();
+   var dateTimecheck = datecheck + ' ' + timecheck;
+
+   //$('#blast_date').attr('min',today);
+   $('#mg_date').attr('min', today);
+
+
+   //code start for add 300min on current time
+   function addMinutesmg(date, minutes) {
+     date.setMinutes(date.getMinutes() + minutes);
+
+     return date;
+   }
+
+   const currentmgdate = new Date();
+
+
+   const resultmgdt = addMinutesmg(currentmgdate, 30);
+  
+   var dd2 = String(resultrbdt.getDate()).padStart(2, '0');
+   var mm2 = String(resultrbdt.getMonth() + 1).padStart(2, '0');
+   var yyyy2 = resultrbdt.getFullYear();
+
+   var updatedmgdate = yyyy2 + '-' + mm2 + '-' + dd2;
+   $('#mg_date').attr('min', updatedmgdate);
+
+
+   function addMinutesmg(date, minutes) {
+    date.setMinutes(date.getMinutes() + minutes);
+
+    return date;
+  }
+
+  const currentDatemkgood = new Date();
+
+  //      const date = new Date('Wed Aug 16 2023 23:43:55 GMT+0530 (India Standard Time)');
+
+  const resultmkgood = addMinutes(currentDatemkgood, 30);
+
+
+
+  var ddcurrent1 = String(resultmkgood.getDate()).padStart(2, '0');
+  var mmcurrent1 = String(resultmkgood.getMonth() + 1).padStart(2, '0');
+  var yyyycurrent1= resultmkgood.getFullYear();
+
+  var updatedcurrentmkgood = yyyycurrent1 + '-' + mmcurrent1 + '-' + ddcurrent1;
+
+
+  var hours1 = resultmkgood.getHours();
+  var minutes1 = resultmkgood.getMinutes();
+  var seconds1 = resultmkgood.getSeconds();
+
+  var updatedtime = hours1 + ":" + minutes1 + ":" + seconds1;
+
+
+  $(function () {
+    $('#mg_time').timepicker({
+      'timeFormat': 'h:i A',
+      step: 1
+    });
+  });
+
+  $("#mg_date").change(function () {
+   
+    var todaymkgood = updatedcurrentmkgood;
+  
+
+    $("#mg_time").val('');
+    if (this.value === todaymkgood) {
+      var thisHourmkgood = getCurrentTime(new Date());
+  
+      var updatedtimemkgood = hours1 + ":" + minutes1;
+      $('#mg_time').timepicker('option', 'minTime', updatedtimemkgood);
+      $('#mg_time').timepicker('option', 'maxTime', '11:59 PM');
+
+    }
+    else {
+      $('#mg_time').timepicker('option', 'minTime', '12:00 AM');
+      $('#mg_time').timepicker('option', 'maxTime', '11:30 PM');
+    }
+
+  });
+
+  function getCurrentTime(date) {
+    var hours = date.getHours(),
+      minutes = date.getMinutes(),
+      ampm = hours >= 12 ? 'PM' : 'AM';
+
+    if (minutes > 30) {
+      minutes = "00";
+      hours++;
+    }
+    else {
+      minutes = "00";
+    }
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+
+
+    return hours + ':' + minutes + ' ' + ampm;
+
+
+
+
+  }
+
+  // code end for add 30 min on make good time
+      
+
+      
+
+
+
+
+
+
+
+   //  code start for add 30 min on RB make good time
+
+   var today = new Date();
+   var dd = String(today.getDate()).padStart(2, '0');
+   var mm = String(today.getMonth() + 1).padStart(2, '0');
+   var yyyy = today.getFullYear();
+
+   today = yyyy + '-' + mm + '-' + dd;
+
+   var todaycheck = new Date();
+   var datecheck = todaycheck.getFullYear() + '-' + (todaycheck.getMonth() + 1) + '-' + todaycheck.getDate();
+   var timecheck = todaycheck.getHours() + ":" + todaycheck.getMinutes() + ":" + todaycheck.getSeconds();
+   var dateTimecheck = datecheck + ' ' + timecheck;
+
+   //$('#blast_date').attr('min',today);
+   $('#rb_mg_date').attr('min', today);
+
+
+   //code start for add 300min on current time
+   function addMinutesrbmg(date, minutes) {
+     date.setMinutes(date.getMinutes() + minutes);
+
+     return date;
+   }
+
+   const currentrbmgdate = new Date();
+
+
+   const resultrbmgdt = addMinutesrbmg(currentrbmgdate, 30);
+  
+   var dd3 = String(resultrbmgdt.getDate()).padStart(2, '0');
+   var mm3 = String(resultrbmgdt.getMonth() + 1).padStart(2, '0');
+   var yyyy3 = resultrbmgdt.getFullYear();
+
+   var updatedrbmgdate = yyyy3 + '-' + mm3 + '-' + dd3;
+   $('#rb_mg_date').attr('min', updatedrbmgdate);
+
+
+
+  var hours11 = resultrbmgdt.getHours();
+  var minutes11 = resultrbmgdt.getMinutes();
+  var seconds11 = resultrbmgdt.getSeconds();
+
+  var updatedrbmgtime = hours11 + ":" + minutes11 + ":" + seconds11;
+
+
+  $(function () {
+    $('#rb_mg_time').timepicker({
+      'timeFormat': 'h:i A',
+      step: 1
+    });
+  });
+
+  $("#rb_mg_date").change(function () {
+   
+    var todayrbmkgood = updatedrbmgdate;
+  
+
+    $("#rb_mg_time").val('');
+    if (this.value === todayrbmkgood) {
+      var thisHourmkgood = getCurrentTime(new Date());
+  
+      var updatedtimemkgood = hours11 + ":" + minutes11;
+      $('#rb_mg_time').timepicker('option', 'minTime', updatedrbmgtime);
+      $('#rb_mg_time').timepicker('option', 'maxTime', '11:59 PM');
+
+    }
+    else {
+      $('#rb_mg_time').timepicker('option', 'minTime', '12:00 AM');
+      $('#rb_mg_time').timepicker('option', 'maxTime', '11:30 PM');
+    }
+
+  });
+
+  function getCurrentTime(date) {
+    var hours = date.getHours(),
+      minutes = date.getMinutes(),
+      ampm = hours >= 12 ? 'PM' : 'AM';
+
+    if (minutes > 30) {
+      minutes = "00";
+      hours++;
+    }
+    else {
+      minutes = "00";
+    }
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+
+
+    return hours + ':' + minutes + ' ' + ampm;
+
+
+
+
+  }
+
+  // code end for add 30 min on make good time
+      
+
+
+  
+
       var idtype = $(this).data('id');
       const myArray = idtype.split(" ");
 
@@ -1146,7 +1434,7 @@ $(document).ready(function () {
       var blast_time = myArray[6];
       var tact = myArray[7];
       var blast_type = myArray[8];
-      console.log("Check Tact in edit condition:" + tact);
+    
 
 
 
@@ -1160,17 +1448,6 @@ $(document).ready(function () {
       var yyyy = today.getFullYear();
 
       today = yyyy + '-' + mm + '-' + dd;
-
-
-
-
-      console.log("id " + id);
-      console.log("ebstatus " + ebstatus);
-      console.log("eballocatedto " + eballocatedto);
-      console.log("blast_date " + blast_date);
-      console.log("rb_type " + rb_type);
-
-
 
 
 
@@ -1191,17 +1468,17 @@ $(document).ready(function () {
       var cname = $(this).val();
 
       if ($(this).val()) {
-        console.log("Selected value:" + cname);
+       
         $("#senerdtl").show();
-        console.log("Code above ajax");
+     
         $.ajax({
-          url: "http://localhost:3000/alltask/action",
+          url: "http://localhost:7777/alltask/action",
           method: "POST",
           data: { id: id, cname: cname, action: 'fetch_senderdtl' },
 
           dataType: "JSON",
           success: function (data) {
-            console.log("Success function");
+          
 
             // $('#cname').val(data.cname);
             $('#sender_name').val(data.sender_name);
@@ -1231,250 +1508,6 @@ $(document).ready(function () {
     });
 
 
-    if (action === "Edit") {
-      console.log(" Rajashri Edit Action if condition");
-      // $("#viewdata1").hide();
-
-
-      $("#viewdata11").hide();
-      $("#eblst1").hide();
-      $("#senerdtl").show();
-      $('#asset_name')[0].disabled = false;
-      $('#asset_link')[0].disabled = false;
-      $('#blast_date')[0].disabled = false;
-      $('#blast_time')[0].disabled = false;
-      //$("#reblastassets").hide();
-
-      $("#assets").show();
-
-      var todaycheck = new Date();
-      var datecheck = todaycheck.getFullYear() + '-' + (todaycheck.getMonth() + 1) + '-' + todaycheck.getDate();
-      var timecheck = todaycheck.getHours() + ":" + todaycheck.getMinutes() + ":" + todaycheck.getSeconds();
-      var dateTimecheck = datecheck + ' ' + timecheck;
-
-      var eblastdttime = blast_date + ' ' + blast_time;
-      var d1 = new Date(eblastdttime);
-      var d2 = new Date(dateTimecheck);
-
-
-      var seconds = (d1 - d2) / 1000;
-
-      console.log("Second:" + seconds);
-      if (seconds > 0 && ebstatus == 0) {
-        console.log("1st else if Eblast Completed");
-        console.log("eblastdttime:  " + eblastdttime);
-        console.log("dateTimecheck:  " + dateTimecheck);
-
-        document.querySelectorAll("#blast_typerr option").forEach(opt => {
-          if (opt.value == "Reminder-Blast") {
-            opt.disabled = true;
-          }
-        });
-        //$('#blast_typerr').prop('selectedIndex', 1);
-
-      }
-
-
-      else if (ebstatus == 1) {
-        console.log("2nd else if Eblast Completed");
-        console.log("eblastdttime:  " + eblastdttime);
-        console.log("dateTimecheck:  " + dateTimecheck);
-
-        document.querySelectorAll("#blast_typerr option").forEach(opt => {
-          if (opt.value == "Reminder-Blast") {
-            opt.disabled = false;
-          }
-        });
-        //$('#blast_typerr').prop('selectedIndex', 1);
-
-      }
-
-
-      else {
-        console.log("Eblast Completed");
-
-        document.querySelectorAll("#blast_typerr option").forEach(opt => {
-          if (opt.value == "Reminder-Blast") {
-            opt.disabled = false;
-          }
-        });
-
-        //$("#blast_typerr option[value=" + Reminder-Blast + "]").attr("disabled", "disabled");
-
-      }
-
-      if (today > rb_date && rb_date != "") {
-        $("#rb_date").removeAttr("min");
-
-      }
-
-      if (today > blast_date && blast_date != "") {
-        $("#blast_date").removeAttr("min");
-        $("#webinarassets11").hide();
-        $("#assets").hide();
-        $("#ebassets").show();
-      }
-
-      if (today > blast_date && today > rb_date && blast_date != "" && rb_date != "") {
-        console.log("today greater than blast and rb date");
-        $("#rb_date").removeAttr("min");
-        $("#blast_date").removeAttr("min");
-        $('#action_button').text('Edit').hide();
-
-      }
-
-    }
-
-
-
-    $('#blast_typerr').on('change', function () {
-      // var id = request.body.id;
-
-      var action = $("#action").val();
-
-
-      var blast_type = $("#blast_type").val();
-      var blast_type = $(this).val();
-
-      console.log("On Blast type err" + blast_type);
-
-      if (blast_type == "Reminder-Blast") {
-        if (ebstatus == "0" && blast_date < today) {
-          console.log("Status");
-          console.log(ebstatus);
-          console.log(" option  disaabled");
-          $("#rballocated_to option[value=" + eballocatedto + "]").attr("disabled", "disabled");
-        }
-        else {
-          console.log("Else condition True");
-          $("#rballocated_to ").removeAttr("disabled", "disabled");
-
-        }
-
-      }
-
-
-
-      console.log("Current date:" + today);
-
-      $("#ebassets").hide();
-      $("#assets").hide();
-      $("#reblastassets").hide();
-
-
-
-
-
-      if (blast_type == 'E-blast' && today <= blast_date && blast_date != "") {
-        console.log(blast_type);
-        $("#ebassets").hide();
-        $("#assets").show();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").hide();
-        $('#asset_name')[0].disabled = false;
-        $('#asset_link')[0].disabled = false;
-        $('#blast_date')[0].disabled = false;
-        $('#blast_time')[0].disabled = false;
-
-      }
-      else if (blast_type == 'E-blast' && today > blast_date && blast_date != "") {
-        console.log("blast type" + blast_type);
-        $("#ebassets").show();
-        $("#assets").hide();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").hide();
-
-        // $("#blast_date").removeAttr("min");
-
-
-        // $('#asset_name')[0].disabled = true;
-        // $('#asset_link')[0].disabled = true;
-        // $('#blast_date')[0].disabled = true;
-        // $('#blast_time')[0].disabled = true;
-
-      }
-
-
-      else if (blast_type == 'Reminder-Blast' && rb_date == "") {
-
-
-        $("#ebassets").hide();
-        $("#reblastassets").show();
-        $("#remblastassetsread").hide();
-        $("#assets").hide();
-      }
-
-      else if (blast_type == 'Reminder-Blast' && today <= rb_date) {
-
-       
-       
-        $("#ebassets").hide();
-        $("#reblastassets").show();
-        $("#assets").hide();
-        $("#remblastassetsread").hide();
-
-
-        $('#rballocated_to')[0].disabled = false;
-        $('#rb_assetname')[0].disabled = false;
-        $('#rb_asset_link')[0].disabled = false;
-        $('#rb_date')[0].disabled = false;
-        $('#rb_time')[0].disabled = false;
-
-      }
-
-
-
-      else if (blast_type == 'Reminder-Blast' && today > rb_date) {
-        console.log("Second If Condition");
-        console.log("Today" + today);
-        console.log("Rem Date" + rb_date);
-        $("#ebassets").hide();
-        $("#assets").hide();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").show();
-
-        // $("#rb_date").removeAttr("min");
-
-
-
-        // $('#rballocated_to')[0].disabled = true;
-        // $('#rb_assetname')[0].disabled = true;
-        // $('#rb_asset_link')[0].disabled = true;
-        // $('#rb_date')[0].disabled = true;
-        // $('#rb_time')[0].disabled = true;
-
-      }
-
-
-
-      else if (blast_type == 'E-blast' && today > blast_date && blast_date != "") {
-        console.log("blast type" + blast_type);
-        $("#ebassets").show();
-        $("#assets").hide();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").hide();
-
-
-      }
-
-
-
-
-
-      else {
-        // $("#asset_name").show();
-        // $("#reblastassets").hide();
-        // $("#assets").hide();
-
-      }
-
-
-
-
-
-
-    });
-
 
 
 
@@ -1484,7 +1517,7 @@ $(document).ready(function () {
       $("#webinarblast").show();
 
       if (today > blast_date && blast_date != "") {
-        console.log("today greater than Webinar date");
+       
         $('input').attr('readonly', true);
         $('select').attr('readonly', true);
         $('textarea').attr('readonly', true);
@@ -1494,7 +1527,7 @@ $(document).ready(function () {
 
       }
       else {
-        console.log("Else condition today greater than Webinar date");
+   
         $('input').attr('readonly', false);
         $('select').attr('readonly', false);
         $('textarea').attr('readonly', false);
@@ -1517,7 +1550,7 @@ $(document).ready(function () {
       //      const date = new Date('Wed Aug 16 2023 23:43:55 GMT+0530 (India Standard Time)');
 
       const result12 = addMinutes2(currentDate11, 30);
-      console.log("Updated Date:  " + result12); // 👉️ 2023-07-27T17:24:52.897Z
+   
 
 
       var ddcurrent12 = String(result12.getDate()).padStart(2, '0');
@@ -1532,7 +1565,7 @@ $(document).ready(function () {
       var seconds12 = result12.getSeconds();
 
       var updatedtime12 = hours12 + ":" + minutes12 + ":" + seconds12;
-      console.log("updatedtime 12" + updatedtime12);
+   
 
       $(function () {
         $('#registration_time').timepicker({
@@ -1542,15 +1575,14 @@ $(document).ready(function () {
       });
 
       $("#registration_date").change(function () {
-        console.log("check date after date clicked");
-        console.log(this.value);
+     
         var today12 = updatedcurrentdatewebinar;
-        console.log("today date:" + today12);
+     
 
         $("#registration_time").val('');
         if (this.value === today12) {
           var thisHour12 = getCurrentTime(new Date());
-          console.log(thisHour12);
+        
           var updatedtime12 = hours12 + ":" + minutes12;
           $('#registration_time').timepicker('option', 'minTime', updatedtime12);
           $('#registration_time').timepicker('option', 'maxTime', '11:59 PM');
@@ -1604,7 +1636,7 @@ $(document).ready(function () {
       if (today > blast_date && today > rb_date && blast_date != "" && rb_date != "") {
 
 
-        console.log("today greater than blast and rb date");
+     
         $('input').attr('readonly', true);
         $('select').attr('readonly', true);
         $('textarea').attr('readonly', true);
@@ -1631,12 +1663,11 @@ $(document).ready(function () {
     //   $("#webinarblast").hide();
     // }
 
-    console.log("Rajashri new edit action");
-    console.log(id);
+   
 
 
     $.ajax({
-      url: "http://localhost:3000/alltask/action",
+      url: "http://localhost:7777/alltask/action",
       method: "POST",
       data: { id: id, action: 'fetch_single' },
 
@@ -1644,6 +1675,764 @@ $(document).ready(function () {
       success: function (data) {
 
 
+
+
+
+        
+
+    if (action === "Edit") {
+
+     
+      console.log("rb mgdttime:" +data.rb_mg_date);
+
+      var rb_mg_date=data.rb_mg_date;
+      var mg_date=data.mg_date;
+
+      $("#rbmkgoodassets").hide();
+      $("#viewdata11").hide();
+      $("#eblst1").hide();
+      $("#senerdtl").show();
+      $('#asset_name')[0].disabled = false;
+      $('#asset_link')[0].disabled = false;
+      $('#blast_date')[0].disabled = false;
+      $('#blast_time')[0].disabled = false;
+      //$("#reblastassets").hide();
+
+      $("#assets").show();
+
+      var todaycheck = new Date();
+      var datecheck = todaycheck.getFullYear() + '-' + (todaycheck.getMonth() + 1) + '-' + todaycheck.getDate();
+      var timecheck = todaycheck.getHours() + ":" + todaycheck.getMinutes() + ":" + todaycheck.getSeconds();
+      var dateTimecheck = datecheck + ' ' + timecheck;
+
+      var eblastdttime = blast_date + ' ' + blast_time;
+      var d1 = new Date(eblastdttime);
+      var d2 = new Date(dateTimecheck);
+
+
+      var seconds = (d1 - d2) / 1000;
+
+     
+      if (seconds > 0 && ebstatus == 0) {
+       
+
+        document.querySelectorAll("#blast_typerr option").forEach(opt => {
+        //  if (opt.value == "Reminder-Blast") {
+         // opt.disabled = true;
+
+         console.log("within if reminder blast");
+          var RB = "Reminder-Blast";
+          $("#blast_typerr option[value=" + RB + "]").hide();
+
+          var MG = "Make-Good";
+
+          $("#blast_typerr option[value=" + MG + "]").hide();
+
+
+          var RBMakeGood = "RBMake-Good";
+
+          $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+
+      //  }
+ });
+      
+ }
+
+
+      else if (ebstatus == 1 || seconds < 0) {
+       
+
+        document.querySelectorAll("#blast_typerr option").forEach(opt => {
+         // if (opt.value == "Reminder-Blast") {
+           // opt.disabled = false;
+
+            
+        //  }
+
+        var RB = "Reminder-Blast";
+          $("#blast_typerr option[value=" + RB + "]").show();
+
+          var MG = "Make-Good";
+
+          $("#blast_typerr option[value=" + MG + "]").show();
+
+
+          var RBMakeGood = "RBMake-Good";
+
+          $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+          $("#assets").hide();
+          $("#ebassets").show();
+
+        });
+        //$('#blast_typerr').prop('selectedIndex', 1);
+
+      }
+
+
+      else {
+       
+
+        document.querySelectorAll("#blast_typerr option").forEach(opt => {
+          // if (opt.value == "Reminder-Blast") {
+          //   opt.disabled = false;
+          // }
+
+
+          var RB = "Reminder-Blast";
+          $("#blast_typerr option[value=" + RB + "]").show();
+
+          var MG = "Make-Good";
+
+          $("#blast_typerr option[value=" + MG + "]").show();
+
+
+          var RBMakeGood = "RBMake-Good";
+
+          $("#blast_typerr option[value=" + RBMakeGood + "]").show();
+
+
+        });
+
+         $("#assets").hide();
+          $("#ebassets").show();
+
+        //$("#blast_typerr option[value=" + Reminder-Blast + "]").attr("disabled", "disabled");
+
+      }
+
+
+      //end code for hide Mg/RB if Eblast not done
+      
+      
+
+//start code for hide/show RB/MG RB if EB MG not done 
+
+
+// var todaycheck = new Date();
+// var datecheck = todaycheck.getFullYear() + '-' + (todaycheck.getMonth() + 1) + '-' + todaycheck.getDate();
+// var timecheck = todaycheck.getHours() + ":" + todaycheck.getMinutes() + ":" + todaycheck.getSeconds();
+// var dateTimecheck = datecheck + ' ' + timecheck;
+var ebmg_date=data.mg_date;
+var ebmg_time=data.mg_time;
+var ebmgdttime = ebmg_date + ' ' + ebmg_time;
+var d1 = new Date(ebmgdttime);
+var d2 = new Date(dateTimecheck);
+var mg_status=data.mg_status;
+
+var secondsebmg = (d1 - d2) / 1000;
+
+if (secondsebmg > 0 && mg_status == 0 && data.mgasset_name !="" && data.mgasset_link !="") {
+
+  console.log("hide reminder blast if EB MG not done");
+  var RB = "Reminder-Blast";
+  $("#blast_typerr option[value=" + RB + "]").hide();
+
+}
+
+
+
+if((data.mgasset_name =="" && data.mgasset_link =="") && (data.rb_assetname !="" && data.rb_assetlink !="" ))
+{
+ var MG = "Make-Good";
+ $("#blast_typerr option[value=" + MG + "]").hide();
+
+}
+
+else{
+ var MG = "Make-Good";
+ $("#blast_typerr option[value=" + MG + "]").show();
+
+}
+
+
+
+//start code for reminder blast
+
+var rb_date=data.rb_date;
+var rb_time=data.rb_time;
+var rbdttime = rb_date + ' ' + rb_time;
+var d1 = new Date(rbdttime);
+var d2 = new Date(dateTimecheck);
+var rbstatus=data.rbstatus;
+
+var secondsrb = (d1 - d2) / 1000;
+
+
+
+if(data.rb_assetname !="" && data.rb_assetlink !="" )
+{
+  console.log("rb_assetname not empty");
+if (secondsrb > 0 && data.rbstatus == 0) {
+ 
+
+  document.querySelectorAll("#blast_typerr option").forEach(opt => {
+  //  if (opt.value == "Reminder-Blast") {
+   // opt.disabled = true;
+
+   console.log("within if reminder blast");
+    var RB = "Reminder-Blast";
+    $("#blast_typerr option[value=" + RB + "]").show();
+
+   
+    var RBMakeGood = "RBMake-Good";
+
+    $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+
+//  }
+});
+
+}
+
+
+else if (data.rbstatus == 1 || secondsrb < 0) {
+ 
+
+  document.querySelectorAll("#blast_typerr option").forEach(opt => {
+   // if (opt.value == "Reminder-Blast") {
+     // opt.disabled = false;
+
+      
+  //  }
+
+  var RB = "Reminder-Blast";
+    $("#blast_typerr option[value=" + RB + "]").show();
+
+    
+
+    var RBMakeGood = "RBMake-Good";
+
+    $("#blast_typerr option[value=" + RBMakeGood + "]").show();
+
+
+    $("#assets").hide();
+    $("#ebassets").show();
+
+  });
+  //$('#blast_typerr').prop('selectedIndex', 1);
+
+}
+
+
+else {
+ 
+
+  document.querySelectorAll("#blast_typerr option").forEach(opt => {
+     var RB = "Reminder-Blast";
+    $("#blast_typerr option[value=" + RB + "]").show();
+  var RBMakeGood = "RBMake-Good";
+
+    $("#blast_typerr option[value=" + RBMakeGood + "]").show();
+
+
+  });
+
+   $("#assets").hide();
+    $("#ebassets").show();
+
+  
+
+}
+
+    }
+
+
+    // else{
+    //   document.querySelectorAll("#blast_typerr option").forEach(opt => {
+               
+    //       var RB = "Reminder-Blast";
+    //       $("#blast_typerr option[value=" + RB + "]").show();
+      
+         
+    //       var RBMakeGood = "RBMake-Good";
+      
+    //       $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+      
+      
+      
+     
+    //   });
+
+    // }
+
+
+//end code for hide/show RB/MG RB if EB MG not done 
+
+
+      var rbdttime = rb_date + ' ' + rb_time;
+      var rbd1 = new Date(rbdttime);
+      var rbd2 = new Date(dateTimecheck);
+
+
+
+
+      if (today > rb_date && rb_date != "") {
+        $("#rb_date").removeAttr("min");
+
+      }
+
+      if (today > blast_date && blast_date != "") {
+        $("#blast_date").removeAttr("min");
+        $("#webinarassets11").hide();
+        $("#assets").hide();
+        $("#ebassets").show();
+      }
+
+      if (today > blast_date && today > rb_date && blast_date != "" && rb_date != "") {
+       
+        $("#rb_date").removeAttr("min");
+        $("#blast_date").removeAttr("min");
+      //  $('#action_button').text('Edit').hide();
+
+      }
+
+
+      if (today > mg_date && mg_date != "") {
+        $("#mg_date").removeAttr("min");
+
+      }
+
+
+
+    }
+
+
+
+    $('#blast_typerr').on('change', function () {
+      // var id = request.body.id;
+
+      var action = $("#action").val();
+
+
+      var blast_type = $("#blast_type").val();
+      var blast_type = $(this).val();
+
+    
+console.log("blast_date:" +blast_date);
+console.log("rb_date:" +rb_date);
+console.log("mg_date:" +mg_date);
+console.log("rb_mg_date:" +rb_mg_date);
+      if (blast_type == "Reminder-Blast") {
+        if (ebstatus == "0" && blast_date < today) {
+          
+          $("#rballocated_to option[value=" + eballocatedto + "]").attr("disabled", "disabled");
+        }
+        else {
+        
+          $("#rballocated_to ").removeAttr("disabled", "disabled");
+
+        }
+
+      }
+
+
+
+ 
+
+      $("#ebassets").hide();
+      $("#assets").hide();
+      $("#reblastassets").hide();
+      $("#mkgoodassets").hide();
+
+console.log("RB Status:" +data.rbstatus);
+
+      if (blast_type == 'E-blast' && today <= blast_date && blast_date != "") {
+       
+        $("#ebassets").hide();
+        $("#assets").show();
+        $("#reblastassets").hide();
+        $("#remblastassetsread").hide();
+        $('#asset_name')[0].disabled = false;
+        $('#asset_link')[0].disabled = false;
+        $('#blast_date')[0].disabled = false;
+        $('#blast_time')[0].disabled = false;
+
+      }
+      else if (blast_type == 'E-blast' && today > blast_date && blast_date != "") {
+     
+        $("#ebassets").show();
+        $("#assets").hide();
+        $("#reblastassets").hide();
+        $("#remblastassetsread").hide();
+        $("#mkgoodassets").hide();
+        $("#rbmkgoodassets").hide();
+
+
+        // $("#blast_date").removeAttr("min");
+
+
+        // $('#asset_name')[0].disabled = true;
+        // $('#asset_link')[0].disabled = true;
+        // $('#blast_date')[0].disabled = true;
+        // $('#blast_time')[0].disabled = true;
+
+      }
+
+
+      else if (blast_type == 'Reminder-Blast' && rb_date == "") {
+
+
+        $("#ebassets").hide();
+        $("#reblastassets").show();
+        $("#remblastassetsread").hide();
+        $("#assets").hide();
+        $("#mkgoodassets").hide();
+        $("#rbmkgoodassets").hide();
+
+      }
+
+
+
+      else if (blast_type == 'Reminder-Blast' && (today > rb_date || data.rbstatus=="1")) {
+      
+
+        console.log("blast_type == 'Reminder-Blast' && (today > rb_date || data.rbstatus==is 1)")
+        $("#ebassets").hide();
+        $("#assets").hide();
+        $("#reblastassets").hide();
+        $("#remblastassetsread").show();
+        $("#mkgoodassets").hide();
+        $("#rbmkgoodassets").hide();
+
+        // $("#rb_date").removeAttr("min");
+
+
+
+        // $('#rballocated_to')[0].disabled = true;
+        // $('#rb_assetname')[0].disabled = true;
+        // $('#rb_asset_link')[0].disabled = true;
+        // $('#rb_date')[0].disabled = true;
+        // $('#rb_time')[0].disabled = true;
+
+      }
+
+
+
+
+      
+
+      else if (blast_type == 'Reminder-Blast' && today <= rb_date) {
+
+       
+       
+        $("#ebassets").hide();
+        $("#reblastassets").show();
+        $("#assets").hide();
+        $("#remblastassetsread").hide();
+        $("#mkgoodassets").hide();
+        $("#rbmkgoodassets").hide();
+
+
+        $('#rballocated_to')[0].disabled = false;
+        $('#rb_assetname')[0].disabled = false;
+        $('#rb_asset_link')[0].disabled = false;
+        $('#rb_date')[0].disabled = false;
+        $('#rb_time')[0].disabled = false;
+
+      }
+
+   
+
+  
+
+  
+
+
+
+
+//start code for make good
+     
+      else if (blast_type == 'Make-Good' && mg_date == "") {
+
+console.log("within blast_type == 'Make-Good' && mg_date ==  ")
+        $("#ebassets").hide();
+        $("#reblastassets").hide();
+        $("#remblastassetsread").hide();
+        $("#assets").hide();
+        $("#mkgoodassets").show();
+        $("#rbmkgoodassets").hide();
+      }
+
+
+
+      
+      else if (blast_type == 'Make-Good'  && today <= mg_date && data.mg_status=="1")   {
+
+       console.log("blast_type == 'Make-Good'  && today <= mg_date && mg_status== is 1")
+       
+        $("#ebassets").hide();
+        $("#reblastassets").hide();
+        $("#assets").hide();
+        $("#remblastassetsread").hide();
+        $("#mkgoodassets").show();
+        $("#rbmkgoodassets").hide();
+
+
+        $('#mgallocated_to').attr("disabled", true); 
+        $('#mgasset_name').attr("disabled", true); 
+        $('#mgasset_link').attr("disabled", true); 
+        $('#mg_date').attr("disabled", true); 
+        $('#mg_time').attr("disabled", true); 
+
+      }
+
+
+
+
+      else if (blast_type == 'Make-Good' && today <= mg_date)   {
+
+       
+       console.log("blast_type == 'Make-Good' && today <= mg_date")
+        $("#ebassets").hide();
+        $("#reblastassets").hide();
+        $("#assets").hide();
+        $("#remblastassetsread").hide();
+        $("#mkgoodassets").show();
+        $("#rbmkgoodassets").hide();
+
+
+      
+
+      }
+
+
+
+
+
+
+      else if (blast_type == 'Make-Good' && today > mg_date) {
+      
+        $("#ebassets").hide();
+        $("#assets").hide();
+        $("#reblastassets").hide();
+        $("#remblastassetsread").hide();
+        $("#mkgoodassets").show();
+        $("#rbmkgoodassets").hide();
+
+        // document.getElementById("mgallocated_to").readOnly = true;
+        // document.getElementById("mgasset_name").readOnly = true;
+        // document.getElementById("mgasset_link").readOnly = true;
+        // document.getElementById("mg_date").readOnly = true;
+        // document.getElementById("mg_time").readOnly = true;
+       
+        $('#mgallocated_to').attr("disabled", true); 
+        $('#mgasset_name').attr("disabled", true); 
+        $('#mgasset_link').attr("disabled", true); 
+        $('#mg_date').attr("disabled", true); 
+        $('#mg_time').attr("disabled", true); 
+
+
+        // $("#rb_date").removeAttr("min");
+
+
+
+        // $('#rballocated_to')[0].disabled = true;
+        // $('#rb_assetname')[0].disabled = true;
+        // $('#rb_asset_link')[0].disabled = true;
+        // $('#rb_date')[0].disabled = true;
+        // $('#rb_time')[0].disabled = true;
+
+      }
+
+
+
+      else if (blast_type == 'Make-Good' &&(( today > mg_date && mg_date != "" ) )) {
+     
+
+        console.log("if mg status is 1");
+        $("#ebassets").hide();
+        $("#assets").hide();
+        $("#reblastassets").hide();
+        $("#remblastassetsread").hide();
+        $("#rbmkgoodassets").hide();
+
+        $('#mgallocated_to').attr("disabled", true); 
+        $('#mgasset_name').attr("disabled", true); 
+        $('#mgasset_link').attr("disabled", true); 
+        $('#mg_date').attr("disabled", true); 
+        $('#mg_time').attr("disabled", true); 
+
+
+      //  document.getElementById("rb_mgasset_name").readOnly = true;
+
+
+
+      }
+
+
+
+
+//end code for make good
+
+
+
+
+
+
+
+
+
+
+
+
+
+//start code for RB make good
+     
+else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
+
+  console.log("within blast_type == 'RBMake-Good' && mg_date ==  ")
+          $("#ebassets").hide();
+          $("#reblastassets").hide();
+          $("#remblastassetsread").hide();
+          $("#assets").hide();
+          $("#mkgoodassets").hide();
+          $("#rbmkgoodassets").show();
+
+        }
+  
+  
+  
+        
+        else if (blast_type == 'RBMake-Good'  && today <= rb_mg_date && data.rb_mg_status=="1")   {
+  
+         console.log("blast_type == 'RBMake-Good'  && today <= rb_mg_date && rb_mg_status== is 1")
+         
+          $("#ebassets").hide();
+          $("#reblastassets").hide();
+          $("#assets").hide();
+          $("#remblastassetsread").hide();
+          $("#mkgoodassets").hide();
+          $("#rbmkgoodassets").show();
+
+  
+  
+          $('#rb_mgallocated_to').attr("disabled", true); 
+          $('#rb_mgasset_name').attr("disabled", true); 
+          $('#rb_mgasset_link').attr("disabled", true); 
+          $('#rb_mg_date').attr("disabled", true); 
+          $('#rb_mg_time').attr("disabled", true); 
+  
+        }
+  
+  
+  
+  
+        else if (blast_type == 'RBMake-Good' && today <= rb_mg_date)   {
+  
+         
+         console.log("blast_type == 'RBMake-Good' && today <= rb_mg_date")
+          $("#ebassets").hide();
+          $("#reblastassets").hide();
+          $("#assets").hide();
+          $("#remblastassetsread").hide();
+          $("#mkgoodassets").hide();
+          $("#rbmkgoodassets").show();
+
+  
+  
+        
+  
+        }
+  
+  
+  
+  
+  
+  
+        else if (blast_type == 'RBMake-Good' && today > rb_mg_date) {
+        
+          $("#ebassets").hide();
+          $("#assets").hide();
+          $("#reblastassets").hide();
+          $("#remblastassetsread").hide();
+          $("#mkgoodassets").hide();
+          $("#rbmkgoodassets").show();
+
+  
+          // document.getElementById("mgallocated_to").readOnly = true;
+          // document.getElementById("mgasset_name").readOnly = true;
+          // document.getElementById("mgasset_link").readOnly = true;
+          // document.getElementById("mg_date").readOnly = true;
+          // document.getElementById("mg_time").readOnly = true;
+         
+          $('#rb_mgallocated_to').attr("disabled", true); 
+  $('#rb_mgasset_name').attr("disabled", true); 
+  $('#rb_mgasset_link').attr("disabled", true); 
+  $('#rb_mg_date').attr("disabled", true); 
+  $('#rb_mg_time').attr("disabled", true); 
+  
+  
+          // $("#rb_date").removeAttr("min");
+  
+  
+  
+          // $('#rballocated_to')[0].disabled = true;
+          // $('#rb_assetname')[0].disabled = true;
+          // $('#rb_asset_link')[0].disabled = true;
+          // $('#rb_date')[0].disabled = true;
+          // $('#rb_time')[0].disabled = true;
+  
+        }
+  
+  
+  
+        else if (blast_type == 'RBMake-Good' &&(( today > mg_date && mg_date != "" ) )) {
+       
+  
+          console.log("if mg status is 1");
+          $("#ebassets").hide();
+          $("#assets").hide();
+          $("#reblastassets").hide();
+          $("#remblastassetsread").hide();
+          $("#rbmkgoodassets").show();
+
+  
+          $('#rb_mgallocated_to').attr("disabled", true); 
+  $('#rb_mgasset_name').attr("disabled", true); 
+  $('#rb_mgasset_link').attr("disabled", true); 
+  $('#rb_mg_date').attr("disabled", true); 
+  $('#rb_mg_time').attr("disabled", true); 
+  
+  
+        //  document.getElementById("rb_mgasset_name").readOnly = true;
+  
+  
+  
+        }
+  
+  
+  
+  
+  //end code for RB make good
+
+
+
+
+
+
+
+
+      else {
+        // $("#asset_name").show();
+        // $("#reblastassets").hide();
+        // $("#assets").hide();
+
+      }
+
+
+
+
+
+
+    });
+
+
+console.log("mg date is check:" +data.mg_date);
         $('#cname').val(data.cname);
         $('#tact1122').val(data.tact);
         $('#camp_name').val(data.camp_name);
@@ -1693,6 +2482,25 @@ $(document).ready(function () {
         $('#registration_link').val(data.asset_link);
         $('#registration_date').val(data.blast_date);
         $('#registration_time').val(data.blast_time);
+
+
+
+        $('#mgallocated_to').val(data.mgallocated_to);
+        $('#mgasset_name').val(data.mgasset_name);
+        $('#mgasset_link').val(data.mgasset_link);
+        $('#mg_date').val(data.mg_date);
+        $('#mg_time').val(data.mg_time);
+
+
+
+        
+        $('#rb_mgallocated_to').val(data.rb_mgallocated_to);
+        $('#rb_mgasset_name').val(data.rb_mgasset_name);
+        $('#rb_mgasset_link').val(data.rb_mgasset_link);
+        $('#rb_mg_date').val(data.rb_mg_date);
+        $('#rb_mg_time').val(data.rb_mg_time);
+
+
         // $('#webcomment').val(data.comment);
 
 
@@ -1702,12 +2510,30 @@ $(document).ready(function () {
         $('#priority').val(data.priority);
         $('#allocated_to').val(data.allocated_to);
         $('#id').val(data.id);
+        
+
+
+        $('#action_button').attr('disabled', false);
+          $('#leftnav').DataTable().ajax.reload();
+          $('#apptask').DataTable().ajax.reload();
+          $('#task_priorities').DataTable().ajax.reload();
+          $('#todaysstask').DataTable().ajax.reload();
+          $('#weeklytasks').DataTable().ajax.reload();
+  
+          
+          // $('#task_priorities').DataTable().ajax.reload();
+  
+  
+        //  $('#action_modal').modal('hide');
+  
+
+
 
         setTimeout(function () {
           $('#message').html('<div class="alert alert-danger">' + data.message + '</div>');
           $('#message').html('');
         }, 5000);
-        //console.log("Rajashri Success new edit action");
+       
 
       }
     });
@@ -1746,7 +2572,7 @@ $(document).ready(function () {
 
     var id = myArray1[0];
 
-    console.log("ID IS:" + id);
+  
 
 
 
@@ -1761,11 +2587,10 @@ $(document).ready(function () {
 
 
     var action = $("#action").val();
-    console.log("View1 action Rajashri");
-    console.log(action);
+   
     if (action === "view1") {
 
-      console.log("If View condition is true");
+    
       $("#fileviewbox").hide();
       $("#fileviewdownload").show();
       $("#webinarfileviewdownload").show();
@@ -1780,18 +2605,20 @@ $(document).ready(function () {
 
 
     $.ajax({
-      url: "http://localhost:3000/alltask/action",
+      url: "http://localhost:7777/alltask/action",
       method: "POST",
       data: { id: id, action: 'fetch_single_view' },
 
       dataType: "JSON",
       success: function (data) {
         if (data.rb_assetname == "") {
-          console.log("RB Asset Empty rbassetss hide");
+        
           $("#rbassetss").hide();
         }
+
+       
         else {
-          console.log("RB Asset not Empty rbassetss show");
+        
           $("#rbassetss").show();
         }
 
@@ -1844,12 +2671,6 @@ $(document).ready(function () {
 
         var adminebcomment = data.comment;
         var adminrbcomment = data.rb_comment;
-
-
-        console.log("user webinar files");
-        console.log("tact is" +tact)
-       
-
         if (tact === "e_blast") {
           $("#webinarfileviewdownload").hide();
           var tact = "Email-Blast";
@@ -1859,7 +2680,7 @@ $(document).ready(function () {
          //////////  Code start for Admin EBlast Files   ////////////////
           if (!admin_filesname) {
             var htmlContent = '';
-            console.log(htmlContent);
+        
 
 
             document.getElementById('viewfiles11').innerHTML = htmlContent;
@@ -1871,7 +2692,7 @@ $(document).ready(function () {
             var length = admin_filesname.length;
             var htmladminebcmt = '';
            
-            htmladminebcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b  style="color:red">Admin EB Comment:   </b> ' + adminebcomment + ' </td> </tr>', '</p></div>';
+            htmladminebcmt += '<div style="background: white;"><p > <tr><td width="5%"><b  style="color:red">Admin EB Comment:   </b> ' + adminebcomment + ' </td> </tr>', '</p></div>';
               var htmlContent = '';
             //var htmlData =admin_filesname;
             for (var i = 0; i < length; i++) {
@@ -1913,10 +2734,9 @@ $(document).ready(function () {
               document.getElementById('viewreminderfiles11').innerHTML = htmlContentrb;
 
               var admin_reminderfiles = admin_reminderfiles.split(',');
-              console.log("admin_reminderfiles:" + admin_reminderfiles);
+          
               var lengthrbfile = admin_reminderfiles.length;
-              console.log("length of admin RB file:" + lengthrbfile);
-              console.log("within else condition:" + admin_reminderfiles);
+             
 
               var htmlContentrb = '';
 
@@ -1935,7 +2755,7 @@ $(document).ready(function () {
             var adminrbcomment = data.rb_comment;
          
           var htmladminrbcmt = '';
-          htmladminrbcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b style="color:red">Admin RB Comment:   </b> ' + adminrbcomment + ' </td> </tr>', '</p></div>';
+          htmladminrbcmt += '<div style="background: white;"><p> <tr><td width="5%"><b style="color:red">Admin RB Comment:   </b> ' + adminrbcomment + ' </td> </tr>', '</p></div>';
           document.getElementById('adminrbcomment').innerHTML = htmladminrbcmt;
           }
 
@@ -1946,7 +2766,7 @@ $(document).ready(function () {
 
           ////////////////////   code start for user Eblast files     ////////////////////
 
-
+var user_ebfiles=data.user_ebfiles;
           if (!user_ebfiles) {
             var htmlContentusereb = '';
             
@@ -1972,7 +2792,7 @@ $(document).ready(function () {
              var userebcomment = data.user_ebcomment;
            
             var htmluserebcmt = '';
-            htmluserebcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b style="color:red">User EB Comment:   </b> ' + userebcomment + ' </td> </tr>', '</p></div>';
+            htmluserebcmt += '<div style="background: white;"><p> <tr><td width="5%"><b style="color:red">User EB Comment:   </b> ' + userebcomment + ' </td> </tr>', '</p></div>';
             document.getElementById('userebcomment').innerHTML = htmluserebcmt;
 
 
@@ -1992,7 +2812,7 @@ $(document).ready(function () {
           }
           else {
             var userhtmlContentrb = '';
-            console.log("Empty User Reminder Files:" + user_rbfiles);
+        
             if (user_rbfiles == "") {
 
             }
@@ -2016,7 +2836,7 @@ $(document).ready(function () {
              var userrbcomment = data.user_rbcomment;
              
               var htmluserrbcmt = '';
-              htmluserrbcmt += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b style="color:red">User RB Comment:   </b> ' + userrbcomment + ' </td> </tr>', '</p></div>';
+              htmluserrbcmt += '<div style="background: white;"><p> <tr><td width="5%"><b style="color:red">User RB Comment:   </b> ' + userrbcomment + ' </td> </tr>', '</p></div>';
               document.getElementById('userrbcomment').innerHTML = htmluserrbcmt;
 
 
@@ -2045,7 +2865,7 @@ $(document).ready(function () {
         //  var adminwebinarcomment1 ="<p style='font-size:12px;'><b style='color:red'>Admin Comment:   </b>" +data.comment+"</p>";
 
 
-          adminwebinarcomment1 += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b  style="color:red">Admin Comment:   </b> ' + data.comment + ' </td> </tr>', '</p></div>';
+          adminwebinarcomment1 += '<div style="background: white;"><p> <tr><td width="5%"><b  style="color:red">Admin Comment:   </b> ' + data.comment + ' </td> </tr>', '</p></div>';
 
 
 
@@ -2094,27 +2914,27 @@ var user_webcomment=data.webinar_comment;
 var user_webcomment ="";
 
 
-user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td width="5%"><b  style="color:red">User Comment:   </b> ' + data.webinar_comment + ' </td> </tr>', '</p></div>';
+user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  style="color:red">User Comment:   </b> ' + data.webinar_comment + ' </td> </tr>', '</p></div>';
 
 
 
     if (!user_webfiles) {
             var htmlContentuserweb = '';
-            console.log(htmlContentuserweb);
+         
 
 
             document.getElementById('webinarviewfiles11').innerHTML = htmlContentuserweb;
 
           }
           else {
-            console.log("else condition User Webinar Files not empty:" + user_webfiles);
+         
 
             var user_webfiles = user_webfiles.split(',');
 
             var length = user_webfiles.length;
 
 
-            console.log("length of user_ebfiles :" + length);
+         
 
             var htmlContentuserweb = '';
             //var htmlData =admin_filesname;
@@ -2125,7 +2945,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
               htmlContentuserweb += '<p  class="filenamep"> <tr><td width="5%"><button type="button"  class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + user_webfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg"><p style="margin:0;">' + user_webfiles[i] + '</p><i class="fa fa-download"></i></button></td> </tr>', '</p>';
 
             }
-            console.log(htmlContentuserweb);
+       
 
 
             document.getElementById('webinarviewuserfiles11').innerHTML = htmlContentuserweb;
@@ -2142,12 +2962,10 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
 
-        console.log("check tact 11:" + data.tact);
+    
         if (data.tact === "webinar") {
           var tactwebview = "Webinar";
-          console.log("tact is webinar");
-
-          console.log("data tact is:" + data.tact);
+        
           $("#webinarassets12").show();
           $("#ebbassetss").hide();
           $("#ebassets").hide();
@@ -2155,12 +2973,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
           $("#tactics").hide();
 
         }
-        // else if(data.tact==="Email Blast / Reminder Blast") {
-        //   console.log("tact is not webinar");
-        //   $("#webinarassets12").hide();
-        //   $("#ebassets").show();
-        //   $("#rbassetss").show();
-        // }
+       
         else if (data.tact === "e_blast") {
           var tactwebview = "Email Blast";
           if (data.rb_type != "" && data.rb_assetname != "" && data.rb_assetlink != "") {
@@ -2174,7 +2987,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
 
-            console.log("rb type rb asset name rb asset links are empty fields.....");
+          
             $("#webinarassets12").hide();
             $("#ebassets").show();
             $("#rbassetss").hide();
@@ -2183,18 +2996,10 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
           }
 
-          // console.log("tact is Email Blast");
-          // $("#webinarassets12").hide();
-          // $("#ebassets").show();
-          // $("#rbassetss").hide(); 
+         
         }
-        console.log("Check Camp ID:" + camp_id);
-        console.log("Check tact :" + tact);
 
-
-        console.log("admin_filesname is:" + admin_filesname);
-
-
+       
 
         setTimeout(function () {
           $('#message').html('<div class="alert alert-danger">' + data.message + '</div>');
@@ -2249,9 +3054,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
     var tact = myArray[7];
     var blast_type = myArray[8];
 
-    console.log("Check id in edit condition:" + id);
-
-    console.log("Check Tact in edit condition:" + tact);
+   
 
 
 
@@ -2269,10 +3072,9 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
     var action = $("#action").val();
-    console.log("editimage action Rajashri");
-    console.log(action);
+   
     if (action === "editimage") {
-      console.log("If editimage condition is true");
+     
       $("#viewdata11").hide();
       $("#editdataa").hide();
       $("#webinarblast").hide();
@@ -2284,7 +3086,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
     $.ajax({
-      url: "http://localhost:3000/alltask/action",
+      url: "http://localhost:7777/alltask/action",
       method: "POST",
       data: { id: id, action: 'fetch_files' },
 
@@ -2294,12 +3096,12 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
         var camp_id = data.camp_id;
 
-        console.log("camp id checks:" + camp_id);
+     
 
 
 
         if (tact === "Email-Blast") {
-          console.log("Tact is Email Blast");
+        
           // var admin_files=data.admin_files;
 
           var admin_filesname = data.admin_files;
@@ -2307,26 +3109,22 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
-          console.log("check length:" + length);
-
-          console.log("admin_filesname:" + admin_filesname);
+        
 
         }
         else if (tact === "Email-Reminder-Blast") {
-          console.log("Tact is Email-Reminder-Blast");
+        
 
           var admin_filesname = data.admin_rb_file;
 
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
-          console.log("check length:" + length);
-
-          console.log(" admin_rb_file:" + admin_filesname);
+         
 
         }
         else if (tact === "Webinar") {
-          console.log("Tact is Webinar");
+        
 
 
           var admin_filesname = data.admin_files;
@@ -2334,9 +3132,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
-          console.log("check length:" + length);
-
-          console.log("admin_filesname:");
+         
 
         }
 
@@ -2354,34 +3150,26 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
         for (var i = 0; i < length; i++) {
 
-          console.log("tact is:" + tact);
-          console.log("Within else condition...");
-          console.log(admin_filesname[i]);
+        
         //  htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr></td>', '</p>';
 
 
 
 
           if (admin_filesname[i] === undefined) {
-            console.log("Within if condition...");
-
-            console.log("tact is:" + tact);
-            console.log(admin_filesname[i]);
-          //  htmlContent += '<p> <tr><td></td><td>Upload File...</td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p>';
-
-          htmlContent += ' <tr id='+ admin_filesname[i]+'><td width="5%"><img src="../../assets/img/files-folder1.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="submit"  value="Delete" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr></td>', '';
+          
+         
+          htmlContent += ' <tr id='+ admin_filesname[i]+'><td width="5%"><img src="../../assets/img/files-folder1.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="submit"  value="Delete" class="btn btn-danger" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr></td>', '';
 
 
           }
 
           else if (admin_filesname[i] != '') {
-            console.log("tact is:" + tact);
-            console.log("Within else condition...");
-            console.log(admin_filesname[i]);
+           
          //   htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p>';
 
 
-            htmlContent += '<tr id="'+ admin_filesname[i] +'" style="background-color: #f3f3f3;"><td colspan="3"><button type="button"  style="border:none;background-color: #e8e8e8;"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" style="width:10%;float: inline-start;"><p style="display:inline-block;float: inline-start;">' + admin_filesname[i] + '</p></button></td><td ><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;float: inline-start;"><input type="submit" value="Delete" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr>', '';
+            htmlContent += '<tr id="'+ admin_filesname[i] +'" style="background-color: #f3f3f3;"><td colspan="3"><button type="button"  style="border:none;background-color: #e8e8e8;"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" style="width:10%;float: inline-start;"><p style="display:inline-block;float: inline-start;">' + admin_filesname[i] + '</p></button></td><td ><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;float: inline-start;"><input type="submit" value="Delete" class="btn btn-danger btn-sm bg-danger" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\' ></tr>', '';
 
           }
 
@@ -2389,13 +3177,11 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
         }
-        console.log("check length:" +length);
+       
 
         if (5 - length > 0) {
 
-          console.log("tact is:" + tact);
-          console.log("Within if condition...");
-          console.log(admin_filesname[i]);
+         
           htmlContent += ' <form enctype="multipart/form-data" id = "form_id"><p> <tr><td colspan="3">Upload File...<input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files[]"  class = "imageInput custom-file-input" data-id = "' + i + '" id = "image_id"  onchange="handleImageUpload(' + i + ')"  multiple></td><td> <input type="submit" class="btn btn-primary" onclick = "fileinsert1(this)" id = "btn' + i + '" data-id=\'' + camp_id + ','  + i + ',' + tact + '\'></tr></td>', '</p> </form>';
 
         }
@@ -2403,42 +3189,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
 
-
-
-
-
-        // for (var i = 0; i < 5; i++)
-        //  { 
-        //   if(admin_filesname[i] === undefined)
-
-        //   { console.log("tact is:" +tact);
-        //     console.log("Within if condition...");
-        //     console.log(admin_filesname[i]);
-        //     htmlContent += ' <form enctype="multipart/form-data" id = "form_id"><p> <tr><td></td><td>Upload File...</td><td><input type="text" value='+admin_filesname[i]+ ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = "'+i+'" id = "image_id"  onchange="handleImageUpload('+i+')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)" id = "btn'+i+'" data-id=\''+ camp_id + ',' + admin_filesname[i] + ',' + i + ',' +tact+ '\'></tr></td>' ,'</p> </form>' ;
-
-
-        //   }
-
-        //   else  if(admin_filesname[i] != '')
-        //   {
-        //     console.log("tact is:" +tact);
-        //     console.log("Within else condition...");
-        //     console.log(admin_filesname[i]);
-        //     htmlContent += '<p> <tr><td width="5%"><img src="../../file_img.png" style="width:100%"></td><td><p>'+admin_filesname[i]+'</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\''+ camp_id + ',' + admin_filesname[i] + ',' + i +  ','  + tact +'\'>Download File for view</button></td><td><input type="text" value='+admin_filesname[i]+ ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = '+i+'  > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)" data-id=\''+ camp_id + ',' + admin_filesname[i] + ',' + i + ',' +tact+'\'></tr></td>' ,'</p>' ;
-
-        //   }
-
-
-        // }
-
-
-
-
-
         htmlContent2 += htmlContent + '' + htmlContent1;
-        console.log("htmlContent2:" + htmlContent2);
-
-
         document.getElementById('container11').innerHTML = htmlContent2;
 
 
@@ -2462,7 +3213,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
         //  var camp_id=data.camp_id;
 
-        console.log("camp id checks:" + id);
+      
         var admin_files = data.admin_files;
 
         var admin_filesname = data.admin_files;
@@ -2470,9 +3221,9 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
         var admin_filesname = admin_filesname.split(',');
 
         var length = admin_filesname.length;
-        console.log("check length:" + length);
+       
 
-        console.log("admin_filesname:")
+      
 
 
 
@@ -2483,20 +3234,15 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
         //var htmlData =admin_filesname;
         for (var i = 0; i < 5; i++) {
           if (admin_filesname[i] === undefined) {
-            console.log("Within if condition...");
-
-            console.log("tact is:" + tact);
-            console.log(admin_filesname[i]);
+           
             htmlContent += '<p> <tr><td></td><td>Upload File...</td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>', '</p>';
 
 
           }
 
           else if (admin_filesname[i] != '') {
-            console.log("tact is:" + tact);
-            console.log("Within else condition...");
-            console.log(admin_filesname[i]);
-            htmlContent += ' <tr id='+ admin_filesname[i]+'><td width="5%"><img src="../../assets/img/files-folder1.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit"  value="Delete" class="btn btn-primary" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>';
+            
+            htmlContent += ' <tr id='+ admin_filesname[i]+'><td width="5%"><img src="../../assets/img/files-folder1.png" style="width:100%"></td><td><p>' + admin_filesname[i] + '</p><button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'>Download File for view</button></td><td><input type="text" value=' + admin_filesname[i] + ' name="filenum" style="display:none;"><input type="file" name="admin_files" class = "imageInput custom-file-input" data-id = ' + i + '   id = "image_id"  onchange="handleImageUpload(' + i + ')" > <input type="submit"  value="Delete" class="btn btn-danger btn-sm bg-danger" onclick = "fileReplace1(this)"  id = "btn' + i + '" data-id=\'' + camp_id + ',' + admin_filesname[i] + ',' + i + ',' + tact + '\'></tr></td>';
 
           }
 
@@ -2507,9 +3253,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
 
         htmlContent2 += htmlContent + '' + htmlContent1;
-        console.log(htmlContent2);
-
-
+        
         document.getElementById('container11').innerHTML = htmlContent2;
 
         $("#container11 .btn-primary").attr("disabled", true)
@@ -2540,7 +3284,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 
     if (confirm("Are you sure you want to delete this data?")) {
       $.ajax({
-        url: "http://localhost:3000/alltask/action",
+        url: "http://localhost:7777/alltask/action",
         method: "POST",
         data: { action: 'delete', id: id },
         dataType: "JSON",
@@ -2570,7 +3314,7 @@ user_webcomment += '<div style="background: white;"><p class="comment1"> <tr><td
 $(document).on("click", ".open-homeEvents", function () {
 
   var idtype = $(this).data('id');
-  console.log("idtype:" + idtype);
+
   const myArray = idtype.split(" ");
 
   var id = myArray[0];
@@ -2583,18 +3327,14 @@ $(document).on("click", ".open-homeEvents", function () {
   var tact = myArray[7];
   var blast_type = myArray[8];
 
-  console.log("ID:" + id);
-  console.log("tact is:" + tact);
-  console.log("blast_type is:" + blast_type);
-  //var eventId = $(this).data('id');
-  //$('#eventId').html( id );
+ 
   $('#camp_id').val(id);
 
   $('#blast_type').val(blast_type);
 
   $('#tact').val(tact);
   $('#status').val(ebstatus);
-  console.log("Check after examplemodal clicked:" + idtype);
+ 
 
 });
 
@@ -2605,9 +3345,120 @@ $(document).on("click", ".open-homeEvents", function () {
 function myFunction() {
 
 
- // $("#exampleModal").modal("hide");
+console.log("within myfunction");
+
+
+  
+  {
+
+
+
+
+    $("#fileviewbox").show();
+    $("#fileviewdownload").hide();
+
+    var formData1 = new FormData(document.getElementById("sample_form"));
+  var comment = $("#comment").val();
+
+   
+
+    var tact = $("#tact").val();
+    var camp_id = $("#camp_id").val();
+
+    var comment_id = $("#comment_id");
+    var comment_id = $("#comment_id").attr("data_id");
+    var rb_status = $("#rbstatus").attr("data-id");
+
+    //formData1.append("comment", comment);
+   
+    formData1.append("comment_id ", comment_id);
+
+   
+    formData1.append("rb_status", rb_status);
+
+   
+    //   var camp_id = $('id')
+    // if (confirm("Are you sure you want to update the data?")) {
+    $.ajax({
+
+      url: "http://localhost:7777/alltask/admin_comment",
+      method: "POST",
+      data: formData1,
+      //   dataType: "JSON",
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        if (data) {
+        
+         // $(".comment")
+          // .html('<div class="alert alert-success">' + data.message + "</div>")
+          // .fadeOut(4000);
+
+          $('#message').html('<div class="alert alert-success">' + data.message + '</div>');
+          $('#leftnav').DataTable().ajax.reload();
+          $('#apptask').DataTable().ajax.reload();
+          $('#task_priorities').DataTable().ajax.reload();
+          $('#todaysstask').DataTable().ajax.reload();
+          $('#weeklytasks').DataTable().ajax.reload();
+          setTimeout(function () {
+            $('#message').html('');
+          }, 5000);
+       //   $("#exampleModal").modal("show");
+          $('#exampleModal').modal('hide');
+          $(document.body).removeClass("modal-open");
+          $(".modal-backdrop").remove();
+          // $('#exampleModal').hide();
+          //$("#sample_form")[0].reset();
+        } else {
+        
+          $(".comment")
+            .html('<div class="alert alert-success">' + data.message + "</div>")
+            .fadeOut(4000);
+
+            $('#exampleModal').modal('hide');
+            $(document.body).removeClass("modal-open");
+          $(".modal-backdrop").remove();
+       
+        }
+      },
+    });
+  }
+
+
+ // else
+  
+  {
+  //  $('#message').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
+
+  
+  // $('#exampleModal').modal('show');
+  //   $('#insertfilemsg').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
+
+  }
+
+}
+
+
+
+// start function for fileview
+
+
+
+
+///function for upload image if no data avalilable
+
+
+
+
+
+function imginsert1() {
+
+
+  $("#fileinsertModal").modal("hide");
 
   var imageleng = document.getElementById('admin_files').files.length;
+
+  console.log("imageleng is:" +imageleng)
 
   if (imageleng <= 5) {
 
@@ -2617,37 +3468,32 @@ function myFunction() {
     $("#fileviewbox").show();
     $("#fileviewdownload").hide();
 
-    var formData1 = new FormData(document.getElementById("sample_form"));
+    var formData1 = new FormData(document.getElementById("imginsert_form"));
 
-
-    
-
-    var comment = $("#commentebrb").val();
-
-    console.log("comment check which passed:" + comment);
+  
 
     var tact = $("#tact").val();
     var camp_id = $("#camp_id").val();
 
-    var comment_id = $("#comment_id");
-    var comment_id = $("#comment_id").attr("data_id");
-    var rb_status = $("#rbstatus").attr("data-id");
 
-    formData1.append("comment", comment);
-    //console.log(formData1.append("comment", comment));
-    formData1.append("comment_id ", comment_id);
 
+ 
+   
+    formData1.set("camp_id", camp_id)
+    formData1.set("tact", tact)
+    //formData1.getAll("admin_files[]", admin_files)
+   // formData1.getAll("admin_files[]", admin_files)
     formData1.getAll("admin_files[]", admin_files)
-    console.log("check which files are selected");
+    console.log("check which files are selected" +admin_files);
     console.log(formData1.getAll("admin_files[]", admin_files));
-    formData1.append("rb_status", rb_status);
+
 
     console.log({ formData1 });
     //   var camp_id = $('id')
     // if (confirm("Are you sure you want to update the data?")) {
     $.ajax({
 
-      url: "http://localhost:3000/alltask/admin_comment",
+      url: "http://localhost:7777/alltask/admin_imginsert",
       method: "POST",
       data: formData1,
       //   dataType: "JSON",
@@ -2669,15 +3515,23 @@ function myFunction() {
           setTimeout(function () {
             $('#message').html('');
           }, 5000);
-          $("#exampleModal").modal("hide");
+
+        $('#fileinsertModal').hide();
+          $("#imginsert_form")[0].reset();
+          $(document.body).removeClass("modal-open");
+          $(".modal-backdrop").remove();
           // $('#exampleModal').hide();
-          $("#sample_form")[0].reset();
+          //$("#sample_form")[0].reset();
         } else {
-          $("#exampleModal").modal("hide");
-          console.log("data in else:" + data);
+        
           $(".comment")
             .html('<div class="alert alert-success">' + data.message + "</div>")
             .fadeOut(4000);
+
+            $('#exampleModal').modal('hide');
+            $(document.body).removeClass("modal-open");
+          $(".modal-backdrop").remove();
+       
         }
       },
     });
@@ -2685,34 +3539,22 @@ function myFunction() {
 
 
   else {
-  //  $('#message').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
-
-  console.log("exampleModal show");
-  $('#exampleModal').modal('show');
-    $('#insertfilemsg').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
-
+    $('#message').html('<p class="alert alert-primary">Please upload only five files...</p>').fadeOut(6000);
   }
 
 }
 
-
-
-// start function for fileview
-
-
-
+//end code for function for image upload if no data available
 
 function fileviewFunction(name) { //=> funtion for uploading images into data base //
   $('#exampleModal').modal('hide');
 
 
-  // var admin_files =name;
-
-  // console.log("Check Admin file name:" +name);
+ 
 
 
   var idtype = $(name).data('id');
-  console.log("idtype in fileview function:" + idtype);
+ 
   const myArray = idtype.split(",");
 
   var camp_id = myArray[0];
@@ -2720,7 +3562,7 @@ function fileviewFunction(name) { //=> funtion for uploading images into data ba
   var oldfname = myArray[1];
   var filenum = myArray[2];
   var tact = myArray[3];
-  console.log("tact check:" + tact);
+  
 
   var admin_files = oldfname;
   if (tact === "Email-Blast") {
@@ -2739,7 +3581,7 @@ function fileviewFunction(name) { //=> funtion for uploading images into data ba
 
 
   var url = "./files/" + camp_id + "/Admin/" + tactfolder + "/" + admin_files;
-  console.log("URL:" + url);
+ 
   //Create XMLHTTP Request.
   var req = new XMLHttpRequest();
   req.open("GET", url, true);
@@ -2752,18 +3594,18 @@ function fileviewFunction(name) { //=> funtion for uploading images into data ba
     var isIE = false || !!document.documentMode;
     if (isIE) {
 
-      console.log("Within if");
+  
       window.navigator.msSaveBlob(blob, admin_files);
     } else {
 
-      console.log("Within else");
+
       var url = window.URL || window.webkitURL;
 
-      console.log("url" + url);
+  
       link = url.createObjectURL(blob);
-      console.log("link" + link);
+ 
       var a = document.createElement("a");
-      console.log("a" + a);
+  
       a.setAttribute("download", admin_files);
 
       a.setAttribute("href", link);
@@ -2792,7 +3634,7 @@ function fileReplace1(e) {
 
 
   if (confirm("Are you sure you want to Delete this file?")) {
-  console.log("filereplace function called");
+
 
   $(e).closest("tr").remove();
  // return false;
@@ -2801,7 +3643,7 @@ function fileReplace1(e) {
   var id = $(e).parent().children('.imageInput').first().data("id");
 
   var idtype = $(e).data('id');
-  console.log("idtype:" + idtype);
+
   const myArray = idtype.split(",");
 
   var camp_id = myArray[0];
@@ -2818,7 +3660,7 @@ function fileReplace1(e) {
 
  //var admin_files = $('.imageInput')[id].files[0]; // Get the selected file
 
- // console.log("admin_files:" + admin_files);
+
 
 
 
@@ -2827,11 +3669,11 @@ function fileReplace1(e) {
   formData.append('filenum', filenum); // Append the file to FormData
   formData.append('oldfname', oldfname); // Append the file to FormData
  // formData.append('admin_files', admin_files); // Append the file to FormData
-console.log(formData);
+
   // Make an Ajax POST request
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:3000/alltask/admin_comment2', // Replace with your server-side script URL
+    url: 'http://localhost:7777/alltask/admin_comment2', // Replace with your server-side script URL
     data: formData,
     processData: false, // Prevent jQuery from processing the data
     contentType: false, // Set content type to false, as we are using FormData
@@ -2846,7 +3688,7 @@ console.log(formData);
       // $("#container11").hide();
       //   $("#fileviewbox").hide();
 
-      console.log("check Response: ",response);
+    
 $('#action_modal').modal('show'); // for hide root modal
 // $("#action_modal").reload();
 
@@ -2891,18 +3733,23 @@ function fileinsert1(e) {
 
   var imageleng = document.getElementById('image_id').files.length;
 
-  console.log("Check image length:" +imageleng);
+  if(imageleng==0){
+    $('#fupload1').show().html('<p class="alert alert-danger">Please upload atleast one file..</p>').fadeOut(4000);
+ 
+    return;
+ }
+
 
   var id = $(e).parent().children('.imageInput').first().data("id");
-  console.log("new file insert function" +id);
+
 
   var idtype = $(e).data('id');
-  console.log("idtype:" + idtype);
+ 
   const myArray = idtype.split(",");
   var camp_id = myArray[0];
   var filenum = myArray[1];
   var tact = myArray[2];
-console.log("Total Files:" +filenum);
+
   var filecountneeded=5-filenum;
 
 
@@ -2910,10 +3757,7 @@ console.log("Total Files:" +filenum);
 
 
   var imageleng = document.getElementById('admin_files');
-  console.log("new file insert function");
-//   var admin_files = $('.imageInput')[id].files[0]; // Get the selected file
 
-//  console.log("admin_files:" + admin_files);
 
  
   
@@ -2921,10 +3765,7 @@ console.log("Total Files:" +filenum);
   
 
   var admin_files = document.getElementById("image_id").files;
-  console.log("admin_files" ,admin_files);
-
-  console.log("First selected image:",admin_files[0].name);
-  console.log("Tact is:" +tact);
+ 
   var formData2 = new FormData();
 
  
@@ -2959,7 +3800,7 @@ console.log("Total Files:" +filenum);
     // if (confirm("Are you sure you want to update the data?")) {
     $.ajax({
 
-      url: "http://localhost:3000/alltask/fileinsert",
+      url: "http://localhost:7777/alltask/fileinsert",
       method: "POST",
       data: formData2,
     processData: false, // Prevent jQuery from processing the data
@@ -2968,7 +3809,7 @@ console.log("Total Files:" +filenum);
 
      
         if (response) {
-console.log("action button disabled");
+
           $('#action_button').attr('disabled', false);
           $('#action_modal').modal('hide');
           // .html('<div class="alert alert-success">' + data.message + "</div>")
@@ -2991,7 +3832,7 @@ console.log("action button disabled");
 
        //   $("#task_form")[0].reset();
         } else {
-          console.log("data in else:" + data);
+       
           $(".comment")
             .html('<div class="alert alert-success">' + data.message + "</div>")
             .fadeOut(4000);
@@ -3012,48 +3853,53 @@ console.log("action button disabled");
 //code end for insert new file
 
 function handleImageUpload(i) {
-  console.log("Handle function" + i);
+
 
 
   $("#container11 .btn-primary").attr("disabled", true)
   $("#btn" + i).attr("disabled", false)
 
-      // var imageInput = document.getElementById("image_id").value;
-      // console.log("imageInput" +imageInput);
-  //     var imageleng =  document.getElementById('image_id').files.length;
-  //     console.log("image length:" +imageleng);
-  //     for(var num=0;num<5;num++)
-  //     {
-  //     if(document.getElementById("image_id").value != "") {
-
-
-
-  //   if(num==i)
-  //   {
-  //     console.log("num is i");
-  //     console.log("num:" +num);
-  //     console.log("i is:" +i);
-  //     document.getElementById("btn"+i).disabled = false;
-  //   }
-  //   else{
-  //     console.log("num is not i");
-  //     console.log("num:" +num);
-  //     console.log("i is:" +i);
-
-  //   }
-
-
-
-
-  //  }
-
-  //  else{
-  //     alert("Please upload least one image");
-  //     document.getElementById("btn"+num).disabled = true;
-
-  //  }
-
-  // }
+     
 }
 
 
+
+
+
+////code for view profile
+
+
+function profileView(e) {//  start code for view profile data //
+
+  // var date = $('#date').val();
+  var user_id = $(e).data('id');
+  
+
+  
+  $.ajax({
+      url: "http://localhost:7777/alltask/action",
+      method: "POST",
+      data: {
+          user_id: user_id,
+          action: 'fetch_single_Profile'
+      },
+
+      dataType: "JSON",
+      success: function(data) {
+      
+          $('#first_namea').val(data.first_name);
+          $('#last_namea').val(data.last_name);
+          $('#emaila').val(data.email);
+          $('#phonea').val(data.phone);
+          $('#user_namea').val(data.user_name);
+         
+          // $('#date').val(data.date);
+          // $('#user_id').val(data.user_id);
+          $('#table_data').DataTable().ajax.reload();
+
+      }
+     });
+  };
+
+
+//end code for view profile
