@@ -13,7 +13,7 @@ $(document).ready(function () {
     'serverMethod': 'get',
     'order': [[0, 'desc']],
     'ajax': {
-      'url': 'http://localhost:7777/alltask/get_data',
+      'url': 'http://localhost:3000/alltask/get_data',
 
     },
 
@@ -33,6 +33,9 @@ $(document).ready(function () {
         orderable: false,
         render: function (data, type, row, meta) {
          
+     
+          console.log("tact before if  is" +row.tact);
+
 
           if (row.tact == "Email Blast / Reminder Blast") {
             var tact = "Email-Reminder-Blast";
@@ -45,6 +48,14 @@ $(document).ready(function () {
             var tact = "Email-Blast";
           }
 
+           if (row.tact == "Make Good") {
+          
+            var tact = "Make-Good";
+          }
+           if (row.tact == "RB Make Good") {
+          
+            var tact = "RB-Make-Good";
+          }
 
 
           if (row.tact == "Webinar") {
@@ -52,87 +63,65 @@ $(document).ready(function () {
             var tact = "Webinar";
           }
 
+console.log("tact is" +tact);
 
-          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined") )) || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined") ))  ) 
+const htmlbutton=`<button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
+           
+           
+<button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + " " + row.rb_type + " " + row.rb_date + " " + row.blast_time + " " + tact + `"><i class="fa fa-pencil"></i></button>
 
-          {
+<button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + `"><i class="fa fa-eye"></i></button>
+
+  <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + " " + row.rb_type + " " + row.rb_date + " " + row.blast_time + " " + tact + `"><i class="fa fa-comment"></i></button></button>
 
 
+  <form id = "sample_form"  enctype="multipart/form-data">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="form-floating">
+      <p id="insertfilemsg"></p>
+         <p >Tact is:`+ tact +`</p>
+      <input type="hidden" name="camp_id" id="camp_id"/ >
+      <input type = "hidden" id ="blast_type" id="blast_type"/  >
+      <input type = "hidden" id ="tact" name="tact"/  >
+      <input type = "hidden" id ="status"   >
 
-            return `
+      <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
+      <input type = "hidden" id ="rbstatus"  data-id = " ` + row.rbstatus + `" >
+      
+      
+ 
+    
+   
+      <textarea class="form-control"  id = "comment" name = "comment" placeholder="Add Comment..." id="floatingTextarea"></textarea>
+      <span>Add Comment...</span>
+      <br><br>
+      
   
+     
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="myFunction()" data-id="`+ row.id + "" + tact + ` ">Send Comment</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-          
-            <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
-           
-           
-            <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-pencil"></i></button>
-
-            <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + `"><i class="fa fa-eye"></i></button>
-
-           
-
-            <button type="button"    class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
-
-
-            <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#fileinsertModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-pencil"></i></button>
-
-
-
-
-            <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `">
-            <i class="fa fa-comment"></i></button>
-           </button>
-           
-           <!-- Modal -->
-           <form id = "sample_form"  enctype="multipart/form-data">
-           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-             <div class="modal-dialog">
-               <div class="modal-content">
-                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body">
-                 <div class="form-floating">
-                 <p id="insertfilemsg"></p>
-                 <input type="hidden" name="camp_id" id="camp_id"/ >
-                 <input type = "hidden" id ="blast_type" id="blast_type"/  >
-                 <input type = "hidden" id ="tact" name="tact"/  >
-                 <input type = "hidden" id ="status"   >
-
-                 <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
-                 <input type = "hidden" id ="rbstatus"  data-id = " ` + row.rbstatus + `" >
-                 
-                 
-            
-               
-                 
-                 <br>
-                 <textarea class="form-control"  id = "comment" name = "comment" placeholder="Add Comment..." id="floatingTextarea"></textarea>
-                 <span>Add Comment...</span>
-                 <br><br>
-                 
-              <!--   <input type = "file" class="form-control" name = "admin_files[]" id = "admin_files"  multiple>
-                 <span >(upload max 5 files)</span>-->
-                
-               </div>
-                 </div>
-                 <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-primary" onclick="myFunction()" data-id="`+ row.id + '' + tact + ` ">Send Comment</button>
-                 </div>
-               </div>
-             </div>
-           </div>
-
-           </form>
+</form>
 
 
 
 
 
-           <form id = "imginsert_form"  enctype="multipart/form-data">
+<form id = "imginsert_form"  enctype="multipart/form-data">
            <div class="modal fade" id="fileinsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog">
                <div class="modal-content">
@@ -143,9 +132,10 @@ $(document).ready(function () {
                  <div class="modal-body">
                  <div class="form-floating">
                  <p id="insertfilemsg"></p>
+                 <p >Tact is:`+ tact +`</p>
                  <input type="hidden" name="camp_id" id="camp_id"/ >
-                 <input type = "hidden" id ="blast_type" id="blast_type"/  >
-                 <input type = "hidden" id ="tact" name="tact"/  >
+                 <input type = "text" id ="blast_type" id="blast_type"/  >
+                 <input type = "text" id ="tact" name="tact"/  >
                  <input type = "hidden" id ="status"   >
 
                  <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
@@ -165,23 +155,39 @@ $(document).ready(function () {
                  </div>
                  <div class="modal-footer">
                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-primary" onclick="imginsert1()" data-id="`+ row.id + '' + tact + ` ">Send Comment</button>
+                   <button type="button" class="btn btn-primary" onclick="imginsert1()" data-id="`+ row.id + " " + tact + ` ">Send Comment</button>
                  </div>
                </div>
              </div>
            </div>
 
-           </form>
+           </form>`
 
 
-                                  
+
+          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined") )) || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined") ))  ) 
+
+          {
+
+
+
+            return `
+            ${htmlbutton} <button type="button" style="display:none"   class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>   <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#fileinsertModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
+
+                                            
               `;
         
           }
 
           else{
 
+           
+            return `
+  
+            ${htmlbutton} <button type="button"    class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
 
+                          
+              `;
           }
 
           
@@ -211,7 +217,7 @@ $(document).ready(function () {
     'serverSide': true,
     'serverMethod': 'get',
     'ajax': {
-      'url': 'http://localhost:7777/alltask/get_prioritydata',
+      'url': 'http://localhost:3000/alltask/get_prioritydata',
 
     },
 
@@ -270,7 +276,7 @@ $(document).ready(function () {
     'serverSide': true,
     'serverMethod': 'get',
     'ajax': {
-      'url': 'http://localhost:7777/alltask/get_todaytaskdata',
+      'url': 'http://localhost:3000/alltask/get_todaytaskdata',
 
     },
 
@@ -322,7 +328,7 @@ $(document).ready(function () {
     'serverSide': true,
     'serverMethod': 'get',
     'ajax': {
-      'url': 'http://localhost:7777/alltask/get_weeklytaskdata',
+      'url': 'http://localhost:3000/alltask/get_weeklytaskdata',
 
     },
 
@@ -446,7 +452,7 @@ $(document).ready(function () {
               $("#senerdtl").show();
             
               $.ajax({
-                url: "http://localhost:7777/alltask/action",
+                url: "http://localhost:3000/alltask/action",
                 method: "POST",
                 data: { cname: cname, action: 'fetch_senderdtladd' },
 
@@ -505,6 +511,8 @@ $(document).ready(function () {
 
 
               if (blast_type == "E-blast") {
+
+                $('.countryselect').show()
                
                 $("#assets").show();
                 $("#reblastassets").hide();
@@ -816,7 +824,7 @@ $(document).ready(function () {
 
     $.ajax({
 
-      url: "http://localhost:7777/alltask/action",
+      url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: $('#task_form').serialize(),
       dataType: "json",
@@ -1472,7 +1480,7 @@ console.log("clicked on edit btn");
         $("#senerdtl").show();
      
         $.ajax({
-          url: "http://localhost:7777/alltask/action",
+          url: "http://localhost:3000/alltask/action",
           method: "POST",
           data: { id: id, cname: cname, action: 'fetch_senderdtl' },
 
@@ -1667,7 +1675,7 @@ console.log("clicked on edit btn");
 
 
     $.ajax({
-      url: "http://localhost:7777/alltask/action",
+      url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: { id: id, action: 'fetch_single' },
 
@@ -2605,7 +2613,7 @@ console.log("mg date is check:" +data.mg_date);
 
 
     $.ajax({
-      url: "http://localhost:7777/alltask/action",
+      url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: { id: id, action: 'fetch_single_view' },
 
@@ -3086,7 +3094,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
 
 
     $.ajax({
-      url: "http://localhost:7777/alltask/action",
+      url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: { id: id, action: 'fetch_files' },
 
@@ -3112,6 +3120,20 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
         
 
         }
+
+        else if (tact === "Make-Good") {
+        
+
+          var admin_filesname = data.admin_ebmgfiles;
+
+          var admin_filesname = admin_filesname.split(',');
+
+          var length = admin_filesname.length;
+         
+
+        }
+
+
         else if (tact === "Email-Reminder-Blast") {
         
 
@@ -3123,6 +3145,19 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
          
 
         }
+
+        else if (tact === "RB-Make-Good") {
+        
+
+          var admin_filesname = data.admin_rbmgfiles;
+
+          var admin_filesname = admin_filesname.split(',');
+
+          var length = admin_filesname.length;
+         
+
+        }
+
         else if (tact === "Webinar") {
         
 
@@ -3284,7 +3319,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
 
     if (confirm("Are you sure you want to delete this data?")) {
       $.ajax({
-        url: "http://localhost:7777/alltask/action",
+        url: "http://localhost:3000/alltask/action",
         method: "POST",
         data: { action: 'delete', id: id },
         dataType: "JSON",
@@ -3365,12 +3400,17 @@ console.log("within myfunction");
     var tact = $("#tact").val();
     var camp_id = $("#camp_id").val();
 
+    console.log("tact:" +tact);
+    console.log("camp_id:" +camp_id);
+   
+
     var comment_id = $("#comment_id");
     var comment_id = $("#comment_id").attr("data_id");
     var rb_status = $("#rbstatus").attr("data-id");
 
     //formData1.append("comment", comment);
-   
+    formData1.append("tact ", tact);
+    formData1.append("camp_id ", camp_id);
     formData1.append("comment_id ", comment_id);
 
    
@@ -3381,7 +3421,7 @@ console.log("within myfunction");
     // if (confirm("Are you sure you want to update the data?")) {
     $.ajax({
 
-      url: "http://localhost:7777/alltask/admin_comment",
+      url: "http://localhost:3000/alltask/admin_comment",
       method: "POST",
       data: formData1,
       //   dataType: "JSON",
@@ -3408,7 +3448,7 @@ console.log("within myfunction");
           $(document.body).removeClass("modal-open");
           $(".modal-backdrop").remove();
           // $('#exampleModal').hide();
-          //$("#sample_form")[0].reset();
+          $("#sample_form")[0].reset();
         } else {
         
           $(".comment")
@@ -3418,6 +3458,7 @@ console.log("within myfunction");
             $('#exampleModal').modal('hide');
             $(document.body).removeClass("modal-open");
           $(".modal-backdrop").remove();
+          $("#sample_form")[0].reset();
        
         }
       },
@@ -3471,13 +3512,15 @@ function imginsert1() {
     var formData1 = new FormData(document.getElementById("imginsert_form"));
 
   
-
+var blast_type=$("#blast_type").val();
     var tact = $("#tact").val();
     var camp_id = $("#camp_id").val();
+console.log("blast_type is:"+blast_type);
+console.log("tact is:"+tact);
+
+console.log("camp_id is:"+camp_id);
 
 
-
- 
    
     formData1.set("camp_id", camp_id)
     formData1.set("tact", tact)
@@ -3493,7 +3536,7 @@ function imginsert1() {
     // if (confirm("Are you sure you want to update the data?")) {
     $.ajax({
 
-      url: "http://localhost:7777/alltask/admin_imginsert",
+      url: "http://localhost:3000/alltask/admin_imginsert",
       method: "POST",
       data: formData1,
       //   dataType: "JSON",
@@ -3673,7 +3716,7 @@ function fileReplace1(e) {
   // Make an Ajax POST request
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:7777/alltask/admin_comment2', // Replace with your server-side script URL
+    url: 'http://localhost:3000/alltask/admin_comment2', // Replace with your server-side script URL
     data: formData,
     processData: false, // Prevent jQuery from processing the data
     contentType: false, // Set content type to false, as we are using FormData
@@ -3800,7 +3843,7 @@ function fileinsert1(e) {
     // if (confirm("Are you sure you want to update the data?")) {
     $.ajax({
 
-      url: "http://localhost:7777/alltask/fileinsert",
+      url: "http://localhost:3000/alltask/fileinsert",
       method: "POST",
       data: formData2,
     processData: false, // Prevent jQuery from processing the data
@@ -3877,7 +3920,7 @@ function profileView(e) {//  start code for view profile data //
 
   
   $.ajax({
-      url: "http://localhost:7777/alltask/action",
+      url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: {
           user_id: user_id,
