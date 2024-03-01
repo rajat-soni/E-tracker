@@ -92,6 +92,7 @@ $(document).ready(function() { // for fetch Data //
 
                     if (row.tact === "Email Blast / Reminder Blast") {
                         var tact = "Email-Reminder-Blast";
+                       
                     }
 
 
@@ -116,7 +117,7 @@ $(document).ready(function() { // for fetch Data //
 
 
 
-                    if ((row.camp_id !== null || row.mg_status !== null || row.rb_mg_status !== null)  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" || (row.user_rbfiles === "undefined")) || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === "") || (mg_link == "") || (mg_image == "") || (row.rb_mg_image == "") || (row.rb_mg_link == "")))) 
+                    if ((row.camp_id !== null || row.mg_status !== null || row.rb_mg_status !== null)  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" || (row.user_rbfiles == "undefined")) || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === "") || (mg_link == "") || (mg_asset_name == "") || (row.rb_mg_image == "") || (row.rb_mg_link == "")))) 
                     {
 
                         return `
@@ -126,10 +127,10 @@ $(document).ready(function() { // for fetch Data //
                         ${(row.rballocated_to == row.user_id && row.rbstatus == 1) ? `<span class="bg-warning text-light px-1 rounded small">RB Done</span>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
-                        ${(row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  "" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_image !==  "" && mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">MG Done</span></i>`: $(row.allocated_to == row.user_id  && row.mg_status == 0 && row.status == 1 && row.mg_link ==  "undefine" && row.mg_image == "undefine" ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`:``}
+                        ${(row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_asset_name !==  "" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mg_link !==  "" && row.mg_asset_name !==  "" && mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">MG Done</span></i>`: $(row.allocated_to == row.user_id  && row.mg_status == 0 && row.status == 1 && row.mg_link ==  "undefine" && row.mg_asset_name == "undefine" ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`:``}
 
                          
-                        ${(row.allocated_to == row.user_id &&  dt3 > dt1 && row.rb_mg_status == 0 && row.rbstatus == 1 && row.rb_mg_link !==  "" && row.rb_mg_image !==  "" ) ? `<input type="checkbox" class="btn btn-link btn-sm rb_checkbox" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && row.rbstatus == 1 && dt3 > dt1 && row.rb_mg_link !==  "" && row.rb_mg_image !==  "" && row.rb_mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">RMG Done</span></i>` : (row.allocated_to == row.user_id && dt3 < dt1 && row.rbstatus  == 1  && row.rb_mg_status == 0 && row.rb_mg_link ==  "undefine" && row.rb_mg_image == "undefine"  ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`: `  `}
+                        ${(row.allocated_to == row.user_id &&  dt3 > dt1 && row.rb_mg_status == 0 && row.rbstatus == 1 && row.rb_mg_link !==  "" && row.rb_mgasset_name !==  "" ) ? `<input type="checkbox" class="btn btn-link btn-sm rb_checkbox" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && row.rbstatus == 1 && dt3 > dt1 && row.rb_mg_link !==  "" && row.rb_mgasset_name !==  "" && row.rb_mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">RMG Done</span></i>` : (row.allocated_to == row.user_id && dt3 < dt1 && row.rbstatus  == 1  && row.rb_mg_status == 0 && row.rb_mg_link ==  "undefine" && row.rb_mgasset_name == "undefine"  ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`: `  `}
                        
                         <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view Data"  data-id =" ` + row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
                         

@@ -647,6 +647,22 @@ if (!fs.existsSync(dir1)){
     
         }
     }
+
+
+    else if(tact==="RB-Make-Good")
+    {
+       
+        console.log("check tact  make good tactics:" +tact);
+        var dir3=`./files/${request.body.camp_id}/user/RB-Make-Good`;
+ 
+        
+
+        if (!fs.existsSync(dir3)){
+            fs.mkdirSync(dir3);
+           
+    
+        }
+    }
     
 
 

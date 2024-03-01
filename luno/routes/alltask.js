@@ -688,10 +688,10 @@ console.log("within fetch_single_Profile");
 
         if (tact == "e_blast") {
 
-
+            // console.log("body",request.body)
             var cname = request.body.cname;
 
-            console.log("Cname check during add:" + cname);
+            console.log("Cname check during add not found:" + cname);
             var camp_name = request.body.camp_name;
             var camp_from = request.body.camp_from;
             var blast_count = request.body.blast_count;
@@ -702,6 +702,9 @@ console.log("within fetch_single_Profile");
             var blast_type = request.body.blast_type11;
             var blast_date = request.body.blast_date;
             var blast_time = request.body.blast_time;
+         
+            var geoe = request.body.geo;
+       
 
 
 
@@ -738,11 +741,11 @@ console.log("within fetch_single_Profile");
 
 
             // End code to Convert AM/PM to 24 Hours  
-            console.log(cname);
+            // console.log(cname);
             var query = `
 		INSERT INTO addtask 
-		(cname,camp_name, camp_from,blast_count,asset_name,asset_link,tact,blast_type,blast_date,blast_time,rb_type,rb_assetname,rb_assetlink,rb_date,rb_time,rballocated_to,priority,allocated_to,status) 
-		VALUES ("${cname}", "${camp_name}","${camp_from}","${blast_count}", "${asset_name}", "${asset_link}", "${tact}", "${blast_type}", "${blast_date}","${blast_time}", "${rb_type}", "${rb_assetname}","${rb_assetlink}","${rb_date}","${rb_time}","${rballocated_to}","${priority}", "${allocated_to}", "${status}")
+		(cname,camp_name, camp_from,blast_count,asset_name,asset_link,tact,blast_type,blast_date,blast_time,geo,rb_type,rb_assetname,rb_assetlink,rb_date,rb_time,rballocated_to,priority,allocated_to,status) 
+		VALUES ("${cname}", "${camp_name}","${camp_from}","${blast_count}", "${asset_name}", "${asset_link}", "${tact}", "${blast_type}", "${blast_date}","${blast_time}", "${geoe}", "${rb_type}", "${rb_assetname}","${rb_assetlink}","${rb_date}","${rb_time}","${rballocated_to}","${priority}", "${allocated_to}", "${status}")
 		`;
        
             console.log(query);

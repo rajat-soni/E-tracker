@@ -1,0 +1,2154 @@
+<% if(!session.user_name){ %>
+  <script type="text/javascript">
+    window.location = "/logout";
+
+  </script>
+  <% } %>
+
+
+
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="../assets/css/changesstyle.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+           <!-- start link for select multiple options -->
+        <link rel="stylesheet" href="https://harvesthq.github.io/chosen/chosen.css" />
+              <!-- end link for select multiple options -->
+      <!-- <link rel="icon" href="https://www.wrraptheme.com/templates/luno/assets/img/favicon.ico" type="image/x-icon"> -->
+      <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css"> -->
+    <!-- rajat-->
+      <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.14.1/jquery.timepicker.min.css"
+        integrity="sha512-WlaNl0+Upj44uL9cq9cgIWSobsjEOD1H7GK1Ny1gmwl43sO0QAUxVpvX2x+5iQz/C60J3+bM7V07aC/CNWt/Yw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- <link rel="stylesheet" href="js/multiselect/jquery.multiselect.css">
+         -->
+
+
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"> -->
+
+        <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+	</script>
+
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js">
+	</script>
+  <link rel="stylesheet" href=
+  "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  
+    <script src=
+  "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+    </script>
+            <!-- Jquery Core Js -->
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script><!-- Favicon-->
+  
+      <!-- Jquery Core Js -->
+      
+      
+      <script src="../javascripts/alltask.js" type="text/javascript"></script>
+      <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+
+
+      <script>
+        window.addEventListener("contextmenu",
+          function (e) {
+            e.stopPropagation()
+          }, true);
+      </script>
+
+
+<style>
+  .chosen-select {
+    width: 465px !important;
+  }
+
+  .chosen-choices {
+    width: 465px !important;
+  }
+
+  .chosen-container-multi {
+    width: 465px !important;
+  }
+</style>
+     
+
+      
+    </head>
+
+    <body class="layout-1" data-luno="theme-blue" oncontextmenu="return false">
+      <!-- start: sidebar -->
+
+
+
+
+      <%- include('header',{session:session}); -%>
+        <!-- start: body area -->
+        <div class="wrapper" style="    height: auto;">
+          <!-- start: page header -->
+
+
+          <!-- start: page body -->
+          <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3 card" style="background:white;margin-left:10px;margin-top:20px;">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+
+                  <div class="tab-content mb-4">
+                    <!-- Tab: My Contacts -->
+
+
+
+
+                    <!-- start: body area -->
+                    <div class="wrapper">
+
+                      <p id="message"></p>
+                      <!-- start: page body -->
+                      <div class="page-body body-layout-1 my-task">
+                        <div class="my-task d-flex flex-nowrap">
+                          <div class="order-1 custom_scroll" style="background: #f4f7f6;border-radius: 10px;">
+                            <button type="button" class="btn bg-secondary text-light mb-3 w-100" data-bs-toggle="modal"
+                              data-bs-target="#new_task" id="add_data">New Task</button>
+                            <div class="leftnav">
+                              <ul class="nav nav-tabs menu-list list-unstyled mb-0 border-0" role="tablist">
+                                <li class="nav-item">
+                                  <a class="nav-link active" href="#" data-bs-toggle="tab" data-bs-target="#task_all"
+                                    role="tab">
+                                    <svg viewBox="0 0 16 16" width="20px" class="me-3" fill="currentColor"
+                                      xmlns="http://www.w3.org/2000/svg">
+                                      <path class="fill-secondary"
+                                        d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z" />
+                                      <path
+                                        d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
+                                    </svg>
+                                    <span>All Task</span>
+
+
+
+
+                                   
+
+                                  </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#task_priority"
+                                    role="tab" id="task_priority11">
+                                    <svg viewBox="0 0 16 16" width="20px" class="me-3" fill="currentColor"
+                                      xmlns="http://www.w3.org/2000/svg">
+                                      <path
+                                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                                      <path class="fill-secondary"
+                                        d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                                    </svg>
+                                    <span>Priority Task</span>
+                                    <!-- <span class="badge bg-danger ms-2 ms-auto">
+                                      <%= data1.length %>
+                                    </span> -->
+                                  </a>
+                                </li>
+
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#task_today"
+                                    role="tab" id="todaytask">
+                                    <svg viewBox="0 0 16 16" width="20px" class="me-3" fill="currentColor"
+                                      xmlns="http://www.w3.org/2000/svg">
+                                      <path class="fill-secondary"
+                                        d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                      <path
+                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                    </svg>
+                                    <span>Today's Tasks</span>
+
+                                  </a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#task_week"
+                                    role="tab" id="weeklytask">
+                                    <svg viewBox="0 0 16 16" width="20px" class="me-3" fill="currentColor"
+                                      xmlns="http://www.w3.org/2000/svg">
+                                      <path class="fill-secondary"
+                                        d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                      <path
+                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                    </svg>
+                                    <span>Within 7 days</span>
+                                    <!-- <span class="badge bg-light text-dark ms-2 ms-auto">
+                                      <%= data4.length %>
+                                    </span> -->
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+
+                          <div class="order-2 flex-grow-1 px-lg-3 px-0 " id="scrollbar" style="background:#f4f7f6; margin-left: 13px; padding-top: 10px;border-radius: 10px;">
+                            <!-- start: page toolbar -->
+
+
+
+                            <div class="container-fluid">
+                              <div class="row g-3">
+                                <div class="col-12">
+                                  <div class="tab-content">
+
+                                    <!-- Code start for All Task -->
+                                    <div class="tab-pane fade show active" id="task_all" role="tabpanel">
+                                      <div class="d-flex justify-content-between mb-2">
+                                        <h4 class="mt-1 mb-0">All Task</h4>
+
+                                        <button onclick="ExportToExcel('xlsx')" class="btn btn-secondary" type="button"
+                                          data-bs-toggle="tooltip" title="Download Reports"><i
+                                            class="fa fa-download"></i></button>
+
+                                        <button class="btn btn-sm d-block d-lg-none btn-primary task-list-toggle"
+                                          type="button"><i class="fa fa-bars"></i></button>
+                                      </div>
+
+                                      <ul class="list-group list-group-flush list-group-custom">
+
+                                        <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-12 mt-2 mt-md-0">
+
+                                        </div>
+
+                                        <table id="tbl_exporttable_to_xls">
+
+                                          <tbody style="display:none">
+                                            <tr style="font-size:12px;color:red">
+                                              <td><b>Campaign Name</b></td>
+                                              <td><b>Campaign From</b></td>
+                                              <td><b>Tact</b></td>
+                                              <td><b>Date / Time(E-Blast / Webinar)</b></td>
+                                              <td><b>Allocated To(E-Blast / Webinar)</b></td>
+                                              <td><b>E-Blast Asset Name</b></td>
+                                              <td><b>Link(E-Blast / Webinar)</b></td>
+
+
+                                              <td><b>Reminder-Blast Date / Time</b></td>
+                                              <td><b>Reminder-Blast Allocated To</b></td>
+                                              <td><b>Reminder-Blast Asset Name</b></td>
+                                              <td><b>Reminder-Blast Asset Link</b></td>
+
+
+
+                                              <td><b>Priority</b></td>
+                                            </tr>
+                                            <% data.forEach(function(d){ %>
+
+                                              <tr>
+
+                                                <td>
+                                                  <%= d.campname %>
+                                                </td>
+
+                                                <td>
+                                                  <%= d.camp_from %>
+                                                </td>
+
+
+                                                <td>
+                                                  <%= d.tact %>
+                                                </td>
+
+
+
+                                                <td>
+                                                  <%= d.eblast_date %>
+                                                </td>
+                                                <td>
+                                                  <%= d.ebfname %>
+                                                </td>
+                                                <td>
+                                                  <%= d.asset_name %>
+                                                </td>
+                                                <td>
+                                                  <%= d.asset_link %>
+                                                </td>
+
+                                                <td>
+                                                  <%= d.rblast_date %>
+                                                </td>
+                                                <td>
+                                                  <%= d.rbfname %>
+                                                </td>
+                                                <td>
+                                                  <%= d.rb_assetname %>
+                                                </td>
+                                                <td>
+                                                  <%= d.rb_assetlink %>
+                                                </td>
+
+
+
+                                                <td>
+                                                  <%= d.priority %>
+                                                </td>
+
+                                               
+
+                                              </tr>
+                                              <script>
+                                                function ExportToExcel(type, fn, dl) {
+                                                  var elt = document.getElementById('tbl_exporttable_to_xls');
+                                                  var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+                                                  return dl ?
+                                                    XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                                                    XLSX.writeFile(wb, fn || ('Campaign Details.' + (type || 'xlsx')));
+                                                }
+
+                                              </script>
+
+                                              <% }); %>
+
+                                          </tbody>
+                                        </table>
+
+
+                                        <table id="apptask" class="table table-striped  table-hover"
+                                          style="white-space: normal !important;">
+                                          <thead class="bg-dark">
+                                            <tr>
+                                              <th class="text-light">Date</th>
+                                              <th class="text-light">Campaign Name</th>
+                                              <th class="text-light">Tact</th>
+
+
+                                              <th class="text-light">Action</th>
+
+                                            </tr>
+                                          </thead>
+                                          <tbody class="bg-light">
+
+                                          </tbody>
+                                        </table>
+
+                                      </ul>
+                                    </div>
+
+
+
+
+                                    <!--  End Code start for All Task -->
+
+
+
+                                    <!-- Start Code for Priority task -->
+                                    <div class="tab-pane fade" id="task_priority" role="tabpanel">
+                                      <div class="d-flex justify-content-between mb-2">
+                                        <h4 class="mt-1 mb-0">Priority Task</h4>
+                                        <button class="btn btn-sm d-block d-lg-none btn-primary task-list-toggle"
+                                          type="button"><i class="fa fa-bars"></i></button>
+                                      </div>
+                                      <ul class="list-group list-group-flush list-group-custom">
+
+
+                                        <table id="task_priorities" class="table table-striped  table-hover"
+                                          style="white-space: normal !important;">
+                                          <thead class="bg-dark">
+                                            <tr>
+                                              <th class="text-light">Date</th>
+                                              <th class="text-light">Campaign Name</th>
+                                              <th class="text-light">Tact</th>
+                                              <th class="text-light">Action</th>
+
+                                            </tr>
+                                          </thead>
+                                          <tbody class="bg-light">
+
+                                          </tbody>
+                                        </table>
+
+
+                                      </ul>
+                                    </div>
+
+                                    <!-- End Code for Priority task -->
+
+
+
+
+                                    <!-- Start Today's Task -->
+                                    <div class="tab-pane fade" id="task_today" role="tabpanel">
+                                      <div class="d-flex justify-content-between mb-2">
+                                        <h4 class="mt-1 mb-0">Today's Task</h4>
+                                        <button class="btn btn-sm d-block d-lg-none btn-primary task-list-toggle"
+                                          type="button"><i class="fa fa-bars"></i></button>
+                                      </div>
+                                      <ul class="list-group list-group-flush list-group-custom">
+
+
+                                        <table id="todaysstask" class="table table-striped  table-hover"
+                                          style="white-space: normal !important;">
+                                          <thead class="bg-dark">
+                                            <tr>
+                                              <th class="text-light">Date</th>
+                                              <th class="text-light">Campaign Name</th>
+                                              <th class="text-light">Tact</th>
+                                              <th class="text-light">Action</th>
+
+                                            </tr>
+                                          </thead>
+                                          <tbody class="bg-light">
+
+                                          </tbody>
+                                        </table>
+
+                                      </ul>
+                                    </div>
+
+                                    <!-- End Today's Task -->
+
+
+
+
+
+
+
+                                    <!--  Start code for This Week Task -->
+                                    <div class="tab-pane fade" id="task_week" role="tabpanel">
+                                      <div class="d-flex justify-content-between mb-2">
+                                        <h4 class="mt-1 mb-0">Within 7 days</h4>
+                                        <button class="btn btn-sm d-block d-lg-none btn-primary task-list-toggle"
+                                          type="button"><i class="fa fa-bars"></i></button>
+                                      </div>
+                                      <ul class="list-group list-group-flush list-group-custom">
+
+
+                                        <table id="weeklytasks" class="table table-striped  table-hover"
+                                          style="white-space: normal !important;">
+                                          <thead class="bg-dark">
+                                            <tr>
+                                              <th class="text-light">Date</th>
+                                              <th class="text-light">Campaign Name</th>
+
+                                              <th class="text-light">Tact</th>
+                                              <th class="text-light">Action</th>
+
+                                            </tr>
+                                          </thead>
+                                          <tbody class="bg-light">
+
+                                          </tbody>
+                                        </table>
+
+                                      </ul>
+                                    </div>
+
+                                    <!--  End code for This Week Task -->
+
+
+
+                                  </div>
+                                </div> <!-- .row end -->
+                              </div>
+                            </div>
+                            <!-- Code End for All Task -->
+
+
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <script src="https://jqueryvalidation.org/files/lib/jquery.js"></script> -->
+                    <script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+
+
+                    <!-- Modal:Add New Task -->
+                    <div class="modal fade" id="action_modal" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <form method="post" id="task_form" enctype="multipart/form-data">
+                            <div class="modal-header" id="dynamic_modal_title"
+                              style="color: red; font-weight: bold; font-size: 32px;">
+
+
+
+                              <h5 class="modal-title">Add Task</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                              <div id="tactics">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label">Tact</label>
+                                    <select name="tactebweb" id="tactebweb" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value="Please select one">Select Tact</option>
+                                      <option value="e_blast">Email Blast</option>
+                                      <option value="webinar">Webinar</option>
+
+                                    </select>
+                                    <div class="text-danger" id="error_Tact"></div>
+                                  </div>
+
+                                </div>
+                              </div>
+
+                              <br>
+                              <!-- Code start for Webinar Blast -->
+                              <div id="webinarblast" style="display:none;">
+
+
+                                <div class="addcname">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Client Name</label>
+                                      <select name="cnamewebinar" id="cnamewebinar" class="form-control">
+                                        <option value="Please select one">Select client</option>
+                                        <% for(var count=0; count < clientlist.length; count++) { %>
+
+                                          <option value="<%= clientlist[count].cid %>">
+                                            <%= clientlist[count].client_name %>
+                                          </option>
+
+                                          <% } %>
+                                      </select>
+                                      <div class="text-danger"  id = "cnamewebinar_error"></div> 
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+
+                                <input type="hidden" name="tact1122" id="tact1122" />
+
+
+
+                                <br>
+
+
+
+
+
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label">Campaign Name</label>
+                                    <input class="form-control" type="text" name="webcamp_name" id="webcamp_name"
+                                      autocomplete="off">
+                                    <div class="text-danger" id="webcamp_error"></div>
+                                  </div>
+
+                                  <div class="col-6">
+                                    <label class="form-label">Campaign From</label>
+                                    <input class="form-control" type="text" name="webcamp_from" id="webcamp_from"
+                                      autocomplete="off">
+                                    <div class="text-danger" id="webcamp_from_error"></div>
+                                  </div>
+                                </div>
+
+
+
+                                <br>
+
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label">Total Counts of Attending</label>
+                                    <input class="form-control" type="number" name="webinar_count" id="webinar_count"
+                                      autocomplete="off">
+                                    <div class="text-danger" id="webinar_count_error"></div>
+                                    <!-- <div class="text-danger" id = "blast_error"></div> -->
+                                  </div>
+
+
+                                  <div class="col-6">
+                                    <label class="form-label">Priority</label>
+                                    <select name="webpriority" id="webpriority" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value="Please select one">Open this select menu</option>
+                                      <option value="Low">Low</option>
+                                      <option value="Medium">Medium</option>
+                                      <option value="High">High</option>
+                                      <option value="Rush">Rush</option>
+
+                                    </select>
+                                    <div class="text-danger" id="weberror_priority"></div>
+                                  </div>
+
+
+                                </div>
+
+
+
+                                <br>
+
+
+                                <div class="row">
+
+
+                                  <div class="col-6">
+                                    <label class="form-label">Blast Type</label>
+                                    <select name="webblsttype" id="webblsttype" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value="Please select one">Open this select menu</option>
+                                      <option value="Live">Live</option>
+                                      <option value="Archived">Archived</option>
+
+
+                                    </select>
+                                    <div class="text-danger" id="weberrblsttype"></div>
+                                  </div>
+
+
+                                  <div class="col-6">
+                                    <label class="form-label">Allocated To</label>
+                                    <!-- <input class="form-control" type="text"  name="cname" id="cname" autocomplete="off"> -->
+
+                                    <select name="weballocated_to" id="weballocated_to" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value="Please select one">Open this select menu</option>
+                                      <% userlist.forEach(function(d){ %>
+                                        <option value="<%= d.user_id %>">
+                                          <%= d.first_name %>
+                                        </option>
+
+
+                                        <% }); %>
+
+                                    </select>
+
+                                    <div class="text-danger" id="weberror_allocated"></div>
+                                  </div>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label">Registration Link</label>
+                                    <input class="form-control" type="text" name="registration_link"
+                                      id="registration_link" autocomplete="off">
+                                    <div class="text-danger" id="error_registration_link"></div>
+                                  </div>
+                                </div>
+
+
+                                <br>
+
+                                <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label">Date/Time (IST)</label>
+                                    <div class="input-group">
+                                      <input type="date" class="form-control" name="registration_date"
+                                        id="registration_date">
+
+                                      <input type="text" class="form-control" name="registration_time"
+                                        id="registration_time"> <i class="far fa-clock"
+                                        style="float: right;    border: 1px solid #e9e6e1; position: relative; z-index: 2;     padding: 11px;"></i>
+
+                                    </div>
+
+                                  
+                                  </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                  <div class="col-6">
+                                <div class="text-danger" id="error_registration_date"></div>
+                              </div>
+                                <div class="col-6">
+                                <div class="text-danger" id="error_registration_time"></div>
+
+                              </div>
+                            </div>
+
+
+
+
+
+
+                                <!-- <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label">Comment & Specification</label>
+                                
+
+                                    <textarea  name="webcomment" id="webcomment" autocomplete="off" rows="5"
+                                      cols="70" class="form-control"></textarea>
+                                     
+                                  </div>
+
+
+                                </div> -->
+
+                              </div>
+
+                              <!-- Code End for Webinar Blast -->
+                              <!-- Code start for Edit Modal -->
+
+
+
+                              <div id="editdataa" style="display:none;">
+
+
+                                <div class="addcname">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Client Name</label>
+                                      <select name="cname" id="cname" class="form-control">
+                                        <option value="Please select one">Select client</option>
+                                        <% for(var count=0; count < clientlist.length; count++) { %>
+
+                                          <option value="<%= clientlist[count].cid %>">
+                                            <%= clientlist[count].client_name %>
+                                          </option>
+
+                                          <% } %>
+                                      </select>
+                                      <div class="text-danger" id="cname_error"></div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="editcname" style="display: none;">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Client Name</label>
+                                      <select name="cname" id="cname" class="form-control cname">
+                                        <option value="">Select client</option>
+                                        <% for(var count=0; count < clientlist.length; count++) { %>
+
+                                          <option value="<%= clientlist[count].cname %>">
+                                            <%= clientlist[count].client_name %>
+                                          </option>
+
+                                          <% } %>
+                                      </select>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+                                <br>
+
+                                <div name="senerdtl" id="senerdtl" style="display:none">
+                                  <div class="row">
+                                    <div class="col-12">
+
+                                      <label class="form-label" style="color:red">Sender Name</label>
+                                      <input type="text" name="sender_name" id="sender_name"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                        readonly="readonly">
+
+
+
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-12">
+
+                                      <label class="form-label" style="color:red">Sender Email</label>
+                                      <input type="text" name="sender_email" id="sender_email"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                        readonly="readonly">
+
+                                    </div>
+
+                                  </div>
+                                </div>
+
+
+
+
+                                <br>
+
+
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label">Campaign Name</label>
+                                    <input class="form-control" type="text" name="camp_name" id="camp_name"
+                                      autocomplete="off">
+                                    <div class="text-danger" id="camp_error"></div>
+                                  </div>
+
+                                  <div class="col-6">
+                                    <label class="form-label">Campaign From</label>
+                                    <input class="form-control" type="text" name="camp_from" id="camp_from"
+                                      autocomplete="off">
+                                    <div class="text-danger" id="camp_from_error"></div>
+                                  </div>
+                                </div>
+
+
+
+                                <br>
+
+                                <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label">Email Blast Count</label>
+                                    <input class="form-control" type="number" name="blast_count" id="blast_count"
+                                      autocomplete="off" min="1">
+
+
+                                   <!--   <input class="form-control" type="number" name="blast_count" id="blast_count"
+                                      autocomplete="off" min="1"  oninput="validity.valid||(value='');">-->
+
+
+                                    <div class="text-danger" id="blast_error"></div>
+                                  </div>
+
+                                </div>
+
+
+
+                                <!-- <div class="col-12">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="Remindon">
+                    <label class="form-check-label" for="Remindon">Remind on</label>
+                  </div>
+                </div> -->
+                                <br>
+
+
+                                <div class="row">
+
+
+                                  <div class="col-6">
+                                    <label class="form-label">Priority</label>
+                                    <select name="priority" id="priority" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value="Please select one">Open this select menu</option>
+                                      <option value="Low">Low</option>
+                                      <option value="Medium">Medium</option>
+                                      <option value="High">High</option>
+                                      <option value="Rush">Rush</option>
+
+                                    </select>
+                                    <div class="text-danger" id="error_priority"></div>
+                                  </div>
+
+
+                                  <div class="col-6">
+                                    <label class="form-label">Allocated To</label>
+                                    <!-- <input class="form-control" type="text" name="cname" id="cname" autocomplete="off"> -->
+
+                                    <select name="allocated_to" id="allocated_to" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value="Please select one">Open this select menu</option>
+                                      <% userlist.forEach(function(d){ %>
+                                        <option value="<%= d.user_id %>">
+                                          <%= d.first_name %>
+                                        </option>
+
+
+                                        <% }); %>
+
+                                    </select>
+
+                                    <div class="text-danger" id="error_allocated"></div>
+                                  </div>
+                                </div>
+
+                                <br>
+                                <div class="row">
+                                  <!-- <div class="col-6">
+                                    <label class="form-label">Tact</label>
+                                    <select name="tact" id="tact" class="form-select"
+                                      aria-label="Default select example">
+                                      <option value = "Please select one">Open this select menu</option>
+                                      <option value="Email Blast">Email Blast</option>
+                                      <option value="Webinar">Webinar</option>
+
+                                    </select>
+                                    <div class="text-danger" id = "error_Tact"></div>
+                                  </div> -->
+
+                                  <div class="col-6">
+                                    <div id="eblst1">
+
+                                      <label class="form-label">Email Blast Type</label>
+                                      <select name="blast_type11" id="blast_type11" class="form-select"
+                                        aria-label="Default select example">
+                                        <option value="Please select one">Open this select menu</option>
+                                        <option value="E-blast">E-blast</option>
+                                        <!-- <option value="Reminder-Blast">Reminder Blast</option> -->
+
+                                      </select>
+                                      <div class="text-danger" id="error_blast_type"></div>
+                                    </div>
+
+
+                                    <div id="reblst">
+
+
+                                      <label class="form-label"> Blast Type</label>
+                                      <select name="blast_typerr" id="blast_typerr" class="form-select"
+                                        aria-label="Default select example">
+
+                                        <!-- <option value="" disabled selected>Select your option</option> -->
+                                        <option value="Reminder-Blast">Reminder Blast</option>
+                                        <option value="E-blast" selected>E-blast</option>
+
+
+                                      </select>
+                                    </div>
+                                  </div>
+
+
+
+
+
+
+                                </div>
+
+
+                                <br>
+
+
+
+                                <div id="ebassets" style="display:none;">
+                                  <hr>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">E-Blast Asset Name:</label>
+                                      <!-- <input type="text" name="ebasset_name" id="ebasset_name"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                        readonly="readonly"> -->
+
+
+
+                                      <textarea name="ebasset_name" id="ebasset_name"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+
+
+
+
+                                    </div>
+
+                                    <br>
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">E-Blast Asset Link:</label>
+                                      <!-- <input type="text" name="ebasset_link" id="ebasset_link"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;  width: 50% !important;"
+                                        readonly="readonly"> -->
+
+
+                                      <textarea name="ebasset_link" id="ebasset_link"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Blast Date:</label>
+
+                                      <input type="text" name="blast_date1" id="blast_date1"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;  width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+
+
+                                      <label class="form-label" style="color:red; ">Blast Time:</label> <input
+                                        type="text" name="blast_time1" id="blast_time1"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                        readonly="readonly">
+
+                                      <!-- <input type="text" class="form-control" name="blast_date" id="blast_date">
+                      <input type="text" class="form-control" name="blast_time1" id="blast_time"> -->
+
+                                    </div>
+                                  </div>
+
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+                                <div id="assets" style="display: none;">
+                                  <hr>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">E-Blast Asset Name</label>
+                                      <input class="form-control" type="text" name="asset_name" id="asset_name"
+                                        autocomplete="off">
+                                      <div class="text-danger" id="error_ebasset_name"></div>
+                                    </div>
+                                  </div>
+                                  <br>
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">E-Blast Asset Link</label>
+                                      <input class="form-control" type="text" name="asset_link" id="asset_link"
+                                        autocomplete="off">
+                                      <div class="text-danger" id="error_asset_link"></div>
+                                    </div>
+                                  </div>
+
+
+                                  <br>
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Blast Time/Date (IST)</label>
+                                      <div class="input-group">
+                                        <input type="date" class="form-control" name="blast_date" id="blast_date">
+
+                                        <input type="text" class="form-control" name="blast_time" id="blast_time"> <i class="far fa-clock"style="float: right;    border: 1px solid #e9e6e1; position: relative; z-index: 2;     padding: 11px;"></i>
+
+
+                                         
+                                      </div>
+                                     
+                                    </div>
+                                    </div>
+                                  
+
+                                    <div class="row">
+                                      <div class="col-12">
+
+                                        <div id="con"  style = "padding: 20px;
+                                        background: #dadada;"></div>
+
+                                          
+                                        <!-- <select name="geo" id="geo" multiple > -->
+                                        
+                                          <select style = "width:465px"  data-placeholder="Choose tags ..." name="geo" id = "geo" multiple class="chosen-select"  style=" width: 465px;">
+                                           
+     
+                                    <!-- <select class="mydrop" data-mul = "drop" multiple="true" name = "geo" id  = "geo" style = ""> -->
+                                      <option  value="AF" >Afghanistan</option>
+                                      <option  value="AL">Albania</option>
+                                      <option id="form_0974_fld_11-2" value="DZ">Algeria</option>
+                                      <option id="form_0974_fld_11-3" value="AS">American Samoa</option>
+                                      <option id="form_0974_fld_11-4" value="AD">Andorra</option>
+                                      <option id="form_0974_fld_11-5" value="AO">Angola</option>
+                                      <option id="form_0974_fld_11-6" value="AI">Anguilla</option>
+                                      <option id="form_0974_fld_11-7" value="AQ">Antarctica</option>
+                                      <option id="form_0974_fld_11-8" value="AG">Antigua and Barbuda</option>
+                                      <option id="form_0974_fld_11-9" value="AR">Argentina</option>
+                                      <option id="form_0974_fld_11-10" value="AM">Armenia</option>
+                                      <option id="form_0974_fld_11-11" value="AW">Aruba</option>
+                                      <option id="form_0974_fld_11-12" value="AU">Australia</option>
+                                      <option id="form_0974_fld_11-13" value="AT">Austria</option>
+                                      <option id="form_0974_fld_11-14" value="AZ">Azerbaijan</option>
+                                      <option id="form_0974_fld_11-15" value="BS">Bahamas</option>
+                                      <option id="form_0974_fld_11-16" value="BH">Bahrain</option>
+                                      <option id="form_0974_fld_11-17" value="BD">Bangladesh</option>
+                                      <option id="form_0974_fld_11-18" value="BB">Barbados</option>
+                                      <option id="form_0974_fld_11-19" value="BY">Belarus</option>
+                                      <option id="form_0974_fld_11-20" value="BE">Belgium</option>
+                                      <option id="form_0974_fld_11-21" value="BZ">Belize</option>
+                                      <option id="form_0974_fld_11-22" value="BJ">Benin</option>
+                                      <option id="form_0974_fld_11-23" value="BM">Bermuda</option>
+                                      <option id="form_0974_fld_11-24" value="BT">Bhutan</option>
+                                      <option id="form_0974_fld_11-25" value="BO">Bolivia</option>
+                                      <option id="form_0974_fld_11-26" value="BQ">Bonaire</option>
+                                      <option id="form_0974_fld_11-27" value="BA">Bosnia</option>
+                                      <option id="form_0974_fld_11-28" value="BW">Botswana</option>
+                                      <option id="form_0974_fld_11-29" value="BV">Bouvet Island</option>
+                                      <option id="form_0974_fld_11-30" value="BR">Brazil</option>
+                                      <option id="form_0974_fld_11-31" value="IO">British Indian Ocean Territory</option>
+                                      <option id="form_0974_fld_11-32" value="BN">Brunei</option>
+                                      <option id="form_0974_fld_11-33" value="BG">Bulgaria</option>
+                                      <option id="form_0974_fld_11-34" value="BF">Burkina Faso</option>
+                                      <option id="form_0974_fld_11-35" value="BI">Burundi</option>
+                                      <option id="form_0974_fld_11-36" value="KH">Cambodia</option>
+                                      <option id="form_0974_fld_11-37" value="CM">Cameroon</option>
+                                      <option id="form_0974_fld_11-38" value="CA">Canada</option>
+                                      <option id="form_0974_fld_11-39" value="CV">Cape Verde</option>
+                                      <option id="form_0974_fld_11-40" value="KY">Cayman Islands</option>
+                                      <option id="form_0974_fld_11-41" value="CF">Central African Republic</option>
+                                      <option id="form_0974_fld_11-42" value="TD">Chad</option>
+                                      <option id="form_0974_fld_11-43" value="CL">Chile</option>
+                                      <option id="form_0974_fld_11-44" value="CN">China</option>
+                                      <option id="form_0974_fld_11-45" value="CX">Christmas Island</option>
+                                      <option id="form_0974_fld_11-46" value="CC">Cocos Islands</option>
+                                      <option id="form_0974_fld_11-47" value="CO">Colombia</option>
+                                      <option id="form_0974_fld_11-48" value="KM">Comoros</option>
+                                      <option id="form_0974_fld_11-49" value="CG">Congo</option>
+                                      <option id="form_0974_fld_11-50" value="CD">Congo, Dem. Rep.</option>
+                                      <option id="form_0974_fld_11-51" value="CK">Cook Islands</option>
+                                      <option id="form_0974_fld_11-52" value="CR">Costa Rica</option>
+                                      <option id="form_0974_fld_11-53" value="HR">Croatia</option>
+                                      <option id="form_0974_fld_11-54" value="CU">Cuba</option>
+                                      <option id="form_0974_fld_11-55" value="CW">Curaçao</option>
+                                      <option id="form_0974_fld_11-56" value="CY">Cyprus</option>
+                                      <option id="form_0974_fld_11-57" value="CZ">Czech Republic</option>
+                                      <option id="form_0974_fld_11-58" value="DK">Denmark</option>
+                                      <option id="form_0974_fld_11-59" value="DJ">Djibouti</option>
+                                      <option id="form_0974_fld_11-60" value="DM">Dominica</option>
+                                      <option id="form_0974_fld_11-61" value="DO">Dominican Republic</option>
+                                      <option id="form_0974_fld_11-62" value="EC">Ecuador</option>
+                                      <option id="form_0974_fld_11-63" value="EG">Egypt</option>
+                                      <option id="form_0974_fld_11-64" value="SV">El Salvador</option>
+                                      <option id="form_0974_fld_11-65" value="GQ">Equatorial Guinea</option>
+                                      <option id="form_0974_fld_11-66" value="ER">Eritrea</option>
+                                      <option id="form_0974_fld_11-67" value="EE">Estonia</option>
+                                      <option id="form_0974_fld_11-68" value="ET">Ethiopia</option>
+                                      <option id="form_0974_fld_11-69" value="FK">Falkland Islands (Malvinas)</option>
+                                      <option id="form_0974_fld_11-70" value="FO">Faroe Islands</option>
+                                      <option id="form_0974_fld_11-71" value="FJ">Fiji</option>
+                                      <option id="form_0974_fld_11-72" value="FI">Finland</option>
+                                      <option id="form_0974_fld_11-73" value="FR">France</option>
+                                      <option id="form_0974_fld_11-74" value="GF">French Guiana</option>
+                                      <option id="form_0974_fld_11-75" value="PF">French Polynesia</option>
+                                      <option id="form_0974_fld_11-76" value="TF">French Southern Territories</option>
+                                      <option id="form_0974_fld_11-77" value="GA">Gabon</option>
+                                      <option id="form_0974_fld_11-78" value="GM">Gambia</option>
+                                      <option id="form_0974_fld_11-79" value="GE">Georgia</option>
+                                      <option id="form_0974_fld_11-80" value="DE">Germany</option>
+                                      <option id="form_0974_fld_11-81" value="GH">Ghana</option>
+                                      <option id="form_0974_fld_11-82" value="GI">Gibraltar</option>
+                                      <option id="form_0974_fld_11-83" value="GR">Greece</option>
+                                      <option id="form_0974_fld_11-84" value="GL">Greenland</option>
+                                      <option id="form_0974_fld_11-85" value="GD">Grenada</option>
+                                      <option id="form_0974_fld_11-86" value="GP">Guadeloupe</option>
+                                      <option id="form_0974_fld_11-87" value="GU">Guam</option>
+                                      <option id="form_0974_fld_11-88" value="GT">Guatemala</option>
+                                      <option id="form_0974_fld_11-89" value="GG">Guernsey</option>
+                                      <option id="form_0974_fld_11-90" value="GN">Guinea</option>
+                                      <option id="form_0974_fld_11-91" value="GW">Guinea-Bissau</option>
+                                      <option id="form_0974_fld_11-92" value="GY">Guyana</option>
+                                      <option id="form_0974_fld_11-93" value="HT">Haiti</option>
+                                      <option id="form_0974_fld_11-94" value="HM">Heard Island</option>
+                                      <option id="form_0974_fld_11-95" value="HN">Honduras</option>
+                                      <option id="form_0974_fld_11-96" value="HK">Hong Kong</option>
+                                      <option id="form_0974_fld_11-97" value="HU">Hungary</option>
+                                      <option id="form_0974_fld_11-98" value="IS">Iceland</option>
+                                      <option id="form_0974_fld_11-99" value="IN">India</option>
+                                      <option id="form_0974_fld_11-100" value="ID">Indonesia</option>
+                                      <option id="form_0974_fld_11-101" value="IR">Iran</option>
+                                      <option id="form_0974_fld_11-102" value="IQ">Iraq</option>
+                                      <option id="form_0974_fld_11-103" value="IE">Ireland</option>
+                                      <option id="form_0974_fld_11-104" value="IM">Isle of Man</option>
+                                      <option id="form_0974_fld_11-105" value="IL">Israel</option>
+                                      <option id="form_0974_fld_11-106" value="IT">Italy</option>
+                                      <option id="form_0974_fld_11-107" value="CI">Ivory Coast</option>
+                                      <option id="form_0974_fld_11-108" value="JM">Jamaica</option>
+                                      <option id="form_0974_fld_11-109" value="JP">Japan</option>
+                                      <option id="form_0974_fld_11-110" value="JE">Jersey</option>
+                                      <option id="form_0974_fld_11-111" value="JO">Jordan</option>
+                                      <option id="form_0974_fld_11-112" value="KZ">Kazakhstan</option>
+                                      <option id="form_0974_fld_11-113" value="KE">Kenya</option>
+                                      <option id="form_0974_fld_11-114" value="KI">Kiribati</option>
+                                      <option id="form_0974_fld_11-115" value="KR">Korea</option>
+                                      <option id="form_0974_fld_11-116" value="KP">Korea, DPRK</option>
+                                      <option id="form_0974_fld_11-117" value="KW">Kuwait</option>
+                                      <option id="form_0974_fld_11-118" value="KG">Kyrgyzstan</option>
+                                      <option id="form_0974_fld_11-119" value="LA">Laos</option>
+                                      <option id="form_0974_fld_11-120" value="LV">Latvia</option>
+                                      <option id="form_0974_fld_11-121" value="LB">Lebanon</option>
+                                      <option id="form_0974_fld_11-122" value="LS">Lesotho</option>
+                                      <option id="form_0974_fld_11-123" value="LR">Liberia</option>
+                                      <option id="form_0974_fld_11-124" value="LY">Libya</option>
+                                      <option id="form_0974_fld_11-125" value="LI">Liechtenstein</option>
+                                      <option id="form_0974_fld_11-126" value="LT">Lithuania</option>
+                                      <option id="form_0974_fld_11-127" value="LU">Luxembourg</option>
+                                      <option id="form_0974_fld_11-128" value="MO">Macao</option>
+                                      <option id="form_0974_fld_11-129" value="MK">Macedonia</option>
+                                      <option id="form_0974_fld_11-130" value="MG">Madagascar</option>
+                                      <option id="form_0974_fld_11-131" value="MW">Malawi</option>
+                                      <option id="form_0974_fld_11-132" value="MY">Malaysia</option>
+                                      <option id="form_0974_fld_11-133" value="MV">Maldives</option>
+                                      <option id="form_0974_fld_11-134" value="ML">Mali</option>
+                                      <option id="form_0974_fld_11-135" value="MT">Malta</option>
+                                      <option id="form_0974_fld_11-136" value="MH">Marshall Islands</option>
+                                      <option id="form_0974_fld_11-137" value="MQ">Martinique</option>
+                                      <option id="form_0974_fld_11-138" value="MR">Mauritania</option>
+                                      <option id="form_0974_fld_11-139" value="MU">Mauritius</option>
+                                      <option id="form_0974_fld_11-140" value="YT">Mayotte</option>
+                                      <option id="form_0974_fld_11-141" value="MX">Mexico</option>
+                                      <option id="form_0974_fld_11-142" value="FM">Micronesia, Fed.</option>
+                                      <option id="form_0974_fld_11-143" value="MD">Moldova</option>
+                                      <option id="form_0974_fld_11-144" value="MC">Monaco</option>
+                                      <option id="form_0974_fld_11-145" value="MN">Mongolia</option>
+                                      <option id="form_0974_fld_11-146" value="ME">Montenegro</option>
+                                      <option id="form_0974_fld_11-147" value="MS">Montserrat</option>
+                                      <option id="form_0974_fld_11-148" value="MA">Morocco</option>
+                                      <option id="form_0974_fld_11-149" value="MZ">Mozambique</option>
+                                      <option id="form_0974_fld_11-150" value="MM">Myanmar</option>
+                                      <option id="form_0974_fld_11-151" value="NA">Namibia</option>
+                                      <option id="form_0974_fld_11-152" value="NR">Nauru</option>
+                                      <option id="form_0974_fld_11-153" value="NP">Nepal</option>
+                                      <option id="form_0974_fld_11-154" value="NL">Netherlands</option>
+                                      <option id="form_0974_fld_11-155" value="NC">New Caledonia</option>
+                                      <option id="form_0974_fld_11-156" value="NZ">New Zealand</option>
+                                      <option id="form_0974_fld_11-157" value="NI">Nicaragua</option>
+                                      <option id="form_0974_fld_11-158" value="NE">Niger</option>
+                                      <option id="form_0974_fld_11-159" value="NG">Nigeria</option>
+                                      <option id="form_0974_fld_11-160" value="NU">Niue</option>
+                                      <option id="form_0974_fld_11-161" value="NF">Norfolk Island</option>
+                                      <option id="form_0974_fld_11-162" value="MP">Northern Marianas</option>
+                                      <option id="form_0974_fld_11-163" value="NO">Norway</option>
+                                      <option id="form_0974_fld_11-164" value="OM">Oman</option>
+                                      <option id="form_0974_fld_11-165" value="PK">Pakistan</option>
+                                      <option id="form_0974_fld_11-166" value="PW">Palau</option>
+                                      <option id="form_0974_fld_11-167" value="PS">Palestinian Terr.</option>
+                                      <option id="form_0974_fld_11-168" value="PA">Panama</option>
+                                      <option id="form_0974_fld_11-169" value="PG">Papua New Guinea</option>
+                                      <option id="form_0974_fld_11-170" value="PY">Paraguay</option>
+                                      <option id="form_0974_fld_11-171" value="PE">Peru</option>
+                                      <option id="form_0974_fld_11-172" value="PH">Philippines</option>
+                                      <option id="form_0974_fld_11-173" value="PN">Pitcairn</option>
+                                      <option id="form_0974_fld_11-174" value="PL">Poland</option>
+                                      <option id="form_0974_fld_11-175" value="PT">Portugal</option>
+                                      <option id="form_0974_fld_11-176" value="PR">Puerto Rico</option>
+                                      <option id="form_0974_fld_11-177" value="QA">Qatar</option>
+                                      <option id="form_0974_fld_11-178" value="RO">Romania</option>
+                                      <option id="form_0974_fld_11-179" value="RU">Russia</option>
+                                      <option id="form_0974_fld_11-180" value="RW">Rwanda</option>
+                                      <option id="form_0974_fld_11-181" value="RE">Réunion</option>
+                                      <option id="form_0974_fld_11-182" value="BL">Saint Barthélemy</option>
+                                      <option id="form_0974_fld_11-183" value="SH">Saint Helena</option>
+                                      <option id="form_0974_fld_11-184" value="KN">Saint Kitts and Nevis</option>
+                                      <option id="form_0974_fld_11-185" value="LC">Saint Lucia</option>
+                                      <option id="form_0974_fld_11-186" value="MF">Saint Martin (French)</option>
+                                      <option id="form_0974_fld_11-187" value="PM">Saint Pierre and Miquelon</option>
+                                      <option id="form_0974_fld_11-188" value="VC">Saint Vincent</option>
+                                      <option id="form_0974_fld_11-189" value="WS">Samoa</option>
+                                      <option id="form_0974_fld_11-190" value="SM">San Marino</option>
+                                      <option id="form_0974_fld_11-191" value="ST">Sao Tome &amp; Principe</option>
+                                      <option id="form_0974_fld_11-192" value="SA">Saudi Arabia</option>
+                                      <option id="form_0974_fld_11-193" value="SN">Senegal</option>
+                                      <option id="form_0974_fld_11-194" value="RS">Serbia</option>
+                                      <option id="form_0974_fld_11-195" value="SC">Seychelles</option>
+                                      <option id="form_0974_fld_11-196" value="SL">Sierra Leone</option>
+                                      <option id="form_0974_fld_11-197" value="SG">Singapore</option>
+                                      <option id="form_0974_fld_11-198" value="SX">Sint Maarten (Dutch)</option>
+                                      <option id="form_0974_fld_11-199" value="SK">Slovakia</option>
+                                      <option id="form_0974_fld_11-200" value="SI">Slovenia</option>
+                                      <option id="form_0974_fld_11-201" value="SB">Solomon Islands</option>
+                                      <option id="form_0974_fld_11-202" value="SO">Somalia</option>
+                                      <option id="form_0974_fld_11-203" value="ZA">South Africa</option>
+                                      <option id="form_0974_fld_11-204" value="GS">South Georgia and the South Sandwich Islands</option>
+                                      <option id="form_0974_fld_11-205" value="SS">South Sudan</option>
+                                      <option id="form_0974_fld_11-206" value="ES">Spain</option>
+                                      <option id="form_0974_fld_11-207" value="LK">Sri Lanka</option>
+                                      <option id="form_0974_fld_11-208" value="SD">Sudan</option>
+                                      <option id="form_0974_fld_11-209" value="SR">Suriname</option>
+                                      <option id="form_0974_fld_11-210" value="SJ">Svalbard</option>
+                                      <option id="form_0974_fld_11-211" value="SZ">Swaziland</option>
+                                      <option id="form_0974_fld_11-212" value="SE">Sweden</option>
+                                      <option id="form_0974_fld_11-213" value="CH">Switzerland</option>
+                                      <option id="form_0974_fld_11-214" value="SY">Syria</option>
+                                      <option id="form_0974_fld_11-215" value="TW">Taiwan</option>
+                                      <option id="form_0974_fld_11-216" value="TJ">Tajikistan</option>
+                                      <option id="form_0974_fld_11-217" value="TZ">Tanzania</option>
+                                      <option id="form_0974_fld_11-218" value="TH">Thailand</option>
+                                      <option id="form_0974_fld_11-219" value="TL">Timor-Leste</option>
+                                      <option id="form_0974_fld_11-220" value="TG">Togo</option>
+                                      <option id="form_0974_fld_11-221" value="TK">Tokelau</option>
+                                      <option id="form_0974_fld_11-222" value="TO">Tonga</option>
+                                      <option id="form_0974_fld_11-223" value="TT">Trinidad and Tobago</option>
+                                      <option id="form_0974_fld_11-224" value="TN">Tunisia</option>
+                                      <option id="form_0974_fld_11-225" value="TR">Turkey</option>
+                                      <option id="form_0974_fld_11-226" value="TM">Turkmenistan</option>
+                                      <option id="form_0974_fld_11-227" value="TC">Turks and Caicos</option>
+                                      <option id="form_0974_fld_11-228" value="TV">Tuvalu</option>
+                                      <option id="form_0974_fld_11-229" value="AE">U.A.E.</option>
+                                      <option id="form_0974_fld_11-230" value="UG">Uganda</option>
+                                      <option id="form_0974_fld_11-231" value="UA">Ukraine</option>
+                                      <option id="form_0974_fld_11-232" value="GB">United Kingdom</option>
+                                      <option id="form_0974_fld_11-233" value="US">United States</option>
+                                      <option id="form_0974_fld_11-234" value="UM">United States Minor Outlying Islands</option>
+                                      <option id="form_0974_fld_11-235" value="UY">Uruguay</option>
+                                      <option id="form_0974_fld_11-236" value="UZ">Uzbekistan</option>
+                                      <option id="form_0974_fld_11-237" value="VU">Vanuatu</option>
+                                      <option id="form_0974_fld_11-238" value="VA">Vatican City</option>
+                                      <option id="form_0974_fld_11-239" value="VE">Venezuela</option>
+                                      <option id="form_0974_fld_11-240" value="VN">Viet Nam</option>
+                                      <option id="form_0974_fld_11-241" value="VG">Virgin Islands, British</option>
+                                      <option id="form_0974_fld_11-242" value="VI">Virgin Islands, U.S.</option>
+                                      <option id="form_0974_fld_11-243" value="WF">Wallis and Futuna</option>
+                                      <option id="form_0974_fld_11-244" value="EH">Western Sahara</option>
+                                      <option id="form_0974_fld_11-245" value="YE">Yemen</option>
+                                      <option id="form_0974_fld_11-246" value="ZM">Zambia</option>
+                                      <option id="form_0974_fld_11-247" value="ZW">Zimbabwe</option>
+                                      <option id="form_0974_fld_11-248" value="AX">Åland Islands</option>
+                                    </select>
+    
+    </div>
+    </div>
+  
+
+                                    
+
+                                   
+
+
+                                  <div class="row">
+                                    <div class="col-6">
+                                  <div class="text-danger" class="form-control" id="error_blast_date"></div>
+                                </div>
+                                  <div class="col-6">
+                                  <div class="text-danger" class="form-control" id="error_blast_time"></div>
+                                  </div>
+                                    </div>
+
+
+                                    
+                                </div>
+
+
+
+                                <div id="remblastassetsread" style="display:none;">
+                                  <hr>
+                                  <div class="row">
+
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder-Blast Allocated To:</label>
+                                      <input type="text" name="rballocated_toread" id="rballocated_toread"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+
+                                    <br>
+
+
+
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder-Blast Asset Name:</label>
+                                      <input type="text" name="rb_assetnameread" id="rb_assetnameread"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+
+                                    <br>
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder-Blast Asset Link:</label>
+                                      <input type="text" name="rb_asset_linkread" id="rb_asset_linkread"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+                                    </div>
+                                  </div>
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder Blast Date:</label>
+
+                                      <input type="text" name="rb_dateread" id="rb_dateread"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;  width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+
+
+                                      <label class="form-label" style="color:red; ">Reminder Blast Time:</label> <input
+                                        type="text" name="rb_timeread" id="rb_timeread"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                        readonly="readonly">
+
+                                      <!-- <input type="text" class="form-control" name="blast_date" id="blast_date">
+                      <input type="text" class="form-control" name="blast_time1" id="blast_time"> -->
+
+                                    </div>
+                                  </div>
+
+                                  <hr>
+
+                                </div>
+
+
+
+
+
+                                <div id="reblastassets">
+
+
+
+
+                                  <div class="row" style="display: none;">
+                                    <div class="col-12">
+                                      <label class="form-label">E-Blast Allocated To</label>
+                                      <input class="form-control" type="text" name="eballocated_to" id="eballocated_to">
+                                    </div>
+
+                                    <div class="col-12">
+                                      <label class="form-label">E-Blast Status</label>
+                                      <input class="form-control" type="text" name="ebstatus" id="ebstatus">
+                                    </div>
+                                  </div>
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Reminder Blast Allocated To</label>
+                                      <!-- <input class="form-control" type="text"  name="cname" id="cname" autocomplete="off"> -->
+
+                                      <select name="rballocated_to" id="rballocated_to" class="form-select"
+                                        aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <% userlist.forEach(function(d){ %>
+                                          <option value="<%= d.user_id %>">
+                                            <%= d.first_name %>
+                                          </option>
+
+
+                                          <% }); %>
+
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <br>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Reminder Blast Asset Name</label>
+                                      <input class="form-control" type="text" name="rb_assetname" id="rb_assetname">
+                                    </div>
+                                  </div>
+                                  <br>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Reminder Blast Asset Link</label>
+                                      <input class="form-control" type="text" name="rb_asset_link" id="rb_asset_link">
+                                    </div>
+                                  </div>
+                                  <br>
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label">Reminder Blast Time/Date (IST)</label>
+                                      <div class="input-group">
+
+                                        <input type="date" class="form-control" name="rb_date" id="rb_date">
+                                        <input type="text" class="form-control" name="rb_time" id="rb_time">
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <br>
+
+
+
+
+
+
+                                <!-- <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label">Comment & Specification</label>
+                                   
+
+                                    <textarea  name="comment" id="comment" autocomplete="off" rows="5"
+                                      cols="70" class="form-control"></textarea>
+                                     
+                                  </div>
+
+
+                                </div> -->
+
+                              </div>
+
+
+
+
+                              <!-- start code for view model -->
+
+                              <div id="viewdata11" style="display:none">
+
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label" style="color:red">Tact:</label>
+                                    <input type="text" name="tactview" id="tactview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                      readonly="readonly">
+
+                                  </div>
+
+
+                                  <div class="col-6">
+                                    <label class="form-label" style="color:red">Client Name:</label>
+                                    <input type="text" name="cnameview" id="cnameview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                      readonly="readonly">
+
+                                  </div>
+
+
+
+                                </div>
+
+
+
+
+
+
+                                <div class="row">
+                                  <div class="col-6">
+
+                                    <label class="form-label" style="color:red">Sender Name:</label>
+                                    <input type="text" name="sender_nameview" id="sender_nameview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                      readonly="readonly">
+
+
+
+                                  </div>
+
+
+                                  <div class="col-6">
+
+                                    <label class="form-label" style="color:red">Sender Email:</label>
+                                    <input type="text" name="sender_emailview" id="sender_emailview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 100% !important;"
+                                      readonly="readonly">
+
+                                  </div>
+                                </div>
+
+
+
+
+                                <hr>
+
+
+                                <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label" style="color:red">Campaign Name:</label>
+                                    <input type="text" name="camp_nameview" id="camp_nameview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                      readonly="readonly">
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label" style="color:red">Campaign From:</label>
+                                    <input type="text" name="camp_fromview" id="camp_fromview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                      readonly="readonly">
+                                  </div>
+
+                                </div>
+
+                                <hr>
+
+
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label" style="color:red">Email Blast Count:</label>
+                                    <input type="text" name="blast_countview" id="blast_countview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                      readonly="readonly">
+                                  </div>
+
+
+                                  <div class="col-6">
+                                    <label class="form-label" style="color:red">Priority:</label>
+                                    <input type="text" name="priorityview" id="priorityview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                      readonly="readonly">
+                                  </div>
+
+                                </div>
+
+
+
+                                <div class="row">
+                                  <div class="col-6">
+                                    <label class="form-label" style="color:red">Allocated To:</label>
+                                    <input type="text" name="first_nameview" id="first_nameview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                      readonly="readonly">
+                                  </div>
+
+
+                                  <!-- <div class="col-6">
+                                    <label class="form-label" style="color:red">Tact:</label>
+                                    <input type="text" name="tactview" id="tactview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                      readonly="readonly">
+                                  </div> -->
+
+                                </div>
+
+
+                                <hr>
+
+
+
+
+                                <!-- start code for view webinar asset -->
+
+
+
+                                <div id="webinarassets12">
+
+
+
+                                  <div class="row">
+
+                                    <center>
+                                      <h4>Webinar</h4>
+                                    </center>
+
+
+
+
+
+                                  </div>
+
+
+
+                                  <div class="row">
+
+
+
+
+                                    <br>
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Registration Link:</label>
+
+                                    </div>
+
+                                    <div class="col-12">
+                                      <textarea name="webinar_linkview" id="webinar_linkview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+                                    </div>
+
+                                  </div>
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Registration Date:</label>
+
+                                      <input type="text" name="webinar_date1view" id="webinar_date1view"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-12">
+
+
+                                      <label class="form-label" style="color:red; ">Registration Time:</label> <input
+                                        type="text" name="webinar_time1view" id="webinar_time1view"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+                                </div>
+
+
+                                <!-- End code for view webinar asset -->
+
+
+
+
+                                <div id="ebbassetss" style="display: none;">
+
+
+                                  <div class="row">
+
+                                    <center>
+                                      <h4>E-Blast</h4>
+                                    </center>
+                                    <!--  <div class="col-12">
+                                    <label class="form-label" style="color:red">Email Blast Type:</label>
+                                    <input type="text" name="blast_typeview" id="blast_typeview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                      readonly="readonly">
+                                  </div> -->
+
+
+
+
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">E-Blast Asset Name:</label>
+                                    </div>
+
+                                    <div class="col-12">
+                                      <textarea name="ebasset_nameview" id="ebasset_nameview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+
+                                    </div>
+                                    <div class="text-danger" id="eblast_error"></div>
+
+                                    <br>
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">E-Blast Asset Link:</label>
+
+                                    </div>
+
+                                    <div class="col-12">
+                                      <textarea name="ebasset_linkview" id="ebasset_linkview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Blast Date:</label>
+
+                                      <input type="text" name="blast_date1view" id="blast_date1view"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-12">
+
+
+                                      <label class="form-label" style="color:red; ">Blast Time:</label> <input
+                                        type="text" name="blast_time1view" id="blast_time1view"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+                                      <!-- <input type="text" class="form-control" name="blast_date" id="blast_date">
+                                          <input type="text" class="form-control" name="blast_time1" id="blast_time"> -->
+
+                                    </div>
+                                  </div>
+
+                                </div>
+
+
+
+
+                                <div id="rbassetss" style="display: none;">
+                                  <hr>
+                                  <div class="row">
+                                    <center>
+                                      <h4>Reminder Blast</h4>
+                                    </center>
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder Blast Asset Name:</label>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                      <!--<input type="text"  name="rb_assetnameview" id="rb_assetnameview" style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;" readonly="readonly">-->
+
+                                      <textarea name="rb_assetnameview" id="rb_assetnameview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+                                    </div>
+
+
+                                    <br>
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder Blast Asset Link:</label>
+
+                                    </div>
+
+                                    <div class="col-12">
+                                      <textarea name="rb_asset_linkview" id="rb_asset_linkview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
+                                        readonly="readonly"></textarea>
+                                    </div>
+
+                                  </div>
+
+
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <label class="form-label" style="color:red; ">Reminder Blast Date:</label>
+
+                                      <input type="text" name="rb_dateview" id="rb_dateview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-12">
+
+
+                                      <label class="form-label" style="color:red; ">Reminder Blast Time:</label> <input
+                                        type="text" name="rb_timeview" id="rb_timeview"
+                                        style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                        readonly="readonly">
+
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <hr>
+
+
+                                <!-- <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label" style="color:red; ">Admin Comment & Specification:</label> <input
+                                      type="text" name="commentview" id="commentview"
+                                      style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;  width: 50% !important;"
+                                      readonly="readonly">
+                                  </div>
+
+
+                                </div> -->
+
+                                <div id="fileviewdownload">
+                                  <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <b style="color:black; ">View & Download <span class="titlehighlight" >(Admin Comment & Files)</span></b>
+                                      </tr>
+                                      <tr>
+                                        <th scope="col" class="thstyle">Email Blast</th>
+                                        <th scope="col" class="thstyle">Reminder Blast</th>
+                                        <!-- <th scope="col">Replace</th> -->
+                                      </tr>
+                                    </thead>
+                                    <tbody class="table">
+
+
+                                      <tr>
+                                        <td id="adminebcomment" class="tdstyle"></td>
+
+                                        <td id="adminrbcomment" class="tdstyle"></td>
+                                      </tr>
+                                    </tbody>
+                                      <tbody class="table">
+                                      <tr>
+
+                                        <td id="viewfiles11" class="tdstyle">
+                                        </td>
+
+                                        <td id="viewreminderfiles11" class="tdstyle"></td>
+                                      </tr>
+                                    </tbody>
+
+                                  </table>
+                                </div>
+
+
+
+
+
+
+
+                                <div id="userfileviewdownload">
+                                  <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <b>View & Download <span class="titlehighlight" >(User Comment & Files)</span></b>
+                                      </tr>
+                                      <tr>
+                                        <th scope="col" class="thstyle">Email Blast</th>
+                                        <th scope="col" class="thstyle">Reminder Blast</th>
+                                        <!-- <th scope="col">Replace</th> -->
+                                      </tr>
+                                    </thead>
+
+                                    <tbody class="table">
+
+
+                                      <tr>
+                                        <td id="userebcomment"></td>
+
+                                        <td id="userrbcomment"></td>
+                                      </tr>
+                                    </tbody>
+
+
+                                    <tbody class="table">
+                                      <tr>
+
+                                        <td id="userviewfiles11" style="border-right: 1px solid;">
+                                        </td>
+
+                                        <td id="userviewreminderfiles11"></td>
+                                      </tr>
+                                    </tbody>
+
+                                  </table>
+                                </div>
+
+
+
+
+
+
+
+                                <div id="webinarfileviewdownload">
+                                  <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <b>View & Download <span class="titlehighlight" >(Comment & files)</span></b>
+                                      </tr>
+                                      <tr>
+                                        <th scope="col" class="thstyle">Admin Files</th>
+                                        <th scope="col" class="thstyle">User Files</th>
+                                        <!-- <th scope="col">Replace</th> -->
+                                      </tr>
+                                    </thead>
+                                    <tbody class="table">
+
+                                      <tr>
+                                        <td id="adminwebinarcomment"></td>
+
+                                        <td id="uerwebinarcomment"></td>
+                                      </tr>
+
+                                    </tbody>
+                                    <tbody class="table">
+                                      <tr>
+
+                                        <td id="webinarviewfiles12" style="border-right: 1px solid;">
+                                        </td>
+
+                                        <td id="webinarviewuserfiles11"></td>
+                                      </tr>
+                                    </tbody>
+
+                                  </table>
+                                </div>
+
+
+
+
+
+
+                              </div>
+
+
+
+                              <!-- End code for view model -->
+                              <br>
+
+
+
+                              <!-- Code End for Edit Modal -->
+
+                              <div id="fileviewbox" style="display:none;">
+                                <div class="row">
+                                  <div class="col-12">
+
+                                    <p id="deletemessage"></p>
+                                    <!-- <input type="hidden" name="admin_files" id="admin_files" />      -->
+
+
+
+
+                                    <div>
+                                      <table class="table table-striped table-hover table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col" colspan="3" >View & Dowdload</th>
+                                            <th scope="col">Insert/Replace</th>
+
+                                          </tr>
+                                        </thead>
+
+
+
+                                        <tbody id="container11">
+                                          <tr></tr>
+                                        </tbody>
+
+                                      </table>
+                                    </div>
+
+
+                                    <br>
+                                  </div>
+
+                                  <br>
+
+                                  <!-- <input type="text" name="admin_filesname" id="admin_filesname" 
+                                 style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;  width: 50% !important;"
+                                 readonly="readonly"> 
+
+
+                                 
+
+
+                                      <button type="button" class="btn btn-secondary"  name="admin_files" id="admin_files" onclick="fileviewFunction()" >Download File</button> -->
+                                </div>
+
+
+                              </div>
+                            </div>
+
+                            <!-- Code start for View Modal -->
+
+
+
+                            <!-- Code End for View Modal -->
+
+
+                            <div class="modal-footer">
+                              <!--  <input type="hidden" name="id" id="id" />
+    <input type="hidden" name="action" id="action" value="Add" />
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary" id="action_button">Save changes</button> -->
+
+
+
+                              <input type="hidden" name="id" id="id" />
+                              <input type="hidden" name="action" id="action" value="Add" />
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" id="action_button">Add</button>
+                            </div>
+
+
+                        </div>
+
+
+                        </form>
+
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+                  <!-- End Modal Code for  View -->
+                </div>
+              </div>
+            </div> <!-- Row end  -->
+
+
+            <!-- Plugin Js -->
+            <script src="../assets/js/bundle/dataTables.bundle.js"></script>
+         
+            <!-- Jquery Page Js -->
+
+
+
+
+            <%- include('footer'); -%>
+          </div>
+
+          <!-- End Container Fluid -->
+        </div>
+     
+        <!-- start: page footer -->
+         <!-- start script for select multiple options -->
+
+        <script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+           <!-- end script for select multiple options -->
+         <script src="../javascripts/multiSelect.js" type="text/javascript"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script> 
+      <script src="../assets/js/theme.js"></script> 
+        <script src="../javascripts/allTaskValidation.js" type="text/javascript"></script>
+       
+        
+ 
+        <!-- <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script> -->
+        <!-- <script src="../js/multiselect/jquery.multiselect.js"></script>  -->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+
+        <!-- Add script for timepicker -->
+
+        <script src="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+            <!-- <link href="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" /> -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.14.1/jquery.timepicker.js"></script>
+
+
+
+        <!-- End Script for timepicker -->
+
+
+        <!-- start script for select multiple options -->
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> -->
+         
+
+         <!-- end script for select multiple options -->
+
+        <script>
+          // new MultiSelectTag('geo')  // id
+         
+
+
+      </script>
+
+
+        </div>
+
+    </body>
+
+
+
+    </html>

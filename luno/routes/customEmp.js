@@ -182,18 +182,20 @@ router.get('/get_data', function (request, response, next) {
                    
                     
                     if(tact==="e_blast")
-                    {  
+                    { 
                         if(row.rb_assetname!="" && row.rb_assetlink!="")
                         {
-                           var tact="Email Blast / Reminder Blast"; 
+                            var tact="Email Blast / Reminder Blast"; 
+                            
                       
-                        }else if(row.mg_link!="" && row.mg_image!=""){
+                        }else if(row.mg_link!="" && row.mg_asset_name!=""){
                             var tact = "Make-Good"
                             console.log("mk find"+tact)
                         }
-                        else if((row.rb_mg_link!="" && row.rb_mg_image!="")){
-                             var tact="RB-Make-Good";
-                             console.log("mkRB find"+tact)
+                        else if(row.rb_mg_link!="" && row.rb_mgasset_name!=""){
+                            var tact="RB-Make-Good";
+                            console.log("mkRB find"+tact)
+                             
                         }else{
                             var tact="Email Blast";
                             console.log("Email Blast");
@@ -648,6 +650,20 @@ if (!fs.existsSync(dir1)){
         }
     }
     
+    else if(tact==="RB-Make-Good")
+    {
+       
+        console.log("check tact  make good tactics:" +tact);
+        var dir3=`./files/${request.body.camp_id}/user/RB-Make-Good`;
+ 
+        
+
+        if (!fs.existsSync(dir3)){
+            fs.mkdirSync(dir3);
+           
+    
+        }
+    }
 
 
 
@@ -744,14 +760,14 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                            
 
 
-                        let  comment_section=`user_rbcomment='${sendComment}',`
-                         if(sendComment==undefined){
-                            comment_section=""
-                         }
+                        // let  comment_section=`user_rbcomment='${sendComment}',`
+                        //  if(sendComment==undefined){
+                        //     comment_section=""
+                        //  }
 
-                            var updateSql = `UPDATE comment_tbl SET  ${comment_section} user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            var updateSql = `UPDATE comment_tbl SET  user_rbfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
                            
-                    
+                      console.log("updatedSql🧈🍞🥐🥨🥪🥙"+updateSql)
 
                             
       
@@ -759,7 +775,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
                          // Make good code start  here//
 
-                         if(tact=="Make_Good")
+                         else if(tact=="Make_Good")
                          {
  
                            console.log("i am in eb_mg_files🤣😃😄😅"+ tact)
@@ -780,8 +796,30 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                              var updateSql = `UPDATE comment_tbl SET   eb_mg_files = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
                             
                      
-       
+                            }
                          //make good code end there //
+
+                        else if(tact=="RB-Make-Good")
+                         {
+ 
+                           console.log("i am in rb_mg_files🤣😃😄😅"+ tact)
+                             let arr=row.eb_mg_files.split(",")
+                             if(row.eb_mg_files.trim().length>0 && arr.length==1 && filenames.length==1){
+                                 arr.push(filenames[0])
+                                 combinedFilenames=arr.join(",")
+                             }
+ 
+                            
+ 
+ 
+                        //  let  comment_section=`user_rbcomment='${sendComment}',`
+                        //   if(sendComment==undefined){
+                        //      comment_section=""
+                        //   }
+ 
+                             var updateSql = `UPDATE comment_tbl SET   rb_mg_files = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            
+                     
 
 
                          } else if(tact == "Webinar")
@@ -802,7 +840,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
 
                           
-                            var updateSql = `UPDATE comment_tbl SET ${comment_section} webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
+                            var updateSql = `UPDATE comment_tbl SET  webinar_files = "${combinedFilenames}" WHERE camp_id = '${camp_id}'`;
     
                         }else{
                           
@@ -815,19 +853,23 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                                 combinedFilenames=arr.join(",")
                             }
 
-                            let  comment_section=`user_ebcomment='${sendComment}',`
-                            if(sendComment==undefined){
-                               comment_section=""
-                            }
+                            // let  comment_section=`user_ebcomment='${sendComment}',`
+                            // if(sendComment==undefined){
+                            //    comment_section=""
+                            // }
 
 
 
-                            var updateSql = `UPDATE comment_tbl SET ${comment_section} user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
+                            var updateSql = `UPDATE comment_tbl SET  user_ebfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id}'`;
                            
                         }   
                          
                             database.query(updateSql, function (err, data) {
-    
+    if(err){
+        console.log(err+"errro here ")
+    }else{
+        console.log("hello ☺🤔😘😎😊😚😊😋"+updateSql)
+    }
                                 response.json({
                                     success: true,
                                     message : 'File Uploaded Successfully...'
@@ -840,19 +882,24 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                        
           
                      if(tact === "Webinar"){
-                        var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_comment,webinar_files) VALUES (${camp_id}, '${sendComment}', '${combinedFilenames}')`;
+                        var sqlQry =  `INSERT INTO comment_tbl (camp_id,webinar_files) VALUES (${camp_id},'${combinedFilenames}')`;
                      }
     
                      else if(tact==="Email-Reminder-Blast")
                      {
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbcomment, user_rbfiles) VALUES (${camp_id}, '${sendComment}','${combinedFilenames}')`; // insert query //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_rbfiles) VALUES (${camp_id},'${combinedFilenames}')`; // insert query //
                      }
                      // make good  code start here //
                      else if(tact==="Make_Good")
                      {
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user) VALUES (${camp_id}, '${sendComment}','${combinedFilenames}')`; // insert query //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,eb_mg_files) VALUES (${camp_id},'${combinedFilenames}')`; // insert query //
                      }
                      //make good code end here //
+
+                     else if(tact==="RB-Make-Good")
+                     {
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,rb_mg_files) VALUES (${camp_id},'${combinedFilenames}')`; // insert query //
+                     }
                      else{
                         var sqlQry = `INSERT INTO comment_tbl (camp_id,mg_eb_files) VALUES (${camp_id},'${combinedFilenames}')`; //
                         // insert query //
@@ -995,6 +1042,14 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                         var admin_files=row.eb_mg_files;
     
                     }
+
+                    else if(tact==="Make-RB-Good")
+    
+                    {
+                        var admin_files=row.rb_mg_files;
+    
+                    }
+
 
     
                     else{

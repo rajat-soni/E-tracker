@@ -814,6 +814,22 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
   });
 
 
+  
+  $.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
 
 
 
@@ -821,16 +837,19 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
 
     event.preventDefault();
 
+    // alert($('#task_form').serializeObject());
+    // return;
 
+      // var geo  = $("#con").val();
+      // alert(geo)
     $.ajax({
 
       url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: $('#task_form').serialize(),
-      dataType: "json",
-      beforeSend: function () {
-        //$('#action_button').attr('disabled', 'disabled');
-      },
+      dataType: "JSON",
+     
+    
 
       success: function (data) {
         $('#message').html('<div class="alert alert-success">' + data.message + '</div>');

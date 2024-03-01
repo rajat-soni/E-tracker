@@ -104,7 +104,7 @@ router.get('/get_data', function(request, response, next){
  
      //Total number of records without filtering
  
-     database.query("SELECT COUNT(*) AS Total ,CONCAT(a.blast_date ,' | ', a.blast_time) AS balst_dt,CONCAT(a.rb_date,' | ',a.rb_time) AS reminderbalst_dt from addtask a left join user_tbl u on a.allocated_to=u.user_id", function(error, data){
+     database.query("SELECT COUNT(*) AS Total ,MAX(CONCAT(a.blast_date ,' | ', a.blast_time)) AS balst_dt,MAX(CONCAT(a.rb_date,' | ',a.rb_time)) AS reminderbalst_dt from addtask a left join user_tbl u on a.allocated_to=u.user_id", function(error, data){
  
          var total_records = data[0].Total;
          console.log("Total Records");
@@ -112,7 +112,7 @@ router.get('/get_data', function(request, response, next){
  
          //Total number of records with filtering
  
-         database.query(`SELECT COUNT(*) AS Total ,CONCAT(a.blast_date ,' | ', a.blast_time) AS balst_dt,CONCAT(a.rb_date,' | ',a.rb_time) AS reminderbalst_dt from addtask a left join user_tbl u on a.allocated_to=u.user_id WHERE 1 ${search_query}`, function(error, data){
+         database.query(`SELECT COUNT(*) AS Total ,MAX(CONCAT(a.blast_date ,' | ', a.blast_time)) AS balst_dt,MAX(CONCAT(a.rb_date,' | ',a.rb_time)) AS reminderbalst_dt from addtask a left join user_tbl u on a.allocated_to=u.user_id WHERE 1 ${search_query}`, function(error, data){
  
              var total_records_with_filter = data[0].Total;
  
@@ -124,31 +124,28 @@ router.get('/get_data', function(request, response, next){
              `;
  
              var data_arr = [];
+           
+             database.query(query, function (error, data) {
  
-             database.query(query, function(error, data){
-                
-               
-               
-                   var ebfname="Rajashri";
-                   console.log("Ebfname" +ebfname);
-
-                    data.forEach(function(row){
-                        var rballocated=row.rballocated_to;
-                        var eballocated=row.allocated_to;
-                        var tdtetime=row.tdtetime;
-                        var tact=row.tact;
-                        console.log("tdtetime" +tdtetime);
-                        console.log("rb alloacted" +rballocated);
-                        console.log("EB alloacted" +eballocated);
-
-const getDate = () => {
-    const newDate = new Date();
-    const year = newDate.getFullYear();
-    const month = newDate.getMonth() + 1;
-    const d = newDate.getDate();
-    
-    return `${year}-${month.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`;
-  }
+            
+                 data.forEach(function (row) {
+                     // console.log(row.role);
+                     var user_id = request.session.user_id;
+                     console.log("session_id 🎏✨🎉🎏🎋🎆"+user_id)
+                     var role = request.session.role;
+                     var image_link = row.mg_link;
+                     console.log("linkUrl"+image_link)
+                         
+                     const getDate = () => {
+                         const newDate = new Date();
+                         const year = newDate.getFullYear();
+                         const month = newDate.getMonth() + 1;
+                         const d = newDate.getDate();
+ 
+                         return `${year}-${month.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`;
+                     }
+                     
+                     var curdate = getDate();
   
 
 if(row.rb_status=="1")
@@ -222,6 +219,44 @@ else
 
 } 
 
+var tact=row.tact;
+
+                   
+       // Assign Tactics here //   
+
+if(tact==="e_blast")
+
+
+{  
+    if(row.rb_mg_link!="" && row.rb_mgasset_name!="" && row.rb_assetname!== null && row.rb_assetlink !== null)
+    {
+       
+        var tact="RB-Make-Good";
+        
+
+
+    }else if(row.mg_link!="" && row.mg_asset_name!="" && row.rb_assetname === null  && row.rb_assetlink === null){
+        var tact = "Make-Good"
+        console.log("mk find"+tact)
+        console.log("mk find 🥙🥙🧈🍳🥙🥪🌮🥐🍿🍟🍕🥖🥙🧈🥞🥞"+tact)
+    }
+    else if(row.rb_assetname!== null && row.rb_assetlink!== null){
+
+        var tact="Email Blast / Reminder Blast"; 
+       console.log("Email Blast / Reminder Blast 🥙🥙🧈🍳🥙🥪🌮🥐🍿🍟🍕🥖🥙🧈🥞🥞"+tact)
+        
+         
+    }else{
+        var tact="Email Blast";
+        console.log("Email Blast");
+    }
+}else if(tact==="webinar"){
+    var tact="Webinar";
+    
+}
+ console.log(tact+"🍜🍛🍚🍚🍙")
+// End //
+
 
                         if(row.rballocated_to!=row.allocated_to && row.rballocated_to!="")
                         {
@@ -250,12 +285,36 @@ else
                             'blast_type' : row.blast_type,
                             'rblast_date' : rblast_date,
                             'rb_type' : row.rb_type,
-                            'id' : row.id
+                            'id' : row.id,
+                            'camp_id': row.camp_id,
+                            'user_rbfiles': row.user_rbfiles,
+                            'user_ebfiles': row.user_ebfiles,
+                            'webinar_files': row.webinar_files,
+                            'id': row.id,
+                            'tact': tact,
+                            'tdte_time': row.tdtetime,
+                            'status' : row.status,
+                            'todaydt': row.todaydt,
+                            'blast_date': row.blast_date,
+                            'eblast_datetime': row.eblast_date,
+                            'reblast_datetime': row.reblast_datetime,
+                            'mg_link': row.mg_link,
+                            'mg_image': row.mg_image,
+                            'mg_status' : row.mg_status,
+                            'rb_mg_image': row.rb_mg_image,
+                            'rb_mg_link' : row.rb_mg_link,
+                            'seesion_id' : user_id,
+                            'allocated_to' : row.allocated_to,
+                            'rbstatus' : row.rbstatus,
+                            'rb_assetlink': row.rb_assetlink,
+                            'rb_assetname' : row.rb_assetname,
+                            'rb_mg_status' : row.rb_mg_status
                         });
 
+                        
                     });
              
-            
+        
 
 
 
@@ -306,7 +365,9 @@ router.post('/action', function(request, response, next) { // fetch all query //
 
 
 
+        // Code for 
 
+        
 
     if (action == 'fetch_single') // fetch single record query //
     {
@@ -345,7 +406,127 @@ else{
        
     }
 
+
+///============================= EB Admin status Code Start ==================================//
+        if (action == "admin_status") {
+            // edit query //
+
+            var status_id = request.body.status_id;
+            console.log("status_id" + status_id);
+            var user_id = request.session.user_id; // session variable //
+            // console.log('session user '+user_id);
+
+            
+                    var updateTask = `UPDATE addtask SET status = 1   WHERE id = ${user_id}`;
+                
+                    database.query(updateTask, function (error, data) {
+                        if (!error) {
+                            response.json({
+                                success: true,
+                                message: "EB  status  Done.. ",
+                            });
+                        } else {
+                            response.json({
+                                success: false,
+                                message: "Error in Error in Make Good!",
+                            });
+                        }
+                    });
+            } ///============================= EB  Admin status Code End ==================================//
+
     
+
+
+///============================= EB Make Good status Code Start ==================================//
+            if (action == "admin_make_good_status") {
+                // edit query //
+        
+                var makeGoodStatusId = request.body.makeGoodStatusId;
+                console.log("makeGoodStatusId" + makeGoodStatusId);
+                var user_id = request.session.user_id; // session variable //
+                // console.log('session user '+user_id);
+        
+                
+                        var updateTask = `UPDATE addtask SET mg_status = 1   WHERE id = ${user_id}`;
+                        console.log("updateTask🎟🎞🎞🎗🎁"+updateTask)
+                      
+                        database.query(updateTask, function (error, data) {
+                            if (!error) {
+                                response.json({
+                                    success: true,
+                                    message: "Make good  status  Done.. ",
+                                });
+                            } else {
+                                response.json({
+                                    success: false,
+                                    message: "Error in Error in Make Good!",
+                                });
+                            }
+                        });
+            }   ///============================= EB Make Good status Code End ==================================//
+                
+            
+            
+
+            ///============================= RB status code Start ==================================//
+            if (action == "admin_rb_status") {
+                // edit query //
+        
+                var rbStatusId = request.body.rbStatusId;
+                console.log("makeGoodStatusId" + rbStatusId);
+                var user_id = request.session.user_id; // session variable //
+                // console.log('session user '+user_id);
+        
+                
+                        var updateTask = `UPDATE addtask SET rbstatus = 1   WHERE id = ${user_id}`;
+                        console.log("updateTask🎟🎞🎞🎗🎁"+updateTask)
+                      
+                        database.query(updateTask, function (error, data) {
+                            if (!error) {
+                                response.json({
+                                    success: true,
+                                    message: "Make good  status  Done.. ",
+                                });
+                            } else {
+                                response.json({
+                                    success: false,
+                                    message: "Error in Error in Make Good!",
+                                });
+                            }
+                        });
+            } ///============================= RB status code End ==================================//
+    
+
+
+///============================= RB MG Status Code Start ==================================//
+            if (action == "admin_rb_mg_status") {
+                // edit query //
+        
+                var rbMgStatusId = request.body.rbMgStatusId;
+                console.log("makeGoodStatusId" + rbMgStatusId);
+                var user_id = request.session.user_id; // session variable //
+                // console.log('session user '+user_id);
+        
+                
+                        var updateTask = `UPDATE addtask SET rb_mg_status = 1   WHERE id = ${user_id}`;
+                        console.log("updateTask🎟🎞🎞🎗🎁"+updateTask)
+                      
+                        database.query(updateTask, function (error, data) {
+                            if (!error) {
+                                response.json({
+                                    success: true,
+                                    message: "Make good  status  Done.. ",
+                                });
+                            } else {
+                                response.json({
+                                    success: false,
+                                    message: "Error in Error in Make Good!",
+                                });
+                            }
+                        });
+            } ///============================= RB MG Status Code End ==================================//
+
+
 
     if (action == 'Edit') // edit query //
      {

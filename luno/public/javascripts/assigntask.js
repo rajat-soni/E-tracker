@@ -32,23 +32,115 @@ $(document).ready(function () { // for fetch Data //
                 targets: 6,
                 orderable: false,
                 render: function (data, type, row, meta) {
+
+
                     console.log("Datatable");
                     console.log("ID" + row.id);
                     console.log("blast_type" + row.blast_type);
-                    return `
+                    alert(row.tact)
+                    
+//    alert(row.rb_assetlink) alert(row)
+                    var mg_status = row.mg_status;
+                   console.log("row.status ✨🎊🎃🧧🎁"+row.rb_status)
+                    var rowId = row.id;
+                    var rb_mg = row.rb_mg_link;
+                    var mg_link = row.mg_link;
+                    var mg_image = row.image;
+                    console.log(row.mg_link);
+                    console.log(row.image)
+                    dt1 = new Date(row.tdte_time);
+                 
+                    console.log("dt1=>" + dt1)
+                    var dt2 = row.eblast_date;
+                    console.log("dt2=>" + dt2)
+                    dt3 = new Date(row.reblast_datetime);
+                     var status =  row.satus;
+                     console.log("status me =>"+status)
                    
-                 <button type="button" hidden class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  data-id =" `+ row.id + ' ' + row.blast_type + ` "><i class="fa fa-trash"></i></button>
-                 
-                 
-                 <button type="button" hidden class="btn btn-link btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"  data-id =" `+ row.id + ' ' + row.blast_type + ` "><i class="fa fa-pencil"></i></button>
+                    allocated_to = row.allocated_to;
+                    rballocated_to = row.rballocated_to;
+                    user_id = row.user_id;
+                    var tact = row.tact;
+                    console.log("tact value is:" + tact);
 
-                 <button type="button" class="btn btn-link btn-sm view1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"  data-id =" `+ row.id + ' ' + row.blast_type + ' ' + row.tact +` "><i class="fa fa-eye"></i></button>
+                    if (row.tact === "Email Blast") {
+
+                        console.log("Email Blast nrew" + row.tact);
+                        var tact = "Email-Blast";
+
+                    } else {
+                        console.log("we are not in blast condtion..")
+                    }
+
+
+                    // code for make good //
+
+                    if (row.tact == "Make-Good") {
+                        var tact = "Make_Good"
+                    }
+
+
+
+                    //end code for make good //
+
+                    if (row.tact === "RB-Make-Good") {
+                        var tact = "RB-Make-Good"
+                    }
+
+
+                    if (row.tact === "Email Blast / Reminder Blast") {
+                        var tact = "Email-Reminder-Blast";
+                    }
+
+
+
+
+                    if (row.tact === "Email Blast / Reminder Blast")
+
+                    {
+
+                        tact = "Email-Reminder-Blast";
+                    }
+
+
+
+
+                    if (row.tact === "Webinar") {
+
+                        console.log("Webinar Blast");
+                        tact = "Webinar";
+                    }
+
+
+                    if ((row.camp_id !== null || row.mg_status !== null || row.rb_mg_status !== null || row.rbstatus !== null)  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == ""  || row.user_rbfiles === "undefined") || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === "") || (row.tact == 'Make' &&  (mg_link == "") || (mg_asset_name == "")) || (row.tact == " RB-Make-Good"  &&  (row.rb_mgasset_name == "") || (row.rb_mg_link == ""))  ))) 
+                      {
+  
                      
-                 
-              
- 
+                          return ` 
+                           
+                          ${(row.status == 1) ? `<span class="bg-primary text-light px-1 rounded small" data-bs-toggle="tooltip" title="${tact}">EB done</span>` : (row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm  myStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = checkboxClick(this)></button>`:` `} 
+           
+                          
+                          ${(row.mg_status == 1 &&  row.mg_asset_name !== "" && row.mg_link !== "" ) ? `<span class="bg-info text-light px-1 rounded small">Mk Done</span>` : (row.mg_status == 0 && row.mg_asset_name == "" && row.mg_link == "") ?`<input type="checkbox" class="btn btn-link btn-sm  myMakeGoodStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = MakeGoodcheckboxClick(this)></button>`:` `} 
 
-                     `;
+ 
+                          ${(row.rbstatus == 1 && row.rb_assetname !== "" &&  row.rb_assetlink !== "") ? `<span class="bg-success text-light px-1 rounded small">Rb Done</span>` : (row.rbstatus == 0 && row.rb_assetname == "" && row.rb_assetlink == "") ?`<input type="checkbox" class="btn btn-link btn-sm  rbStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbCheckboxClick(this)></button>`:` `} 
+                   
+
+                          ${(row.rb_mg_status == 1 && row.tact == "RB-Make-Good" && row.rb_mg_link !== "" &&  row.rb_mgasset_name !== "") ? `<span class="bg-danger text-light px-1 rounded small">RB MG Done</span>` : (row.rb_mg_status == 0  && row.rb_mg_link == "" &&  row.rb_mgasset_name == "" ) ?`<input type="checkbox" class="btn btn-link btn-sm  rbMgStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbMgCheckboxClick(this)></button>`:` `} 
+                   
+
+                            <button type="button" hidden class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  data-id =" `+ row.id + ' ' + row.blast_type + ` "><i class="fa fa-trash"></i></button>
+                            
+                            
+                            <button type="button" hidden class="btn btn-link btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"  data-id =" `+ row.id + ' ' + row.blast_type + ` "><i class="fa fa-pencil"></i></button>
+
+                            <button type="button" class="btn btn-link btn-sm view1" data-bs-toggle="tooltip" data-bs-placement="top" title="View"  data-id =" `+ row.id + ' ' + row.blast_type + ' ' + row.tact +` "><i class="fa fa-eye"></i></button>
+
+               
+                  
+                          `;
+                    }    
                 }
             }
 
@@ -57,6 +149,7 @@ $(document).ready(function () { // for fetch Data //
 
 
     });
+
 
     $('#add_data').click(function () { // for insert the Data //
 
@@ -154,8 +247,7 @@ $(document).ready(function () { // for fetch Data //
                     $('#user_id').val(data.user_id);
                     $('#id').val(data.id);
                     $('#table_data').DataTable().ajax.reload();
-                }
-                else {
+                }else {
                     alert("E - Blast");
                     $('#camp_id').val(data.camp_name);
                     $('#blst_type').val(data.blast_type);
