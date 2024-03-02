@@ -183,7 +183,7 @@ router.get('/get_data', function (request, response, next) {
                     
                     if(tact==="e_blast")
                     { 
-                        if(row.rb_assetname!="" && row.rb_assetlink!="")
+                        if(row.rb_assetname!="" && row.rb_assetlink!="" )
                         {
                             var tact="Email Blast / Reminder Blast"; 
                             

@@ -321,9 +321,9 @@ $(document).ready(function() { // for fetch Data //
          $("#campname").show()
          $("#user_ebcomment").show()
 
-         $("#fileviewbox").hide()
+         $("#fileviewbox").show()
          $("#webinarFlex").hide()
-         $("#ebBlastview").hide()
+         $("#ebBlastview").show()
          $('#webinar_files').hide();
          $('#ebasset').hide();
          $('#rbasset').hide();
@@ -510,33 +510,7 @@ $(document).ready(function() { // for fetch Data //
                     $('#webinar_comment_show').show();
 
                            // MAKE GOOD   START //
-                  }else if (tact == "Make_Good" ) {
-
-                   
-                     var eb_mg_files = data.eb_mg_files;
-                     var eb_mg_files = eb_mg_files.split(',');
-                     var eb_mg_files_length = eb_mg_files.length;
-                     for (var i = 0; i < eb_mg_files_length; i++) {
-                        if (eb_mg_files[i] != undefined && eb_mg_files[i].trim().length != 0) {
-
-                           htmlContent1 += '<td style = "background-color: aliceblue;"  ><img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
-
-                        }
-               
-                     }
-
-                     document.getElementById('MakeGoodView').innerHTML =  htmlContent1;
-                     ;
-
-                     $("#MakeGoodView").show();
-                     $("#makeGood11").show();
-                     $("#makeGood12").show();
-                     $('#viewfiles11').hide();
-                     $('#viewReminderBlastView11').hide()
-                     $('#webinarflex').hide();
-                     $('#fileviewdownload').hide();
-                     $('#rbFlex').hide();
-                     $("#user_ebcomment").hide();
+                  
                    
                      
 
@@ -592,9 +566,38 @@ $(document).ready(function() { // for fetch Data //
                     $("#webinarFlex").hide();
                     $("#user_ebcomment").show();
 
-                     
+                       
 
+                     if (tact == "Make_Good" ) {
 
+                   
+                        var eb_mg_files = data.eb_mg_files;
+                        var eb_mg_files = eb_mg_files.split(',');
+                        var eb_mg_files_length = eb_mg_files.length;
+                        for (var i = 0; i < eb_mg_files_length; i++) {
+                           if (eb_mg_files[i] != undefined && eb_mg_files[i].trim().length != 0) {
+   
+                              htmlContent1 += '<td style = "background-color: aliceblue;"  ><img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
+   
+                           }
+                  
+                        }
+   
+                        document.getElementById('MakeGoodView').innerHTML =  htmlContent1;
+                        ;
+   
+                        $("#MakeGoodView").show();
+                        $("#makeGood11").show();
+                        $("#makeGood12").show();
+                        $('#viewfiles11').show();
+                        $('#viewfiles12').show();
+                        $('#viewReminderBlastView11').hide()
+                        $('#webinarflex').hide();
+                        $('#fileviewdownload').hide();
+                        $('#rbFlex').hide();
+                        $("#user_ebcomment").hide();
+
+                    }
 
 
                     var user_rbfiles = data.user_rbfiles;
