@@ -179,31 +179,35 @@ router.get('/get_data', function (request, response, next) {
 
                     var tact=row.tact;
 
-                   
+                    console.log("tacthere"+tact)
                     
-                    if(tact==="e_blast")
-                    { 
-                        if(row.rb_assetname!="" && row.rb_assetlink!="" )
+                    if (tact === "e_blast") {
+
+
+                        if(row.blast_type="E-blast" && row.asset_name!="" && row.asset_link!="")
                         {
-                            var tact="Email Blast / Reminder Blast"; 
-                            
-                      
-                        }else if(row.mg_link!="" && row.mg_asset_name!=""){
-                            var tact = "Make-Good"
-                            console.log("mk find"+tact)
+
+                            var tact = "Email Blast";
                         }
-                        else if(row.rb_mg_link!="" && row.rb_mgasset_name!=""){
-                            var tact="RB-Make-Good";
-                            console.log("mkRB find"+tact)
-                             
-                        }else{
-                            var tact="Email Blast";
-                            console.log("Email Blast");
+
+                       if(row.blast_type="Make-Good" && row.mgasset_name!="" && row.mgasset_link!="")
+                        {
+
+                            var tact = "Make Good";
                         }
-                    }
-                    else if(tact==="webinar"){
-                        var tact="Webinar";
+
+
+                        if (row.blast_type="Reminder-Blast" && row.rb_assetname != "" && row.rb_assetlink != "") {
+                            var tact = "Email Blast / Reminder Blast";
+                        }
                         
+                         if (row.blast_type="RBMake-Good" && row.rb_mgasset_name != "" && row.rb_mgasset_link != "") {
+                            var tact = "RB Make Good";
+                        }
+
+                    }
+                     if (tact === "webinar") {
+                        var tact = "Webinar";
                     }
                     
 
@@ -258,7 +262,9 @@ router.get('/get_data', function (request, response, next) {
                         'mg_status' : row.mg_status,
                         'rb_mg_image': row.rb_mg_image,
                         'rb_mg_link' : row.rb_mg_link,
-                        'rb_mg_status' : row.rb_mg_status
+                        'rb_mg_status' : row.rb_mg_status,
+                        'rb_mgasset_link' : row.rb_mgasset_link,
+                        'rb_mgasset_name'  : row.rb_mgasset_name  
                     });
 
                     
@@ -745,7 +751,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                         data.forEach(function (row) {
                       
                         // console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
-                      
+                        
 
                         if(tact=="Email-Reminder-Blast")
                         {
@@ -803,8 +809,8 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                          {
  
                            console.log("i am in rb_mg_files🤣😃😄😅"+ tact)
-                             let arr=row.eb_mg_files.split(",")
-                             if(row.eb_mg_files.trim().length>0 && arr.length==1 && filenames.length==1){
+                             let arr=row.rb_mg_files.split(",")
+                             if(row.rb_mg_files.trim().length>0 && arr.length==1 && filenames.length==1){
                                  arr.push(filenames[0])
                                  combinedFilenames=arr.join(",")
                              }
@@ -901,7 +907,7 @@ router.post("/comment",  upload.any('image'),(request, response) => {
                         var sqlQry = `INSERT INTO comment_tbl (camp_id,rb_mg_files) VALUES (${camp_id},'${combinedFilenames}')`; // insert query //
                      }
                      else{
-                        var sqlQry = `INSERT INTO comment_tbl (camp_id,mg_eb_files) VALUES (${camp_id},'${combinedFilenames}')`; //
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebfiles) VALUES (${camp_id},'${combinedFilenames}')`; //
                         // insert query //
                         console.log("inser mg qeruy"+sqlQry)
                      }
@@ -954,14 +960,15 @@ router.post("/comment",  upload.any('image'),(request, response) => {
 
    
 
-
-    router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {  // for delete images //
+//========== image module user for delete Files ========= //
+    router.post('/image_replace', upload.single('user_rbfiles'), (request, response) => {  
      
 
         var oldfname1 = request.body.oldfname;
         var camp_id = request.body.camp_id;
         var tact = request.body.tact;
-        console.log("old file Name😍😎😋😊😉"+oldfname1+"camp_id => "+camp_id+"tact=>"+ tact )
+        
+        console.log("old file Name😍😎😋😊😉"+oldfname1+"camp_id => "+camp_id+"tact=>"+ tact)
     
         var filenum = request.body.filenum;
         var oldfname = request.body.oldfname;
@@ -1043,10 +1050,12 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
     
                     }
 
-                    else if(tact==="Make-RB-Good")
+                    else if(tact==="RB-Make-Good")
     
                     {
                         var admin_files=row.rb_mg_files;
+                       
+
     
                     }
 
@@ -1114,7 +1123,9 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                         
                         var updateSql = `UPDATE comment_tbl SET user_ebfiles='${output}' WHERE camp_id = '${camp_id}'`;
 
-                        if( tact === "Webinar"){
+                       
+
+                        if( tact == "Webinar"){
 
                          
                              //
@@ -1129,7 +1140,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
 
                            
                         }
-                       else if(tact==="Email-Reminder-Blast")
+                       else if(tact=="Email-Reminder-Blast")
                        {
                         // if(output.length==1){
                         //     output.push(output)
@@ -1139,7 +1150,7 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
     
                        }
 
-                       else if(tact==="Make_Good")
+                       else if(tact=="Make_Good")
                        {
                         // if(output.length==1){
                         //     output.push(output)
@@ -1149,6 +1160,17 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
     
                        }
 
+
+                       else if(tact== "RB-Make_Good")
+                       {
+                        // if(output.length==1){
+                        //     output.push(output)
+                        // }
+                        console.log("👨‍🦰👩‍🦱👨‍🦲👦👩‍🦰🧓👨‍🦰👩‍🦰👨‍🦰👨‍🦰👩‍🦰👨‍🦰👱‍♂️👨‍🦳👼🤶🤶 in rb query"+tact)
+                        
+                        var updateSql = `UPDATE comment_tbl SET rb_mg_files='${output}' WHERE camp_id = '${camp_id}'`;
+    
+                       }
 
 
                        else{
@@ -1162,6 +1184,11 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                       
                         console.log("Update query" +updateSql);
                         database.query(updateSql, function (err, data) {
+                            if(err){
+                                console.log("err"+err)
+                            }else{
+                                console.log("updateSql🤗😘😍😊🤨"+ updateSql)
+                            }
     
                             if (err) {
                                 response.json({
@@ -1267,6 +1294,20 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                              
                            
                              var updateSql = `UPDATE comment_tbl SET webinar_comment ='${sendcmt}' WHERE camp_id = ${camp_id}`;
+
+
+                         }else if(tact == "Make_Good")
+                         {
+                             
+                           
+                             var updateSql = `UPDATE comment_tbl SET eb_mg_msg ='${sendcmt}' WHERE camp_id = ${camp_id}`;
+
+
+                          } else if(tact == "RB-Make-Good")
+                         {
+                             
+                           
+                             var updateSql = `UPDATE comment_tbl SET rb_mg_msg ='${sendcmt}' WHERE camp_id = ${camp_id}`;
      
                         }else{
                        
@@ -1300,6 +1341,15 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                       else if(tact=="Email-Reminder-Blast")
                       {
                          var sqlQry = `INSERT INTO comment_tbl (camp_id, user_rbcomment) VALUES (${camp_id},'${sendcmt}')`; // insert query //
+                      }
+
+                      else if(tact=="Make_Good")
+                      {
+                         var sqlQry = `INSERT INTO comment_tbl (camp_id, eb_mg_msg) VALUES (${camp_id},'${sendcmt}')`; // insert query //
+                      }
+                      else if(tact=="RB-Make-Good")
+                      {
+                         var sqlQry = `INSERT INTO comment_tbl (camp_id, rb_mg_msg) VALUES (${camp_id},'${sendcmt}')`; // insert query //
                       }
                       else{
                          var sqlQry = `INSERT INTO comment_tbl (camp_id,user_ebcomment) VALUES (${camp_id},'${sendcmt}')`; //

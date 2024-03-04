@@ -19,15 +19,15 @@ router.get("/", function (request, response, next) {
 
     var query1 = " SELECT *, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS rb_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,' | ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,' | ', rb_time) >= CURRENT_TIMESTAMP)";
     var query2 = "SELECT * FROM campaign ORDER BY id DESC";
-    var currentblast = "select (select count(*) from addtask where (blast_date = current_date && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now() ) && status=0))+ (select count(*) from addtask where (rb_date = current_date && (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now() ) && rbstatus=0)) as currentblast";
+    var currentblast = "select (select count(*) from addtask where (blast_date = current_date && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 1 hour) > now() ) && status=0))+ (select count(*) from addtask where (rb_date = current_date && (DATE_ADD(concat(rb_date, ' ', rb_time),interval 1 hour) > now() ) && rbstatus=0)) + (select count(*) from addtask where (mg_date = current_date && (DATE_ADD(concat(mg_date, ' ', mg_time),interval 1 hour) > now() ) && mg_status=0)) + (select count(*) from addtask where (rb_mg_date = current_date && (DATE_ADD(concat(rb_mg_date, ' ', rb_mg_time),interval 1 hour) > now() ) && rb_mg_status=0)) as currentblast";
     var weektask = "SELECT *, CONCAT( blast_date ,' | ', blast_time) AS balst_dt FROM addtask WHERE blast_date BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)";
     var clientlist = "select *,c.client_id as cid,c.client_name as cname from client_tbl c right join sender_tbl s on c.client_id=s.client_id  ";
     var userlist = "SELECT * FROM  user_tbl ORDER BY user_id DESC";
 
 
-    var completed = "select * from addtask where status=1 || rbstatus=1";
-    var missed = "select (select count(*) FROM `addtask` WHERE (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) < now() && status=0)) + (select count(*) from addtask where (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) < now() && rbstatus=0)) as missed";
-    var pending = "select (select count(*) from addtask where (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now() ) and status=0) + (select count(*) from addtask where (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now()) and rbstatus=0 ) as pending";
+    var completed = "select((select count(*) from addtask where status=1)+(select count(*) from addtask where rbstatus=1)+(select count(*) from addtask where mg_status=1)+(select count(*) from addtask where rb_mg_status=1)) as completed";
+    var missed = "select (select count(*) FROM `addtask` WHERE (DATE_ADD(concat(blast_date, ' ', blast_time),interval 1 hour) < now() && status=0)) + (select count(*) from addtask where (DATE_ADD(concat(rb_date, ' ', rb_time),interval 1 hour) < now() && rbstatus=0)) + (select count(*) from addtask where (DATE_ADD(concat(mg_date, ' ', mg_time),interval 1 hour) < now() && mg_status=0)) + (select count(*) from addtask where (DATE_ADD(concat(rb_mg_date, ' ', rb_mg_time),interval 1 hour) < now() && rb_mg_status=0)) as missed";
+    var pending = "select (select count(*) from addtask where (DATE_ADD(concat(blast_date, ' ', blast_time),interval 1 hour) > now() ) and status=0) + (select count(*) from addtask where (DATE_ADD(concat(rb_date, ' ', rb_time),interval 1 hour) > now()) and rbstatus=0 ) + (select count(*) from addtask where (DATE_ADD(concat(mg_date, ' ', mg_time),interval 1 hour) > now()) and mg_status=0 ) + (select count(*) from addtask where (DATE_ADD(concat(rb_mg_date, ' ', rb_mg_time),interval 1 hour) > now()) and rb_mg_status=0 ) as pending    ";
 
 
    
@@ -215,21 +215,48 @@ router.get('/get_data', function (request, response, next) {
                     var tact = row.tact;
 
                     console.log("tact in routes:" + tact);
+                    console.log("blast_type in routes:" + row.blast_type);
 
                     if (tact === "e_blast") {
 
-                        if (row.rb_assetname != "" && row.rb_assetlink != "") {
-                            var tact = "Email Blast / Reminder Blast";
-                        }
-                        
-                        else {
-                            var tact = "Email Blast";
 
+                        if(row.blast_type=="E-blast" && row.asset_name  !== null && row.asset_link  !== null)
+                        {
+
+                            var tact = "Email Blast";
+                            console.log("Email Blast" +row.blast_type);
                         }
+
+                       if(row.blast_type=="Make-Good" && row.mgasset_name !== null && row.mgasset_link !== null)
+                        {
+
+                            var tact = "Make Good";
+                            console.log("Make Good" +row.blast_type);
+                        }
+
+
+                        if (row.blast_type=="Reminder-Blast" && row.rb_assetname !== null && row.rb_assetlink !== null) {
+                            var tact = "Email Blast / Reminder Blast";
+                            console.log("Email Blast / Reminder Blast" +row.blast_type);
+                        }
+
+
+                        if (row.blast_type=="RBMake-Good" && row.rb_mgasset_name !== null && row.rb_mgasset_link !== null) {
+                            var tact = "RB Make Good";
+                            console.log("RB Make Good" +row.blast_type);
+                        }
+
+
+                        
+                        //  if (row.blast_type == "RBMake-Good" && row.rb_mgasset_name !== null && row.rb_mgasset_link !== null) {
+                        //     var tact = "RB Make Good";
+                        //     console.log("RB Make Good" +row.blast_type);
+                        // }
 
                     }
-                    else if (tact === "webinar") {
+                     if (tact === "webinar") {
                         var tact = "Webinar";
+                        console.log("webinar" +row.blast_type);
                     }
 
 
@@ -242,6 +269,8 @@ router.get('/get_data', function (request, response, next) {
                     }
 
 
+
+                    console.log("tact is:" +tact);
 
                     data_arr.push({
                         'balst_dt': row.balst_dt,
@@ -257,7 +286,24 @@ router.get('/get_data', function (request, response, next) {
                         'blast_time': row.blast_time,
                         'camp_id': row.camp_id,
                         'admin_rb_file': row.admin_rb_file,
-                        'admin_files': row.admin_files,
+                        'mg_date': row.mg_date,
+                        'mg_time': row.mg_time,
+                        'mg_status': row.mg_status,
+                        'rb_mg_date': row.rb_mg_date,
+                        'rb_mg_time': row.rb_mg_time,
+                        'rb_mg_status': row.rb_mg_status,
+                        'rbstatus': row.rbstatus,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_link': row.mgasset_link,
+                        'rb_assetname': row.rb_assetname,
+                        'rb_assetlink': row.rb_assetlink,
+                        'rb_time': row.rb_time,
+                        'comment': row.comment,
+                        'rb_comment': row.rb_comment,
+                        'admin_ebmgcmt': row.admin_ebmgcmt,
+                        'admin_rbmgcmt': row.admin_rbmgcmt,
+                        'webinar_comment': row.webinar_comment,
+                       
                         'id': row.id
                     });
                 });
@@ -334,7 +380,7 @@ router.get('/get_prioritydata', function (request, response, next) {
             var total_records_with_filter = data[0].Total;
 
             var query = `
-            SELECT *, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS rb_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,'  ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,'  ', rb_time) >= CURRENT_TIMESTAMP)  AND 1 ${search_query} 
+            SELECT *, CONCAT( blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS rb_dt, CONCAT( mg_date ,' | ', mg_time) AS mg_dt, CONCAT( rb_mg_date ,' | ', rb_mg_time) AS rb_mg_dt FROM addtask WHERE priority='Rush' && (CONCAT( blast_date ,' ', blast_time) >= CURRENT_TIMESTAMP OR CONCAT( rb_date ,' ', rb_time) >= CURRENT_TIMESTAMP OR CONCAT( mg_date ,' ', mg_time) >= CURRENT_TIMESTAMP OR CONCAT(rb_mg_date ,' ', rb_mg_time) >= CURRENT_TIMESTAMP) AND 1 ${search_query} 
             ORDER BY balst_dt,${column_name} ${column_sort_order} 
             LIMIT ${start}, ${length}
             `;
@@ -345,10 +391,58 @@ router.get('/get_prioritydata', function (request, response, next) {
             database.query(query, function (error, data) {
 
                 data.forEach(function (row) {
+
+
+                    var priority = row.priority;
+                    var tact = row.tact;
+
+                    console.log("tact in routes:" + tact);
+                    console.log("blast_type in routes:" + row.blast_type);
+
+                    if (tact === "e_blast") {
+
+
+                        if(row.blast_type="E-blast" && row.asset_name!="" && row.asset_link!="")
+                        {
+
+                            var tact = "Email Blast";
+                        }
+
+                       if(row.blast_type="Make-Good" && row.mgasset_name!="" && row.mgasset_link!="")
+                        {
+
+                            var tact = "Make Good";
+                        }
+
+
+                        if (row.blast_type="Reminder-Blast" && row.rb_assetname != "" && row.rb_assetlink != "") {
+                            var tact = "Email Blast / Reminder Blast";
+                        }
+                        
+                         if (row.blast_type="RBMake-Good" && row.rb_mgasset_name != "" && row.rb_mgasset_link != "") {
+                            var tact = "RB Make Good";
+                        }
+
+                    }
+                     if (tact === "webinar") {
+                        var tact = "Webinar";
+                    }
+
+
+
+                    if (priority == "Rush") {
+                        var camp_name = row.camp_name + " " + `<span class="bg-danger text-light px-1 rounded small">Rush</span>`;
+                    }
+                    else {
+                        var camp_name = row.camp_name;
+                    }
+
+console.log("check tact in priority data:" +tact)
+
                     data_arr.push({
-                        'camp_name': row.camp_name,
+                        'camp_name': camp_name,
                         'blast_date1': row.balst_dt,
-                        'tact': row.tact,
+                        'tact': tact,
 
                         'status': row.status,
                         'allocated_to': row.allocated_to,
@@ -356,7 +450,22 @@ router.get('/get_prioritydata', function (request, response, next) {
                         'blast_type': row.blast_type,
                         'rb_type': row.rb_type,
                         'rb_date': row.rb_date,
+                       
                         'blast_time': row.blast_time,
+                       
+                        'mg_date': row.mg_date,
+                        'mg_time': row.mg_time,
+                        'mg_status': row.mg_status,
+                        'rbstatus': row.rbstatus,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_link': row.mgasset_link,
+                        'rb_assetname': row.rb_assetname,
+                        'rb_assetlink': row.rb_assetlink,
+                        'rb_time': row.rb_time,
+                        'rb_mg_date': row.rb_mg_date,
+                        'rb_mg_time': row.rb_mg_time,
+                        'rb_mg_status': row.rb_mg_status,
                         'id': row.id
                     });
                 });
@@ -434,27 +543,86 @@ router.get('/get_todaytaskdata', function (request, response, next) {
             var total_records_with_filter = data[0].Total;
 
             var query = `
-            SELECT *, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask 
-            WHERE blast_date=CURDATE() && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 2 hour) > now()) || (DATE_ADD(concat(rb_date, ' ', rb_time),interval 2 hour) > now() ) AND 1 ${search_query} 
+            SELECT *, CONCAT(  blast_date ,' | ', blast_time) AS balst_dt FROM addtask WHERE blast_date=CURDATE() && (DATE_ADD(concat(blast_date, ' ', blast_time),interval 1 hour) > now()) || (DATE_ADD(concat(rb_date, ' ', rb_time),interval 1 hour) > now() ) || (DATE_ADD(concat(mg_date, ' ', mg_time),interval 1 hour) > now() ) || (DATE_ADD(concat(rb_mg_date, ' ', rb_mg_time),interval 1 hour) > now() ) AND 1 ${search_query} 
             ORDER BY balst_dt,${column_name} ${column_sort_order} 
             LIMIT ${start}, ${length}
             `;
 
+
+            
             var data_arr = [];
 
             database.query(query, function (error, data) {
 
                 data.forEach(function (row) {
+
+                    var priority = row.priority;
+                    var tact = row.tact;
+
+                    console.log("tact in routes:" + tact);
+                    console.log("blast_type in routes:" + row.blast_type);
+
+                    if (tact === "e_blast") {
+
+
+                        if(row.blast_type="E-blast" && row.asset_name!="" && row.asset_link!="")
+                        {
+
+                            var tact = "Email Blast";
+                        }
+
+                       if(row.blast_type="Make-Good" && row.mgasset_name!="" && row.mgasset_link!="")
+                        {
+
+                            var tact = "Make Good";
+                        }
+
+
+                        if (row.blast_type="Reminder-Blast" && row.rb_assetname != "" && row.rb_assetlink != "") {
+                            var tact = "Email Blast / Reminder Blast";
+                        }
+                        
+                         if (row.blast_type="RBMake-Good" && row.rb_mgasset_name != "" && row.rb_mgasset_link != "") {
+                            var tact = "RB Make Good";
+                        }
+
+                    }
+                     if (tact === "webinar") {
+                        var tact = "Webinar";
+                    }
+
+
+
+                    if (priority == "Rush") {
+                        var camp_name = row.camp_name + " " + `<span class="bg-danger text-light px-1 rounded small">Rush</span>`;
+                    }
+                    else {
+                        var camp_name = row.camp_name;
+                    }
+
+console.log("check tact in todays task data:" +tact)
+
+
                     data_arr.push({
-                        'camp_name': row.camp_name,
+                        'camp_name': camp_name,
                         'blast_date1': row.balst_dt,
                         'blast_date': row.blast_date,
-                        'tact': row.tact,
+                        'tact': tact,
                         'blast_time': row.blast_time,
                         'rb_date': row.rb_date,
                         'rb_type': row.rb_type,
                         'allocated_to': row.allocated_to,
                         'status': row.status,
+                        'rbstatus': row.rbstatus,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_link': row.mgasset_link,
+                        'rb_assetname': row.rb_assetname,
+                        'rb_assetlink': row.rb_assetlink,
+                        'rb_time': row.rb_time,
+                        'rb_mg_date': row.rb_mg_date,
+                        'rb_mg_time': row.rb_mg_time,
+                        'rb_mg_status': row.rb_mg_status,
                         'id': row.id
                     });
                 });
@@ -534,7 +702,7 @@ router.get('/get_weeklytaskdata', function (request, response, next) {
             var total_records_with_filter = data[0].Total;
 
             var query = `
-            SELECT *, CONCAT( blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS reminder_dt FROM addtask WHERE (blast_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (rb_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) AND 1 ${search_query} 
+            SELECT *, CONCAT( blast_date ,' | ', blast_time) AS balst_dt, CONCAT( rb_date ,' | ', rb_time) AS reminder_dt FROM addtask WHERE (blast_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (rb_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (mg_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) || (rb_mg_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY) AND 1 ${search_query} 
             ORDER BY ${column_name} ${column_sort_order} 
             LIMIT ${start}, ${length}
             `;
@@ -549,10 +717,57 @@ router.get('/get_weeklytaskdata', function (request, response, next) {
             database.query(query, function (error, data) {
 
                 data.forEach(function (row) {
+
+                    var priority = row.priority;
+                    var tact = row.tact;
+
+                    console.log("tact in routes:" + tact);
+                    console.log("blast_type in routes:" + row.blast_type);
+
+                    if (tact === "e_blast") {
+
+
+                        if(row.blast_type="E-blast" && row.asset_name!="" && row.asset_link!="")
+                        {
+
+                            var tact = "Email Blast";
+                        }
+
+                       if(row.blast_type="Make-Good" && row.mgasset_name!="" && row.mgasset_link!="")
+                        {
+
+                            var tact = "Make Good";
+                        }
+
+
+                        if (row.blast_type="Reminder-Blast" && row.rb_assetname != "" && row.rb_assetlink != "") {
+                            var tact = "Email Blast / Reminder Blast";
+                        }
+                        
+                         if (row.blast_type="RBMake-Good" && row.rb_mgasset_name != "" && row.rb_mgasset_link != "") {
+                            var tact = "RB Make Good";
+                        }
+
+                    }
+                     if (tact === "webinar") {
+                        var tact = "Webinar";
+                    }
+
+
+
+                    if (priority == "Rush") {
+                        var camp_name = row.camp_name + " " + `<span class="bg-danger text-light px-1 rounded small">Rush</span>`;
+                    }
+                    else {
+                        var camp_name = row.camp_name;
+                    }
+
+
+
                     data_arr.push({
-                        'camp_name': row.camp_name,
+                        'camp_name': camp_name,
                         'blast_date1': row.balst_dt,
-                        'tact': row.tact,
+                        'tact': tact,
 
                         'status': row.status,
                         'allocated_to': row.allocated_to,
@@ -561,6 +776,20 @@ router.get('/get_weeklytaskdata', function (request, response, next) {
                         'rb_type': row.rb_type,
                         'rb_date': row.rb_date,
                         'blast_time': row.blast_time,
+                        'rb_date': row.rb_date,
+                        'rb_type': row.rb_type,
+                        'allocated_to': row.allocated_to,
+                      
+                        'rbstatus': row.rbstatus,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_name': row.mgasset_name,
+                        'mgasset_link': row.mgasset_link,
+                        'rb_assetname': row.rb_assetname,
+                        'rb_assetlink': row.rb_assetlink,
+                        'rb_time': row.rb_time,
+                        'rb_mg_date': row.rb_mg_date,
+                        'rb_mg_time': row.rb_mg_time,
+                        'rb_mg_status': row.rb_mg_status,
                         'id': row.id
                     });
                 });
@@ -688,10 +917,10 @@ console.log("within fetch_single_Profile");
 
         if (tact == "e_blast") {
 
-            // console.log("body",request.body)
+
             var cname = request.body.cname;
 
-            console.log("Cname check during add not found:" + cname);
+            console.log("Cname check during add:" + cname);
             var camp_name = request.body.camp_name;
             var camp_from = request.body.camp_from;
             var blast_count = request.body.blast_count;
@@ -702,10 +931,7 @@ console.log("within fetch_single_Profile");
             var blast_type = request.body.blast_type11;
             var blast_date = request.body.blast_date;
             var blast_time = request.body.blast_time;
-         
             var geoe = request.body.geo;
-       
-
 
 
             var rb_type = "";
@@ -741,11 +967,11 @@ console.log("within fetch_single_Profile");
 
 
             // End code to Convert AM/PM to 24 Hours  
-            // console.log(cname);
+            console.log(cname);
             var query = `
 		INSERT INTO addtask 
-		(cname,camp_name, camp_from,blast_count,asset_name,asset_link,tact,blast_type,blast_date,blast_time,geo,rb_type,rb_assetname,rb_assetlink,rb_date,rb_time,rballocated_to,priority,allocated_to,status) 
-		VALUES ("${cname}", "${camp_name}","${camp_from}","${blast_count}", "${asset_name}", "${asset_link}", "${tact}", "${blast_type}", "${blast_date}","${blast_time}", "${geoe}", "${rb_type}", "${rb_assetname}","${rb_assetlink}","${rb_date}","${rb_time}","${rballocated_to}","${priority}", "${allocated_to}", "${status}")
+		(cname,camp_name, camp_from,blast_count,asset_name,asset_link,tact,blast_type,blast_date,blast_time,rb_type,rb_assetname,rb_assetlink,rb_date,rb_time,rballocated_to,priority,allocated_to,status,geo) 
+		VALUES ("${cname}", "${camp_name}","${camp_from}","${blast_count}", "${asset_name}", "${asset_link}", "${tact}", "${blast_type}", "${blast_date}","${blast_time}", "${rb_type}", "${rb_assetname}","${rb_assetlink}","${rb_date}","${rb_time}","${rballocated_to}","${priority}", "${allocated_to}", "${status}","${geoe}")
 		`;
        
             console.log(query);
@@ -998,16 +1224,24 @@ console.log("within fetch_single_Profile");
         console.log("MG Date in routes file is:" +mg_date);
         var mg_time = request.body.mg_time;
 
-
+        console.log("mg_time in routes file is:" +mg_time);
 
         var rb_mgallocated_to = request.body.rb_mgallocated_to;
         var rb_mgasset_name = request.body.rb_mgasset_name;
         var rb_mgasset_link = request.body.rb_mgasset_link;
         var rb_mg_date = request.body.rb_mg_date;
         var rb_mg_time = request.body.rb_mg_time;
+        var geo = request.body.geo;
+        var mg_geo= request.body.mg_geo;
+        var rb_geo= request.body.rb_geo;
+        var rb_mg_geo= request.body.rb_mg_geo;
+        var geo_chosen= request.body.geo;
 
-
-
+    
+        console.log("check geo :" +geo);
+        console.log("check mg_geo :" +mg_geo);
+        console.log("check rb_geo :" +rb_geo);
+        console.log("check rb_mg_geo :" +rb_mg_geo);
         var cname = cname[0];
 
 
@@ -1087,7 +1321,7 @@ console.log("within fetch_single_Profile");
             // var rb_date = request.body.rb_date;
             console.log("Make Good Date displayed");
             console.log(mg_date);
-            console.log("mg_date time" + mg_date);
+            console.log("mg_date time" + mg_time);
 
             var validTime = mg_time.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
             if (!validTime) {
@@ -1237,8 +1471,10 @@ console.log("within fetch_single_Profile");
         rb_mgasset_link = "${rb_mgasset_link}",
         rb_mg_date = "${rb_mg_date}",
         rb_mg_time = "${rb_mg_time}",
-
-        
+        geo = "${geo}",
+        mg_geo = "${mg_geo}",
+        rb_geo = "${rb_geo}",
+        rb_mg_geo = "${rb_mg_geo}",
        
         priority = "${priority}",
         allocated_to = "${allocated_to}"
@@ -1269,8 +1505,7 @@ console.log("within fetch_single_Profile");
         blast_type = "${blast_type}",
         blast_date = "${blast_date}",
         blast_time = "${blast_time}",
-        asset_name = "${asset_name}" ,
-        asset_link = "${asset_link}",
+       
 
         mgallocated_to = "${mgallocated_to}",
         mgasset_name = "${mgasset_name}",
@@ -1284,7 +1519,10 @@ console.log("within fetch_single_Profile");
         rb_mgasset_link = "${rb_mgasset_link}",
         rb_mg_date = "${rb_mg_date}",
         rb_mg_time = "${rb_mg_time}",
-
+        geo = "${geo}",
+        mg_geo = "${mg_geo}",
+        rb_geo = "${rb_geo}",
+        rb_mg_geo="${rb_mg_geo}",
 
        
         priority = "${priority}",
@@ -1414,6 +1652,19 @@ var storage = multer.diskStorage({
             }
         }
 
+        else if (tact === "Make-Good") {
+            var dir3 = `./files/${campid}/Admin/Make-Good`;
+            console.log("check Make-Good");
+
+            if (!fs.existsSync(dir3)) {
+                fs.mkdirSync(dir3);
+                console.log("Make-Good folder created....");
+
+            }
+        }
+
+
+
         else if (tact === "Email-Reminder-Blast") {
             var dir3 = `./files/${campid}/Admin/Email-Reminder-Blast`;
             console.log("check Email-Reminder-Blast tact");
@@ -1424,6 +1675,20 @@ var storage = multer.diskStorage({
 
             }
         }
+
+
+        else if (tact === "RB-Make-Good") {
+            var dir3 = `./files/${campid}/Admin/RB-Make-Good`;
+            console.log("check RB-Make-Good");
+
+            if (!fs.existsSync(dir3)) {
+                fs.mkdirSync(dir3);
+                console.log("RB-Make-Good folder created....");
+
+            }
+        }
+
+
 
 
 
@@ -1471,7 +1736,7 @@ var upload = multer({
 
 
 
-router.post("/admin_comment", upload.any('admin_files'), (request, response) => {
+router.post("/admin_comment",upload.any('admin_files'), (request, response) => {
 
     var comment = request.body.comment;
     console.log("within admn comment js" + comment);
@@ -1513,6 +1778,23 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
                         console.log("tact is eb/rb:" + updateSql);
 
                     }
+
+
+                    else if (tact == "Make-Good") {
+                        console.log("Make-Good in if condition");
+                        var updateSql = `UPDATE comment_tbl SET  admin_ebmgcmt='${comment}' WHERE camp_id = '${camp_id.trim()}'`;
+                        console.log("tact is Make-Good:" + updateSql);
+
+                    }
+
+                    else if (tact == "RB-Make-Good") {
+                        console.log("RB-Make-Good in if condition");
+                        var updateSql = `UPDATE comment_tbl SET  admin_rbmgcmt='${comment}' WHERE camp_id = '${camp_id.trim()}'`;
+                        console.log("tact is RB-Make-Good:" + updateSql);
+
+                    }
+
+
                     else {
                         console.log("in else condition");
                         var updateSql = `UPDATE comment_tbl SET  comment='${comment}' WHERE camp_id = '${camp_id.trim()}'`;
@@ -1557,13 +1839,37 @@ router.post("/admin_comment", upload.any('admin_files'), (request, response) => 
                         //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
 
                         var sqlQry = `INSERT INTO comment_tbl (camp_id,rb_comment) VALUES (${camp_id},  '${comment}')`; // insert query //
-
-
                         console.log("tact is eb/rb:" + sqlQry);
 
                         
 
                     }
+
+
+                    else if (tact == "Make-Good") {
+                        console.log("in if condition tact is Make-Good");
+                        //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_ebmgcmt) VALUES (${camp_id},  '${comment}')`; // insert query //
+                        console.log("tact is eb/rb:" + sqlQry);
+
+                        
+
+                    }
+
+
+
+                    else if (tact == "RB-Make-Good") {
+                        console.log("in if condition tact is RB-Make-Good");
+                        //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rbmgcmt) VALUES (${camp_id},  '${comment}')`; // insert query //
+                        console.log("tact is eb/rb:" + sqlQry);
+
+                        
+
+                    }
+
 
                     else{
 
@@ -1655,6 +1961,20 @@ router.post("/admin_imginsert", upload.any('admin_files'), (request, response) =
                         console.log("tact is eb/rb:" + updateSql);
 
                     }
+
+                   else if (tact == "Make-Good") {
+                        console.log("in if condition");
+                        var updateSql = `UPDATE comment_tbl SET  admin_ebmgfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+                        console.log("tact is Make-Good:" + updateSql);
+
+                    }
+                    else if (tact == "RB-Make-Good") {
+                        console.log("in if condition");
+                        var updateSql = `UPDATE comment_tbl SET  admin_rbmgfiles = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+                        console.log("tact is RB-Make-Good:" + updateSql);
+
+                    }
+
                     else {
                         console.log("in else condition");
                         var updateSql = `UPDATE comment_tbl SET   admin_files = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
@@ -1707,6 +2027,34 @@ router.post("/admin_imginsert", upload.any('admin_files'), (request, response) =
 
                     }
 
+                   else if (tact == "Make-Good") {
+                        console.log("in if condition tact is Make-Good");
+                        //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_ebmgfiles) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
+
+
+                        console.log("tact is admin_ebmgfiles:" + sqlQry);
+
+                        
+
+                    }
+
+                    else if (tact == "RB-Make-Good") {
+                        console.log("in if condition tact is RB-Make-Good");
+                        //var updateSql = `UPDATE comment_tbl SET  rb_comment='${comment}', admin_rb_file = '${combinedFilenames}' WHERE camp_id = '${camp_id.trim()}'`;
+
+                        var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rbmgfiles) VALUES (${camp_id}, '${combinedFilenames}')`; // insert query //
+
+
+                        console.log("tact is admin_rbmgfiles:" + sqlQry);
+
+                        
+
+                    }
+
+
+
                     else{
 
    //   console.log(Object.keys(imagePath).map(function(k){return imagePath[k]}).join(","));
@@ -1720,7 +2068,7 @@ router.post("/admin_imginsert", upload.any('admin_files'), (request, response) =
 
                         response.json({
                             success: true,
-                            message: 'Files Uploaded Successfully.. '
+                            message: 'Files Inserted Successfully.. '
                         })
                     })
                  
@@ -1784,6 +2132,16 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
     var tactfolder = "Email-Reminder-Blast";
   }
 
+
+  else if (tact === "Make-Good") {
+    var tactfolder = "Make-Good";
+  }
+
+
+  else if (tact === "RB-Make-Good") {
+    var tactfolder = "RB-Make-Good";
+  }
+
   else if (tact === "Webinar") {
     var tactfolder = "Webinar";
   }
@@ -1844,9 +2202,17 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
                     var admin_files = row.admin_rb_file;
 
                 }
+                else if (tact === "Make-Good") {
+                    var admin_files = row.admin_ebmgfiles;
+
+                }
+                if (tact === "RB-Make-Good") {
+                    var admin_files = row.admin_rb_file;
+
+                }
 
                 else {
-                    var admin_files = row.admin_files;
+                    var admin_files = row.admin_rbmgfiles;
                 }
 
 
@@ -1933,6 +2299,19 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
                             var updateSql = `UPDATE comment_tbl SET admin_rb_file='${output}' WHERE camp_id = '${camp_id}'`;
 
                         }
+
+                       else if (tact === "Make-Good") {
+                            var updateSql = `UPDATE comment_tbl SET admin_ebmgfiles='${output}' WHERE camp_id = '${camp_id}'`;
+
+                        }
+
+
+                        else if (tact === "RB-Make-Good") {
+                            var updateSql = `UPDATE comment_tbl SET admin_rbmgfiles='${output}' WHERE camp_id = '${camp_id}'`;
+
+                        }
+
+
                         else {
                             var updateSql = `UPDATE comment_tbl SET admin_files='${output}' WHERE camp_id = '${camp_id}'`;
                         }
@@ -1966,6 +2345,17 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
                         if (tact = "Email-Reminder-Blast") {
                             var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rb_file) VALUES (${camp_id}, '${output}')`; // insert query //
                         }
+
+                        else if (tact = "Make-Good") {
+                            var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_ebmgfiles) VALUES (${camp_id}, '${output}')`; // insert query //
+                        }
+
+
+                        else if (tact = "RB-Make-Good") {
+                            var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rbmgfiles) VALUES (${camp_id}, '${output}')`; // insert query //
+                        }
+
+
                         else {
                             var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_files) VALUES (${camp_id}, '${output}')`; // insert query //
                         }
@@ -2048,6 +2438,16 @@ router.post("/fileinsert", upload.any('admin_files'), (request, response) => {
 
                 }
 
+                else if (tact === "Make-Good") {
+                    var admin_files = row.admin_ebmgfiles;
+
+                }
+                else if (tact === "RB-Make-Good") {
+                    var admin_files = row.admin_rbmgfiles;
+
+                }
+
+
                 else {
                     var admin_files = row.admin_files;
                 }
@@ -2097,6 +2497,20 @@ router.post("/fileinsert", upload.any('admin_files'), (request, response) => {
                             var updateSql = `UPDATE comment_tbl SET admin_rb_file='${output}' WHERE camp_id = '${camp_id}'`;
 
                         }
+
+                        else if (tact === "Make-Good") {
+                            var updateSql = `UPDATE comment_tbl SET admin_ebmgfiles='${output}' WHERE camp_id = '${camp_id}'`;
+
+                        }
+
+
+                       else if (tact === "RB-Make-Good") {
+                            var updateSql = `UPDATE comment_tbl SET admin_rbmgfiles='${output}' WHERE camp_id = '${camp_id}'`;
+
+                        }
+
+
+
                         else {
                             var updateSql = `UPDATE comment_tbl SET admin_files='${output}' WHERE camp_id = '${camp_id}'`;
                         }
@@ -2130,6 +2544,16 @@ router.post("/fileinsert", upload.any('admin_files'), (request, response) => {
                         if (tact = "Email-Reminder-Blast") {
                             var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rb_file) VALUES (${camp_id}, '${output}')`; // insert query //
                         }
+
+                        else if (tact = "Make-Good") {
+                            var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_ebmgfiles) VALUES (${camp_id}, '${output}')`; // insert query //
+                        }
+
+
+                        else if (tact = "RB-Make-Good") {
+                            var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_rbmgfiles	) VALUES (${camp_id}, '${output}')`; // insert query //
+                        }
+
                         else {
                             var sqlQry = `INSERT INTO comment_tbl (camp_id,admin_files) VALUES (${camp_id}, '${output}')`; // insert query //
                         }

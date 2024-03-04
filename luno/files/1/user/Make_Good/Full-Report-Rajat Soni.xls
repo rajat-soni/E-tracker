@@ -1,0 +1,239 @@
+
+        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+        <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"/>
+        <head><!--[if gte mso 9]><xml>
+        <x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>FullReport</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>
+        <![endif]--></head>
+        <body><table><tr><td>Date</td><td>Client_Code</td><td>CID</td><td>Campaign_Name</td><td>Category</td><td>Country</td><td>Asset_Name</td><td>EDM_link</td><td>Links_Updated_by</td><td>EDM_Completed_By</td><td>userid</td><td>Comments</td></tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Career Progression Plan for Managers</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>HR & AI SuperHuman Report</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Guide: The Basics of Payroll in Australia</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Guide: How to make an impact in your first 90 days as a new HR manager</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-4-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>A manager’s guide to performance reviews</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-5-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Onboarding and induction checklist</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-6-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-10</td><td>CS</td><td>43201</td><td>43201-American-Lawyer-Media-(ALM)-CPL-Q1-Koa-Health-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Executive summary: Workplace mental health trends 2024</td><td>https://resource.itbusinesstoday.com/whitepapers/43201-Koa-Health-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>3121089.3</td><td>New-order-Alpha-3121089.3-TT-Trustpilot-DE-Strat/Ent-Prospecting-Q1</td><td>ALPHA (ACE)</td><td>EU</td><td>Lügner, Fälscher und Betrüger: So schützen wir Unternehmen vor Bewertungsbetrug</td><td>https://eu.itbusinessplus.com/whitepaper/LP-3121089.3-Trustpilot-DE-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>74823</td><td>FEB-ASSET-0124-0222-Phantom-EBN-ArmadaCare-PO-74823</td><td>PHANTOM (Magento) - EBN</td><td>Both</td><td>BE PREPARED TO FACE THE HARSH REALITIES OF HDHPS WITH HSAS</td><td>https://resource.itsourcebox.com/whitepaper/EBN-ArmadaCare-PO-74823-1-email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43071</td><td>43071-OpenText-Inc-CPL-Q1-ABM-DTG-GL-DX-Future-of-CX-EMEA-XDBS-Corp</td><td>TGIF (Tele marketing)</td><td>EU</td><td>The Future State of CX in 2024</td><td>https://resource.itbusinesstoday.com/whitepapers/43071-Open-Text-Corporation-CPL-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43071</td><td>43071-OpenText-Inc-CPL-Q1-ABM-DTG-GL-DX-Future-of-CX-EMEA-XDBS-Corp</td><td>TGIF (Tele marketing)</td><td>EU</td><td>Preparing for the shift from CCM to CXM</td><td>https://resource.itbusinesstoday.com/whitepapers/43071-Open-Text-Corporation-CPL-2nd-1-email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>N/A</td><td>42784-IBM-EMEA-CPL-Q1-AI4B-ABM-UK-BDM-Enterprise-Cloud-Strategy-00087982-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>The CEO’s guide to generative AI Application modernization</td><td>https://resource.itbusinesstoday.com/whitepapers/42784-IBM-EMEA-UK-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>N/A</td><td>42784-IBM-EMEA-CPL-Q1-AI4B-ABM-UK-BDM-Enterprise-Cloud-Strategy-00087982-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>AI Academy guidebook: Put AI to work in application modernization</td><td>https://resource.itbusinesstoday.com/whitepapers/42784-IBM-EMEA-UK-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Career Progression Plan for Managers</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>HR & AI SuperHuman Report</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Guide: The Basics of Payroll in Australia</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Guide: How to make an impact in your first 90 days as a new HR manager</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-4-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>A manager’s guide to performance reviews</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-5-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>CS</td><td>43150</td><td>43150-Employment-Hero-CPL-Q1-Q2-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Onboarding and induction checklist</td><td>https://resource.itbusinesstoday.com/whitepapers/43150-Employment-Hero-6-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>Survey</td><td>W-8</td><td>New-HTML-Build:-FY24-Q1-Q4-AWS-Education-WW-TS</td><td>W8-Techscore</td><td>Both</td><td>Mission-Critical Infrastructure | Take the Quiz! </td><td>https://engage.biz-tech-insights.com/LP-FY24-Q1-Q4-AWS-Education-WW-TS/email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>Survey</td><td>W-8</td><td>BUILD-LP-FY24-Q3-Oracle-EMEA-APPS-TechScore</td><td>W8-Techscore</td><td>Both</td><td>Transforming Finance Management Quiz | Take the Quiz!</td><td>https://engage.biz-tech-insights.com/LP-FY24-Q3-Oracle-EMEA-APPS-TechScore/email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>Survey</td><td>N/A</td><td>New-HTML-Build:-2024-Q1-ServiceNow-FSM-TechScore</td><td>W8-Techscore</td><td>Both</td><td>Modernizing Field Service Management Quiz | Take the Quiz!</td><td>https://engage.biz-tech-insights.com/LP-2024-Q1-ServiceNow-FSM-TS/email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-16</td><td>Survey</td><td>W-8</td><td>New-HTML-Build:-2024-Q1-ServiceNow-FSM-TechScore</td><td>W8-Techscore</td><td>Both</td><td>Modernizing Field Service Management Quiz | Take the Quiz!</td><td>https://engage.biz-tech-insights.com/LP-2024-Q1-ServiceNow-FSM-TS/email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-17</td><td>CS</td><td>W-8</td><td>New-Program-FY24-Q3-Cisco-Panoptica-CS-+-Intent-+-BANT</td><td>W8 (CS)</td><td>Both</td><td>Cloud Security, Enhanced: Attack Path Analysis to Identify the Critical Risks in Your Hybrid Cloud</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q3-Cisco-Panoptica-CS-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-17</td><td>CS</td><td>W-8</td><td>New-Program-FY24-Q3-Cisco-Panoptica-CS-+-Intent-+-BANT</td><td>W8 (CS)</td><td>Both</td><td>The Beginner’s Guide to Attack Paths</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q3-Cisco-Panoptica-CS-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-17</td><td>CS</td><td>W-8</td><td>New-Program-FY24-Q3-Cisco-Panoptica-CS-+-Intent-+-BANT</td><td>W8 (CS)</td><td>Both</td><td>The Future of Cloud Security: Attack Paths and Graph-based Technology</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q3-Cisco-Panoptica-CS-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>2268G</td><td>EDM-Required-Ray-L-2268G-Spectrum-628-HL-Q1-2024-01-Fiber</td><td>RAY (INSTA)</td><td>NON-EU</td><td>RELIABLE, POWERFUL DEDICATED FIBER INTERNET ACCESS</td><td>https://resource.itbusinessplus.com/whitepapers/Ray-L-2268G-Spectrum-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>2268G</td><td>EDM-Required-Ray-L-2268G-Spectrum-628-HL-Q1-2024-01-Fiber</td><td>RAY (INSTA)</td><td>NON-EU</td><td>SUPPORT REMOTE EMPLOYEES WITH HIGH CAPACITY BANDWIDTH</td><td>https://resource.itbusinessplus.com/whitepapers/Ray-L-2268G-Spectrum-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>2268G</td><td>EDM-Required-Ray-L-2268G-Spectrum-628-HL-Q1-2024-01-Fiber</td><td>RAY (INSTA)</td><td>NON-EU</td><td>IMPROVE NETWORK PERFORMANCE WITH HIGH CAPACITY BANDWIDTH</td><td>https://resource.itbusinessplus.com/whitepapers/Ray-L-2268G-Spectrum-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>2268G</td><td>EDM-Required-Ray-L-2268G-Spectrum-628-HL-Q1-2024-01-Fiber</td><td>RAY (INSTA)</td><td>NON-EU</td><td>RELIABLE, POWERFUL DEDICATED FIBER INTERNET ACCESS</td><td>https://resource.itbusinessplus.com/whitepapers/Ray-L-2268G-Spectrum-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>2268G</td><td>EDM-Required-Ray-L-2268G-Spectrum-628-HL-Q1-2024-01-Fiber</td><td>RAY (INSTA)</td><td>NON-EU</td><td>SUPPORT REMOTE EMPLOYEES WITH HIGH CAPACITY BANDWIDTH</td><td>https://resource.itbusinessplus.com/whitepapers/Ray-L-2268G-Spectrum-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>2268G</td><td>EDM-Required-Ray-L-2268G-Spectrum-628-HL-Q1-2024-01-Fiber</td><td>RAY (INSTA)</td><td>NON-EU</td><td>IMPROVE NETWORK PERFORMANCE WITH HIGH CAPACITY BANDWIDTH</td><td>https://resource.itbusinessplus.com/whitepapers/Ray-L-2268G-Spectrum-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Edge-to-cloud computing is powering smart cities</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Answer these 4 questions to build trust in your data</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Are you a leader or a laggard when it comes to edge technology?</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Which applications should be deployed at the edge? </td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-4-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>A step-by-step guide to becoming a data-first organization</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-5-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Simplify data management and turn your data into intelligence </td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-6-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Want to align legacy and cloud infrastructures?</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-7-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>The IT decision-maker’s guide to optimizing cloud workload placement</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-8-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Transforming to hybrid cloud? It’s time to prioritize security.</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-9-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Are you confident in your hybrid cloud security?</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-10-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Bring the cloud experience to multi-generational IT </td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-11-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>BUILD-LP-FY24-Q1-Q4-HPE-Unified-CS</td><td>W8 (CS)</td><td>Both</td><td>Accelerate insights and results by acting on data at the edge</td><td>https://engage.biz-tech-insights.com/whitepaper/LP-FY24-Q1-Q4-HPE-Unified-CS-DE-12-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>41481</td><td>41481-Darktrace-EMEA-CPL-Q4-ABM-BANT-UK-ENT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>The CISO's Guide to Cloud Security</td><td>https://resource.itbusinesstoday.com/whitepapers/41481-Darktrace-EMEA-CPL-UK-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>41481</td><td>41481-Darktrace-EMEA-CPL-Q4-ABM-BANT-UK-ENT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>The CISO's Guide to Cyber AI: Categorizing the Use of AI in Cyber Security</td><td>https://resource.itbusinesstoday.com/whitepapers/41481-Darktrace-EMEA-CPL-UK-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>41481</td><td>41481-Darktrace-EMEA-CPL-Q4-ABM-BANT-UK-ENT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>Navigating a New Threat Landscape</td><td>https://resource.itbusinesstoday.com/whitepapers/41481-Darktrace-EMEA-CPL-UK-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>IDC: Implementare un’infrastruttura di storage sostenibile</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-128-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>IDC: Implementación de infraestructuras de almacenamiento sostenibles</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-129-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Créer des chaînes d’approvisionnement intelligentes, résilientes et durables</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-130-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Supply chain intelligenti, resilienti e sostenibili</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-131-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Building intelligent, resilient and sustainable supply chains</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-132-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Aufbau intelligenter, robuster und nachhaltiger Lieferketten</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-133-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Cadenas de suministro inteligentes, resilientes y sostenibles</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-134-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>6 Myths of SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-135-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>2022 Gartner Magic Quadrant for SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-136-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>6 Myths of SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-137-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Magic Quadrant für Security Information und Event Management</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-138-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Automate Security Intelligence with IBM Security QRadar SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-139-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>KuppingerCole Leadership Compass: SOAR 2023</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-140-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>KuppingerCole Leadership Compass: SOAR 2023</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-141-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Forrester: The Total Economic Impact™ Of IBM Security QRadar SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-142-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Forrester: Total Economic Impact™ von IBM Security QRadar SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-143-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Forrester TEI™ for IBM Turbonomic</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-144-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>The Total Economic Impact™ Of Turbonomic Application Resource Management for IBM Cloud® Paks </td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-145-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>2022 State of Multicloud Report</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-146-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W-8</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>IT Best Practices for Accelerating the Journey to Carbon Neutrality</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-147-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>IDC: Implementare un’infrastruttura di storage sostenibile</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-128-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>IDC: Implementación de infraestructuras de almacenamiento sostenibles</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-129-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Créer des chaînes d’approvisionnement intelligentes, résilientes et durables</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-130-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Supply chain intelligenti, resilienti e sostenibili</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-131-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Building intelligent, resilient and sustainable supply chains</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-132-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Aufbau intelligenter, robuster und nachhaltiger Lieferketten</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-133-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Cadenas de suministro inteligentes, resilientes y sostenibles</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-134-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>6 Myths of SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-135-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>2022 Gartner Magic Quadrant for SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-136-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>6 Myths of SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-137-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Magic Quadrant für Security Information und Event Management</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-138-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Automate Security Intelligence with IBM Security QRadar SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-139-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>KuppingerCole Leadership Compass: SOAR 2023</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-140-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>KuppingerCole Leadership Compass: SOAR 2023</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-141-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Forrester: The Total Economic Impact™ Of IBM Security QRadar SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-142-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Forrester: Total Economic Impact™ von IBM Security QRadar SIEM</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-143-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>Forrester TEI™ for IBM Turbonomic</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-144-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>The Total Economic Impact™ Of Turbonomic Application Resource Management for IBM Cloud® Paks </td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-145-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>2022 State of Multicloud Report</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-146-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-20</td><td>CS</td><td>W8-CS</td><td>2024-Q1-IBM-WW-EMEA-CS-+-ABM-LP-Build-Details</td><td>W8 (CS)</td><td>Both</td><td>IT Best Practices for Accelerating the Journey to Carbon Neutrality</td><td>https://engage.biz-tech-insights.com/whitepaper/2024-Q1-IBM-EMEA-147-land.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-21</td><td>CS</td><td>43490</td><td>43490-MuleSoft-CPL-Q1-Q2-ABM-NAMER-HLS-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>2024 Connectivity Benchmark Report</td><td>https://resource.itbusinesstoday.com/whitepapers/43490-MuleSoft-CPL-ABM-US-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-21</td><td>CS</td><td>43490</td><td>43490-MuleSoft-CPL-Q1-Q2-ABM-NAMER-HLS-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>Create connected experiences with MuleSoft + AI</td><td>https://resource.itbusinesstoday.com/whitepapers/43490-MuleSoft-CPL-ABM-US-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-21</td><td>CS</td><td>43490</td><td>43490-MuleSoft-CPL-Q1-Q2-ABM-NAMER-HLS-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>How to build a world-class API ecosystem</td><td>https://resource.itbusinesstoday.com/whitepapers/43490-MuleSoft-CPL-ABM-US-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-21</td><td>CS</td><td>43490</td><td>43490-MuleSoft-CPL-Q1-Q2-ABM-NAMER-HLS-XDBS-Corp</td><td>TGIF (email marketing)</td><td>Both</td><td>Accelerate clinical trial coordination with an API-led strategy</td><td>https://resource.itbusinesstoday.com/whitepapers/43490-MuleSoft-CPL-ABM-US-4-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-22</td><td>Survey</td><td>W8-LA</td><td>Build-LP:-FY24-Q1-Uber-for-Business-Enterprise-Mid-Market-+-Automotive-Lead-Advance-+-Soft-BANT</td><td>W8-LA</td><td>Both</td><td>Elevating Customer Experience for the Auto Industry</td><td>https://engage.biz-tech-insights.com/LP-Uber-Business-Automotive-LA/email.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Asset Name</td><td>EDM  Link</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Sustainable Devices for Positive Impact</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Forrester: The Total Economic Impact of Dell PC As A Service</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>How the way we work will change the Office of the Future</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Equipping the Future Workspace</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-4-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Maximizing Power Efficiency with Dell Optimizer</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-5-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Work and innovate everywhere</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-6-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43527</td><td>43527-Dell-Technologies-EMEA-CPL-Q1-ABM-MB-WTN-Client-Solutions-CP-UK-BANT-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Cost Savings and Business Benefits Enabled by the Intel vPro® Platform as an Endpoint Standard</td><td>https://resource.itbusinesstoday.com/whitepapers/43527-Dell-Technologies-EMEA-UK-7-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43530</td><td>43530-Simply-Funds-CPL-Q4-Q1-Pilot-AU-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Discover Your Funding Solution</td><td>https://resource.itbusinesstoday.com/whitepapers/43530-Simply-Funds-CPL-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>43571</td><td>43571-Lenovo-CPL-Q1-VMware-Global-Manufacturing-Demand-Canada-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Discover real-world examples of smart infrastructure with Lenovo</td><td>https://resource.itbusinesstoday.com/whitepapers/43571-Lenovo-VMware-Global-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-23</td><td>CS</td><td>Arc-(90676)</td><td>EDM-Request:-Arc-(90676)-INT-Surging-TAL-LEADS-EcoStruxure-Energy-Hub-AU-Dir+-Q124</td><td>TAJ (ARC)</td><td>NON-EU</td><td>A brighter future starts with you</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90676-Surging-EcoStruxure-Energy-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-24</td><td>CS</td><td>90676</td><td>EDM-Request:-Arc-(90676)-INT-Surging-TAL-LEADS-EcoStruxure-Energy-Hub-AU-Dir+-Q124</td><td>TAJ (ARC)</td><td>Both</td><td>A brighter future starts with you</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90676-Surging-EcoStruxure-Energy-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-28</td><td>CS</td><td>43765</td><td>43765-Microsoft-CPL-Q1-PMG-ABM-Modern-Work-CoPilot-ENT-France-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>La superpuissance derrière l’IA, c’est vous</td><td>https://resource.itbusinesstoday.com/whitepapers/43765-Microsoft-CPL-Q1-PMG-FR-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-28</td><td>CS</td><td>43750</td><td>43750-Wtwh-Media-Llc-CPL-Q1-ABM-PBC-Design-Guide-Mini-Ballscrews-XDBS-Corp</td><td>TGIF (email marketing)</td><td>EU</td><td>Design Guide: Miniature Ballscrews</td><td>https://resource.itbusinesstoday.com/whitepapers/43750-Wtwh-Media-Llc-CPL-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>43846</td><td>43846-Vistar-Media-CPL-Q1-APAC-Malaysia-XDBS-Corp</td><td>TGIF (email marketing)</td><td>NON-EU</td><td>Programmatic Out-of-home: What APAC Marketers Need to Know</td><td>https://resource.itbusinesstoday.com/whitepapers/43846-Vistar-Media-CPL-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Generative AI is here. Are you ready?</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-1-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Work and innovate everywhere with Dell’s portfolio of intelligent solutions</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-2-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Dell APEX PC As A Service</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-3-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Intelligence meets simplicity</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-4-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Investing in the future of work</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-5-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Dell Trusted Workspace</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-6-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Office of the Future</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-7-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Equipping the future workspace</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-8-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr><tr>
+                <td>2024-02-29</td><td>CS</td><td>90808</td><td>Arc-(90808)-INT-BANT-Leads-Dell-APAC-MB-CSG-DigitalWorkplace-MY-Feb/Apr24</td><td>TAJ (ARC)</td><td>NON-EU</td><td>Business grade workforce solutions without compromise</td><td>https://resource.itbusinessplus.com/whitepapers/LP-90808-Dell-Digital-Workplace-9-edm.html</td><td></td><td>Rajat Soni</td><td>103855</td><td></td>
+            </tr></table></body></html>

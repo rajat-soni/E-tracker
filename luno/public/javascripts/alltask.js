@@ -1,7 +1,8 @@
 
-
-
 $(document).ready(function () {
+  
+
+
 
   // code end for fetch sender details after selecting client name
 
@@ -68,7 +69,7 @@ console.log("tact is" +tact);
 const htmlbutton=`<button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
            
            
-<button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + " " + row.rb_type + " " + row.rb_date + " " + row.blast_time + " " + tact + `"><i class="fa fa-pencil"></i></button>
+<button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + " ---- " + row.status + " ---- " + row.allocated_to + " ---- " + row.blast_date + " ---- " + row.rb_type + " ---- " + row.rb_date + " ---- " + row.blast_time + " ---- " + tact + " ---- "  + row.mg_date + " ---- " + row.mg_time + " ---- " + row.mg_status + " ---- " + row.rb_mg_date + " ---- " + row.rb_mg_time + " ---- " + row.rb_mg_status + " ---- " + row.rbstatus + " ---- " + row.mgasset_name + " ---- " + row.mgasset_link + " ---- " + row.rb_assetname + " ---- " + row.rb_assetlink + " ---- " + row.rb_time +`" ><i class="fa fa-pencil"></i></button>
 
 <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + `"><i class="fa fa-eye"></i></button>
 
@@ -97,7 +98,6 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
       
       
  
-    
    
       <textarea class="form-control"  id = "comment" name = "comment" placeholder="Add Comment..." id="floatingTextarea"></textarea>
       <span>Add Comment...</span>
@@ -243,12 +243,40 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
         targets: 3,
         orderable: false,
         render: function (data, type, row, meta) {
+          
+          if (row.tact == "Email Blast / Reminder Blast") {
+            var tact = "Email-Reminder-Blast";
+
+          
+          }
+
+          if (row.tact == "Email Blast") {
+          
+            var tact = "Email-Blast";
+          }
+
+           if (row.tact == "Make Good") {
+          
+            var tact = "Make-Good";
+          }
+           if (row.tact == "RB Make Good") {
+          
+            var tact = "RB-Make-Good";
+          }
+
+
+          if (row.tact == "Webinar") {
+           
+            var tact = "Webinar";
+          }
+
+
           return `
                     
           <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
                    
                    
-          <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + " ---- " + row.status + " ---- " + row.allocated_to + " ---- " + row.blast_date + " ---- " + row.rb_type + " ---- " + row.rb_date + " ---- " + row.blast_time + " ---- " + tact + " ---- "  + row.mg_date + " ---- " + row.mg_time + " ---- " + row.mg_status + " ---- " + row.rb_mg_date + " ---- " + row.rb_mg_time + " ---- " + row.rb_mg_status + " ---- " + row.rbstatus + " ---- " + row.mgasset_name + " ---- " + row.mgasset_link + " ---- " + row.rb_assetname + " ---- " + row.rb_assetlink + " ---- " + row.rb_time +`"><i class="fa fa-pencil"></i></button>
 
           <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + `"><i class="fa fa-eye"></i></button>
                       
@@ -296,12 +324,40 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
         targets: 3,
         orderable: false,
         render: function (data, type, row, meta) {
+
+          if (row.tact == "Email Blast / Reminder Blast") {
+            var tact = "Email-Reminder-Blast";
+
+          
+          }
+
+          if (row.tact == "Email Blast") {
+          
+            var tact = "Email-Blast";
+          }
+
+           if (row.tact == "Make Good") {
+          
+            var tact = "Make-Good";
+          }
+           if (row.tact == "RB Make Good") {
+          
+            var tact = "RB-Make-Good";
+          }
+
+
+          if (row.tact == "Webinar") {
+           
+            var tact = "Webinar";
+          }
+
+          
           return `
                     
           <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
                    
                    
-          <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + " ---- " + row.status + " ---- " + row.allocated_to + " ---- " + row.blast_date + " ---- " + row.rb_type + " ---- " + row.rb_date + " ---- " + row.blast_time + " ---- " + tact + " ---- "  + row.mg_date + " ---- " + row.mg_time + " ---- " + row.mg_status + " ---- " + row.rb_mg_date + " ---- " + row.rb_mg_time + " ---- " + row.rb_mg_status + " ---- " + row.rbstatus + " ---- " + row.mgasset_name + " ---- " + row.mgasset_link + " ---- " + row.rb_assetname + " ---- " + row.rb_assetlink + " ---- " + row.rb_time +`"><i class="fa fa-pencil"></i></button>
 
           <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + `"><i class="fa fa-eye"></i></button>
                       `;
@@ -348,12 +404,43 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
         targets: 3,
         orderable: false,
         render: function (data, type, row, meta) {
+
+          
+          if (row.tact == "Email Blast / Reminder Blast") {
+            var tact = "Email-Reminder-Blast";
+
+          
+          }
+
+          if (row.tact == "Email Blast") {
+          
+            var tact = "Email-Blast";
+          }
+
+           if (row.tact == "Make Good") {
+          
+            var tact = "Make-Good";
+          }
+           if (row.tact == "RB Make Good") {
+          
+            var tact = "RB-Make-Good";
+          }
+
+
+          if (row.tact == "Webinar") {
+           
+            var tact = "Webinar";
+          }
+
+console.log("tact is" +tact);
+
+
           return `
                     
           <button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
                    
                    
-          <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + row.tact + `"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-link btn-sm edit" data-id="`+ row.id + " ---- " + row.status + " ---- " + row.allocated_to + " ---- " + row.blast_date + " ---- " + row.rb_type + " ---- " + row.rb_date + " ---- " + row.blast_time + " ---- " + tact + " ---- "  + row.mg_date + " ---- " + row.mg_time + " ---- " + row.mg_status + " ---- " + row.rb_mg_date + " ---- " + row.rb_mg_time + " ---- " + row.rb_mg_status + " ---- " + row.rbstatus + " ---- " + row.mgasset_name + " ---- " + row.mgasset_link + " ---- " + row.rb_assetname + " ---- " + row.rb_assetlink + " ---- " + row.rb_time +`"><i class="fa fa-pencil"></i></button>
 
           <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + `"><i class="fa fa-eye"></i></button>
                       
@@ -511,8 +598,6 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
 
 
               if (blast_type == "E-blast") {
-
-                $('.countryselect').show()
                
                 $("#assets").show();
                 $("#reblastassets").hide();
@@ -814,42 +899,42 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
   });
 
 
-  
-  $.fn.serializeObject = function() {
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
-        if (o[this.name]) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
-    });
-    return o;
-};
+// start code for geo
 
+
+
+$.fn.serializeObject = function() {
+  var o = {};
+  var a = this.serializeArray();
+  $.each(a, function() {
+      if (o[this.name]) {
+          if (!o[this.name].push) {
+              o[this.name] = [o[this.name]];
+          }
+          o[this.name].push(this.value || '');
+      } else {
+          o[this.name] = this.value || '';
+      }
+  });
+  return o;
+};
+//end code geo
 
 
   $('#task_form').on('submit', function (event) {
 
     event.preventDefault();
 
-    // alert($('#task_form').serializeObject());
-    // return;
 
-      // var geo  = $("#con").val();
-      // alert(geo)
     $.ajax({
 
       url: "http://localhost:3000/alltask/action",
       method: "POST",
       data: $('#task_form').serialize(),
-      dataType: "JSON",
-     
-    
+      dataType: "json",
+      beforeSend: function () {
+        //$('#action_button').attr('disabled', 'disabled');
+      },
 
       success: function (data) {
         $('#message').html('<div class="alert alert-success">' + data.message + '</div>');
@@ -1082,6 +1167,10 @@ console.log("clicked on edit btn");
         });
       });
 
+
+
+
+
       $("#blast_date").change(function () {
        
         var today = updateddateeb;
@@ -1127,7 +1216,8 @@ console.log("clicked on edit btn");
 
 
       //Code End for E-Blast Date and Time for Edit
-
+      var chektmeb= $("#blast_time").val('');
+      console.log("chektmeb:" +chektmeb)
 
       //  code start for add 30 min on Reminder blast time
       function addMinutes(date, minutes) {
@@ -1311,6 +1401,8 @@ console.log("clicked on edit btn");
     }
 
   });
+var chektm= $("#mg_time").val('');
+  console.log("chektm:" +chektm)
 
   function getCurrentTime(date) {
     var hours = date.getHours(),
@@ -1450,7 +1542,7 @@ console.log("clicked on edit btn");
   
 
       var idtype = $(this).data('id');
-      const myArray = idtype.split(" ");
+      const myArray = idtype.split(" ---- ");
 
       var id = myArray[0];
       var ebstatus = myArray[1];
@@ -1460,9 +1552,18 @@ console.log("clicked on edit btn");
       var rb_date = myArray[5];
       var blast_time = myArray[6];
       var tact = myArray[7];
-      var blast_type = myArray[8];
-    
-
+      var mg_date = myArray[8];
+      var mg_time = myArray[9];
+      var mg_status = myArray[10];
+      var rb_mg_date = myArray[11];
+      var rb_mg_time = myArray[12];
+      var rb_mg_status = myArray[13];
+      var rbstatus = myArray[14];
+      var mgasset_name = myArray[15];
+      var mgasset_link = myArray[16];
+      var rb_assetname = myArray[17];
+      var rb_assetlink = myArray[18];
+      var rb_time = myArray[19];
 
 
       var eblastdttime = blast_date + ' ' + blast_time;
@@ -1535,7 +1636,7 @@ console.log("clicked on edit btn");
     });
 
 
-
+console.log("check tact:" +tact);
 
 
     if (tact === "Webinar") {
@@ -1652,8 +1753,8 @@ console.log("clicked on edit btn");
     }
 
 
-    else if (tact === "Email") {
-
+    else  {
+console.log("within else11111111")
       $("#editdataa").show();
       $("#fileviewbox").hide();
       $("#webinarblast").hide();
@@ -1662,14 +1763,23 @@ console.log("clicked on edit btn");
 
       if (today > blast_date && today > rb_date && blast_date != "" && rb_date != "") {
 
+// if(today > rb_mg_date && rb_mg_date != "" && rb_mgasset_name!="")
 
+// {
+//   $('input').attr('readonly', true);
+//   $('select').attr('readonly', true);
+//   $('textarea').attr('readonly', true);
+//   $("#rb_date").removeAttr("min");
+//   $("#blast_date").removeAttr("min");
+//   $('#action_button').text('Edit').hide();
+// }
      
-        $('input').attr('readonly', true);
-        $('select').attr('readonly', true);
-        $('textarea').attr('readonly', true);
-        $("#rb_date").removeAttr("min");
-        $("#blast_date").removeAttr("min");
-        $('#action_button').text('Edit').hide();
+        // $('input').attr('readonly', true);
+        // $('select').attr('readonly', true);
+        // $('textarea').attr('readonly', true);
+        // $("#rb_date").removeAttr("min");
+        // $("#blast_date").removeAttr("min");
+        // $('#action_button').text('Edit').hide();
 
       }
       else {
@@ -1693,27 +1803,18 @@ console.log("clicked on edit btn");
    
 
 
-    $.ajax({
-      url: "http://localhost:3000/alltask/action",
-      method: "POST",
-      data: { id: id, action: 'fetch_single' },
-
-      dataType: "JSON",
-      success: function (data) {
-
-
-
-
 
         
 
     if (action === "Edit") {
 
      
-      console.log("rb mgdttime:" +data.rb_mg_date);
+      console.log("rb rb_date:" +rb_date);
 
-      var rb_mg_date=data.rb_mg_date;
-      var mg_date=data.mg_date;
+      var rb_mg_date=rb_mg_date;
+      var mg_date=mg_date;
+
+      console.log("mg_date" +mg_date);
 
       $("#rbmkgoodassets").hide();
       $("#viewdata11").hide();
@@ -1723,6 +1824,7 @@ console.log("clicked on edit btn");
       $('#asset_link')[0].disabled = false;
       $('#blast_date')[0].disabled = false;
       $('#blast_time')[0].disabled = false;
+      //$('#geo')[0].disabled = false;
       //$("#reblastassets").hide();
 
       $("#assets").show();
@@ -1739,9 +1841,15 @@ console.log("clicked on edit btn");
 
       var seconds = (d1 - d2) / 1000;
 
-     
+    
+      console.log("check seconds11:" +seconds);
+
+
       if (seconds > 0 && ebstatus == 0) {
-       
+        console.log("check seconds:" +seconds);
+
+     
+     console.log("check ebstatus:" +ebstatus);
 
         document.querySelectorAll("#blast_typerr option").forEach(opt => {
         //  if (opt.value == "Reminder-Blast") {
@@ -1760,6 +1868,8 @@ console.log("clicked on edit btn");
 
           $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
 
+    $("#assets").show();
+     $("#ebassets").hide();
 
 
       //  }
@@ -1770,7 +1880,7 @@ console.log("clicked on edit btn");
 
       else if (ebstatus == 1 || seconds < 0) {
        
-
+        console.log("within else if");
         document.querySelectorAll("#blast_typerr option").forEach(opt => {
          // if (opt.value == "Reminder-Blast") {
            // opt.disabled = false;
@@ -1791,7 +1901,7 @@ console.log("clicked on edit btn");
           $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
 
 
-          $("#assets").hide();
+         $("#assets").hide();
           $("#ebassets").show();
 
         });
@@ -1800,16 +1910,18 @@ console.log("clicked on edit btn");
       }
 
 
-      else {
+
+      else if (ebstatus == 1 || seconds < 0) {
        
-
+        console.log("within else if");
         document.querySelectorAll("#blast_typerr option").forEach(opt => {
-          // if (opt.value == "Reminder-Blast") {
-          //   opt.disabled = false;
-          // }
+         // if (opt.value == "Reminder-Blast") {
+           // opt.disabled = false;
 
+            
+        //  }
 
-          var RB = "Reminder-Blast";
+        var RB = "Reminder-Blast";
           $("#blast_typerr option[value=" + RB + "]").show();
 
           var MG = "Make-Good";
@@ -1819,15 +1931,48 @@ console.log("clicked on edit btn");
 
           var RBMakeGood = "RBMake-Good";
 
-          $("#blast_typerr option[value=" + RBMakeGood + "]").show();
+          $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
 
-
-        });
 
          $("#assets").hide();
-          $("#ebassets").show();
+         $("#ebassets").show();
 
-        //$("#blast_typerr option[value=" + Reminder-Blast + "]").attr("disabled", "disabled");
+        });
+        //$('#blast_typerr').prop('selectedIndex', 1);
+
+      }
+
+
+
+      
+      else  {
+       
+        console.log("within else if");
+        document.querySelectorAll("#blast_typerr option").forEach(opt => {
+         // if (opt.value == "Reminder-Blast") {
+           // opt.disabled = false;
+
+            
+        //  }
+
+        var RB = "Reminder-Blast";
+          $("#blast_typerr option[value=" + RB + "]").hide();
+
+          var MG = "Make-Good";
+
+          $("#blast_typerr option[value=" + MG + "]").hide();
+
+
+          var RBMakeGood = "RBMake-Good";
+
+          $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+          // $("#assets").hide();
+          // $("#ebassets").show();
+
+        });
+        //$('#blast_typerr').prop('selectedIndex', 1);
 
       }
 
@@ -1843,58 +1988,136 @@ console.log("clicked on edit btn");
 // var datecheck = todaycheck.getFullYear() + '-' + (todaycheck.getMonth() + 1) + '-' + todaycheck.getDate();
 // var timecheck = todaycheck.getHours() + ":" + todaycheck.getMinutes() + ":" + todaycheck.getSeconds();
 // var dateTimecheck = datecheck + ' ' + timecheck;
-var ebmg_date=data.mg_date;
-var ebmg_time=data.mg_time;
+var ebmg_date=mg_date;
+var ebmg_time=mg_time;
 var ebmgdttime = ebmg_date + ' ' + ebmg_time;
 var d1 = new Date(ebmgdttime);
 var d2 = new Date(dateTimecheck);
-var mg_status=data.mg_status;
+var mg_status=mg_status;
 
 var secondsebmg = (d1 - d2) / 1000;
 
-if (secondsebmg > 0 && mg_status == 0 && data.mgasset_name !="" && data.mgasset_link !="") {
+if(mg_date!="")
+{
+if (secondsebmg > 0 && mg_status == 0 && mgasset_name !="" && mgasset_link !="") {
 
   console.log("hide reminder blast if EB MG not done");
   var RB = "Reminder-Blast";
   $("#blast_typerr option[value=" + RB + "]").hide();
 
+  var RBMakeGood = "RBMake-Good";
+
+  $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+
 }
 
 
 
-if((data.mgasset_name =="" && data.mgasset_link =="") && (data.rb_assetname !="" && data.rb_assetlink !="" ))
+
+
+else if (mg_status == 1 || seconds < 0) {
+       
+
+  document.querySelectorAll("#blast_typerr option").forEach(opt => {
+   // if (opt.value == "Reminder-Blast") {
+     // opt.disabled = false;
+
+      
+  //  }
+
+  var RB = "Reminder-Blast";
+    $("#blast_typerr option[value=" + RB + "]").show();
+
+    var MG = "Make-Good";
+
+    $("#blast_typerr option[value=" + MG + "]").show();
+
+
+    var RBMakeGood = "RBMake-Good";
+
+    $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+    // $("#assets").hide();
+    // $("#ebassets").show();
+
+  });
+  //$('#blast_typerr').prop('selectedIndex', 1);
+
+}
+
+
+else if (mg_status == 0 || seconds < 0) {
+       
+
+  document.querySelectorAll("#blast_typerr option").forEach(opt => {
+   // if (opt.value == "Reminder-Blast") {
+     // opt.disabled = false;
+
+      
+  //  }
+
+  console.log("mg_status == 0 || seconds < 0")
+
+  var RB = "Reminder-Blast";
+    $("#blast_typerr option[value=" + RB + "]").show();
+
+    var MG = "Make-Good";
+
+    $("#blast_typerr option[value=" + MG + "]").show();
+
+
+    var RBMakeGood = "RBMake-Good";
+
+    $("#blast_typerr option[value=" + RBMakeGood + "]").hide();
+
+
+    // $("#assets").hide();
+    // $("#ebassets").show();
+
+  });
+  //$('#blast_typerr').prop('selectedIndex', 1);
+
+}
+}
+
+if((mgasset_name =="" && mgasset_link =="") && (rb_assetname !="" && rb_assetlink !="" ))
 {
  var MG = "Make-Good";
  $("#blast_typerr option[value=" + MG + "]").hide();
 
 }
 
-else{
- var MG = "Make-Good";
- $("#blast_typerr option[value=" + MG + "]").show();
+// else{
+//   console.log('(mgasset_name =="" && mgasset_link =="") && (rb_assetname !="" && rb_assetlink !=""');
+//  var MG = "Make-Good";
+//  $("#blast_typerr option[value=" + MG + "]").show();
 
-}
+// }
 
 
 
 //start code for reminder blast
 
-var rb_date=data.rb_date;
-var rb_time=data.rb_time;
+var rb_date=rb_date;
+var rb_time=rb_time;
 var rbdttime = rb_date + ' ' + rb_time;
 var d1 = new Date(rbdttime);
 var d2 = new Date(dateTimecheck);
-var rbstatus=data.rbstatus;
+var rbstatus=rbstatus;
 
 var secondsrb = (d1 - d2) / 1000;
-
-
-
-if(data.rb_assetname !="" && data.rb_assetlink !="" )
+console.log('rb_date is'+rb_date)
+console.log('rb_time is'+rb_time)
+console.log('rb_assetname is'+rb_assetname)
+console.log('rb_assetlink is'+rb_assetlink)
+if(rb_assetname !="" && rb_assetlink !="" )
 {
   console.log("rb_assetname not empty");
-if (secondsrb > 0 && data.rbstatus == 0) {
- 
+if (secondsrb > 0 && rbstatus == 0) {
+ console.log("secondsrb > 0 && rbstatus == 0");
 
   document.querySelectorAll("#blast_typerr option").forEach(opt => {
   //  if (opt.value == "Reminder-Blast") {
@@ -1917,7 +2140,7 @@ if (secondsrb > 0 && data.rbstatus == 0) {
 }
 
 
-else if (data.rbstatus == 1 || secondsrb < 0) {
+else if (rbstatus == 1 || secondsrb < 0) {
  
 
   document.querySelectorAll("#blast_typerr option").forEach(opt => {
@@ -1937,8 +2160,8 @@ else if (data.rbstatus == 1 || secondsrb < 0) {
     $("#blast_typerr option[value=" + RBMakeGood + "]").show();
 
 
-    $("#assets").hide();
-    $("#ebassets").show();
+    // $("#assets").hide();
+    // $("#ebassets").show();
 
   });
   //$('#blast_typerr').prop('selectedIndex', 1);
@@ -1946,25 +2169,39 @@ else if (data.rbstatus == 1 || secondsrb < 0) {
 }
 
 
-else {
+
+
+else if (rbstatus == 0 || secondsrb < 0 && (rb_assetname !="" && rb_assetlink !="" )) {
  
 
   document.querySelectorAll("#blast_typerr option").forEach(opt => {
-     var RB = "Reminder-Blast";
+   // if (opt.value == "Reminder-Blast") {
+     // opt.disabled = false;
+
+      
+  //  }
+
+  var RB = "Reminder-Blast";
     $("#blast_typerr option[value=" + RB + "]").show();
-  var RBMakeGood = "RBMake-Good";
+
+    
+
+    var RBMakeGood = "RBMake-Good";
 
     $("#blast_typerr option[value=" + RBMakeGood + "]").show();
 
 
+    // $("#assets").hide();
+    // $("#ebassets").show();
+
   });
-
-   $("#assets").hide();
-    $("#ebassets").show();
-
-  
+  //$('#blast_typerr').prop('selectedIndex', 1);
 
 }
+
+
+
+
 
     }
 
@@ -2010,6 +2247,18 @@ else {
         $("#ebassets").show();
       }
 
+
+
+      if (today > mg_date && mg_date != "") {
+        $("#mg_date").removeAttr("min");
+        // $("#webinarassets11").hide();
+        // $("#assets").hide();
+        // $("#ebassets").show();
+      }
+
+
+
+
       if (today > blast_date && today > rb_date && blast_date != "" && rb_date != "") {
        
         $("#rb_date").removeAttr("min");
@@ -2027,6 +2276,11 @@ else {
 
 
     }
+
+
+
+
+ 
 
 
 
@@ -2066,9 +2320,12 @@ console.log("rb_mg_date:" +rb_mg_date);
       $("#reblastassets").hide();
       $("#mkgoodassets").hide();
 
-console.log("RB Status:" +data.rbstatus);
+console.log("RB Status:" +rbstatus);
 
-      if (blast_type == 'E-blast' && today <= blast_date && blast_date != "") {
+console.log("check blast_type" +blast_type);
+
+      if (blast_type == 'E-blast' && today <= blast_date && blast_date != "" && ebstatus=="1") {
+        console.log('blast_type == E-blast && today <= blast_date && blast_date != "" && ebstatus=="0"')
        
         $("#ebassets").hide();
         $("#assets").show();
@@ -2080,6 +2337,8 @@ console.log("RB Status:" +data.rbstatus);
         $('#blast_time')[0].disabled = false;
 
       }
+
+
       else if (blast_type == 'E-blast' && today > blast_date && blast_date != "") {
      
         $("#ebassets").show();
@@ -2101,6 +2360,120 @@ console.log("RB Status:" +data.rbstatus);
       }
 
 
+
+      
+
+
+//start code for make good
+     
+else if (blast_type == 'Make-Good' && mg_date == "") {
+
+  console.log("within blast_type == 'Make-Good' && mg_date ==  ")
+          $("#ebassets").hide();
+          $("#reblastassets").hide();
+          $("#remblastassetsread").hide();
+          $("#assets").hide();
+          $("#mkgoodassets").show();
+          $("#rbmkgoodassets").hide();
+        }
+  
+  
+  
+        
+        else if (blast_type == 'Make-Good'  && today <= mg_date && mg_status=="1")   {
+  
+         console.log("blast_type == 'Make-Good'  && today <= mg_date && mg_status== is 1")
+         
+          $("#ebassets").hide();
+          $("#reblastassets").hide();
+          $("#assets").hide();
+          $("#remblastassetsread").hide();
+          $("#mkgoodassets").show();
+          $("#rbmkgoodassets").hide();
+  
+  
+   $('#mgallocated_to').attr("readonly", true); 
+         $('#mgasset_name').attr("readonly", true); 
+        $('#mgasset_link').attr("readonly", true); 
+        $('#mg_date').attr("readonly", true); 
+         $('#mg_time').attr("readonly", true); 
+  
+        }
+  
+  
+  
+  
+        else if (blast_type == 'Make-Good' && today <= mg_date)   {
+  
+         
+         console.log("blast_type == 'Make-Good' && today <= mg_date" +mg_date)
+          $("#ebassets").hide();
+          $("#reblastassets").hide();
+          $("#assets").hide();
+          $("#remblastassetsread").hide();
+          $("#mkgoodassets").show();
+          $("#rbmkgoodassets").hide();
+  
+  
+        
+  
+        }
+  
+  
+  
+  
+  
+  
+        else if (blast_type == 'Make-Good' && today > mg_date && mg_date != "") {
+        
+          console.log("blast_type == 'Make-Good' && today > mg_date")
+          $("#ebassets").hide();
+          $("#assets").hide();
+          $("#reblastassets").hide();
+          $("#remblastassetsread").hide();
+          $("#mkgoodassets").show();
+          $("#rbmkgoodassets").hide();
+
+          //$("#mgallocated_to option").prop('disabled', true);
+
+  
+      document.getElementById("mgallocated_to").readOnly = true;
+          document.getElementById("mgasset_name").readOnly = true;
+          document.getElementById("mgasset_link").readOnly = true;
+          document.getElementById("mg_date").readOnly = true;
+          document.getElementById("mg_time").readOnly = true;
+         
+      //   $('#mgallocated_to').attr("readonly", true); 
+         
+          // $('#mgasset_name').attr("disabled", true); 
+          // $('#mgasset_link').attr("disabled", true); 
+          // $('#mg_date').attr("disabled", true); 
+          // $('#mg_time').attr("disabled", true); 
+  
+  
+          // $("#rb_date").removeAttr("min");
+  
+  
+  
+          // $('#rballocated_to')[0].disabled = true;
+          // $('#rb_assetname')[0].disabled = true;
+          // $('#rb_asset_link')[0].disabled = true;
+          // $('#rb_date')[0].disabled = true;
+          // $('#rb_time')[0].disabled = true;
+  
+        }
+  
+  
+  
+   
+  
+  
+  
+  
+  //end code for make good
+
+
+
       else if (blast_type == 'Reminder-Blast' && rb_date == "") {
 
 
@@ -2115,10 +2488,10 @@ console.log("RB Status:" +data.rbstatus);
 
 
 
-      else if (blast_type == 'Reminder-Blast' && (today > rb_date || data.rbstatus=="1")) {
+      else if (blast_type == 'Reminder-Blast' && (today > rb_date || rbstatus=="1")) {
       
 
-        console.log("blast_type == 'Reminder-Blast' && (today > rb_date || data.rbstatus==is 1)")
+        console.log("blast_type == 'Reminder-Blast' && (today > rb_date || rbstatus==is 1)")
         $("#ebassets").hide();
         $("#assets").hide();
         $("#reblastassets").hide();
@@ -2155,157 +2528,15 @@ console.log("RB Status:" +data.rbstatus);
         $("#rbmkgoodassets").hide();
 
 
-        $('#rballocated_to')[0].disabled = false;
-        $('#rb_assetname')[0].disabled = false;
-        $('#rb_asset_link')[0].disabled = false;
-        $('#rb_date')[0].disabled = false;
-        $('#rb_time')[0].disabled = false;
+        // $('#rballocated_to')[0].disabled = false;
+        // $('#rb_assetname')[0].disabled = false;
+        // $('#rb_asset_link')[0].disabled = false;
+        // $('#rb_date')[0].disabled = false;
+        // $('#rb_time')[0].disabled = false;
 
       }
 
    
-
-  
-
-  
-
-
-
-
-//start code for make good
-     
-      else if (blast_type == 'Make-Good' && mg_date == "") {
-
-console.log("within blast_type == 'Make-Good' && mg_date ==  ")
-        $("#ebassets").hide();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").hide();
-        $("#assets").hide();
-        $("#mkgoodassets").show();
-        $("#rbmkgoodassets").hide();
-      }
-
-
-
-      
-      else if (blast_type == 'Make-Good'  && today <= mg_date && data.mg_status=="1")   {
-
-       console.log("blast_type == 'Make-Good'  && today <= mg_date && mg_status== is 1")
-       
-        $("#ebassets").hide();
-        $("#reblastassets").hide();
-        $("#assets").hide();
-        $("#remblastassetsread").hide();
-        $("#mkgoodassets").show();
-        $("#rbmkgoodassets").hide();
-
-
-        $('#mgallocated_to').attr("disabled", true); 
-        $('#mgasset_name').attr("disabled", true); 
-        $('#mgasset_link').attr("disabled", true); 
-        $('#mg_date').attr("disabled", true); 
-        $('#mg_time').attr("disabled", true); 
-
-      }
-
-
-
-
-      else if (blast_type == 'Make-Good' && today <= mg_date)   {
-
-       
-       console.log("blast_type == 'Make-Good' && today <= mg_date")
-        $("#ebassets").hide();
-        $("#reblastassets").hide();
-        $("#assets").hide();
-        $("#remblastassetsread").hide();
-        $("#mkgoodassets").show();
-        $("#rbmkgoodassets").hide();
-
-
-      
-
-      }
-
-
-
-
-
-
-      else if (blast_type == 'Make-Good' && today > mg_date) {
-      
-        $("#ebassets").hide();
-        $("#assets").hide();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").hide();
-        $("#mkgoodassets").show();
-        $("#rbmkgoodassets").hide();
-
-        // document.getElementById("mgallocated_to").readOnly = true;
-        // document.getElementById("mgasset_name").readOnly = true;
-        // document.getElementById("mgasset_link").readOnly = true;
-        // document.getElementById("mg_date").readOnly = true;
-        // document.getElementById("mg_time").readOnly = true;
-       
-        $('#mgallocated_to').attr("disabled", true); 
-        $('#mgasset_name').attr("disabled", true); 
-        $('#mgasset_link').attr("disabled", true); 
-        $('#mg_date').attr("disabled", true); 
-        $('#mg_time').attr("disabled", true); 
-
-
-        // $("#rb_date").removeAttr("min");
-
-
-
-        // $('#rballocated_to')[0].disabled = true;
-        // $('#rb_assetname')[0].disabled = true;
-        // $('#rb_asset_link')[0].disabled = true;
-        // $('#rb_date')[0].disabled = true;
-        // $('#rb_time')[0].disabled = true;
-
-      }
-
-
-
-      else if (blast_type == 'Make-Good' &&(( today > mg_date && mg_date != "" ) )) {
-     
-
-        console.log("if mg status is 1");
-        $("#ebassets").hide();
-        $("#assets").hide();
-        $("#reblastassets").hide();
-        $("#remblastassetsread").hide();
-        $("#rbmkgoodassets").hide();
-
-        $('#mgallocated_to').attr("disabled", true); 
-        $('#mgasset_name').attr("disabled", true); 
-        $('#mgasset_link').attr("disabled", true); 
-        $('#mg_date').attr("disabled", true); 
-        $('#mg_time').attr("disabled", true); 
-
-
-      //  document.getElementById("rb_mgasset_name").readOnly = true;
-
-
-
-      }
-
-
-
-
-//end code for make good
-
-
-
-
-
-
-
-
-
-
-
 
 
 //start code for RB make good
@@ -2320,12 +2551,15 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
           $("#mkgoodassets").hide();
           $("#rbmkgoodassets").show();
 
+     
+
+
         }
   
   
   
         
-        else if (blast_type == 'RBMake-Good'  && today <= rb_mg_date && data.rb_mg_status=="1")   {
+        else if (blast_type == 'RBMake-Good'  && today <= rb_mg_date && rb_mg_status=="1")   {
   
          console.log("blast_type == 'RBMake-Good'  && today <= rb_mg_date && rb_mg_status== is 1")
          
@@ -2373,6 +2607,7 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
   
         else if (blast_type == 'RBMake-Good' && today > rb_mg_date) {
         
+          console.log("blast_type == 'RBMake-Good' && today > rb_mg_date");
           $("#ebassets").hide();
           $("#assets").hide();
           $("#reblastassets").hide();
@@ -2386,12 +2621,7 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
           // document.getElementById("mgasset_link").readOnly = true;
           // document.getElementById("mg_date").readOnly = true;
           // document.getElementById("mg_time").readOnly = true;
-         
-          $('#rb_mgallocated_to').attr("disabled", true); 
-  $('#rb_mgasset_name').attr("disabled", true); 
-  $('#rb_mgasset_link').attr("disabled", true); 
-  $('#rb_mg_date').attr("disabled", true); 
-  $('#rb_mg_time').attr("disabled", true); 
+       
   
   
           // $("#rb_date").removeAttr("min");
@@ -2408,7 +2638,7 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
   
   
   
-        else if (blast_type == 'RBMake-Good' &&(( today > mg_date && mg_date != "" ) )) {
+        else if (blast_type == 'RBMake-Good' &&(( today > rb_mg_date && rb_mg_date != "" ) )) {
        
   
           console.log("if mg status is 1");
@@ -2419,15 +2649,10 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
           $("#rbmkgoodassets").show();
 
   
-          $('#rb_mgallocated_to').attr("disabled", true); 
-  $('#rb_mgasset_name').attr("disabled", true); 
-  $('#rb_mgasset_link').attr("disabled", true); 
-  $('#rb_mg_date').attr("disabled", true); 
-  $('#rb_mg_time').attr("disabled", true); 
+
   
   
-        //  document.getElementById("rb_mgasset_name").readOnly = true;
-  
+      
   
   
         }
@@ -2451,6 +2676,7 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
 
       }
 
+      console.log("mg mg_time is check1111:" +mg_time);
 
 
 
@@ -2459,7 +2685,23 @@ else if (blast_type == 'RBMake-Good' && rb_mg_date == "") {
     });
 
 
-console.log("mg date is check:" +data.mg_date);
+    $.ajax({
+      url: "http://localhost:3000/alltask/action",
+      method: "POST",
+      data: { id: id, action: 'fetch_single' },
+
+      dataType: "JSON",
+      success: function (data) {
+
+
+        $('#mgallocated_to').val(data.mgallocated_to);
+        $('#mgasset_name').val(data.mgasset_name);
+        $('#mgasset_link').val(data.mgasset_link);
+        $('#mg_date').val(data.mg_date);
+        $('#mg_time').val(data.mg_time);
+       
+
+console.log("mg mg_time is check:" +data.mg_time);
         $('#cname').val(data.cname);
         $('#tact1122').val(data.tact);
         $('#camp_name').val(data.camp_name);
@@ -2482,7 +2724,7 @@ console.log("mg date is check:" +data.mg_date);
         $('#rb_dateread').val(data.rb_date);
         $('#rb_timeread').val(data.rb_time);
         $('#rballocated_toread').val(data.rballocated_to);
-
+        $('#priority').val(data.priority);
 
 
         $('#ebasset_name').val(data.asset_name);
@@ -2517,26 +2759,36 @@ console.log("mg date is check:" +data.mg_date);
         $('#mgasset_link').val(data.mgasset_link);
         $('#mg_date').val(data.mg_date);
         $('#mg_time').val(data.mg_time);
+       
+
+console.log("mg mg_time is check 111:" +data.mg_time);
 
 
-
-        
         $('#rb_mgallocated_to').val(data.rb_mgallocated_to);
         $('#rb_mgasset_name').val(data.rb_mgasset_name);
         $('#rb_mgasset_link').val(data.rb_mgasset_link);
         $('#rb_mg_date').val(data.rb_mg_date);
         $('#rb_mg_time').val(data.rb_mg_time);
-
-
-        // $('#webcomment').val(data.comment);
-
-
-
-
-        // $('#comment').val(data.comment);
         $('#priority').val(data.priority);
         $('#allocated_to').val(data.allocated_to);
         $('#id').val(data.id);
+
+console.log("check geo" +data.geo)
+     //  $('#geo_chosen').val(data.geo);
+
+     $("#geo").val(data.geo.split(","));
+     $('#geo').trigger("chosen:updated");
+
+     $("#mg_geo").val(data.mg_geo.split(","));
+     $('#mg_geo').trigger("chosen:updated");
+
+     $("#rb_geo").val(data.rb_geo.split(","));
+     $('#rb_geo').trigger("chosen:updated");
+
+     $("#rb_mg_geo").val(data.rb_mg_geo.split(","));
+     $('#rb_mg_geo').trigger("chosen:updated");
+   
+        
         
 
 
@@ -2677,6 +2929,22 @@ console.log("mg date is check:" +data.mg_date);
 
 
 
+        $('#mgallocated_to').val(data.mgallocated_to);
+        $('#mgasset_name').val(data.mgasset_name);
+        $('#mgasset_link').val(data.mgasset_link);
+        $('#mg_date').val(data.mg_date);
+        $('#mg_time').val(data.mg_time);
+       
+
+console.log("mg mg_time is view2222:" +data.mg_time);
+        $('#rb_mgallocated_to').val(data.rb_mgallocated_to);
+        $('#rb_mgasset_name').val(data.rb_mgasset_name);
+        $('#rb_mgasset_link').val(data.rb_mgasset_link);
+        $('#rb_mg_date').val(data.rb_mg_date);
+        $('#rb_mg_time').val(data.rb_mg_time);
+
+
+
         $('#webinar_linkview').val(data.asset_link);
         $('#webinar_date1view').val(data.blast_date);
         $('#webinar_time1view').val(data.blast_time);
@@ -2739,6 +3007,122 @@ console.log("mg date is check:" +data.mg_date);
           }
           
       //////////  Code end for Admin EBlast Files   ////////////////
+
+
+
+
+         //////code start for display Admin EB MG files/////////////////
+         var admin_ebmgfiles = data.admin_ebmgfiles;
+
+         console.log("admin_ebmgfiles" +admin_ebmgfiles)
+         
+         if (!admin_ebmgfiles) {
+  
+  
+  
+            }
+            else {
+              var htmlContentebmgfiles = '';
+             
+              if (admin_ebmgfiles == "") {
+  
+              }
+              else {
+  
+                document.getElementById('viewfilesebmg').innerHTML = htmlContentebmgfiles;
+
+                console.log("admin_ebmgfiles:" +admin_ebmgfiles);
+  
+                var admin_ebmgfiles = admin_ebmgfiles.split(',');
+            
+                var lengthebmgfiles = admin_ebmgfiles.length;
+               
+  
+                var htmlContentebmgfiles = '';
+  
+                var tact = "Make-Good";
+                //var htmlData =admin_filesname;
+                for (var i = 0; i < lengthebmgfiles; i++) {
+  
+                  htmlContentebmgfiles += '<p  class="filenamep"> <tr><td width="5%"><button type="button" class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_ebmgfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg" ><p  style="margin:0;">' + admin_ebmgfiles[i] + '</p><i class="fa fa-download"></i></button></td></tr>', '</p>';
+  
+                }
+
+                console.log("htmlContentebmgfiles" +htmlContentebmgfiles)
+  
+           document.getElementById('viewfilesebmg').innerHTML = htmlContentebmgfiles;
+  
+                
+              }
+           
+            }
+
+               var adminebmgcomment = data.admin_ebmgcmt;
+           
+            var htmladminebmgcmt = '';
+            htmladminebmgcmt += '<div style="background: white;"><p> <tr><td width="5%"><b style="color:red">Admin EB MG Comment:   </b> ' + adminebmgcomment + ' </td> </tr>', '</p></div>';
+            document.getElementById('adminebmgcomment').innerHTML = htmladminebmgcmt;
+  
+  
+           /////////   code end for admin EB MG files   //////////////////////
+
+
+
+
+
+
+
+
+             //////code start for display Admin RB MG files/////////////////
+         var admin_rbmgfiles = data.admin_rbmgfiles;
+         
+         if (!admin_rbmgfiles) {
+  
+  
+  
+            }
+            else {
+              var htmlContentrbmgfiles = '';
+             
+              if (admin_rbmgfiles == "") {
+  
+              }
+              else {
+  
+                document.getElementById('viewfilesrbmg').innerHTML = htmlContentrbmgfiles;
+
+                console.log("admin_rbmgfiles:" +admin_rbmgfiles);
+  
+                var admin_rbmgfiles = admin_rbmgfiles.split(',');
+            
+                var lengthrbmgfiles = admin_rbmgfiles.length;
+               
+  
+                var htmlContentrbmgfiles = '';
+  
+                var tact = "Make-Good";
+                //var htmlData =admin_filesname;
+                for (var i = 0; i < lengthrbmgfiles; i++) {
+  
+                  htmlContentrbmgfiles += '<p  class="filenamep"> <tr><td width="5%"><button type="button" class="filebtn" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + camp_id + ',' + admin_rbmgfiles[i] + ',' + i + ',' + tact + '\'><img src="../../assets/img/files-folder1.png" class="fileimg" ><p  style="margin:0;">' + admin_rbmgfiles[i] + '</p><i class="fa fa-download"></i></button></td></tr>', '</p>';
+  
+                }
+
+                console.log("htmlContentrbmgfiles" +htmlContentrbmgfiles)
+  
+           document.getElementById('viewfilesrbmg').innerHTML = htmlContentrbmgfiles;
+  
+                
+              }
+              var admin_rbmgcmt = data.admin_rbmgcmt;
+           
+            var htmladminrbmgcmt = '';
+            htmladminrbmgcmt += '<div style="background: white;"><p> <tr><td width="5%"><b style="color:red">Admin RB MG Comment:   </b> ' + admin_rbmgcmt + ' </td> </tr>', '</p></div>';
+            document.getElementById('adminrbmgcomment').innerHTML = htmladminrbmgcmt;
+            }
+  
+  
+           /////////   code end for admin RB MG files   //////////////////////
 
 
 
@@ -3411,15 +3795,16 @@ console.log("within myfunction");
     $("#fileviewbox").show();
     $("#fileviewdownload").hide();
 
-    var formData1 = new FormData(document.getElementById("sample_form"));
+  var formData1 = new FormData(document.getElementById("sample_form"));
+    console.log("formData1 is:" +formData1);
   var comment = $("#comment").val();
-
+console.log("commet is:" +comment);
    
 
     var tact = $("#tact").val();
     var camp_id = $("#camp_id").val();
 
-    console.log("tact:" +tact);
+    console.log("tact within myfunction:" +tact);
     console.log("camp_id:" +camp_id);
    
 
@@ -3430,22 +3815,23 @@ console.log("within myfunction");
     //formData1.append("comment", comment);
     formData1.append("tact ", tact);
     formData1.append("camp_id ", camp_id);
-    formData1.append("comment_id ", comment_id);
+    formData1.append("comment ", comment);
+   // formData1.append("comment_id ", comment_id);
 
    
-    formData1.append("rb_status", rb_status);
+   // formData1.append("rb_status", rb_status);
 
-   
+    console.log({ formData1 });
     //   var camp_id = $('id')
     // if (confirm("Are you sure you want to update the data?")) {
     $.ajax({
 
       url: "http://localhost:3000/alltask/admin_comment",
       method: "POST",
-      data: formData1,
-      //   dataType: "JSON",
-      contentType: false,
-      processData: false,
+      data: { tact:tact, camp_id:camp_id, comment:comment },
+      dataType: "JSON",
+    // contentType: false,
+    //   processData: false,
       success: function (data) {
         if (data) {
         
