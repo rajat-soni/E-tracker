@@ -117,19 +117,21 @@ $(document).ready(function() { // for fetch Data //
 
 
 
-                    if ((row.camp_id !== "" || row.mg_status !== "" || row.rb_mg_status !== "")  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" || (row.user_rbfiles == "undefined")) || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === "") || (mgasset_link == "") || (mg_asset_name == "") || (row.rb_mgasset_link == "") || (row.rb_mgasset_name == "")))) 
+                    if ((row.camp_id !== "" || row.mg_status !== "" || row.rb_mg_status !== "")  || (row.tact == "Email Blast / Reminder Blast" && row.user_rbfiles == "" || (row.user_rbfiles == "undefined")) || (row.tact == "Email Blast" && (row.user_ebfiles == "" || (row.user_ebfiles === "undefined"))) || (row.tact == "Webinar" && (row.webinar_files == "" || (row.webinar_files === undefined) || (mgasset_link == "") || (mg_asset_name == "") || (row.rb_mgasset_link == "") || (row.rb_mgasset_name == "")))) 
                     {
 
                         return `
+                       
                      
-                        ${(row.allocated_to == row.user_id && row.status == 1 && row.asset_name!="" && row.asset_link!="") ? `<span class="bg-success text-light px-1 rounded small">EB done</span>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 &&  row.asset_name=="" && row.asset_link=="" ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0  && row.asset_name!="" && row.asset_link!="") ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
+                       
+
+                        ${(row.allocated_to == row.user_id && row.status == 1 && row.asset_link!="") ? `<span class="bg-success text-light px-1 rounded small">Blast Done!</span>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 &&  row.asset_name=="" && row.asset_link=="" ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0  &&  row.asset_link!="") ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
          
                         ${(row.rballocated_to == row.user_id && row.rbstatus == 1 && row.rb_assetname != "" && row.rb_assetlink != "") ? `<span class="bg-warning text-light px-1 rounded small">RB Done</span>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 && row.rb_assetname == undefined && row.rb_assetlink == undefined ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0  && row.rb_assetname != "" && row.rb_assetlink != "" ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
-                        ${(row.allocated_to == row.user_id  && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">MG Done</span></i>`: $(row.allocated_to == row.user_id  && row.mg_status == 0  && row.mgasset_name == undefined && row.mgasset_link == undefined) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`:``}
-
-                          console.log(${row.rb_mgasset_name} +""+${row.rb_mgasset_link})
+                        ${(row.allocated_to == row.user_id  && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && mg_status == 1 )?`<span class="bg-success text-light px-1 rounded small mkg_show">MG Done</span></i>`: ``}
+                           console.log(${row.rb_mgasset_name}${row.rb_mgasset_link})
                         ${(row.allocated_to == row.user_id &&  dt3 > dt1 && row.rb_mg_status == 0 &&  row.rb_mgasset_name != "" && row.rb_mgasset_link != ""  ) ? `<input type="checkbox" class="btn btn-link btn-sm rb_checkbox" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && row.rb_mg_status == 1 && dt3 > dt1 && row.rb_mgasset_name != "" && row.rb_mgasset_link != ""  )?`<span class="bg-success text-light px-1 rounded small mkg_show">RMG Done</span></i>` : (row.allocated_to == row.user_id && dt3 < dt1 &&  row.rb_mg_status == 0 && row.rb_mgasset_name == undefined && row.rb_mgasset_link == undefined ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`: `  `}
                        
                         <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view Data"  data-id =" ` + row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
@@ -289,6 +291,10 @@ $(document).ready(function() { // for fetch Data //
 
 
 
+            $("#makeGood11").hide();
+            $("#makeGood12").hide();
+         
+            $("#MakeGoodView").hide();
             $("#rbFlex").hide()
             $("#eBc").show()
             $("#cf").show()
@@ -330,11 +336,12 @@ $(document).ready(function() { // for fetch Data //
          $('#comment').show();
          $('#comment').show();
 
-        }else if (tact == "Make_Good") {
-            var htmlContent1 = '';
-
+        }else if (tact == "RB-Make-Good") {
+           
+            $('#__rb_mg_asset_view').show()
+           
          $("#rbmakeGood11").show();
-         $("#makeGood12").handleImageUpload();
+         $("#makeGood12").hide();
       
          $("#MakeGoodView").hide();
          $("#rbFlex").hide()
@@ -371,7 +378,8 @@ $(document).ready(function() { // for fetch Data //
         } else if (tact == "Webinar") {
 
 
-
+            
+            $("#ebmgview").hide();
             $("#webinarFlex").show();
             $("#user_ebcomment").show();
             $("#rbFlex").hide();
@@ -426,6 +434,15 @@ $(document).ready(function() { // for fetch Data //
                 $('#blast_date').val(data.blast_date);
                 $('#blast_time').val(data.blast_time);
 
+                $('#mgasset_name').val(data.mgasset_name)
+                $('#mgasset_link').val(data.mgasset_link)
+
+               
+                $('#rb_mgasset_link').val(data.rb_mgasset_link)
+                $('#rb_mgasset_name').val(data.rb_mgasset_name)
+
+         
+
                 //$('#rb_comment').val(data.rb_comment);
 
                 $('#user_rbcomment').val(data.user_rbcomment);
@@ -471,7 +488,7 @@ $(document).ready(function() { // for fetch Data //
 
                 if (tactValue == "webinar") {
 
-
+                    $("#ebmgview").hide();
                     $("#webinarFlex").show();
                     //  alert(webinar.html())
                     $("#ebComment").hide();
@@ -498,6 +515,9 @@ $(document).ready(function() { // for fetch Data //
                         }
                     }
                     document.getElementById('wbinar11').innerHTML = htmlContent;
+                    $(".ebmgview").hide();
+                    $(".rbmgview").hide();
+                    
                     $('#webinar_comment').show();
                     $('#wbinar11').show();
                     $('#webinarcomment').show()
@@ -521,8 +541,8 @@ $(document).ready(function() { // for fetch Data //
 
                     }
                     document.getElementById('wbinar12').innerHTML = adminHtml;
-
-
+                    $(".rbmgview").hide();
+                    $(".ebmgview").hide();
                     $('#webinarFlex').show();
 
                     $('#wbinar12').show();
@@ -586,6 +606,11 @@ $(document).ready(function() { // for fetch Data //
                      }
                     
                     document.getElementById('viewfiles113').innerHTML = amdinebContent;
+                    $(".ebmgview").hide();
+                    $(".rbmgview").hide();
+                    
+                 
+                    $("#MakeGoodView").hide();
                     $("#viewfiles113").show();
                     $("#rbFlex").hide();
                     $("#webinarFlex").hide();
@@ -593,7 +618,7 @@ $(document).ready(function() { // for fetch Data //
 
                        
 
-                     if (tact == "Make_Good" ) {
+                    if (tact == "Make_Good" ) {
                        
 
                    
@@ -612,6 +637,7 @@ $(document).ready(function() { // for fetch Data //
                         document.getElementById('MakeGoodView').innerHTML =  htmlContent1;
                         ;
    
+                        $('#__eb_mg_asset_view').show();
                         $("#MakeGoodView").show();
                         $("#makeGood11").show();
                         $("#makeGood12").show();
@@ -627,7 +653,7 @@ $(document).ready(function() { // for fetch Data //
 
                     if (tact == "RB-Make-Good" ) {
                        
- alert("jksdjfkjd"+data.rb_mg_files)
+                        alert("jksdjfkjd"+data.rb_mg_files)
                    
                         var rb_mg_files = data.rb_mg_files;
                         var rb_mg_files = rb_mg_files.split(',');
@@ -656,14 +682,10 @@ $(document).ready(function() { // for fetch Data //
                         $("#user_ebcomment").hide();
 
                     }
-                    
-
-
-
-                    var user_rbfiles = data.user_rbfiles;
-                    var user_rbfiles = user_rbfiles.split(',');
-                    var user_rbfiles_length = user_rbfiles.length;
-                    for (var i = 0; i < user_rbfiles_length; i++) {
+                        var user_rbfiles = data.user_rbfiles;
+                        var user_rbfiles = user_rbfiles.split(',');
+                        var user_rbfiles_length = user_rbfiles.length;
+                        for (var i = 0; i < user_rbfiles_length; i++) {
 
 
                         if (user_rbfiles[i] != undefined && user_rbfiles[i].trim().length != 0) {

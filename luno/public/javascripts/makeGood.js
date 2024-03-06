@@ -6,7 +6,7 @@
 $(document).on('click', '.mg_check', function(e) {
 
     var eb_mg_id = $(this).data('id');
-
+ alert("hello")
 
     var checkBox = document.getElementsByClassName("mg_check");
    

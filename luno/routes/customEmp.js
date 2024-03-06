@@ -264,7 +264,14 @@ router.get('/get_data', function (request, response, next) {
                         'rb_mg_link' : row.rb_mg_link,
                         'rb_mg_status' : row.rb_mg_status,
                         'rb_mgasset_link' : row.rb_mgasset_link,
-                        'rb_mgasset_name'  : row.rb_mgasset_name  
+                        'rb_mgasset_name'  : row.rb_mgasset_name, 
+                          'mgasset_name'   : row.mgasset_name,
+                          'mgasset_link'   : row.mgasset_link,
+                          'rb_mgasset_name' : row.rb_mgasset_name,
+                          'rb_mgasset_link' : row.rb_mgasset_link,
+                          'asset_link' : row.asset_link,
+                          'asset_name' : row.asset_name
+
                     });
 
                     
@@ -1161,12 +1168,12 @@ var url = "./files/" + camp_id + "/user/" + tact + "/"+oldfname ;
                        }
 
 
-                       else if(tact== "RB-Make_Good")
+                       else if(tact== "RB-Make-Good")
                        {
                         // if(output.length==1){
                         //     output.push(output)
                         // }
-                        console.log("👨‍🦰👩‍🦱👨‍🦲👦👩‍🦰🧓👨‍🦰👩‍🦰👨‍🦰👨‍🦰👩‍🦰👨‍🦰👱‍♂️👨‍🦳👼🤶🤶 in rb query"+tact)
+                        // console.log("👨‍🦰👩‍🦱👨‍🦲👦👩‍🦰🧓👨‍🦰👩‍🦰👨‍🦰👨‍🦰👩‍🦰👨‍🦰👱‍♂️👨‍🦳👼🤶🤶 in rb query"+tact)
                         
                         var updateSql = `UPDATE comment_tbl SET rb_mg_files='${output}' WHERE camp_id = '${camp_id}'`;
     
