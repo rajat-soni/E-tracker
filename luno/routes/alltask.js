@@ -303,6 +303,10 @@ router.get('/get_data', function (request, response, next) {
                         'admin_ebmgcmt': row.admin_ebmgcmt,
                         'admin_rbmgcmt': row.admin_rbmgcmt,
                         'webinar_comment': row.webinar_comment,
+                        'admin_ebmgfiles': row.admin_ebmgfiles,
+                        'admin_rbmgfiles': row.admin_rbmgfiles,
+                        'admin_files': row.admin_files,
+                        'admin_rb_file': row.admin_rb_file,
                        
                         'id': row.id
                     });
@@ -2194,41 +2198,56 @@ router.post('/admin_comment2', upload.single('admin_files'), (request, response)
 
             data.forEach(function (row) {
 
-                console.log("within second condition");
+                console.log("within second condition delete");
+                console.log("within admin_files");
+                console.log("check tact is" +tact);
 
                 var camp_id = row.camp_id;
-
-                if (tact === "Email-Reminder-Blast") {
+               if (tact === "Email-Reminder-Blast") {
                     var admin_files = row.admin_rb_file;
+                    console.log("Email-Reminder-Blast is:" +tact);
 
                 }
                 else if (tact === "Make-Good") {
                     var admin_files = row.admin_ebmgfiles;
+                    console.log(" Make-Good tact is:" +tact);
 
                 }
-                if (tact === "RB-Make-Good") {
-                    var admin_files = row.admin_rb_file;
+                else if (tact === "RB-Make-Good") {
+                    var admin_files = row.admin_rbmgfiles;
+                    console.log("RB-Make-Good is:" +tact);
 
                 }
 
                 else {
-                    var admin_files = row.admin_rbmgfiles;
+                    var admin_files = row.admin_files;
+                    console.log("else tact is:" +tact);
                 }
 
 
-
+console.log("admin_files" +admin_files)
                 const myArray =  new Array(admin_files);
 
-                var output = admin_files.split(',');
-                console.log("Array:" + output[filenum]);
-                var deletefile=output[filenum]
+               // if(myArray=="")
+              //  {
+              //      var output = "";
+               // }
+              //  else{
 
-                console.log("deletefile Array:" + filenum);
+                    var output = admin_files.split(',');
+                    console.log("Array:" + output[filenum]);
+                    var deletefile=output[filenum]
+    
+                    console.log("deletefile Array:" + filenum);
+    
+                    const x = output.splice(filenum,1);
+                    
+                    console.log(`output values: ${output}`);
+                    console.log(`variable x value: ${x}`);
+             //   }
 
-                const x = output.splice(filenum,1);
                 
-                console.log(`output values: ${output}`);
-                console.log(`variable x value: ${x}`);
+               
                 
 
 
@@ -2429,7 +2448,7 @@ router.post("/fileinsert", upload.any('admin_files'), (request, response) => {
             console.log("within first condition");
             data.forEach(function (row) {
 
-                console.log("within second condition");
+                console.log("within second condition file insert");
 
                 var camp_id = row.camp_id;
 

@@ -159,25 +159,56 @@
                          
                             <div id = "hide_modal">
 
-                             
+                              <div class="row mt-3" id = "__eb_mg_asset_view" style = "display: none;">
+                                <div class="col-md-6">
+                                  <label class="form-label" style="color:red">Make Good Asset Name:</label>
+                                  <input type="text" name="mgasset_name" id="mgasset_name"
+                                  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                  readonly="readonly">
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="form-label" style="color:red">Make Good  Link:</label>
+                                  <input type="text" name="mgasset_link" id="mgasset_link"
+                                  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                  readonly="readonly">
+                                </div>
+                                <hr>
+                              </div>
+                            
+                            
+                              <div class="row mt-3 mb-3" id = "__rb_mg_asset_view" style = "display: none;">
+                                <div class="col-md-6">
+                                  <label class="form-label" style="color:red">RB MG Asset Name:</label>
+                                  <input type="text" name="rb_mgasset_name" id="rb_mgasset_name"
+                                  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                  readonly="readonly">
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="form-label" style="color:red">RB MG  Link:</label>
+                                  <input type="text" name="rb_mgasset_link" id="rb_mgasset_link"
+                                  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                                  readonly="readonly">
+                                </div>
+                                <hr>
+                              </div>
                               
 
 
                               
 
     
-                        <div class="table-responsive">   
+                              <div class="table-responsive">   
 
                                 <table class="table table-bordered border">
                                
                                  
                                
-                                  <thead class="bg-light" style = "background-color: aliceblue;">
-                                    <tr style = "background-color: aliceblue;">
-                                 <th style="width:10%" ><b style = "color: #dc3545;">Client Name </b></th>
-                                <th style="width:20%" ><b style = "color: #dc3545;">Sender Name </b></th> 
-                                <th style="width:20%" ><b style = "color: #dc3545;">Blast Count  </b></th> 
-                                <th style="width:30%"><b style = "color: #dc3545;">Sender Email </b></th> 
+                                  <thead class="bg-light">
+                                    <tr>
+                                 <th style="width:10%">Client Name:</th>
+                                <th style="width:20%">Sender Name:</th> 
+                                <th style="width:20%">Campaign From :</th> 
+                                <th style="width:30%">Sender Email:</th> 
                               </tr>
                            </thead>
                            <tbody class="border">
@@ -188,7 +219,7 @@
                               <td> <input type="text" name="sender_nameview" id="sender_nameview"
                                 style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
                                 readonly="readonly"></td>
-                              <td>  <input type="text" required name="blast_countview" id="blast_countview"    style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
+                              <td>  <input type="text" required name="camp_from" id="camp_from" class="form-control"  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
                                 readonly="readonly"/></td>
                               <td style ="width:40% !important;"> <input type="text" name="sender_emailview" id="sender_emailview"
                                 style="outline: none;outline: none !important; border: none;   width: 105%;"
@@ -198,313 +229,60 @@
                            </tbody>
 
                            </table>
-                      </div>
+</div>
 
-                          <!--=========== EB Blast =============-->   
-                          <div class="table-responsive">   
 
-                            <table class="table table-bordered border">
-                           
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         
+                               
+                              
+                               
                              
+    
+                     
+                              
+    
+                             
+                        <div class="row">
                            
-                              <thead class="bg-light" style = "background-color: aliceblue;">
-                                <tr style = "background-color: aliceblue;">
-                             <th style="width:10%" ><b style = "color: #dc3545;">CampName </b></th>
-                            <th style="width:20%" ><b style = "color: #dc3545;">Camp From </b></th> 
-                           
-                          </tr>
-                       </thead>
-                       <tbody class="border">
-                        <tr class="col border" >
-                          <td> <textarea type="text" name="camp_name" id="camp_name"
-                            style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
-                            readonly="readonly"></textarea></td>
-                          <td> <input type="text" name="camp_from" id="camp_from"
-                            style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: 50% !important;"
-                            readonly="readonly"></td>
-                        
-                        </tr>
-              
-                       </tbody>
-
-                       </table>
-                  </div>
-                            <!--=========== EB Blast =============-->   
-
-
+                          </div>
                        
-                            <!-- <hr> -->
+                            <hr>
                         
 
 
-                            <!-- <div class="row" >
+                            <div class="row" >
                               <div class="col-6" Id="eBc">
                                 <label class="form-label" style="color:red">Email Blast Count:</label>
-                                
+                                <input type="text" name="blast_countview" id="blast_countview"
+                                  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
+                                  readonly="readonly">
                               </div>
   
   
   
                             </div>
-   -->
-  
-
-
-                            <div class="table-responsive">   
-
-                              <table class="table table-bordered border">
-                             
-                               
-                             
-                                <thead class="bg-light" style = "background-color: aliceblue;" >
-                                  <tbody class="border">
-                                  <tr style ="">
-                                    <th style="width:7% !important;"><b  style = "color: #dc3545;">Tactics Type</b></th>
-                                  
-                               <th style="width:10%"><b  style = "color: #dc3545; text-align: center;">Blast Asset Name:</b></th>
-                              <th style="width:20%"><b style = "color: #dc3545; text-align: center;">Blast Asset links</b></th> 
-                              <!-- <th style="width:20%">Blast Date</th> 
-                              <th style="width:30%">Blast Time</th>  -->
-                            </tr>
-                 
-                           
-                          
-                         
-                          <tr class="col border" >
-                          
-                            <th style="width:7% !important;"><b  style = "color: #dc3545;  background-color: aliceblue;">Email Blast</b></th>
-                            <td> <textarea name="asset_name" id="asset_name"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                            <td> <textarea name="asset_link" id="asset_link"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;    width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                           
-                          </tr>
-                          <tr>
-                            <th style="width:7% !important;" ><b  style = "color: #dc3545;">Riminder Blast</b></th>
-                            <td><textarea name="rb_assetnameview" id="rb_assetnameview"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                            <td>  <textarea name="rb_asset_linkview" id="rb_asset_linkview"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                          </tr>
-                      
-                          <tr>
-                            <th style="width:7% !important;"><b  style = "color: #dc3545;">Make Good</b></th>
-                            <td><textarea name="mgasset_name" name="mgasset_name" id="mgasset_name"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                            <td>  <textarea name="mgasset_link" name="mgasset_link" id="mgasset_link"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                          </tr>
-
-                          <tr>
-                            <th style="width:10% !important;"><b  style = "color: #dc3545;">RB Make  Good</b></th>
-                            <td><textarea name="mgasset_name" name="rb_mgasset_name" id="rb_mgasset_name"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea></td>
-                            <td>  <textarea name="mgasset_link" name="rb_mgasset_link" id="rb_mgasset_link"
-                              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                              readonly="readonly"></textarea>
-                            </td>
-                          </tr>
-
-
-
-                         </tbody>
-                        </thead>
-                         </table>
-                    </div>
-
-<!----===============Image upload section ============================================!-->
-
-
-
-
-   <div class="table-responsive">   
-
-                              <table class="table table-bordered border">
-                             
-                               
-                             
-                                <thead class="bg-light" style = "background-color: aliceblue;" >
-                                  <tbody class="border">
-                                  <tr style ="">
-                                    <th style="width:7% !important;"><b  style = "color: #dc3545;">Tactics Type</b></th>
-                                  
-                               <th style="width:10%"><b  style = "color: #dc3545; text-align: center;">User Files</b></th>
-                              <th style="width:20%"><b style = "color: #dc3545; text-align: center;">Admin Files</b></th> 
-                            </tr>
-                 
-                           
-                          
-                         
-                            <tr class="col border" >
-                            
-                              <th style="width:7% !important;"><b  style = "color: #dc3545;  background-color: aliceblue;">Email Blast</b></th>
-                              <td id = "viewfiles112" style="display:none;"></td>
-                              <td id = "viewfiles113" style="display: none;"></td>
-                             
-                            </tr>
-                            
-                            <tr>
-                              <th style="width:7% !important;"><b  style = "color: #dc3545;">Make Good</b></th>
-                              <td  id = "makeGood11" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
-                              <td  id = "makeGood12" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
-                            </tr>
-  
-                            <tr>
-                              <th style="width:7% !important;" ><b  style = "color: #dc3545;">Reminder Blast</b></th>
-                              <td id = "viewReminderBlastView11" style="border-right: 1px solid; display: none;"></td>
-                                <td id = "viewReminderBlastView12" style="border-right: 1px solid; display : ononek;"></td>
-                            </tr>
-                        
-                            <tr>
-                              <th style="width:10% !important;"><b  style = "color: #dc3545;">RB Make  Good</b></th>
-                              <td  id = "rbmakeGood11" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
-                              <td  id = "rbmakeGood12" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
-                            </tr>
   
   
-  
-                           </tbody>
-                          </thead>
-                           </table>
-                      </div>
-
-  <!-----==========================Imag code End ========================---->
-  
-  <!-----==========================Imag code Start ========================---->
-  <div class="table-responsive">   
-
-    <table class="table table-bordered border">
-   
-     
-   
-      <thead class="bg-light" style = "background-color: aliceblue;" >
-        <tbody class="border">
-          <tr style ="" style = "background-color: aliceblue;">
-                  <th style="width:7% !important;"><b  style = "color: #dc3545;">Tactics Type</b></th>
-                
-            <th style="width:10%"><b  style = "color: #dc3545; text-align: center;">User Comment</b></th>
-            <th style="width:20%"><b style = "color: #dc3545; text-align: center;">Admin Comment</b></th> 
-          </tr>
-          <tr class="col border" >
-          
-                <th style="width:7% !important;"><b  style = "color: #dc3545;  background-color: aliceblue;">Email Blast</b></th>
-                <td><textarea name="user_ebcomment" id="user_ebcomment"
-                  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                  readonly="readonly" row="4"></textarea>
-              </td>
-              <td><textarea name="comment" id = "comment" class ="admin_comment"
-                style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                readonly="readonly" row="4"></textarea>
-            </td>
-          
-          </tr>
-      
-          <tr >
-            <th style="width:7% !important;"><b  style = "color: #dc3545;">Make Good</b></th>
-          <td><textarea name="eb_mg_msg" id="eb_mg_msg"
-            style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-            readonly="readonly" row="4"></textarea></td>
-            <td><textarea name="admin_ebmgcmt" id="admin_ebmgcmt"
-              style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-              readonly="readonly" row="4"></textarea></td>
-          </tr>
-
-          <tr>
-            <th style="width:7% !important;" ><b  style = "color: #dc3545;">Reminder Blast</b></th>
-            <td id = "viewReminderBlastView11" style="border-right: 1px solid; display: none;"></td>
-              <td id = "viewReminderBlastView12" style="border-right: 1px solid; display : ononek;"></td>
-          </tr>
-
-          <tr>
-            <th style="width:10% !important;"><b  style = "color: #dc3545;">RB Make  Good</b></th>
-            <td  id = "rbmakeGood11" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
-            <td  id = "rbmakeGood12" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
-          </tr>
-       </tbody>
-</thead>
- </table>
-</div>
-
-    <!-----==========================Imag code End ========================---->
-
-
-                           
-                      <div class="row">
-                         
-                        </div>
-
-
-
-                        <div class="table-responsive">   
-
-                          <table class="table table-bordered border">
-                         
-                           
-                         
-                            <thead class="bg-light" style = "background-color: aliceblue;">
-                              <tr  style = "background-color: aliceblue;">
-                           <th style="width:10%" style = "color:red"><b style = "color: #dc3545;">Email blast Count</b></th>
-                          
-                           <th style="width:20%" style = "color:red"><b style = "color: #dc3545;">Blast Date</b></th> 
-                          <th style="width:30%" style = "color:red"><b style = "color: #dc3545;">Blast Time</b></th> 
-                        </tr>
-                     </thead>
-                     <tbody class="border">
-                      <tr class="col border" >
-                        <td> <input type="text" name="blast_countview" id="blast_countview"
-                          style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
-                          readonly="readonly"></td>
-                        
-                        <td>  <input type="text" name="blast_date" id="blast_date"
-                          style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;  width: 50% !important;"
-                          readonly="readonly">
-</td>
-                        <td style ="width:40% !important;"> <input type="text" name="blast_time" id="blast_time"
-                          style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
-                          readonly="readonly"></td>
-                      </tr>
-            
-                     </tbody>
-
-                     </table>
-                </div>
-
-                       
-                  <div class="row">
-                     
-                    </div>
-                     
-                          <!-- <hr> -->
-                      
-
-
-                          <!-- <div class="row" >
-                            <div class="col-6" Id="eBc">
-                              <label class="form-label" style="color:red">Email Blast Count:</label>
-                              <input type="text" name="blast_countview" id="blast_countview"
-                                style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;"
-                                readonly="readonly">
-                            </div>
-
-
-
-                          </div> -->
-
-
   
   
   
   
                            
   
-                            <!-- <div id="ebasset" style="display:none">
+                            <div id="ebasset" style="display:none">
   <hr>
 
   <div class="row">
@@ -518,7 +296,7 @@
                                 <div class="col-12">
                                   <label class="form-label" style="color:red; ">E-Blast Asset Name:</label>
                                   <!-- <input type="text"  name="ebasset_nameview" id="ebasset_nameview" style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;" readonly="readonly"> -->
-                                <!--</div>
+                                </div>
                                 <div class="col-12">
   
                                   <textarea name="asset_name" id="asset_name"
@@ -530,8 +308,8 @@
                                 <br>
                                 <div class="col-12">
                                   <label class="form-label" style="color:red; ">E-Blast Asset Link:</label>
-                                    <input  type="text"  name="ebasset_linkview" id="ebasset_linkview"  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;" readonly="readonly" > -->
-                                <!--</div>
+                                  <!--  <input  type="text"  name="ebasset_linkview" id="ebasset_linkview"  style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: 50% !important;" readonly="readonly" > -->
+                                </div>
   
   
                                 <div class="col-12">
@@ -553,9 +331,9 @@
   
   
                                 </div>
-                              </div>-->
+                              </div>
 
-                              <!--<div class="row">
+                              <div class="row">
                                 <div class="col-12">
                                   <label class="form-label" style="color:red; ">Blast Time:</label>
   
@@ -565,48 +343,24 @@
   
   
                                 </div>
-                              </div> -->
+                              </div>
 
-
+<hr>
                               <div class="row" id = "ebComment">
                                 <div class="container">
                                 <div class="card">
-                                  <!--<div class="card-header" style = "background-color: aliceblue;"><h6><b style = "color: #dc3545;">User And  Admin Comments</b></h6></div>
+                                  <div class="card-header" style = "background-color: aliceblue;"><h4><b>User And  Admin Comments</b></h4></div>
                                   <div class="card-body">
-
-                                    <div class="table-responsive">   
-
-                                      <table class="table table-bordered border">
-                                     
-                                       
-                                     
-                                        <thead class="bg-light" style = "background-color: aliceblue;">
-                                          <tr style = "background-color: aliceblue;">
-                                       <th style="width:10%" style = "color:red"><b style = "color: #dc3545;">User Comment</b></th>
-                                      
-                                       <th style="width:20%" style = "color:red"><b style = "color: #dc3545;">AdminComment</b></th> 
-                                  
-                                    </tr>
-                                 </thead>
                                     
-                                 <tbody class="border">
-                                  <tr class="col border" >
-                                    <!-- <td> <textarea class="form-control"   id = "user_ebcomment" name = "user_ebcomment" placeholder="" id="floatingTextarea" readonly="readonly" style = "border-radius:0px; background-color: aliceblue;"></textarea></td>
-                                    
-                                    <td>    <textarea class="form-control"   id = "comment" name = "comment" placeholder="" id="floatingTextarea" readonly="readonly" style = "border-radius: 0px; background-color: aliceblue;"></textarea>
-            </td> 
-                                   
-                        
-                                 </tbody>
-            
-                                 </table>
-                            </div>
+                               <div class="row">
+                                <div class="col">
+                                  <label class="form-label text-dark"><b>User Comment</b></label>
   
-                                  
+                                  <textarea class="form-control"   id = "user_ebcomment" name = "user_ebcomment" placeholder="" id="floatingTextarea" readonly="readonly" style = "border-radius:0px; background-color: aliceblue;"></textarea>
                                     
   
   
-                                </div>-->
+                                </div>
 <!-- 
                                  <div class="row"  id = "webinarcomment" style="">
                                   <div class="col-6">
@@ -614,13 +368,21 @@
     
                                     <textarea class="form-control"  id = "webinar_comment" name = "webinar_comment" placeholder="webinar Comment" readonly="readonly"></textarea>
 
-                                  </div> -
+                                  </div> --> 
   
                               
-                              
-                                
+                                <div class="col"  id = "adminComment" >
+                                  <label  class="form-label text-dark"><b>AdminComment</b></label>
   
-                            </div>-->
+                                  <textarea class="form-control"   id = "comment" name = "comment" placeholder="" id="floatingTextarea" readonly="readonly" style = "border-radius: 0px; background-color: aliceblue;"></textarea>
+                                    
+  
+  
+                                </div>
+                                </div>
+                              </div>
+  
+                            </div>
                                   </div>
   
                             </div>
@@ -669,9 +431,9 @@
   
                                 <div class="col-12">
   
-                                  <!-- <textarea name="rb_assetnameview" id="rb_assetnameview"
+                                  <textarea name="rb_assetnameview" id="rb_assetnameview"
                                     style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;width: -webkit-fill-available; resize: none;"
-                                    readonly="readonly"></textarea> -->
+                                    readonly="readonly"></textarea>
                                 </div>
   
                                 <br>
@@ -682,7 +444,9 @@
   
                                 <div class="col-12">
   
-                                
+                                  <textarea name="rb_asset_linkview" id="rb_asset_linkview"
+                                    style="outline: none;outline: none !important; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden;border-bottom-style: hidden;   width: -webkit-fill-available; resize: none;"
+                                    readonly="readonly"></textarea>
                                 </div>
   
                               </div>
@@ -746,30 +510,31 @@
                             </div>
                     
                                  
-                       
+                            <hr>
                            
                             <div class="row" id = "ebBlastview"   style = "display:none;" >
                              
                            <div class="container">
-                              <!--<div class="card">
-                                <div class="card-header" style = "background-color: aliceblue;"><h6><b style = "color: #dc3545;">Email Blast Files</b></h6></div>
+                              <div class="card">
+                                <div class="card-header" style = "background-color: aliceblue;"><h5><b>Email Blast Files</b></h5></div>
                          
                                 <div class="card-body">
                                   <table class="table table-striped table-hover table-bordered ">
                               <thead>
                               
                                <tr>
-                             <th scope="col"><b style = "color: #dc3545;">user Email Blast</b></th>
-                             <th scope="col"> <b style = "color: #dc3545;"> Admin Email Blast</b></th>
+                             <th scope="col" >user Email Blast</th>
+                             <th scope="col">Admin Email Blast</th>
                              <!-- <th scope="col">Email Blast</th>
                              <th scope="col">Reminder Blast</th> -->
-                             <!-- <th scope="col">Replace</th> -
+                             <!-- <th scope="col">Replace</th> -->
                              </tr>
                              </thead>
                              <tbody class="table" style = "background-color: aliceblue;" >
                              <tr >
 
-                             
+                              <td id = "viewfiles112" style="border-right: 1px solid; display:none;"></td>
+                              <td id = "viewfiles113" style="border-right: 1px solid; display: none;"></td>
                              
 
                               
@@ -778,7 +543,7 @@
 
                              </table>
                              </div>
-                            </div>-->
+                            </div>
                          </div>
                    
                             </div>
@@ -803,7 +568,8 @@
                                           <tbody class="table" style = "background-color: aliceblue;" >
                                                   <tr>
 
-                                                    
+                                                          <td id = "viewReminderBlastView11" style="border-right: 1px solid; display: none;"></td>
+                                                          <td id = "viewReminderBlastView12" style="border-right: 1px solid; display : none;"></td>
                                                     </tr>
                               
                                                 </tbody>
@@ -859,7 +625,7 @@
 
                       <div  class="row"   style = "display:block;" id="ebmgview">
                         <div class="container">
-                        <!----<div class="card">
+                        <div class="card">
                           <div class="card-header" style = "background-color: aliceblue;"><h4><b>Make Good EB Files</b></h4></div>
                           <div class="card-body">
                           <table class="table table-striped table-hover table-bordered ">
@@ -868,20 +634,21 @@
                                       <th scope="col">Make  Good User  files</th>
                                       <th scope="col">Make  Good Addmin  files</th>
                                         <!--<th scope="col">Reminder Blast</th> -->
-                                        <!-- <th scope="col">Replace</th> -
+                                        <!-- <th scope="col">Replace</th> -->
                                     </tr>
                                   </thead>
                                   <tbody class="table" style = "background-color: aliceblue;" id = "MakeGoodView">
                               
                                        <tr>
-                                         
+                                          <td  id = "makeGood11" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
+                                          <td  id = "makeGood12" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
                                         
                                         </tr>
                                   </tbody>
 
-                          </table>--
+                          </table>
                         </div>
-                    </div>-->
+                    </div>
                   
                   </div>
                 </div>       <!-- Make good file code End  -->
@@ -906,7 +673,8 @@
                             <tbody class="table" style = "background-color: aliceblue;" id = "RBMakeGoodView">
                         
                                  <tr>
-                                    
+                                    <td  id = "rbmakeGood11" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
+                                    <td  id = "rbmakeGood12" style="border-right: 1px solid; display:none;  background-color: aliceblue;"  ></td>
                                   </tr>
                             </tbody>
 

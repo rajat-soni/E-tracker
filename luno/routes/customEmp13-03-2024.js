@@ -184,38 +184,26 @@ router.get('/get_data', function (request, response, next) {
                     if (tact === "e_blast") {
 
 
-                        if(row.blast_type=="E-blast" && row.asset_name  !== null && row.asset_link  !== null)
+                        if(row.blast_type="E-blast" && row.asset_name!="" && row.asset_link!="")
                         {
 
                             var tact = "Email Blast";
-                            console.log("Email Blast" +row.blast_type);
                         }
 
-                       if(row.blast_type=="Make-Good" && row.mgasset_name !== null && row.mgasset_link !== null)
+                       if(row.blast_type="Make-Good" && row.mgasset_name!="" && row.mgasset_link!="")
                         {
 
                             var tact = "Make Good";
-                            console.log("Make Good" +row.blast_type);
                         }
 
 
-                        if (row.blast_type=="Reminder-Blast" && row.rb_assetname !== null && row.rb_assetlink !== null) {
+                        if (row.blast_type="Reminder-Blast" && row.rb_assetname != "" && row.rb_assetlink != "") {
                             var tact = "Email Blast / Reminder Blast";
-                            console.log("Email Blast / Reminder Blast" +row.blast_type);
                         }
-
-
-                        if (row.blast_type=="RBMake-Good" && row.rb_mgasset_name !== null && row.rb_mgasset_link !== null) {
-                            var tact = "RB Make Good";
-                            console.log("RB Make Good" +row.blast_type);
-                        }
-
-
                         
-                        //  if (row.blast_type == "RBMake-Good" && row.rb_mgasset_name !== null && row.rb_mgasset_link !== null) {
-                        //     var tact = "RB Make Good";
-                        //     console.log("RB Make Good" +row.blast_type);
-                        // }
+                         if (row.blast_type="RBMake-Good" && row.rb_mgasset_name != "" && row.rb_mgasset_link != "") {
+                            var tact = "RB Make Good";
+                        }
 
                     }
                      if (tact === "webinar") {
@@ -282,10 +270,7 @@ router.get('/get_data', function (request, response, next) {
                           'rb_mgasset_name' : row.rb_mgasset_name,
                           'rb_mgasset_link' : row.rb_mgasset_link,
                           'asset_link' : row.asset_link,
-                          'asset_name' : row.asset_name,
-                          'eb_mg_msg' : row.eb_mg_msg,
-                          'admin_ebmgcmt' : row.admin_ebmgcmt
-
+                          'asset_name' : row.asset_name
 
                     });
 

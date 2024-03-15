@@ -282,10 +282,7 @@ router.get('/get_data', function (request, response, next) {
                           'rb_mgasset_name' : row.rb_mgasset_name,
                           'rb_mgasset_link' : row.rb_mgasset_link,
                           'asset_link' : row.asset_link,
-                          'asset_name' : row.asset_name,
-                          'eb_mg_msg' : row.eb_mg_msg,
-                          'admin_ebmgcmt' : row.admin_ebmgcmt
-
+                          'asset_name' : row.asset_name
 
                     });
 

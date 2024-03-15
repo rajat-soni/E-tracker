@@ -37,11 +37,11 @@ $(document).ready(function () { // for fetch Data //
                     console.log("Datatable");
                     console.log("ID" + row.id);
                     console.log("blast_type" + row.blast_type);
-                   
+                    alert(row.tact)
                     
 //    alert(row.rb_assetlink) alert(row)
                     var mg_status = row.mg_status;
-                   //console.log("row.status ✨🎊🎃🧧🎁"+row.rb_status)
+                   console.log("row.status ✨🎊🎃🧧🎁"+row.rb_status)
                     var rowId = row.id;
                     var rb_mg = row.rb_mg_link;
                     var mg_link = row.mg_link;
@@ -118,16 +118,18 @@ $(document).ready(function () { // for fetch Data //
   
                      
                           return ` 
+                           
+                          ${(row.status == 1 && row.asset_link!="") ? `<span class="bg-primary text-light px-1 rounded small" data-bs-toggle="tooltip" title="${tact}">EB done</span>` : (row.status == 0 ) ?`<input type="checkbox" class="btn btn-link btn-sm  myStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = checkboxClick(this)></button>`:` `} 
+           
                           
-                          ${(row.status == 1  && ( row.asset_name !=="undefined" ||  row.asset_name !== "") ) ? `<span class="bg-primary text-light px-1 rounded small" data-bs-toggle="tooltip" title="${tact}">Blast Done!</span>` : row.status == 0 &&  row.asset_name!="undefined"  ?`<input type="checkbox" class="btn btn-link btn-sm  myStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-status = "${row.status}" data-rowid='${meta.row}' data-id="${data}" onclick = "checkboxClick(this)"></button>`:` `} 
+                          ${(row.mg_status == 1 &&  row.mg_asset_name !== "" && row.mg_link !== "" ) ? `<span class="bg-primary text-light px-1 rounded small">Mk Done</span>` : (row.mg_status == 0 && row.mgasset_name!="" && row.mgasset_link!="" && row.mg_status == 0) ?`<input type="checkbox" class="btn btn-link btn-sm  myMakeGoodStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = MakeGoodcheckboxClick(this)></button>`:` `} 
 
-                        
-                          ${(row.mg_status == 1  &&  row.mgasset_name != "undefined" && row.mgasset_link != "undefined" && tact == "Make Good" ) ? `<span class="bg-dark text-light px-1 rounded small">Mk Done</span>` : (row.mg_status == 0 && row.mgasset_name!= "undefined" && row.mgasset_link!="undefined"  && tact == "Make Good" && row.status==1) ?`<input type="checkbox" class="btn btn-link btn-sm  myMakeGoodStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = MakeGoodcheckboxClick(this)></button>`:` `}
-
-                          ${(row.rbstatus == 1   && row.rb_assetname != "undefined" &&  row.rb_assetlink != "undefined"  && tact == "Email-Reminder-Blast") ? `<span class="bg-danger text-light px-1 rounded small">Blast Done!</span>` : (row.rbstatus == 0 && row.rb_assetname != "undefined" && row.rb_assetlink != "undefined"  && tact == "Email-Reminder-Blast") ?`<input type="checkbox" class="btn btn-link btn-sm  rbStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbCheckboxClick(this)></button>`:` `} 
-
-                         ${(row.rb_mg_status == 1 && tact == "RB Make Good"  &&  row.rb_mgasset_name != "undefined" && row.rb_mgasset_link != "undefined") ? `<span class="bg-danger text-light px-1 rounded small">RB MG Done</span>` : (row.rb_mg_status == 0  &&  row.rb_mg_status == 0 &&  row.rb_mgasset_name != "undefined" && row.rb_mgasset_link != "undefined" && tact == "RB Make Good" ) ?`<input type="checkbox" class="btn btn-link btn-sm  rbMgStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbMgCheckboxClick(this)></button>`:` `} 
-
+ 
+                          ${(row.rbstatus == 1 && row.rb_assetname !== "" &&  row.rb_assetlink !== "") ? `<span class="bg-danger text-light px-1 rounded small">Rb Done</span>` : (row.rbstatus == 0 && row.rb_assetname != "" && row.rb_assetlink != "") ?`<input type="checkbox" class="btn btn-link btn-sm  rbStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbCheckboxClick(this)></button>`:` `} 
+                   
+         
+                          ${(row.rb_mg_status == 1 && row.tact == "RB Make Good"  &&  row.rb_mgasset_name != "" && row.rb_mgasset_link != "") ? `<span class="bg-danger text-light px-1 rounded small">RB MG Done</span>` : (row.rb_mg_status == 0  &&  row.rb_mg_status == 0 &&  row.rb_mgasset_name != "" && row.rb_mgasset_link != "" ) ?`<input type="checkbox" class="btn btn-link btn-sm  rbMgStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbMgCheckboxClick(this)></button>`:` `} 
+                   
 
                             <button type="button" hidden class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  data-id =" `+ row.id + ' ' + row.blast_type + ` "><i class="fa fa-trash"></i></button>
                             
@@ -149,23 +151,6 @@ $(document).ready(function () { // for fetch Data //
 
     });
 
-
-//${(row.mg_status == 1  &&  row.mg_asset_name != "undefined" && row.mgasset_link != "undefined" && tact == "Make Good" ) ? `<span class="bg-primary text-light px-1 rounded small">Mk Done</span>` : (row.mg_status == 0 && row.mgasset_name!= "undefined" && row.mgasset_link!="undefined"  && tact == "Make Good" && row.status==1) ?`<input type="checkbox" class="btn btn-link btn-sm  myMakeGoodStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = MakeGoodcheckboxClick(this)></button>`:` `}
-           
-
-
-                          //${(row.rbstatus == 1 && row.status == 1 && row.mg_status == 1  && row.rb_assetname != undefined &&  row.rb_assetlink != undefined  && tact == "Email-Reminder-Blast") ? `<span class="bg-danger text-light px-1 rounded small">Blast Done!</span>` : (row.rbstatus == 0 && row.rb_assetname != "undefined" && row.rb_assetlink != "undefined" ) ?`<input type="checkbox" class="btn btn-link btn-sm  rbStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbCheckboxClick(this)></button>`:` `} 
-//
-
-// ${(row.mg_status == 1 &&  row.mg_asset_name != "undefined" && row.mg_link != "undefined" ) ? `<span class="bg-primary text-light px-1 rounded small">Mk Done</span>` : (row.mg_status == 0 && row.mgasset_name!= "undefined" && row.mgasset_link!="undefined" && row.status == 1) ?`<input type="checkbox" class="btn btn-link btn-sm  myMakeGoodStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = MakeGoodcheckboxClick(this)></button>`:` `} 
-
- 
-    //                       ${(row.rbstatus == 1 && row.rb_assetname != null &&  row.rb_assetlink != null) ? `<span class="bg-danger text-light px-1 rounded small">Rb Done</span>` : (row.rbstatus == 0 && row.rb_assetname == null && row.rb_assetlink == null) ?`<input type="checkbox" class="btn btn-link btn-sm  rbStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbCheckboxClick(this)></button>`:` `} 
-                   
-         
-    //                       ${(row.rb_mg_status == 1 && row.tact == "RB Make Good"  &&  row.rb_mgasset_name != null && row.rb_mgasset_link != null) ? `<span class="bg-danger text-light px-1 rounded small">RB MG Done</span>` : (row.rb_mg_status == 0  &&  row.rb_mg_status == 0 &&  row.rb_mgasset_name == null && row.rb_mgasset_link == null ) ?`<input type="checkbox" class="btn btn-link btn-sm  rbMgStatusCheckbox"  data-bs-toggle="tooltip" data-bs-placement="top" name = checkbox title="${row.tact}" data-rowid='${meta.row}' data-id="${data}" onclick = rbMgCheckboxClick(this)></button>`:` `} 
-
-    
 
     $('#add_data').click(function () { // for insert the Data //
 

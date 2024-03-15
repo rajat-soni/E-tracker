@@ -117,7 +117,7 @@ router.get('/get_data', function(request, response, next){
              var total_records_with_filter = data[0].Total;
  
              var query = `
-             select *,now() as tdtetime,a.id as eid,a.id as rbid,u.first_name as ebfname,a.camp_name as campname,CONCAT( a.blast_date ,' | ', a.blast_time) as eblast_date,a.status as ebstatus,CONCAT( a.rb_date ,' | ', a.rb_time) as rblast_date,t3.first_name as rbfname,a.camp_name as rbcampname,a.rbstatus as rb_status,a.rb_type as rbtype from user_tbl u join addtask a on u.user_id=a.allocated_to left join user_tbl t3 on a.rballocated_to=t3.user_id  
+             select *,now() as tdtetime,a.id as eid,a.id as rbid,u.first_name as ebfname,a.camp_name as campname,CONCAT( a.blast_date ,' | ', a.blast_time) as eblast_date,a.status as ebstatus,CONCAT( a.rb_date ,' | ', a.rb_time) as rblast_date,t3.first_name as rbfname,a.camp_name as rbcampname,a.rbstatus as rb_status,a.rb_type as rbtype from user_tbl u join addtask a on u.user_id=a.allocated_to left join user_tbl t3 on a.rballocated_to=t3.user_id 
              WHERE 1 ${search_query} 
              ORDER BY ${column_name} ${column_sort_order} 
              LIMIT ${start}, ${length}
@@ -227,32 +227,30 @@ var tact=row.tact;
        if (tact === "e_blast") {
 
 
-        if(row.blast_type=="E-blast" && row.asset_name  !== null && row.asset_link  !== null)
+        if(row.blast_type="E-blast" && row.asset_name!="" && row.asset_link!="")
         {
 
             var tact = "Email Blast";
-            console.log("Email Blast" +row.blast_type);
         }
 
-       if(row.blast_type=="Make-Good" && row.mgasset_name !== null && row.mgasset_link !== null)
+       if(row.blast_type="Make-Good" && row.mgasset_name!="" && row.mgasset_link!="")
         {
 
             var tact = "Make Good";
-            console.log("Make Good" +row.blast_type);
         }
 
 
-        if (row.blast_type=="Reminder-Blast" && row.rb_assetname !== null && row.rb_assetlink !== null) {
+        if (row.blast_type="Reminder-Blast" && row.rb_assetname != "" && row.rb_assetlink != "") {
             var tact = "Email Blast / Reminder Blast";
-            console.log("Email Blast / Reminder Blast" +row.blast_type);
         }
-
-
-        if (row.blast_type=="RBMake-Good" && row.rb_mgasset_name !== null && row.rb_mgasset_link !== null) {
+        
+         if (row.blast_type="RBMake-Good" && row.rb_mgasset_name != "" && row.rb_mgasset_link != "") {
             var tact = "RB Make Good";
-            console.log("RB Make Good" +row.blast_type);
         }
 
+    }
+     if (tact === "webinar") {
+        var tact = "Webinar";
     }
 // End //
 
@@ -305,16 +303,11 @@ var tact=row.tact;
                             'seesion_id' : user_id,
                             'allocated_to' : row.allocated_to,
                             'rbstatus' : row.rbstatus,
+                            'rb_assetlink': row.rb_assetlink,
                             'rb_assetname' : row.rb_assetname,
                             'rb_mg_status' : row.rb_mg_status,
                             'rb_mgasset_link' : row.rb_mgasset_link,
-                            'rb_mgasset_name'  : row.rb_mgasset_name,
-                            'mgasset_name' : row.mgasset_name,
-                            'mgasset_link' : row.mgasset_link,
-                            'rb_assetlink' : row.rb_assetlink,
-                            'rb_assetname' : row.rb_assetname,
-                            'asset_name' : row.asset_name,
-                            'asset_link' : row.asset_link
+                            'rb_mgasset_name'  : row.rb_mgasset_name
                         });
 
                         
@@ -423,7 +416,7 @@ else{
             // console.log('session user '+user_id);
 
             
-                    var updateTask = `UPDATE addtask SET status = 1   WHERE id = ${status_id}`;
+                    var updateTask = `UPDATE addtask SET status = 1   WHERE id = ${user_id}`;
                 
                     database.query(updateTask, function (error, data) {
                         if (!error) {
@@ -453,7 +446,7 @@ else{
                 // console.log('session user '+user_id);
         
                 
-                        var updateTask = `UPDATE addtask SET mg_status = 1   WHERE id = ${makeGoodStatusId}`;
+                        var updateTask = `UPDATE addtask SET mg_status = 1   WHERE id = ${user_id}`;
                         console.log("updateTask🎟🎞🎞🎗🎁"+updateTask)
                       
                         database.query(updateTask, function (error, data) {
@@ -484,14 +477,14 @@ else{
                 // console.log('session user '+user_id);
         
                 
-                        var updateTask = `UPDATE addtask SET rbstatus = 1   WHERE id = ${rbStatusId}`;
+                        var updateTask = `UPDATE addtask SET rbstatus = 1   WHERE id = ${user_id}`;
                         console.log("updateTask🎟🎞🎞🎗🎁"+updateTask)
                       
                         database.query(updateTask, function (error, data) {
                             if (!error) {
                                 response.json({
                                     success: true,
-                                    message: "Admin RB  status  Done.. ",
+                                    message: "Make good  status  Done.. ",
                                 });
                             } else {
                                 response.json({
@@ -514,14 +507,14 @@ else{
                 // console.log('session user '+user_id);
         
                 
-                        var updateTask = `UPDATE addtask SET rb_mg_status = 1   WHERE id = ${rbMgStatusId}`;
+                        var updateTask = `UPDATE addtask SET rb_mg_status = 1   WHERE id = ${user_id}`;
                         console.log("updateTask🎟🎞🎞🎗🎁"+updateTask)
                       
                         database.query(updateTask, function (error, data) {
                             if (!error) {
                                 response.json({
                                     success: true,
-                                    message: "Make good  RB status  Done.. ",
+                                    message: "Make good  status  Done.. ",
                                 });
                             } else {
                                 response.json({

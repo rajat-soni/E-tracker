@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<title>2023 Generative AI Survey </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+body{
+ padding-top: 10px;
+}
+.panel-primary {
+    border-color: #026DB8;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #026DB8;
+    border-color: #026DB8;
+}
+.btn-primary:hover { 
+    background-color: #026DB8;
+	border-color: #026DB8;
+}
+.container {
+max-width: 900px;
+}
+.footer {
+padding: 20px 0;
+margin-top: 10px;
+border-top: 1px solid #026DB8;
+background-color: #f5f5f5;
+}
+.breadcrumb {
+padding: 15px 15px;
+margin-bottom: 5px;
+list-style: none;
+background-color: #f5f5f5;
+border-radius: 4px;
+}
+.alert {
+padding: 15px;
+margin-bottom: 10px;
+border: 1px solid transparent;
+border-radius: 4px;
+}
+label.error {
+color: #f00;
+font-weight: 400;
+}
+#div1 {
+margin-bottom: 5px;
+}
+
+.panel-primary>.panel-heading {
+color: #fff;
+background-color: #026DB8;
+border-color: #026DB8;
+}
+
+.col-md-6{
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
+}
+</style>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() { 
+		$("#signup_form").validate({
+		errorElement: 'label',
+			rules: {
+				firstname: {
+					required: true,
+				},
+				lastname: {
+					required: true,
+				},
+				email: {
+					required: true,
+					nofreeemail: true,
+					email: true
+				},
+				homephone: {
+					required: true,
+				},
+				address: {
+					required: true,
+				},
+				city: {
+					required: true,
+				},
+				state: {
+					required: true,
+				},
+				postalcode: {
+					required: true,
+				},
+				country: {
+					required: true,
+				},
+				industry: {
+					required: true,
+				},
+				jobtitle: {
+					required: true,
+				},
+				companyname: {
+					required: true,
+				},
+				companysize: {
+					required: true,
+				},
+				specifictitle: {
+					required: true,
+				},
+				advicebrand: {
+					required: true,
+				},
+				que1: {
+					required: true,
+				},
+				Asset: {
+					required: true,
+				},
+				std1: {
+					required: true,
+				},
+				std2: {
+					required: true,
+				},
+				std7: {
+					required: true,
+				},
+				std6: {
+					required: true,
+				},
+				std3: {
+					required: true,
+				},
+				std5: {
+					required: true,
+				},
+				std4: {
+					required: true,
+				}
+			},
+			messages: {
+				firstname: {
+					required: "The details are incorrect/incomplete"
+				},
+				lastname: {
+					required: "The details are incorrect/incomplete"
+				},
+				email: {
+					required: "Please enter an email address",
+					nofreeemail: "Please enter your business email, generic email not allowed",
+					email: "Please enter a valid email address"
+				},
+				homephone: {
+					required: "The details are incorrect/incomplete"
+				},
+				address: {
+					required: "The details are incorrect/incomplete"
+				},
+				city: {
+					required: "The details are incorrect/incomplete"
+				},
+				state: {
+					required: "The details are incorrect/incomplete"
+				},
+				postalcode: {
+					required: "The details are incorrect/incomplete"
+				},
+				country: {
+					required: "The details are incorrect/incomplete"
+				},
+				industry: {
+					required: "The details are incorrect/incomplete"
+				},
+				jobtitle: {
+					required: "The details are incorrect/incomplete"
+				},
+				companyname: {
+					required: "The details are incorrect/incomplete"
+				},
+				companysize: {
+					required: "The details are incorrect/incomplete"
+				},
+				specifictitle: {
+					required: "The details are incorrect/incomplete"
+				},
+				advicebrand: {
+					required: "The details are incorrect/incomplete"
+				},
+				que1: {
+					required: "The details are incorrect/incomplete"
+				},
+				Asset: {
+					required: "The details are incorrect/incomplete"
+				},
+				std1: {
+					required: "The details are incorrect/incomplete"
+				},
+				std2: {
+					required: "The details are incorrect/incomplete"
+				},
+				std7: {
+					required: "The details are incorrect/incomplete"
+				},
+				std6: {
+					required: "The details are incorrect/incomplete"
+				},
+				std3: {
+					required: "The details are incorrect/incomplete"
+				},
+				std5: {
+					required: "The details are incorrect/incomplete"
+				},
+				std4: {
+					required: "The details are incorrect/incomplete"
+				}
+			}
+		});
+});
+</script>
+</head>
+<body>
+<div class="container master-container">
+    <table width="870px;" style="margin-bottom:10px;">
+	<tr>
+	<td>
+     <img src="https://rm-content.s3.amazonaws.com/56969df1bd02a4a3292a2178/599845/upload-cf5553e0-7445-11e6-a1c9-e73c34e5a362.png" class="img-responsive" border="0" alt="logo"/>   
+	</td>
+	
+		 <td style="float:right;">
+		  <img src="https://engage.biz-tech-insights.com/LP-2023-Q3-ServiceNow-Telecom-Media-and-Tech/ServiceNow_logo_RGB_BL_Green.png" alt="thumbnail" style="margin-top: 15px; width: 200px; margin-left: 0px!important;">
+		 
+        </td>
+	
+	</tr>
+	</table>
+     
+    
+	<div id="div1">
+	<table style="width: 870px; height:130px; background: #026DB8;">
+				<tbody>
+				<tr style="height: 100px;">
+				<td>
+				<p style="line-height: 26px; color: #ffffff; padding: 1em; text-align: center; padding-top: 22px;"><span style="font-size: 18pt;  font-family: HelveticaNeueLT Pro 57 Cn;"><strong>2023 Generative AI Survey </strong></span></p>
+				</td>
+				</tr>
+				</tbody>
+				</table>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		  <div class="panel panel-primary">
+			
+			<div class="panel-body">
+             
+             <p style="text-align: left; font-size: 14px;margin-top:8px;margin-left:2px;padding-left:0px;"><b>Complete a 5-minute survey on Generative AI | Receive a Yeti mug</b></p> 
+			 
+            <p style="font-size: 14px;margin-top:8px;margin-left:2px;padding-left:0px;">This survey aims to learn where organizations are in their generative AI (GenAI) journey.<br><br>
+GenAI will power a major surge of business innovation in the coming years. While AI is not new, GenAI tools like ChatGPT and DALL-E have made AI far more approachable and human, while introducing a new toolkit that empowers people to perform at potentially heroic levels. Today, GenAI engagement is powered by large language models (LLMs) that help users mine data, recognize patterns, derive insights, create art, and even generate computer code.<br><br>
+AI-powered digital transformation isn&#8217;t just about making work more efficient or simply automating processes and workflows. It&#8217;s about building enterprises that create dramatically more value by orchestrating both human and machine intelligence.
+</p>
+
+			
+            <p style="font-size: 14px; margin-top: 18px; margin-left:2px;padding-left:0px;">Please take this 5-minute survey, and we&#8217;ll send you a complimentary Yeti mug (valued at $23.99).</p>
+			<br>
+			<center><img src="https://engage.biz-tech-insights.com/LP-2023-Q3-ServiceNow-Telecom-Media-and-Tech/LP-2023-Q3-ServiceNow-Telecom-Media-and-Tech.png" alt="thumbnail"style="width: 300px;"></center> <br>
+            </div>
+		  </div>
+		</div>
+		<div class="col-md-6">
+		  <div class="panel panel-primary">
+			<div class="panel-heading">REGISTER NOW!</div>
+			<div class="panel-body">
+			<form action="https://engage.biz-tech-insights.com/LP-2023-Q3-ServiceNow-Telecom-Media-and-Tech/surveyform.php" method="POST" class="simple_form new_user_basic" id="signup_form" name="signup_form" novalidate="novalidate">
+			<input type="hidden" class="form-control" id="camp_id" name="camp_id" value="LP-2023-Q3-ServiceNow-Telecom-Media-and-Tech">
+			<div class="form-group">
+			  <label for="usr">First Name</label>
+			  <input type="text" class="form-control" id="firstname" name="firstname" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">Last Name</label>
+			  <input type="text" class="form-control" id="lastname" name="data[0]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">Job Title</label>
+			  <input type="text" class="form-control" id="jobtitle" name="data[1]" required>
+			</div>
+			<div class="form-group email required user_basic_email">
+			  <label class="email required control-label" for="user_basic_email">
+			   Email</label>
+			  <input class="string email required form-control" id="email" name="data[2]" type="email" />
+			</div>
+			<div class="form-group">
+			  <label for="usr">Phone</label>
+			  <input type="text" class="form-control" id="homephone" name="data[3]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">Company</label>
+			  <input type="text" class="form-control" id="companyname" name="data[4]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">Address</label>
+			  <input type="text" class="form-control" id="address" name="data[5]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">City</label>
+			  <input type="text" class="form-control" id="city" name="data[6]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">State</label>			  
+			    <input type="text" class="form-control" id="state" name="data[7]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">Postal Code</label>
+			  <input type="text" class="form-control" id="postalcode" name="data[8]" required>
+			</div>
+			<div class="form-group">
+			  <label for="usr">Country</label>
+			  <select name="data[9]" id="country" class="form-control" required>
+				<option value="" selected="selected">- select -</option>
+				<option id="form_0132_fld_9-0" value="AF">Afghanistan</option>
+				<option id="form_0132_fld_9-1" value="AL">Albania</option>
+				<option id="form_0132_fld_9-2" value="DZ">Algeria</option>
+				<option id="form_0132_fld_9-3" value="AS">American Samoa</option>
+				<option id="form_0132_fld_9-4" value="AD">Andorra</option>
+				<option id="form_0132_fld_9-5" value="AO">Angola</option>
+				<option id="form_0132_fld_9-6" value="AI">Anguilla</option>
+				<option id="form_0132_fld_9-7" value="AQ">Antarctica</option>
+				<option id="form_0132_fld_9-8" value="AG">Antigua and Barbuda</option>
+				<option id="form_0132_fld_9-9" value="AR">Argentina</option>
+				<option id="form_0132_fld_9-10" value="AM">Armenia</option>
+				<option id="form_0132_fld_9-11" value="AW">Aruba</option>
+				<option id="form_0132_fld_9-12" value="AU">Australia</option>
+				<option id="form_0132_fld_9-13" value="AT">Austria</option>
+				<option id="form_0132_fld_9-14" value="AZ">Azerbaijan</option>
+				<option id="form_0132_fld_9-15" value="BS">Bahamas</option>
+				<option id="form_0132_fld_9-16" value="BH">Bahrain</option>
+				<option id="form_0132_fld_9-17" value="BD">Bangladesh</option>
+				<option id="form_0132_fld_9-18" value="BB">Barbados</option>
+				<option id="form_0132_fld_9-19" value="BY">Belarus</option>
+				<option id="form_0132_fld_9-20" value="BE">Belgium</option>
+				<option id="form_0132_fld_9-21" value="BZ">Belize</option>
+				<option id="form_0132_fld_9-22" value="BJ">Benin</option>
+				<option id="form_0132_fld_9-23" value="BM">Bermuda</option>
+				<option id="form_0132_fld_9-24" value="BT">Bhutan</option>
+				<option id="form_0132_fld_9-25" value="BO">Bolivia</option>
+				<option id="form_0132_fld_9-26" value="BQ">Bonaire</option>
+				<option id="form_0132_fld_9-27" value="BA">Bosnia</option>
+				<option id="form_0132_fld_9-28" value="BW">Botswana</option>
+				<option id="form_0132_fld_9-29" value="BV">Bouvet Island</option>
+				<option id="form_0132_fld_9-30" value="BR">Brazil</option>
+				<option id="form_0132_fld_9-31" value="IO">British Indian Ocean Territory</option>
+				<option id="form_0132_fld_9-32" value="BN">Brunei</option>
+				<option id="form_0132_fld_9-33" value="BG">Bulgaria</option>
+				<option id="form_0132_fld_9-34" value="BF">Burkina Faso</option>
+				<option id="form_0132_fld_9-35" value="BI">Burundi</option>
+				<option id="form_0132_fld_9-36" value="KH">Cambodia</option>
+				<option id="form_0132_fld_9-37" value="CM">Cameroon</option>
+				<option id="form_0132_fld_9-38" value="CA">Canada</option>
+				<option id="form_0132_fld_9-39" value="CV">Cape Verde</option>
+				<option id="form_0132_fld_9-40" value="KY">Cayman Islands</option>
+				<option id="form_0132_fld_9-41" value="CF">Central African Republic</option>
+				<option id="form_0132_fld_9-42" value="TD">Chad</option>
+				<option id="form_0132_fld_9-43" value="CL">Chile</option>
+				<option id="form_0132_fld_9-44" value="CN">China</option>
+				<option id="form_0132_fld_9-45" value="CX">Christmas Island</option>
+				<option id="form_0132_fld_9-46" value="CC">Cocos Islands</option>
+				<option id="form_0132_fld_9-47" value="CO">Colombia</option>
+				<option id="form_0132_fld_9-48" value="KM">Comoros</option>
+				<option id="form_0132_fld_9-49" value="CG">Congo</option>
+				<option id="form_0132_fld_9-50" value="CD">Congo, Dem. Rep.</option>
+				<option id="form_0132_fld_9-51" value="CK">Cook Islands</option>
+				<option id="form_0132_fld_9-52" value="CR">Costa Rica</option>
+				<option id="form_0132_fld_9-53" value="HR">Croatia</option>
+				<option id="form_0132_fld_9-54" value="CU">Cuba</option>
+				<option id="form_0132_fld_9-55" value="CW">Cura�ao</option>
+				<option id="form_0132_fld_9-56" value="CY">Cyprus</option>
+				<option id="form_0132_fld_9-57" value="CZ">Czech Republic</option>
+				<option id="form_0132_fld_9-58" value="DK">Denmark</option>
+				<option id="form_0132_fld_9-59" value="DJ">Djibouti</option>
+				<option id="form_0132_fld_9-60" value="DM">Dominica</option>
+				<option id="form_0132_fld_9-61" value="DO">Dominican Republic</option>
+				<option id="form_0132_fld_9-62" value="EC">Ecuador</option>
+				<option id="form_0132_fld_9-63" value="EG">Egypt</option>
+				<option id="form_0132_fld_9-64" value="SV">El Salvador</option>
+				<option id="form_0132_fld_9-65" value="GQ">Equatorial Guinea</option>
+				<option id="form_0132_fld_9-66" value="ER">Eritrea</option>
+				<option id="form_0132_fld_9-67" value="EE">Estonia</option>
+				<option id="form_0132_fld_9-68" value="ET">Ethiopia</option>
+				<option id="form_0132_fld_9-69" value="FK">Falkland Islands (Malvinas)</option>
+				<option id="form_0132_fld_9-70" value="FO">Faroe Islands</option>
+				<option id="form_0132_fld_9-71" value="FJ">Fiji</option>
+				<option id="form_0132_fld_9-72" value="FI">Finland</option>
+				<option id="form_0132_fld_9-73" value="FR">France</option>
+				<option id="form_0132_fld_9-74" value="GF">French Guiana</option>
+				<option id="form_0132_fld_9-75" value="PF">French Polynesia</option>
+				<option id="form_0132_fld_9-76" value="TF">French Southern Territories</option>
+				<option id="form_0132_fld_9-77" value="GA">Gabon</option>
+				<option id="form_0132_fld_9-78" value="GM">Gambia</option>
+				<option id="form_0132_fld_9-79" value="GE">Georgia</option>
+				<option id="form_0132_fld_9-80" value="DE">Germany</option>
+				<option id="form_0132_fld_9-81" value="GH">Ghana</option>
+				<option id="form_0132_fld_9-82" value="GI">Gibraltar</option>
+				<option id="form_0132_fld_9-83" value="GR">Greece</option>
+				<option id="form_0132_fld_9-84" value="GL">Greenland</option>
+				<option id="form_0132_fld_9-85" value="GD">Grenada</option>
+				<option id="form_0132_fld_9-86" value="GP">Guadeloupe</option>
+				<option id="form_0132_fld_9-87" value="GU">Guam</option>
+				<option id="form_0132_fld_9-88" value="GT">Guatemala</option>
+				<option id="form_0132_fld_9-89" value="GG">Guernsey</option>
+				<option id="form_0132_fld_9-90" value="GN">Guinea</option>
+				<option id="form_0132_fld_9-91" value="GW">Guinea-Bissau</option>
+				<option id="form_0132_fld_9-92" value="GY">Guyana</option>
+				<option id="form_0132_fld_9-93" value="HT">Haiti</option>
+				<option id="form_0132_fld_9-94" value="HM">Heard Island</option>
+				<option id="form_0132_fld_9-95" value="HN">Honduras</option>
+				<option id="form_0132_fld_9-96" value="HK">Hong Kong</option>
+				<option id="form_0132_fld_9-97" value="HU">Hungary</option>
+				<option id="form_0132_fld_9-98" value="IS">Iceland</option>
+				<option id="form_0132_fld_9-99" value="IN">India</option>
+				<option id="form_0132_fld_9-100" value="ID">Indonesia</option>
+				<option id="form_0132_fld_9-101" value="IR">Iran</option>
+				<option id="form_0132_fld_9-102" value="IQ">Iraq</option>
+				<option id="form_0132_fld_9-103" value="IE">Ireland</option>
+				<option id="form_0132_fld_9-104" value="IM">Isle of Man</option>
+				<option id="form_0132_fld_9-105" value="IL">Israel</option>
+				<option id="form_0132_fld_9-106" value="IT">Italy</option>
+				<option id="form_0132_fld_9-107" value="CI">Ivory Coast</option>
+				<option id="form_0132_fld_9-108" value="JM">Jamaica</option>
+				<option id="form_0132_fld_9-109" value="JP">Japan</option>
+				<option id="form_0132_fld_9-110" value="JE">Jersey</option>
+				<option id="form_0132_fld_9-111" value="JO">Jordan</option>
+				<option id="form_0132_fld_9-112" value="KZ">Kazakhstan</option>
+				<option id="form_0132_fld_9-113" value="KE">Kenya</option>
+				<option id="form_0132_fld_9-114" value="KI">Kiribati</option>
+				<option id="form_0132_fld_9-115" value="KR">Korea</option>
+				<option id="form_0132_fld_9-116" value="KP">Korea, DPRK</option>
+				<option id="form_0132_fld_9-117" value="KW">Kuwait</option>
+				<option id="form_0132_fld_9-118" value="KG">Kyrgyzstan</option>
+				<option id="form_0132_fld_9-119" value="LA">Laos</option>
+				<option id="form_0132_fld_9-120" value="LV">Latvia</option>
+				<option id="form_0132_fld_9-121" value="LB">Lebanon</option>
+				<option id="form_0132_fld_9-122" value="LS">Lesotho</option>
+				<option id="form_0132_fld_9-123" value="LR">Liberia</option>
+				<option id="form_0132_fld_9-124" value="LY">Libya</option>
+				<option id="form_0132_fld_9-125" value="LI">Liechtenstein</option>
+				<option id="form_0132_fld_9-126" value="LT">Lithuania</option>
+				<option id="form_0132_fld_9-127" value="LU">Luxembourg</option>
+				<option id="form_0132_fld_9-128" value="MO">Macao</option>
+				<option id="form_0132_fld_9-129" value="MK">Macedonia</option>
+				<option id="form_0132_fld_9-130" value="MG">Madagascar</option>
+				<option id="form_0132_fld_9-131" value="MW">Malawi</option>
+				<option id="form_0132_fld_9-132" value="MY">Malaysia</option>
+				<option id="form_0132_fld_9-133" value="MV">Maldives</option>
+				<option id="form_0132_fld_9-134" value="ML">Mali</option>
+				<option id="form_0132_fld_9-135" value="MT">Malta</option>
+				<option id="form_0132_fld_9-136" value="MH">Marshall Islands</option>
+				<option id="form_0132_fld_9-137" value="MQ">Martinique</option>
+				<option id="form_0132_fld_9-138" value="MR">Mauritania</option>
+				<option id="form_0132_fld_9-139" value="MU">Mauritius</option>
+				<option id="form_0132_fld_9-140" value="YT">Mayotte</option>
+				<option id="form_0132_fld_9-141" value="MX">Mexico</option>
+				<option id="form_0132_fld_9-142" value="FM">Micronesia, Fed.</option>
+				<option id="form_0132_fld_9-143" value="MD">Moldova</option>
+				<option id="form_0132_fld_9-144" value="MC">Monaco</option>
+				<option id="form_0132_fld_9-145" value="MN">Mongolia</option>
+				<option id="form_0132_fld_9-146" value="ME">Montenegro</option>
+				<option id="form_0132_fld_9-147" value="MS">Montserrat</option>
+				<option id="form_0132_fld_9-148" value="MA">Morocco</option>
+				<option id="form_0132_fld_9-149" value="MZ">Mozambique</option>
+				<option id="form_0132_fld_9-150" value="MM">Myanmar</option>
+				<option id="form_0132_fld_9-151" value="NA">Namibia</option>
+				<option id="form_0132_fld_9-152" value="NR">Nauru</option>
+				<option id="form_0132_fld_9-153" value="NP">Nepal</option>
+				<option id="form_0132_fld_9-154" value="NL">Netherlands</option>
+				<option id="form_0132_fld_9-155" value="NC">New Caledonia</option>
+				<option id="form_0132_fld_9-156" value="NZ">New Zealand</option>
+				<option id="form_0132_fld_9-157" value="NI">Nicaragua</option>
+				<option id="form_0132_fld_9-158" value="NE">Niger</option>
+				<option id="form_0132_fld_9-159" value="NG">Nigeria</option>
+				<option id="form_0132_fld_9-160" value="NU">Niue</option>
+				<option id="form_0132_fld_9-161" value="NF">Norfolk Island</option>
+				<option id="form_0132_fld_9-162" value="MP">Northern Marianas</option>
+				<option id="form_0132_fld_9-163" value="NO">Norway</option>
+				<option id="form_0132_fld_9-164" value="OM">Oman</option>
+				<option id="form_0132_fld_9-165" value="PK">Pakistan</option>
+				<option id="form_0132_fld_9-166" value="PW">Palau</option>
+				<option id="form_0132_fld_9-167" value="PS">Palestinian Terr.</option>
+				<option id="form_0132_fld_9-168" value="PA">Panama</option>
+				<option id="form_0132_fld_9-169" value="PG">Papua New Guinea</option>
+				<option id="form_0132_fld_9-170" value="PY">Paraguay</option>
+				<option id="form_0132_fld_9-171" value="PE">Peru</option>
+				<option id="form_0132_fld_9-172" value="PH">Philippines</option>
+				<option id="form_0132_fld_9-173" value="PN">Pitcairn</option>
+				<option id="form_0132_fld_9-174" value="PL">Poland</option>
+				<option id="form_0132_fld_9-175" value="PT">Portugal</option>
+				<option id="form_0132_fld_9-176" value="PR">Puerto Rico</option>
+				<option id="form_0132_fld_9-177" value="QA">Qatar</option>
+				<option id="form_0132_fld_9-178" value="RO">Romania</option>
+				<option id="form_0132_fld_9-179" value="RU">Russia</option>
+				<option id="form_0132_fld_9-180" value="RW">Rwanda</option>
+				<option id="form_0132_fld_9-183" value="SH">Saint Helena</option>
+				<option id="form_0132_fld_9-184" value="KN">Saint Kitts and Nevis</option>
+				<option id="form_0132_fld_9-185" value="LC">Saint Lucia</option>
+				<option id="form_0132_fld_9-186" value="MF">Saint Martin (French)</option>
+				<option id="form_0132_fld_9-187" value="PM">Saint Pierre and Miquelon</option>
+				<option id="form_0132_fld_9-188" value="VC">Saint Vincent</option>
+				<option id="form_0132_fld_9-189" value="WS">Samoa</option>
+				<option id="form_0132_fld_9-190" value="SM">San Marino</option>
+				<option id="form_0132_fld_9-191" value="ST">Sao Tome &amp; Principe</option>
+				<option id="form_0132_fld_9-192" value="SA">Saudi Arabia</option>
+				<option id="form_0132_fld_9-193" value="SN">Senegal</option>
+				<option id="form_0132_fld_9-194" value="RS">Serbia</option>
+				<option id="form_0132_fld_9-195" value="SC">Seychelles</option>
+				<option id="form_0132_fld_9-196" value="SL">Sierra Leone</option>
+				<option id="form_0132_fld_9-197" value="SG">Singapore</option>
+				<option id="form_0132_fld_9-198" value="SX">Sint Maarten (Dutch)</option>
+				<option id="form_0132_fld_9-199" value="SK">Slovakia</option>
+				<option id="form_0132_fld_9-200" value="SI">Slovenia</option>
+				<option id="form_0132_fld_9-201" value="SB">Solomon Islands</option>
+				<option id="form_0132_fld_9-202" value="SO">Somalia</option>
+				<option id="form_0132_fld_9-203" value="ZA">South Africa</option>
+				<option id="form_0132_fld_9-204" value="GS">South Georgia and the South Sandwich Islands</option>
+				<option id="form_0132_fld_9-205" value="SS">South Sudan</option>
+				<option id="form_0132_fld_9-206" value="ES">Spain</option>
+				<option id="form_0132_fld_9-207" value="LK">Sri Lanka</option>
+				<option id="form_0132_fld_9-208" value="SD">Sudan</option>
+				<option id="form_0132_fld_9-209" value="SR">Suriname</option>
+				<option id="form_0132_fld_9-210" value="SJ">Svalbard</option>
+				<option id="form_0132_fld_9-211" value="SZ">Swaziland</option>
+				<option id="form_0132_fld_9-212" value="SE">Sweden</option>
+				<option id="form_0132_fld_9-213" value="CH">Switzerland</option>
+				<option id="form_0132_fld_9-214" value="SY">Syria</option>
+				<option id="form_0132_fld_9-215" value="TW">Taiwan</option>
+				<option id="form_0132_fld_9-216" value="TJ">Tajikistan</option>
+				<option id="form_0132_fld_9-217" value="TZ">Tanzania</option>
+				<option id="form_0132_fld_9-218" value="TH">Thailand</option>
+				<option id="form_0132_fld_9-219" value="TL">Timor-Leste</option>
+				<option id="form_0132_fld_9-220" value="TG">Togo</option>
+				<option id="form_0132_fld_9-221" value="TK">Tokelau</option>
+				<option id="form_0132_fld_9-222" value="TO">Tonga</option>
+				<option id="form_0132_fld_9-223" value="TT">Trinidad and Tobago</option>
+				<option id="form_0132_fld_9-224" value="TN">Tunisia</option>
+				<option id="form_0132_fld_9-225" value="TR">Turkey</option>
+				<option id="form_0132_fld_9-226" value="TM">Turkmenistan</option>
+				<option id="form_0132_fld_9-227" value="TC">Turks and Caicos</option>
+				<option id="form_0132_fld_9-228" value="TV">Tuvalu</option>
+				<option id="form_0132_fld_9-229" value="AE">U.A.E.</option>
+				<option id="form_0132_fld_9-230" value="UG">Uganda</option>
+				<option id="form_0132_fld_9-231" value="UA">Ukraine</option>
+				<option id="form_0132_fld_9-232" value="GB">United Kingdom</option>
+				<option id="form_0132_fld_9-233" value="US">United States</option>
+				<option id="form_0132_fld_9-234" value="UM">United States Minor Outlying Islands</option>
+				<option id="form_0132_fld_9-235" value="UY">Uruguay</option>
+				<option id="form_0132_fld_9-236" value="UZ">Uzbekistan</option>
+				<option id="form_0132_fld_9-237" value="VU">Vanuatu</option>
+				<option id="form_0132_fld_9-238" value="VA">Vatican City</option>
+				<option id="form_0132_fld_9-239" value="VE">Venezuela</option>
+				<option id="form_0132_fld_9-240" value="VN">Viet Nam</option>
+				<option id="form_0132_fld_9-241" value="VG">Virgin Islands, British</option>
+				<option id="form_0132_fld_9-242" value="VI">Virgin Islands, U.S.</option>
+				<option id="form_0132_fld_9-243" value="WF">Wallis and Futuna</option>
+				<option id="form_0132_fld_9-244" value="EH">Western Sahara</option>
+				<option id="form_0132_fld_9-245" value="YE">Yemen</option>
+				<option id="form_0132_fld_9-246" value="ZM">Zambia</option>
+				<option id="form_0132_fld_9-247" value="ZW">Zimbabwe</option>
+				<option id="form_0132_fld_9-248" value="AX">Aland Islands</option>
+			</select>
+			</div>
+			
+			
+			
+			 
+			
+		 <div class="form-group">
+			  <label for="usr">When it comes to purchasing a GenAI solution in your organization, do you consider yourself:</label>
+			  <select name="std1" id="std1" class="form-control">
+				<option value="" selected="selected">- select -</option>
+				<option value="A Decision maker ">A Decision maker </option>
+<option value="An influencer">An influencer</option>
+<option value="Or, do you have no role ">Or, do you have no role </option>
+
+
+
+
+			</select>
+			</div>
+			
+			<div class="form-group">
+			  <label for="usr">Is your organization interested in GenAI solutions to improve its business and IT performance? </label>
+			  <select name="std2" id="std2" class="form-control">
+				<option value="" selected="selected">- select -</option>
+				<option value="Yes">Yes</option>
+<option value="No">No</option>
+
+
+				
+				
+			</select>
+			</div>
+			
+			<div class="form-group">
+			  <label for="usr">What is your estimated annual spend for generative AI technology? Is it: </label>
+			  <select name="std3" id="std3" class="form-control">
+				<option value="" selected="selected">- select -</option>
+				<option value="More than $50k">More than $50k</option>
+<option value="Less than $50k">Less than $50k</option>
+
+
+				
+			</select>
+			</div>
+			
+			<div class="form-group">
+			  <label for="usr">What's your time frame for evaluating or adopting such a generative AI solution? Is it:</label>
+			  <select name="std4" id="std4" class="form-control">
+				<option value="" selected="selected">- select -</option>
+				<option value="1-6 months">1-6 months</option>
+<option value="6-12 months">6-12 months</option>
+<option value="12+ months ">12+ months </option>
+
+
+
+			</select>
+			</div> 
+			
+			
+			
+			
+			
+			<div class="form-group">							
+				<div class="checkbox">
+					<div>
+					  
+					  <input type="checkbox" name="std10" style="margin-left:0px;"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Yes, I would like to receive communications from ServiceNow and/or its affiliates regarding products and services, newsletters, and events.</p>
+					  
+					</div>
+				</div>
+			</div>
+			<center><input class="btn btn-primary" name="commit" type="submit" value="TAKE THE SURVEY NOW!" /></center>
+		</form>
+		</div>
+		</div>
+		</div>
+	</div>
+</div>
+<div class="container master-container">
+  <footer class="footer">
+    <div class="container">
+      <p align="center">Copyright &copy; 2023 Biz Tech Insights<br><a href="https://biz-tech-insights.com/privacy-policy/">Biz-Tech-Insights Privacy Policy</a><br>
+	 <a href="https://www.servicenow.com/privacy-statement.html" target="_blank">ServiceNow privacy policy</a>	   
+	  </p>
+      
+    </div>
+  </footer>
+ </div> 
+</body>
+</html>

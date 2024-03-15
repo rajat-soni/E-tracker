@@ -15,7 +15,7 @@ function checkboxClick(e){
            },
            dataType: "JSON",
            success: function(data) {
-             
+               $('.message').html('<div class="alert alert-success">' + data.message + '</div>').fadeIn();
 
                console.log("data" + data);
 
@@ -25,8 +25,8 @@ function checkboxClick(e){
                    $('.remider_blst').show();
                    $('.check').hide();
 
-                   $('.view_msg').html('<p class="alert alert-danger">' + data.message + '</div>').fadeOut(4000);
-                   $('#table_data').DataTable().ajax.reload();
+                  alert("success")
+
                
 
 
@@ -36,7 +36,7 @@ function checkboxClick(e){
                    
                }
 
-              
+               $('#tdata').DataTable().ajax.reload();
                setTimeout(function() {
                    $('.message').html('');
                }, 1000);
@@ -74,7 +74,7 @@ function  MakeGoodcheckboxClick(e){
           },
           dataType: "JSON",
           success: function(data) {
-            $('.view_msg').html('<p class="alert alert-danger">' + data.message + '</div>').fadeOut(4000);
+              $('.message').html('<div class="alert alert-success">' + data.message + '</div>').fadeIn();
 
               console.log("data" + data);
 
@@ -132,7 +132,7 @@ function  rbCheckboxClick(e){
           },
           dataType: "JSON",
           success: function(data) {
-            $('.view_msg').html('<p class="alert alert-danger">' + data.message + '</div>').fadeOut(4000);
+              $('.message').html('<div class="alert alert-success">' + data.message + '</div>').fadeIn();
 
               console.log("data" + data);
 
@@ -192,9 +192,9 @@ function  rbMgCheckboxClick(e){
           },
           dataType: "JSON",
           success: function(data) {
-              
+              $('.message').html('<div class="alert alert-success">' + data.message + '</div>').fadeIn();
 
-             
+              console.log("data" + data);
 
               if (data.success) {
                   alert(data.success)
@@ -202,7 +202,7 @@ function  rbMgCheckboxClick(e){
                   $('.remider_blst').show();
                   $('.check').hide();
 
-                  $('.view_msg').html('<p class="alert alert-danger">' + data.message + '</div>').fadeOut(4000);
+                 alert("success")
 
                   dataTable.row($(this).attr('data-rowid')).invalidate().draw();
 

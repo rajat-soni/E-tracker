@@ -125,12 +125,12 @@ $(document).ready(function() { // for fetch Data //
                      
                        
 
-                        ${(row.allocated_to == row.user_id && row.status == 1 && (row.asset_link!=null ||  row.asset_link == "") ) ? `<span class="bg-dark text-light px-1 rounded small">Blast Done!</span>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 &&  row.asset_name=="" && row.asset_link=="" ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0  &&  row.asset_link!=null) ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
+                        ${(row.allocated_to == row.user_id && row.status == 1 && row.asset_link!="") ? `<span class="bg-dark text-light px-1 rounded small">Blast Done!</span>` : (row.allocated_to == row.user_id && dt2 < dt1 && row.status == 0 &&  row.asset_name=="" && row.asset_link=="" ) ? `<span class="bg-danger text-light px-1 rounded small">EB Missed</span>`: (row.allocated_to == row.user_id && dt2 > dt1 && row.status == 0  &&  row.asset_link!="") ?`<input type="checkbox" class="btn btn-link btn-sm check" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
          
                         ${(row.rballocated_to == row.user_id && row.rbstatus == 1 && row.rb_assetname != "" && row.rb_assetlink != "") ? `<span class="bg-danger text-light px-1 rounded small">RB Done</span>` : (row.rballocated_to == row.user_id && dt3 < dt1 && row.rbstatus == 0 && row.rb_assetname == undefined && row.rb_assetlink == undefined ) ? `<span class="bg-danger text-light px-1 rounded small">RB Missed</span>`: (row.rballocated_to == row.user_id && dt3 > dt1 && row.rbstatus == 0  && row.rb_assetname != "" && row.rb_assetlink != "" ) ?`<input type="checkbox" class="btn btn-link btn-sm remider_blstcheckbox" id ="my_id" data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}"></button>`:` `} 
 
 
-                        ${(row.allocated_to == row.user_id  && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && row.mg_status == 0  && row.status == 1  && tact == "Make_Good") ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && mg_status == 1 )?`<span class="bg-primary text-light px-1 rounded small mkg_show">MG Done</span></i>`: ``}
+                        ${(row.allocated_to == row.user_id  && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && row.mg_status == 0  ) ? `<input type="checkbox" class="btn btn-link btn-sm mg_check" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="${row.tact}" data-rowid='${meta.row}' data-id="${data}"></button> `:  (row.allocated_to == row.user_id && row.status == 1 && dt2 > dt1 && row.mgasset_name!="" && row.mgasset_link!="" && mg_status == 1 )?`<span class="bg-primary text-light px-1 rounded small mkg_show">MG Done</span></i>`: ``}
                         
                         ${(row.allocated_to == row.user_id &&  dt3 > dt1 && row.rb_mg_status == 0 &&  row.rb_mgasset_name != "" && row.rb_mgasset_link != ""  ) ? `<input type="checkbox" class="btn btn-link btn-sm rb_checkbox" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && row.rb_mg_status == 1 && dt3 > dt1 && row.rb_mgasset_name != "" && row.rb_mgasset_link != ""  )?`<span class="bg-success text-light px-1 rounded small mkg_show">RMG Done</span></i>` : (row.allocated_to == row.user_id && dt3 < dt1 &&  row.rb_mg_status == 0 && row.rb_mgasset_name == undefined && row.rb_mgasset_link == undefined ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`: `  `}
                        
@@ -475,16 +475,12 @@ $(document).ready(function() { // for fetch Data //
                 $('#rb_mgasset_link').val(data.rb_mgasset_link)
                 $('#rb_mgasset_name').val(data.rb_mgasset_name)
 
-                $('#eb_mg_msg').val(data.eb_mg_msg);
-               
-                $('#admin_ebmgcmt').val(data.admin_ebmgcmt);
+         
 
                 //$('#rb_comment').val(data.rb_comment);
 
                 $('#user_rbcomment').val(data.user_rbcomment);
                 $('#user_ebcomment').val(data.user_ebcomment);
-               
-              
                 $('#rb_comment').val(data.rb_comment);
 
                 $('#comment').val(data.comment);
@@ -616,7 +612,7 @@ $(document).ready(function() { // for fetch Data //
 
                         if (user_image[i] != undefined && user_image[i].trim().length != 0) {
 
-                            htmlebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + user_image[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="user_ebfiles" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_image[i] + ',' + i + ',' + tact + '\'></a></i></td>';
+                            htmlebContent += '<p> <tr><td style = "background-color: aliceblue;" > <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + user_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;"  name="user_ebfiles" style = "font-size: 12px;" id="user_ebfiles" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_image[i] + ',' + i + ',' + tact + '\'> </a></i></td></tr>', '</p>';
                         }
 
                     }
@@ -638,7 +634,7 @@ $(document).ready(function() { // for fetch Data //
 
 
                         if (admin_image[i] != undefined && admin_image[i].trim().length != 0) {
-                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
+                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
 
                         }
                      }
@@ -666,7 +662,7 @@ $(document).ready(function() { // for fetch Data //
                             for (var i = 0; i < eb_mg_files_length; i++) {
                             if (eb_mg_files[i] != undefined && eb_mg_files[i].trim().length != 0) {
    
-                                htmlContent1 += '<p> <tr ><td style = "background-color: aliceblue;" > <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
+                                htmlContent1 += '<p> <tr ><td style = "background-color: aliceblue;" > <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
                             }
                   
                     }
@@ -690,7 +686,7 @@ $(document).ready(function() { // for fetch Data //
                         $('#rbFlex').hide();
                         $("#user_ebcomment").hide();
 
-                        var admin_image = data.admin_ebmgfiles;
+                        var admin_image = data.admin_files;
 
                         var admin_image = admin_image.split(',');
                         var admin_length = admin_image.length;
@@ -701,7 +697,7 @@ $(document).ready(function() { // for fetch Data //
 
 
                         if (admin_image[i] != undefined && admin_image[i].trim().length != 0) {
-                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
+                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
 
                         }
 
@@ -717,7 +713,15 @@ $(document).ready(function() { // for fetch Data //
                     $("#rbmgview").hide();
                     $("#ebmgview").show();
                     $("#MakeGoodView").show();
+                    $(".rbmgview").hide();
                    
+                    $('#viewfiles11').show();
+                    $('#viewfiles12').show();
+                    $('#viewReminderBlastView11').hide()
+                    $('#webinarflex').hide();
+                    $('#fileviewdownload').hide();
+                    $('#rbFlex').hide();
+                    $("#user_ebcomment").hide();
 
 
                 }
@@ -731,7 +735,7 @@ $(document).ready(function() { // for fetch Data //
                         for (var i = 0; i < rb_mg_files_length; i++) {
                            if (rb_mg_files[i] != undefined && rb_mg_files[i].trim().length != 0) {
                      
-                              htmlContent1 += '<p><tr><td style = "background-color: aliceblue;"  ><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + rb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + rb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
+                              htmlContent1 += '<td style = "background-color: aliceblue;"  ><img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + rb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + rb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
    
                            }
                   
@@ -751,19 +755,18 @@ $(document).ready(function() { // for fetch Data //
                         $('#rbFlex').hide();
                         $("#user_ebcomment").hide();
 
-                        var admin_rbmgfiles = data.admin_rbmgfiles;
-                     
+                        var admin_image = data.admin_files;
 
-                        var admin_rbmgfiles = admin_rbmgfiles.split(',');
-                        var admin_rbmgfiles_lenght = admin_rbmgfiles.length;
+                        var admin_image = admin_image.split(',');
+                        var admin_length = admin_image.length;
                         var amdinebContent = '';
-                   
-                    for (var i = 0; i < admin_rbmgfiles_lenght; i++) {
+
+                    for (var i = 0; i < admin_length; i++) {
 
 
 
-                        if (admin_rbmgfiles[i] != undefined && admin_rbmgfiles[i].trim().length != 0) {
-                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > &nbsp; &nbsp;' + admin_rbmgfiles[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
+                        if (admin_image[i] != undefined && admin_image[i].trim().length != 0) {
+                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
 
                         }
 
@@ -795,7 +798,7 @@ $(document).ready(function() { // for fetch Data //
 
 
                         if (user_rbfiles[i] != undefined && user_rbfiles[i].trim().length != 0) {
-                            htmlContent += '<p ><tr><td style = "background-color: aliceblue;"  >  <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + user_rbfiles[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:12px; color:black" name="user_rbfiles" style = "font-size: 12px;" id="user_file" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_rbfiles[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
+                            htmlContent += '<p ><tr><td style = "background-color: aliceblue;"  >  <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + user_rbfiles[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black" name="user_rbfiles" style = "font-size: 12px;" id="user_file" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_rbfiles[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
 
                         }
 
@@ -814,12 +817,16 @@ $(document).ready(function() { // for fetch Data //
                     for (var i = 0; i < admin_rb_length; i++) {
 
                         if (admin_rb_image[i] != undefined && admin_rb_image[i].trim().length != 0) {
-                            adminRbHtml += '<p  ><tr><td style = "background-color: aliceblue;" ><span style = "font-size:10px; color:black;">&nbsp; &nbsp;' + admin_rb_image[i] + ' <span style = "font-size:16px; color:black;">&nbsp; &nbsp; <a href = "#"<i class="fa fa-download" style = "font-size:12px; color:black;" name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_rb_image[i] + ',' + i + ',' + tact + '\'></a></i></a><br></td></tr>', '</p>';
+                            adminRbHtml += '<p  ><tr><td style = "background-color: aliceblue;" ><img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;">&nbsp; &nbsp;' + admin_rb_image[i] + ' <span style = "font-size:16px; color:black;">&nbsp; &nbsp; <a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;" name="user_rbfiles" id="user_file" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_rb_image[i] + ',' + i + ',' + tact + '\'></a></i></a><br></td></tr>', '</p>';
                         }
                     }
                     document.getElementById('viewReminderBlastView12').innerHTML = adminRbHtml;
                     $('#viewReminderBlastView12').show();
-                   
+                    $('#webinarFlex').hide();
+                    $('#fileviewdownload').hide();
+                    $('#viewfiles11').hide();
+                    $('#webinar_comment_show').hide();
+
                     $("#user_ebcomment").show();
 
                     if (tact == "Email-Reminder-Blast") {
@@ -955,7 +962,7 @@ $(document).ready(function() { // for fetch Data //
 
 
 
-                            htmlContent += '<tr><td width="60%"> <span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + user_imagename[i] + '&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\'></i></td> &nbsp;<td  width="40%"><input type="text" value=' + user_imagename[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>', '';
+                            htmlContent += '<tr><td width="60%"> <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + user_imagename[i] + '&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\'></i></td> &nbsp;<td  width="40%"><input type="text" value=' + user_imagename[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>', '';
                         } else {
                             //  alert("tact is not:" +tact);
                         }
@@ -995,7 +1002,7 @@ $(document).ready(function() { // for fetch Data //
  
  
  
-                             htmlContent += '<tr><td width="60%"> <span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + rb_mgfiles[i] + '&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + rb_mgfiles[i] + ',' + i + ',' + tactValue + '\'></i></td> &nbsp;<td  width="40%"><input type="text" value=' + rb_mgfiles[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + rb_mgfiles[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>', '';
+                             htmlContent += '<tr><td width="60%"> <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + rb_mgfiles[i] + '&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + rb_mgfiles[i] + ',' + i + ',' + tactValue + '\'></i></td> &nbsp;<td  width="40%"><input type="text" value=' + rb_mgfiles[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + rb_mgfiles[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>', '';
                          } else {
                              //  alert("tact is not:" +tact);
                          }
@@ -1031,7 +1038,7 @@ $(document).ready(function() { // for fetch Data //
 
 
 
-                            htmlContent += '<tr><td width="60%"> <span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + eb_mgfiles[i] + '&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mgfiles[i] + ',' + i + ',' + tactValue + '\'></i></td> &nbsp;<td  width="40%"><input type="text" value=' + eb_mgfiles[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + eb_mgfiles[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>', '';
+                            htmlContent += '<tr><td width="60%"> <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + eb_mgfiles[i] + '&nbsp;&nbsp; </span> </i><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black"" name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mgfiles[i] + ',' + i + ',' + tactValue + '\'></i></td> &nbsp;<td  width="40%"><input type="text" value=' + eb_mgfiles[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + eb_mgfiles[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></td></tr>', '';
                         } else {
                             //  alert("tact is not:" +tact);
                         }
@@ -1094,7 +1101,7 @@ $(document).ready(function() { // for fetch Data //
                         } else if (user_rb_files[i] != '') {
                             // console.log("tact is:" +tact);
 
-                            htmlContent += '<p class="main"> <tr><td width="60%" style = "background-color: aliceblue;">  <span style = "font-size:10px; color:black;">  &nbsp; &nbsp;' + user_rb_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_rb_files[i] + ',' + i + ',' + tactValue + '\'> </a></i></td> &nbsp;</td><td width="40%"> <input type="submit" class="btn btn-danger btn-sm bg-danger" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ',' + user_rb_files[i] + ',' + i + ',' + tactValue + '\' value = "Delete file" id = "btn_id"></td> </tr>', '</p>';
+                            htmlContent += '<p class="main"> <tr><td width="60%" style = "background-color: aliceblue;">  <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;">  &nbsp; &nbsp;' + user_rb_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_rb_files[i] + ',' + i + ',' + tactValue + '\'> </a></i></td> &nbsp;</td><td width="40%"> <input type="submit" class="btn btn-danger btn-sm bg-danger" onclick = "fileReplace1(this)" data-id=\'' + data.camp_id + ',' + user_rb_files[i] + ',' + i + ',' + tactValue + '\' value = "Delete file" id = "btn_id"></td> </tr>', '</p>';
 
                         }
                     }
@@ -1173,7 +1180,7 @@ $(document).ready(function() { // for fetch Data //
 
                         // console.log("tact is:" +tact);
 
-                        htmlContent += '<p> <tr><td width="60%" style = "background-color: aliceblue;"><span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + user_imagename[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\'></a> </i></td > &nbsp;<td  width="40%" style = "background-color: aliceblue;"><input type="text" value=' + user_imagename[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></tr></td></tr>', '</p>';
+                        htmlContent += '<p> <tr><td width="60%" style = "background-color: aliceblue;"><img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:10px; color:black;"> &nbsp; &nbsp;' + user_imagename[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:16px; color:black;"  name="image" id="image" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\'></a> </i></td > &nbsp;<td  width="40%" style = "background-color: aliceblue;"><input type="text" value=' + user_imagename[i] + ' name="filenum" style="display:none;"> <span> &nbsp; &nbsp;<input type="submit" class="btn btn-danger btn-sm  " onclick = "fileReplace1(this)"  data-id=\'' + data.camp_id + ',' + user_imagename[i] + ',' + i + ',' + tactValue + '\' value = "Delete Files"> &nbsp; &nbsp;</span></tr></td></tr>', '</p>';
 
                     } else {
                         // $('.msgedit').show().html('<p class="alert alert-danger">Please Upload Files..</p>').fadeOut(4000);

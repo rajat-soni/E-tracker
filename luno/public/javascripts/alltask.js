@@ -40,6 +40,8 @@ $(document).ready(function () {
 
           if (row.tact == "Email Blast / Reminder Blast") {
             var tact = "Email-Reminder-Blast";
+            var showtact="Reminder Blast";
+            var showcmt=row.rb_comment;
 
           
           }
@@ -47,24 +49,36 @@ $(document).ready(function () {
           if (row.tact == "Email Blast") {
           
             var tact = "Email-Blast";
+            var showtact="Email Blast";
+            var showcmt=row.comment;
           }
 
            if (row.tact == "Make Good") {
           
             var tact = "Make-Good";
+            var showtact="Make Good";
+            var showcmt=row.admin_ebmgcmt;
           }
            if (row.tact == "RB Make Good") {
           
             var tact = "RB-Make-Good";
+            var showtact="RB Make Good";
+            var showcmt=row.admin_rbmgcmt;
+
+
           }
 
 
           if (row.tact == "Webinar") {
            
             var tact = "Webinar";
+            var showtact="Webinar";
+            var showcmt=row.webinar_comment;
           }
 
 console.log("tact is" +tact);
+
+console.log("admin_ebmgfiles File" +row.admin_ebmgfiles);
 
 const htmlbutton=`<button type="button" style="display:none" class="btn btn-link btn-sm delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-id="${data}"><i class="fa fa-trash"></i></button>
            
@@ -73,7 +87,7 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
 
 <button type="button" class="btn btn-link btn-sm view1" data-id ="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + `"><i class="fa fa-eye"></i></button>
 
-  <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + " " + row.status + " " + row.allocated_to + " " + row.blast_date + " " + row.rb_type + " " + row.rb_date + " " + row.blast_time + " " + tact + `"><i class="fa fa-comment"></i></button></button>
+  <button type="button" class="open-homeEvents btn btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="`+ row.id + "---" + row.status + "---" + row.allocated_to + "---" + row.blast_date + "---" + row.rb_type + "---" + row.rb_date + "---" + row.blast_time + "---" + tact + "---" + showtact + "---" + showcmt +`"><i class="fa fa-comment"></i></button></button>
 
 
   <form id = "sample_form"  enctype="multipart/form-data">
@@ -87,19 +101,21 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
       <div class="modal-body">
       <div class="form-floating">
       <p id="insertfilemsg"></p>
-         <p >Tact is:`+ tact +`</p>
+       
       <input type="hidden" name="camp_id" id="camp_id"/ >
       <input type = "hidden" id ="blast_type" id="blast_type"/  >
       <input type = "hidden" id ="tact" name="tact"/  >
+      <input type = "text" id ="showtactics" name="showtactics" style="border: none; font-size: 18px; font-weight: bold; color: red;"/  >
       <input type = "hidden" id ="status"   >
 
+   
       <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
       <input type = "hidden" id ="rbstatus"  data-id = " ` + row.rbstatus + `" >
-      
+     
       
  
    
-      <textarea class="form-control"  id = "comment" name = "comment" placeholder="Add Comment..." id="floatingTextarea"></textarea>
+      <textarea class="form-control"  id = "comment" name = "comment"  id="floatingTextarea">`+showcmt+`</textarea>
       <span>Add Comment...</span>
       <br><br>
       
@@ -120,61 +136,62 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
 
 
 
-
-<form id = "imginsert_form"  enctype="multipart/form-data">
-           <div class="modal fade" id="fileinsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-             <div class="modal-dialog">
-               <div class="modal-content">
-                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body">
-                 <div class="form-floating">
-                 <p id="insertfilemsg"></p>
-                 <p >Tact is:`+ tact +`</p>
-                 <input type="hidden" name="camp_id" id="camp_id"/ >
-                 <input type = "text" id ="blast_type" id="blast_type"/  >
-                 <input type = "text" id ="tact" name="tact"/  >
-                 <input type = "hidden" id ="status"   >
-
-                 <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
-                 <input type = "hidden" id ="rbstatus"  data-id = " ` + row.rbstatus + `" >
-                 
-                 
-            
-               
-                 
-                 <br>
-               
-                 
-               <input type = "file" class="form-control" name = "admin_files[]" id = "admin_files"  multiple>
-                 <span >(upload max 5 files)</span>
-                
-               </div>
-                 </div>
-                 <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-primary" onclick="imginsert1()" data-id="`+ row.id + " " + tact + ` ">Send Comment</button>
-                 </div>
-               </div>
-             </div>
-           </div>
-
-           </form>`
+`
 
 
 
-          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined") )) || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined") ))  ) 
+          if (row.camp_id === null || (row.tact == "Email Blast / Reminder Blast" && row.admin_rb_file == "" ||  (row.admin_rb_file === "undefined"  || row.admin_rb_file == null ))|| (row.tact == "Email Blast" && (row.admin_files == "" ||  (row.admin_files === "undefined" || row.admin_files == null) ))|| (row.tact == "Make Good" && (row.admin_ebmgfiles == "" ||  (row.admin_ebmgfiles === "undefined" || row.admin_ebmgfiles == null) ))|| (row.tact == "RB Make Good" && (row.admin_rbmgfiles == "" ||  (row.admin_rbmgfiles === "undefined" || row.admin_rbmgfiles == null) ))  || (row.tact == "Webinar" && (row.admin_files == "" ||  (row.admin_files === "undefined"  || row.admin_files == null ) ))  ) 
 
           {
 
 
 
             return `
-            ${htmlbutton} <button type="button" style="display:none"   class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>   <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#fileinsertModal" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
+           
+            ${htmlbutton} <button type="button" style="display:none"   class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>   <button type="button" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#fileinsertModal" data-id="`+ row.id + "---" + row.status + "---" + row.allocated_to + "---" + row.blast_date + "---" + row.rb_type + "---" + row.rb_date + "---" + row.blast_time + "---" + tact + "---" + showtact + "---" + showcmt +`"><i class="fa fa-upload"></i></button>
 
-                                            
+                
+<form id = "imginsert_form"  enctype="multipart/form-data">
+<div class="modal fade" id="fileinsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="form-floating">
+      <p id="insertfilemsg"></p>
+      <p ><h5 style="color:red">`+ showtact +`</h5></p>
+      <input type="hidden" name="camp_id" id="camp_id"/ >
+      <input type = "hidden" id ="blast_type" id="blast_type"/  >
+      <input type = "hidden" id ="tact" name="tact"/  >
+      <input type = "hidden" id ="status"   >
+
+      <input type = "hidden" id ="comment_id"  data-id = " ` + row.comment_id + `" >
+      <input type = "hidden" id ="rbstatus"  data-id = " ` + row.rbstatus + `" >
+      
+      
+      <input type = "text" id ="showtactics" name="showtactics" style="border: none; font-size: 18px; font-weight: bold; color: red;"/  >
+    
+      
+      <br>
+    
+      
+    <input type = "file" class="form-control" name = "admin_files[]" id = "admin_files"  multiple>
+      <span >(upload max 5 files)</span>
+     
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="imginsert1()" data-id="`+ row.id + " " + tact + ` ">Send Comment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</form>                            
               `;
         
           }
@@ -183,7 +200,7 @@ const htmlbutton=`<button type="button" style="display:none" class="btn btn-link
 
            
             return `
-  
+            
             ${htmlbutton} <button type="button"    class="btn btn-link btn-sm editimage" data-id="`+ row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `"><i class="fa fa-upload"></i></button>
 
                           
@@ -2325,10 +2342,10 @@ console.log("RB Status:" +rbstatus);
 console.log("check blast_type" +blast_type);
 
       if (blast_type == 'E-blast' && today <= blast_date && blast_date != "" && ebstatus=="1") {
-        console.log('blast_type == E-blast && today <= blast_date && blast_date != "" && ebstatus=="0"')
+        console.log('blast_type == E-blast && today <= blast_date && blast_date != "" && ebstatus=="1"')
        
-        $("#ebassets").hide();
-        $("#assets").show();
+        $("#ebassets").show();
+        $("#assets").hide();
         $("#reblastassets").hide();
         $("#remblastassetsread").hide();
         $('#asset_name')[0].disabled = false;
@@ -3465,6 +3482,8 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
     var tact = myArray[7];
     var blast_type = myArray[8];
 
+    var showtact=myArray[9];
+
    
 
 
@@ -3507,7 +3526,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
 
         var camp_id = data.camp_id;
 
-     
+        var tactshowfiles="";
 
 
 
@@ -3520,6 +3539,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
+          var tactshowfiles="Email Blast";
         
 
         }
@@ -3532,6 +3552,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
+          var tactshowfiles="Make Good";
          
 
         }
@@ -3545,6 +3566,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
+          var tactshowfiles="Reminder-Blast";
          
 
         }
@@ -3557,6 +3579,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
+          var tactshowfiles="RB Make Good";
          
 
         }
@@ -3570,6 +3593,7 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
           var admin_filesname = admin_filesname.split(',');
 
           var length = admin_filesname.length;
+          var tactshowfiles="Webinar";
          
 
         }
@@ -3626,11 +3650,18 @@ user_webcomment += '<div style="background: white;"><p> <tr><td width="5%"><b  s
 
 
 
+      
+        var htmltactshow="";
+        htmltactshow += '<h5 style="color:red"> <b> '+tactshowfiles+' </b><h5>';
+        document.getElementById('showtactsfiles').innerHTML = htmltactshow;
 
+        console.log("htmltactshow" +htmltactshow)
         htmlContent2 += htmlContent + '' + htmlContent1;
         document.getElementById('container11').innerHTML = htmlContent2;
 
 
+
+      
 
 
         $('#admin_files').val(data.admin_files);
@@ -3753,7 +3784,9 @@ $(document).on("click", ".open-homeEvents", function () {
 
   var idtype = $(this).data('id');
 
-  const myArray = idtype.split(" ");
+  console.log("idtype" +idtype);
+
+  const myArray = idtype.split("---");
 
   var id = myArray[0];
   var ebstatus = myArray[1];
@@ -3763,15 +3796,23 @@ $(document).on("click", ".open-homeEvents", function () {
   var rb_date = myArray[5];
   var blast_time = myArray[6];
   var tact = myArray[7];
-  var blast_type = myArray[8];
+  var showtact = myArray[8];
+  var showcmt = myArray[9];
+ 
 
  
+  console.log("show cmt is:" +showcmt);
+  console.log("showtact is" +showtact);
   $('#camp_id').val(id);
 
   $('#blast_type').val(blast_type);
 
   $('#tact').val(tact);
   $('#status').val(ebstatus);
+  $('#comment').val(showcmt);
+  $('#showtactics').val(showtact);
+  
+
  
 
 });
