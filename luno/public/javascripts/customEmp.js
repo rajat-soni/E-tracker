@@ -134,14 +134,14 @@ $(document).ready(function() { // for fetch Data //
                         
                         ${(row.allocated_to == row.user_id &&  dt3 > dt1 && row.rb_mg_status == 0 &&  row.rb_mgasset_name != "" && row.rb_mgasset_link != ""  ) ? `<input type="checkbox" class="btn btn-link btn-sm rb_checkbox" id ="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-rowid='${meta.row}' data-id="${data}"></button>` : (row.allocated_to == row.user_id && row.rb_mg_status == 1 && dt3 > dt1 && row.rb_mgasset_name != "" && row.rb_mgasset_link != ""  )?`<span class="bg-success text-light px-1 rounded small mkg_show">RMG Done</span></i>` : (row.allocated_to == row.user_id && dt3 < dt1 &&  row.rb_mg_status == 0 && row.rb_mgasset_name == undefined && row.rb_mgasset_link == undefined ) ? `<span class="bg-danger text-light px-1 rounded small">MGNA</span>`: `  `}
                        
-                        <button type="button" class="btn btn-link btn-sm view" data-bs-toggle="tooltip" data-bs-placement="top" title="view Data"  data-id =" ` + row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
+                        <button type="button" class="btn btn-link btn-sm view text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="view Data"  data-id =" ` + row.id + ' ' + row.user_id + ' ' + tact + ` "><span class="bi bi-eye" style = "font-size:18px"></span></button>
                         
-                        <button type="button" style = "display:none;" class="open-homeEvents btn btn-primary btn-sm" data-bs-toggle="modal" "  data-bs-target="#${tact+""+row.id}" data-id="` + row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `" >
+                        <button type="button" style = "display:none;" class="open-homeEvents btn btn-primary btn-sm text-muted" data-bs-toggle="modal" "  data-bs-target="#${tact+""+row.id}" data-id="` + row.id + ' ' + row.status + ' ' + row.allocated_to + ' ' + row.blast_date + ' ' + row.rb_type + ' ' + row.rb_date + ' ' + row.blast_time + ' ' + tact + `" >
 
-                        <button type="button"  id = "editimage"     class="btn btn-link btn-sm editimage" data-id="` + row.id + ' ' + tact + `"><i class="fa fa-upload"></i></button>
+                        <button type="button"  id = "editimage"     class="btn btn-link btn-sm editimage text-muted " data-id="` + row.id + ' ' + tact + `"><i class="fa fa-upload"></i></button>
 
                               <!-- Button trigger modal -->
-                              <i class="fa fa-commenting" style="font-size:16px" aria-hidden="true" class="bg-primary" data-bs-toggle="modal" data-bs-target="#${tact}"></i>
+                              <i class="fa fa-commenting text-muted" style="font-size:16px" aria-hidden="true" class="bg-primary" data-bs-toggle="modal" data-bs-target="#${tact}"></i>
                         
                            
                               <!-- Modal -->
@@ -330,6 +330,15 @@ $(document).ready(function() { // for fetch Data //
             $('#comment').show();
 
         } else if (tact == "Make_Good") {
+            $('.user_ebcomment').show();
+            $(".email_blast_asset_view").show();
+            $(".rb_blast_asset_view").hide();
+            $(".mg_asset_view").show();
+            $(".rb_mg_asset_view").hide();
+            $('#webainar_table_view').hide();
+            $('#webainar_table').hide()
+            $('#webainar_table_view').hide();
+            $('#webainar_table').hide()
             
             $("#ebmgview").show();
             $("#rbmgview").hide();
@@ -383,13 +392,13 @@ $(document).ready(function() { // for fetch Data //
             $("#rbmgview").hide();
             $("#ebmgview").hide();
 
-            $("#makeGood11").hide();
-            $("#makeGood12").hide();
+            $("#makeGood11").show();
+            $("#makeGood12").show();
             $('#__rb_mg_asset_view').hide()
             $('#__eb_mg_asset_view').hide()
            
             $("#rbmakeGood11").show();
-            $("#makeGood12").hide();
+           
          
             $("#eBc").show()
             $("#cf").show()
@@ -402,7 +411,12 @@ $(document).ready(function() { // for fetch Data //
             $('#ebasset').show();
             $('#rbasset').show();
 
-        } else if (tact == "Webinar") {
+        } else {
+            $('#webinar_table').show();
+            $('#webainar_table_view').show();
+            $('#comment_tbl_data').show();
+            $('.web_admin_comment').show();
+     
 
             $("#rbmgview").hide();
              $("#makeGood11").hide();
@@ -411,7 +425,7 @@ $(document).ready(function() { // for fetch Data //
             $('#__rb_mg_asset_view').hide()
             $('#__eb_mg_asset_view').hide()
            
-            $("#rbmakeGood11").show();
+            $("#rbmakeGood11").hide();
             $("#makeGood12").hide();            
             
             $("#webinarFlex").show();
@@ -466,12 +480,26 @@ $(document).ready(function() { // for fetch Data //
                 $('#asset_name').val(data.asset_name);
                 $('#asset_link').val(data.asset_link);
                 $('#blast_date').val(data.blast_date);
-                $('#blast_time').val(data.blast_time);
-
+                $('#blast_time').val(data.blast_time)
+                $('.blast_date').val(data.blast_date);
+                $('.blast_time').val(data.blast_time)
+                ;
                 $('#mgasset_name').val(data.mgasset_name)
                 $('#mgasset_link').val(data.mgasset_link)
 
+                $('#mg_date').val(data.mg_date)
+                $('#mg_time').val(data.mg_time)
+
+                $('#rb_mg_date').val(data.rb_mg_date)
+                $('#rb_mg_time').val(data.rb_mg_time)
                
+                $('#rb_mg_msg').val(data.rb_mg_msg)
+                $('#admin_rbmgcmt').val(data.admin_rbmgcmt)
+
+                $('#registration_date').val(data.registration_date)
+                $('#registration_time').val(data.registration_time)
+
+                
                 $('#rb_mgasset_link').val(data.rb_mgasset_link)
                 $('#rb_mgasset_name').val(data.rb_mgasset_name)
 
@@ -482,14 +510,17 @@ $(document).ready(function() { // for fetch Data //
                 //$('#rb_comment').val(data.rb_comment);
 
                 $('#user_rbcomment').val(data.user_rbcomment);
-                $('#user_ebcomment').val(data.user_ebcomment);
-               
+                $('.user_ebcomment').val(data.user_ebcomment);
+         
               
                 $('#rb_comment').val(data.rb_comment);
 
                 $('#comment').val(data.comment);
                 $('#webinar_admin_comment').val(data.comment)
                 $('#webinar_comment').val(data.webinar_comment)
+                $('.web_admin_comment').val(data.comment)
+                $('.priority').val(data.priority);
+                
 
                 $('#blast_type').val(data.blast_type);
 
@@ -522,22 +553,75 @@ $(document).ready(function() { // for fetch Data //
                 var htmlContent = '';
 
 
+// for for table asset name and link view //
+if(tactValue  == 'e_blast'){
+
+    $(".email_blast_asset_view").show();
+    $(".rb_blast_asset_view").hide();
+    $(".mg_asset_view").hide();
+    $(".rb_mg_asset_view").hide();
+    
+    
+    
+   }
+   
+   if(tact == "Make_Good"){
+    $('.user_ebcomment').show();
+    $(".email_blast_asset_view").show();
+    $(".rb_blast_asset_view").hide();
+    $(".mg_asset_view").show();
+    $(".rb_mg_asset_view").hide();
+    $('#webainar_table_view').hide();
+    $('#webainar_table').hide()
+    $('#webainar_table_view').hide();
+    $('#webainar_table').hide()
+   }
+   // end for the table assest name link view //
+
+    if(tact == "Email-Reminder-Blast"){
+    $('.user_ebcomment').show();
+    $(".email_blast_asset_view").show();
+    $(".rb_blast_asset_view").show();
+    $(".mg_asset_view").show();
+    $(".rb_mg_asset_view").hide();
+    $('#webainar_table_view').hide();
+    $('#webainar_table').hide()
+   
+   
+    
+    
+   }
+
+   if(tactValue == 'webinar'){
+    
+    $('#comment_tbl_data').hide();
+    $('#webinar_table').show();
+    $('#webainar_table_view').show()
+    $(".email_blast_asset_view").hide();
+    $(".rb_blast_asset_view").hide();
+    $(".mg_asset_view").hide();
+    $(".rb_mg_asset_view").hide();
+    $('#all_file_views').hide();
+    $('#all_blast_view').hide();
+    $('.web_admin_comment').show();
+   }
+
+
 
 
                 if (tactValue == "webinar") {
-
                    
-                    $("#webinarFlex").show();
-                    //  alert(webinar.html())
-                    $("#ebComment").hide();
-                    var rb = $("#rbFlex").hide();
-                    // alert(rb.html())
-                    $("#ebasset").hide();
-                    $("#user_ebcomment").hide();
+                    $('.web_admin_comment').show();
+                    $('#all_file_views').hide();
+                    $('#all_blast_view').hide();
+                    $('.user_ebcomment').show();
+    $(".email_blast_asset_view").hide();
+    $(".rb_blast_asset_view").hide();
+    $(".mg_asset_view").hide();
+    $(".rb_mg_asset_view").hide();
+    $('#webinar_table').show();
+    $('#webainar_table_view').show()
 
-                    $("#ebBlastview").hide();
-                    $('#webinar_comment').show();
-                    $('#webinar_admin_comment').show();
                     var user_image1 = data.webinar_files;
 
 
@@ -549,7 +633,7 @@ $(document).ready(function() { // for fetch Data //
                     for (var i = 0; i <= 1; i++) {
 
                         if (user_image1[i] != undefined && user_image1[i].trim().length != 0) {
-                            htmlContent += '<p> <tr ><td style = "background-color: aliceblue;"> <img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px;"> &nbsp; ' + user_image1[i] + '</i></span> &nbsp; &nbsp;   <a  href = "#"<i class="fa fa-download" style = "font-size:15px; color:black;"  name="webinar_files" id="images"  onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_image1[i] + ',' + i + ',' + tact + '\'><a></i></td></tr>', '</p>';
+                            htmlContent += '<p> <tr ><td style = "background-color: aliceblue;"> <span style = "font-size:9px;"> &nbsp; ' + user_image1[i] + '</i></span> &nbsp; &nbsp;   <a  href = "#"<i class="fa fa-download" style = "font-size:15px; color:black;"  name="webinar_files" id="images"  onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + user_image1[i] + ',' + i + ',' + tact + '\'><a></i></td></tr>', '</p>';
                         }
                     }
                     document.getElementById('wbinar11').innerHTML = htmlContent;
@@ -568,13 +652,14 @@ $(document).ready(function() { // for fetch Data //
                     $('#ebBlastview').hide()
 
                     var admin_image = data.admin_files;
+                    
                     var admin_image = admin_image.split(',');
                     var admin_length = admin_image.length;
                     var adminHtml = '';
                     for (var i = 0; i <= 1; i++) {
                         if (admin_image[i] != undefined && admin_image[i].trim().length != 0) {
 
-                            adminHtml += '<p> <tr><td style = "background-color: aliceblue;" ><img src="../../assets/img/files-folder1.png" class="fileimg"><span style = "font-size:9px;"> &nbsp; ' + admin_image[i] + '</i></span> &nbsp; &nbsp;   <a  href = "#"<i class="fa fa-download" style = "font-size:15px; color:black;"  name="webinar_files" id="images"  onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'><a></i></td></tr>', '</p>';
+                            adminHtml += '<p> <tr><td style = "background-color: aliceblue;" ><span style = "font-size:9px;"> &nbsp; ' + admin_image[i] + '</i></span> &nbsp; &nbsp;   <a  href = "#"<i class="fa fa-download" style = "font-size:15px; color:black;"  name="webinar_files" id="images"  onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'><a></i></td></tr>', '</p>';
                         }
 
                     }
@@ -594,16 +679,17 @@ $(document).ready(function() { // for fetch Data //
                            // MAKE GOOD   START //
                   
                    
+                           
                      
 
 
                 } else if (tactValue == 'e_blast') {
 
-
+                    $('#webainar_table').hide();
                     $("#rbFlex").hide();
                     $("#webinarFlex").hide()
                     $("#ebBlastview").show()
-               
+                    $('#webinar_table').hide()
 
                     var user_image = data.user_ebfiles;
 
@@ -656,17 +742,22 @@ $(document).ready(function() { // for fetch Data //
 
                        
 
-                    if (tact == "Make_Good" ) {
-                       
+                    if (tact == "Make_Good" || tact == "Email-Reminder-Blast" ) {
+                        $('#webainar_table').hide()
+                        $('#webinar_table').hide()
+                      
+                        $(".user_ebcomment").show();
 
+                    
                             var htmlContent1 = "";
                             var eb_mg_files = data.eb_mg_files;
                             var eb_mg_files = eb_mg_files.split(',');
                             var eb_mg_files_length = eb_mg_files.length;
                             for (var i = 0; i < eb_mg_files_length; i++) {
+                                
                             if (eb_mg_files[i] != undefined && eb_mg_files[i].trim().length != 0) {
    
-                                htmlContent1 += '<p> <tr ><td style = "background-color: aliceblue;" > <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i></td>', '';
+                                htmlContent1 += ' <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + eb_mg_files[i] + '&nbsp;&nbsp;</span><a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black" name="eb_mg_files" style = "font-size: 12px;" id="eb_mg_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + eb_mg_files[i] + ',' + i + ',' + tact + '\'></a></i>', '';
                             }
                   
                     }
@@ -677,8 +768,8 @@ $(document).ready(function() { // for fetch Data //
                         $('#__eb_mg_asset_view').show();
                         
                         $("#makeGood11").show();
-                        $("#rbmgview").hide();
-                        $("#ebmgview").show();
+                        // $("#rbmgview").hide();
+                        // $("#ebmgview").show();
                         $("#MakeGoodView").show();
                         $(".rbmgview").hide();
                        
@@ -688,7 +779,7 @@ $(document).ready(function() { // for fetch Data //
                         $('#webinarflex').hide();
                         $('#fileviewdownload').hide();
                         $('#rbFlex').hide();
-                        $("#user_ebcomment").hide();
+                        $(".user_ebcomment").show();
 
                         var admin_image = data.admin_ebmgfiles;
 
@@ -701,7 +792,7 @@ $(document).ready(function() { // for fetch Data //
 
 
                         if (admin_image[i] != undefined && admin_image[i].trim().length != 0) {
-                            amdinebContent += '<p> <tr ><td style = "background-color: aliceblue;" > <span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i></td></tr>', '</p>';
+                            amdinebContent += '<span style = "font-size:9px; color:black;">&nbsp; &nbsp;' + admin_image[i] + '&nbsp;&nbsp;</span> <a href = "#"<i class="fa fa-download" style = "font-size:13px; color:black;" name="admin_files" id="admin_files" onclick="fileviewFunction(this)" data-id=\'' + data.camp_id + ',' + admin_image[i] + ',' + i + ',' + tact + '\'></a></i>', '';
 
                         }
 
@@ -717,13 +808,17 @@ $(document).ready(function() { // for fetch Data //
                     $("#rbmgview").hide();
                     $("#ebmgview").show();
                     $("#MakeGoodView").show();
+                    $(".user_ebcomment").show();
+
+
                    
 
 
                 }
 
                     if (tact == "RB-Make-Good" ) {
-                       
+                        $('#webainar_table').hide()
+                        $('#webinar_table').hide()
                        
                         var rb_mg_files = data.rb_mg_files;
                         var rb_mg_files = rb_mg_files.split(',');
@@ -775,6 +870,8 @@ $(document).ready(function() { // for fetch Data //
                     document.getElementById('rbmakeGood12').innerHTML =  amdinebContent;
                     ;
                     
+                    
+                    
                     $("#rbmakeGood12").show();
                     $("#RBMakeGoodView").show();
                     $("#rbmakeGood11").show();
@@ -802,8 +899,11 @@ $(document).ready(function() { // for fetch Data //
                     }
 
                     document.getElementById('viewReminderBlastView11').innerHTML = htmlContent;
-
-
+                    $("#makeGood11").show();
+                    $("#makeGood12").show();
+                   
+                    $('#webainar_table').hide()
+                    $('#webinar_table').hide()
                     $('#viewfiles11').hide();
                     $('#viewReminderBlastView11').show()
                     $('#webinarflex').hide();
@@ -818,6 +918,8 @@ $(document).ready(function() { // for fetch Data //
                         }
                     }
                     document.getElementById('viewReminderBlastView12').innerHTML = adminRbHtml;
+                    $("#makeGood11").show();
+                    $("#makeGood12").show();
                     $('#viewReminderBlastView12').show();
                    
                     $("#user_ebcomment").show();
@@ -1710,17 +1812,10 @@ function removeFile(e) {
 
     // alert(myArray[3])
     if (filenum.length !== 0) {
-        // alert("tact in filereplace function" +tact);
-        //   var rb_files =  document.getElementsByClassName('.custom-file-input')
-        // var user_files  =  $('.imageInput')[0].files[0];
-        // alert(user_files)
-
-        // console.log("iamge",user_files)
+       
 
         var formData = new FormData();
-        // var user_rbfiles  =  $('.imageInput')[0].files[0]
-
-        // var user_files = $('.imageInput')[id].files[0]; // Get the selected file
+      
 
         formData.append('tact', tact); // Append the file to FormData
         formData.append('camp_id', camp_id); // Append the file to FormData
@@ -1737,11 +1832,7 @@ function removeFile(e) {
             processData: false, // Prevent jQuery from processing the data
             contentType: false, // Set content type to false, as we are using FormData
             success: function(response) {
-                // Handle the server's response here
-                //  $('.wrap_new').html('<p class="alert alert-success">Image Upload successfully..</p>').fadeOut(3000)
-                // $("#container11").hide();
-                //   $("#fileviewbox").hide();
-                //   alert(response)
+               
 
                 $('#message').html('<div class="alert alert-success">' + response.message + '</div>');
                 $('#leftnav').DataTable().ajax.reload();
@@ -1771,7 +1862,6 @@ function removeFile(e) {
 
 function profileView(e) { //  start code for view profile data //
 
-    // var date = $('#date').val();
     var user_id = $(e).data('id');
 
 
@@ -1792,9 +1882,6 @@ function profileView(e) { //  start code for view profile data //
             $('#emailp').val(data.email);
             $('#phonep').val(data.phone);
             $('#user_namep').val(data.user_name);
-
-            // $('#date').val(data.date);
-            // $('#user_id').val(data.user_id);
             $('#table_data').DataTable().ajax.reload();
 
         }
@@ -1811,8 +1898,6 @@ function singlecomment(e) {
 
     var sendComment = $(".modal-body").find(`[name = "sendComment"][data-id='${id}']`).val();
 
-
-    // var sendComment = $('[name = "sendComment"]').val();
 
 
 
@@ -1834,10 +1919,6 @@ function singlecomment(e) {
                 $(`#${tact}`).modal("hide");
                 $('#leftnav').DataTable().ajax.reload();
                 $('#apptask').DataTable().ajax.reload();
-
-                // $('#sendForm').modal("hide");
-                //  $('#sendForm').trigger('reset');
-                // alert("data   inserted");
             } else {
                 alert("data  not inserted");
             }
